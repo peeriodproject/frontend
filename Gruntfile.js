@@ -48,6 +48,13 @@ module.exports = function (grunt) {
                 src: ['src/client/index.html'],
                 dest: 'build/index.html'
             }
+        },
+        compass: {
+            dist: {
+                options: {
+                    config: './config.rb'
+                }
+            }
         }
     });
 
@@ -55,7 +62,8 @@ module.exports = function (grunt) {
 //grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-compass');
 
     grunt.registerTask('default', ['build', 'watch']);
-    grunt.registerTask('build', ['browserify:app', 'copy:fonts', 'copy:icons', 'copy:locales', 'copy:manifest', 'copy:main']);
+    grunt.registerTask('build', ['browserify:app', 'copy:fonts', 'copy:icons', 'copy:locales', 'copy:manifest', 'copy:main', 'compass:dist']);
 };
