@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name"            : "Peeriod – Bleeding Edge Filesharing",
+    "description"     : "Peeriod Frontend",
+    "version"         : "0.0.1",
+    "icons"           : {
+        "16" : "assets/icons/icon16.png",
+        "48" : "assets/icons/icon48.png",
+        "128": "assets/icons/icon128.png"
+    },
+    "omnibox"         : {
+        "keyword": "peeriod"
+    },
+    "default_locale"  : "en",
+
+    // PACKAGED APP
+    // http://code.google.com/chrome/extensions/apps.html
+    "app"             : {
+        "launch": {
+            "local_path": "index.html"
+        }
+    }
+}

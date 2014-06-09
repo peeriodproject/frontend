@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "Peeriod – Bleeding Edge Filesharing",
+    "description": "Peeriod Frontend",
+    "version": "0.0.1",
+    "icons": {
+        "16": "img/icon16.png",
+        "48": "img/icon48.png",
+        "128": "img/icon128.png"
+    },
+    "omnibox": {
+        "keyword" : "appkey"
+    },
+    "background": {
+        "scripts": ["../build/js/background-bundle.js"],
+        "persistent": true
+    }
+}
