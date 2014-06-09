@@ -28,3 +28,5 @@ node_modules
 /.jest-cache/
 /.sublime-grunt.cache
 /build/
+/.sass-cache/
+/bower_components/

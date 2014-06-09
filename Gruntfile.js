@@ -19,6 +19,12 @@ module.exports = function (grunt) {
             tasks: ['browserify:app']
         },
         copy      : {
+            fonts   : {
+                expand: true,
+                cwd   : 'src/',
+                src   : ['./fonts/*'],
+                dest  : 'build/assets'
+            },
             icons   : {
                 cwd   : 'src/',
                 expand: true,
@@ -51,5 +57,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default', ['build', 'watch']);
-    grunt.registerTask('build', ['browserify:app', 'copy:icons', 'copy:locales', 'copy:manifest', 'copy:main']);
+    grunt.registerTask('build', ['browserify:app', 'copy:fonts', 'copy:icons', 'copy:locales', 'copy:manifest', 'copy:main']);
 };

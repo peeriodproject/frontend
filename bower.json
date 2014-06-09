@@ -1,0 +1,20 @@
+{
+  "name": "git_frontend",
+  "version": "0.0.0",
+  "homepage": "https://github.com/joernroeder/abschluss_frontend",
+  "authors": [
+    "Jörn Röder <kontakt@joernroeder.de>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "typeplate-starter-kit": "~1.1.4"
+  }
+}

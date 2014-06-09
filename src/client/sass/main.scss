@@ -1,0 +1,19 @@
+@import "compass";
+@import "compass/reset";
+@import "_fonts";
+@import "_variables";
+@import "_typeplate-vars";
+@import "../../../bower_components/typeplate-starter-kit/scss/_typeplate.scss";
+
+/*body {
+	font-family: 'Aileron UltraLight';
+}*/
+
+b,
+strong {
+	font-family: $strong-font-family;
+}
+
+a {
+	font-family: $strong-font-family;
+}

@@ -1,0 +1,31 @@
+@import "compass/css3/font-face";
+
+@include font-face("Aileron Thin", font-files(
+		"Aileron-Thin.woff",
+		"Aileron-Thin.ttf",
+		"Aileron-Thin.svg"
+	), "Aileron-Thin.eot", 200, normal);
+
+@include font-face("Aileron", font-files(
+		"Aileron-Regular.woff",
+		"Aileron-Regular.ttf",
+		"Aileron-Regular.svg"
+	), "Aileron-Regular.eot", 400, normal);
+
+@include font-face("Aileron UltraLight", font-files(
+		"Aileron-UltraLight.woff",
+		"Aileron-UltraLight.ttf",
+		"Aileron-UltraLight.svg"
+	), "Aileron-UltraLight.eot", 200, normal);
+
+@include font-face("Aileron Light", font-files(
+		"Aileron-Light.woff",
+		"Aileron-Light.ttf",
+		"Aileron-Light.svg"
+	), "Aileron-Light.eot", 200, normal);
+
+@include font-face("Aileron SemiBold", font-files(
+		"Aileron-SemiBold.woff",
+		"Aileron-SemiBold.ttf",
+		"Aileron-SemiBold.svg"
+	), "Aileron-SemiBold.eot", 700, normal);
