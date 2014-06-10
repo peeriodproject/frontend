@@ -1,9 +1,25 @@
+@import "../../../bower_components/normalize.scss/normalize";
 @import "compass";
 @import "compass/reset";
-@import "_variables";
-@import "_fonts";
-@import "_typeplate-vars";
-@import "../../../bower_components/typeplate-starter-kit/scss/_typeplate.scss";
+@import "variables";
+@import "fonts";
+@import "grids";
+
+//@import "_typeplate-vars";
+//@import "../../../bower_components/typeplate-starter-kit/scss/_typeplate.scss";
+
+@include border-box-sizing;
+
+body {
+	@include container;
+}
+
+.settings {
+	background-color: rgba(255,0,0,.5);
+	//@include span(8);
+	//@include pad(2);
+	@include squish(2);
+}
 
 /*body {
 	font-family: 'Aileron UltraLight';

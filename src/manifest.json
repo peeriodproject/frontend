@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name"            : "Peeriod – Bleeding Edge Filesharing",
+    "name"            : "__MSG_appName__ – __MSG_appTagline__",
     "description"     : "Peeriod Frontend",
     "version"         : "0.0.1",
     "icons"           : {
@@ -9,7 +9,7 @@
         "128": "assets/icons/icon128.png"
     },
     "omnibox"         : {
-        "keyword": "peeriod"
+        "keyword": "__MSG_omniboxKeyword__"
     },
     "default_locale"  : "en",
 

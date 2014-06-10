@@ -47,10 +47,10 @@
 	), "Aileron-Regular.eot", $font-weight-regular, normal);
 
 @include font-face("Aileron", font-files(
-		"Aileron-RegularItalic.woff",
-		"Aileron-RegularItalic.ttf",
-		"Aileron-RegularItalic.svg"
-	), "Aileron-RegularItalic.eot", $font-weight-regular, italic);
+		"Aileron-Italic.woff",
+		"Aileron-Italic.ttf",
+		"Aileron-Italic.svg"
+	), "Aileron-Italic.eot", $font-weight-regular, italic);
 
 // Semi Bold
 @include font-face("Aileron", font-files(

@@ -6,5 +6,9 @@ module.exports = [
 	{
 		path: '/foo/:username',
 		handler: require('../core/foo/FooHandler')
+	},
+	{
+		path: '/folders/:folder',
+		handler: require('../core/settings/SharedFoldersHandler')
 	}
 ];

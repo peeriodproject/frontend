@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "typeplate-starter-kit": "~1.1.4"
+    "typeplate-starter-kit": "~1.1.4",
+    "normalize.scss": "~2.2.0+normalize.2.1.3"
   }
 }

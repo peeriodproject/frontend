@@ -28,6 +28,7 @@ var Page = React.createClass({
 				<h6>Commodo Parturient Vestibulum Fermentum Cras</h6>
 				<p>Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 				<p><Link href='/foo/username-state-from-url'>Login</Link></p>
+				<p><Link href='/folders/folder-name'>Folders</Link></p>
 				<div>{this.state.message}</div>
 			</div>
 		)

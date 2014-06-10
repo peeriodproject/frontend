@@ -1,9 +1,20 @@
 /* http://code.google.com/chrome/extensions/i18n.html */
 
-/* An Example String */
 {
-  "hello_string": {
-    "message": "Greetings, elf!",
-    "description": "Shown when the app loads"
-  }
+	"appName": {
+		"message": "Peeriod",
+		"description": "The application name"
+	},
+	"appTagline": {
+		"message": "Bleeding Edge Filesharing",
+		"description": "The applications tagline"
+	},
+	"omniboxKeyword": {
+		"message": "peeriod",
+		"description": "The lowercase keyword to enable the omnibox instant search."
+	},
+	"settings_sharedFolders_title": {
+		"message": "Shared Folders",
+		"description": "The title of the 'Shared Folders' settings page"
+	}
 }
