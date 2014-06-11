@@ -1,9 +1,17 @@
-@import "../../../bower_components/normalize.scss/normalize";
+@import "../../../bower_components/modularized-normalize-scss/normalize";
+
 @import "compass";
 @import "compass/reset";
+@import "compass/typography/vertical_rhythm";
+
 @import "variables";
 @import "fonts";
 @import "grids";
+@import "rhythm";
+
+@import "../core/elements/Button";
+
+// http://zoerooney.com/blog/web-development/clean-sticky-footer-sass-mixin/
 
 //@import "_typeplate-vars";
 //@import "../../../bower_components/typeplate-starter-kit/scss/_typeplate.scss";
@@ -12,14 +20,39 @@
 
 body {
 	@include container;
+
+	font-family: "Aileron";
+	font-weight: $font-weight-thin;
+
+	background-color: rgb(104, 0, 122);
+	color: #fff;
+	-webkit-font-smoothing: antialiased;
+
+	@import "../core/settings/SharedFoldersHandler";
 }
 
-.settings {
-	background-color: rgba(255,0,0,.5);
+main {
+	background-color: rgba(104, 0, 122, .8);
+	padding-top: rhythm(3);
+}
+
+a {
+	font-weight: $font-weight-regular;
+	color: #fff;
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+}
+
+/*.settings,
+.shared-folders-handler {
 	//@include span(8);
 	//@include pad(2);
 	@include squish(2);
-}
+}*/
 
 /*body {
 	font-family: 'Aileron UltraLight';

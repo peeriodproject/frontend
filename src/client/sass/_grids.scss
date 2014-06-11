@@ -5,11 +5,11 @@
 
 $susy: (
 	columns: 12,
-	gutters: 1/4,
+	gutter: 20px,
 	global-box-sizing: border-box,
-  	use-custom: (
-  		rem: true
-    ),
+	use-custom: (
+		rem: true
+	),
 	debug: (
 		image: show
 	)

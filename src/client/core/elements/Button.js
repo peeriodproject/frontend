@@ -5,21 +5,30 @@
 
 var React = require('react');
 
+var I18nMixin = require('../i18n/I18nMixin');
+
 var Button = React.createClass({
+
+	mixins: [I18nMixin],
+
+	getDefaultProps: function () {
+		return {
+			label: 'elements_button_label',
+			type: 'button',
+			onClick: function () {
+			}
+		}
+	},
 
 	getInitialState: function () {
 		return {
-			label: this.props.label || 'Button'
+			label: this.i18n(this.props.label)
 		};
-	},
-
-	getType: function () {
-		return this.props.type || 'button';
 	},
 
 	render: function () {
 		return (
-			<button type={this.getType()} onClick={this.props.onClick}>{this.state.label}</button>
+			<button type={this.props.type} onClick={this.props.onClick}>{this.state.label}</button>
 		)
 	}
 });

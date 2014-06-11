@@ -1,23 +1,25 @@
 {
-    "manifest_version": 2,
-    "name"            : "__MSG_appName__ – __MSG_appTagline__",
-    "description"     : "Peeriod Frontend",
-    "version"         : "0.0.1",
-    "icons"           : {
-        "16" : "assets/icons/icon16.png",
-        "48" : "assets/icons/icon48.png",
-        "128": "assets/icons/icon128.png"
-    },
-    "omnibox"         : {
-        "keyword": "__MSG_omniboxKeyword__"
-    },
-    "default_locale"  : "en",
+	"manifest_version": 2,
+	"name"            : "__MSG_appName__ – __MSG_appTagline__",
+	"description"     : "Peeriod Frontend",
+	"version"         : "0.0.1",
+	"icons"           : {
+		"16" : "assets/icons/icon16.png",
+		"48" : "assets/icons/icon48.png",
+		"128": "assets/icons/icon128.png"
+	},
+	"omnibox"         : {
+		"keyword": "__MSG_omniboxKeyword__"
+	},
+	"default_locale"  : "en",
 
-    // PACKAGED APP
-    // http://code.google.com/chrome/extensions/apps.html
-    "app"             : {
-        "launch": {
-            "local_path": "index.html"
-        }
-    }
+	// PACKAGED APP
+	// http://code.google.com/chrome/extensions/apps.html
+	"app"             : {
+		"launch": {
+			"local_path": "index.html"
+		}
+	},
+
+	"content_security_policy": "script-src 'self' http://localhost:3000; object-src 'self'"
 }

@@ -16,5 +16,13 @@
 	"settings_sharedFolders_title": {
 		"message": "Shared Folders",
 		"description": "The title of the 'Shared Folders' settings page"
+	},
+	"settings_sharedFolders_addFolderButton_label": {
+		"message": "Add Folder",
+		"description": "the label of the 'Add Folder' button"
+	},
+	"elements_button_label": {
+		"message": "Button",
+		"description": "The default button label"
 	}
 }

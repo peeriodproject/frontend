@@ -13,7 +13,14 @@ var I18nMixin = {
 	 * @return {string}
 	 */
 	i18n: function (key) {
-		return chrome.i18n.getMessage(key);
+		var value = chrome.i18n.getMessage(key);
+
+		if (!value) {
+			console.warn('i18n: No value found for key: "' + key  + '"');
+			value = '__' + key + '__';
+		}
+
+		return value;
 	}
 };
 

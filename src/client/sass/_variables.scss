@@ -20,3 +20,13 @@ $font-weight-semi-bold		: 500;
 $font-weight-bold			: 600;
 $font-weight-heavy			: 700;
 $font-weight-black			: 800;
+
+
+// -------------------------------------//
+
+$base-font-size: 18px;
+$base-line-height: $base-font-size * 1.6;
+$rhythm-unit: "rem";
+
+$button-border-radius: 3px / $base-font-size * 1rem;
+$button-border-width: 1px;

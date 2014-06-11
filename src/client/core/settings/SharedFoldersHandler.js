@@ -5,58 +5,44 @@
 
 var React = require('react');
 var Link = require('react-router-component').Link;
-var Async = require('react-async');
+//var Async = require('react-async');
 
 var Folder = require('./Folder');
 var Button = require('../elements/Button');
 
+var ChannelMixin = require('../socket/ChannelMixin');
+var I18nMixin = require('../i18n/I18nMixin');
+
 var SharedFoldersHandler = React.createClass({
-	mixins: [Async.Mixin],
+	mixins: [ChannelMixin, I18nMixin],
 
-	getInitialStateAsync: function(cb) {
-		setTimeout(function () {
-			cb(null, {
-				message: 'foobar',
-				folders: [
-					{
-						name: 'Folder Name',
-						path: '/path/to/folder',
-						status: 'active'
-					}
-				]
-			});
-		}, 0);
-	},
+	channelName: 'folder',
+	initialState: { folders: [] },
 
-	componentDidMount: function () {
-		var inputNode = this.folderInput.getDOMNode();
-
-		inputNode.setAttribute('directory', '');
-		inputNode.setAttribute('webkitdirectory', '');
-	},
-
-	i18n: function (key) {
-		return chrome.i18n.getMessage(key);
+	updateChannelState: function (state) {
+		this.replaceState({
+			folders: state
+		});
 	},
 
 	addFolder: function(event) {
-		console.log('adding folder');
-		console.log(this);
-		var folders = this.state.folders || [];
+		event.preventDefault();
+		event.target.blur();
+
+		this.channel.send('addFolder', prompt('add path', '/torrent'));
+
+		/*var folders = this.state.folders || [];
 		folders.push({
 			name: 'foo-' + Date.now(),
 			path: '/fdkjg/.dfg/fhgg',
-			status: 'foo'
+			status: 'foo',
+			items: 135
 		});
 
 		this.setState({
 			folders: folders
-		});
-
-		this.folderInput.getDOMNode().click();
+		});*/
 	},
-
-	folderInput: <input type='file' webkitdirectory='' directory='' />,
 
 	render: function() {
 		var folders = {};
@@ -64,25 +50,23 @@ var SharedFoldersHandler = React.createClass({
 		if (this.state.folders && this.state.folders.length) {
 			for (var i in this.state.folders) {
 				var folder = this.state.folders[i];
-				folders['folder-' + i] = <Folder name={folder.name} path={folder.path} status={folder.status} />;
+				folders[folder.path] = <Folder name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
 			}
 		}
 
 		return (
-			<section className="settings">
-				<header>
-					<h1>{this.i18n('settings_sharedfolders_title')}</h1>
-					<h2>Vulputate Fringilla Consectetur</h2>
-				</header>
-				{this.folderInput}
-				<Button onClick={this.addFolder} label='Add Folder' />
-				
-				<hr />
-				{folders}
-				<hr />
-				<p><Link href='/foo/username-state-from-url'>Login</Link></p>
-				<div>{this.state.message}</div>
-			</section>
+			<main>
+				<section className="shared-folders-handler">
+					<header>
+						<h1>{this.i18n('settings_sharedFolders_title')}</h1>
+						<div className="add-folder-button">
+							<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
+						</div>
+					</header>
+					
+					{folders}
+				</section>
+			</main>
 		)
 	}
 });

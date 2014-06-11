@@ -1,0 +1,22 @@
+.shared-folders-handler {
+	$squish: 2;
+	@include squish(2);
+
+	@include nested(12 - ($squish * 2)) {
+		header {
+			@include span(full);
+			
+			h1 {
+				@include span(6);
+			}
+
+			.add-folder-button {
+				@include span(2 last);
+
+				button {
+					@include span(full);
+				}
+			}
+		}
+	}
+}
