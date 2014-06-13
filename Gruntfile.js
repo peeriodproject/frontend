@@ -14,6 +14,19 @@ module.exports = function (grunt) {
                 dest: 'build/assets/js/main.js'
             }
         },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        'build/assets/css/main.css',
+                        'build/assets/js/main.js'
+                    ]
+                },
+                options: {
+                    watchTask: true
+                }
+            }
+        },
         watch     : {
             files: ['./src/**/*.js'],
             tasks: ['browserify:app']
@@ -59,11 +72,25 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-browserify');
-//grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
-    grunt.registerTask('default', ['build', 'watch']);
-    grunt.registerTask('build', ['browserify:app', 'copy:fonts', 'copy:icons', 'copy:locales', 'copy:manifest', 'copy:main', 'compass:dist']);
+    grunt.registerTask('default', [
+        'build',
+        'browserSync',
+        'watch',
+
+    ]);
+
+    grunt.registerTask('build', [
+        'browserify:app',
+        'copy:fonts',
+        'copy:icons',
+        'copy:locales',
+        'copy:manifest',
+        'copy:main',
+        'compass:dist'
+    ]);
 };

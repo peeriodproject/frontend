@@ -55,14 +55,14 @@ var SharedFoldersHandler = React.createClass({
 		}
 
 		return (
-			<main>
+			<main className="main">
 				<section className="shared-folders-handler">
-					<header>
+					{/*<header>
 						<h1>{this.i18n('settings_sharedFolders_title')}</h1>
 						<div className="add-folder-button">
 							<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
 						</div>
-					</header>
+					</header>*/}
 					
 					{folders}
 				</section>

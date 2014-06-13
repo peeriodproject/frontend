@@ -8,14 +8,17 @@
 @import "fonts";
 @import "grids";
 @import "rhythm";
+@import "stickyFooter";
 
 @import "../core/elements/Button";
+@import "../core/elements/Badge";
 
 // http://zoerooney.com/blog/web-development/clean-sticky-footer-sass-mixin/
 
 //@import "_typeplate-vars";
 //@import "../../../bower_components/typeplate-starter-kit/scss/_typeplate.scss";
 
+@include sticky-footer(3rem);
 @include border-box-sizing;
 
 body {
@@ -28,12 +31,34 @@ body {
 	color: #fff;
 	-webkit-font-smoothing: antialiased;
 
+	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
 }
 
-main {
+#wrapper {
 	background-color: rgba(104, 0, 122, .8);
-	padding-top: rhythm(3);
+	//@include debug-vertical-alignment();
+}
+
+.footer {
+	@include squish(2);
+}
+
+.folder.status-invalid {
+	background: red;
+}
+
+.folder {
+	@include padding-trailer();
+}
+
+.folder + .folder {
+	@include leading-border();
+	//border-top: 1px solid rgba(255, 255, 255, .15);
+}
+
+main {
+	//padding-top: leader(3);
 }
 
 a {

@@ -21,9 +21,9 @@ var Folder = React.createClass({
 		return (
 			<section className={"folder status-" + this.props.status}>
 				<h3>{this.props.name}</h3>
-				<p>{this.props.path}</p>
+				<p className="path">{this.props.path}</p>
 				
-				<div className="">
+				<div className="badge-wrapper">
 					<Badge label={this.props.items} />
 				</div>
 			</section>

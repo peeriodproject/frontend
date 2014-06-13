@@ -1,0 +1,10 @@
+.folder {
+	.path {
+		@include span(11);
+	}
+
+	.badge-wrapper {
+		text-align: right;
+		@include span(1 last);
+	}
+}

@@ -1,0 +1,9 @@
+.badge {
+	background: rgba(255, 255, 255, .15);
+	border-radius: 3px;
+	display: inline-block;
+
+	@include bleed-y($base-half-leader / 4);
+	padding-left: $base-leader;
+	padding-right: $base-leader;
+}
