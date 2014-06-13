@@ -19,7 +19,7 @@ var Folder = React.createClass({
 
 	render: function () {
 		return (
-			<section className="folder status-{this.props.status}">
+			<section className={"folder status-" + this.props.status}>
 				<h3>{this.props.name}</h3>
 				<p>{this.props.path}</p>
 				
