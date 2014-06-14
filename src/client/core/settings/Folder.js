@@ -6,6 +6,7 @@
 var React = require('react');
 var Link = require('react-router-component').Link;
 var Badge = require('../elements/Badge');
+var Path = require('../elements/Path');
 
 var Folder = React.createClass({
 	getDefaultProps: function () {
@@ -20,8 +21,8 @@ var Folder = React.createClass({
 	render: function () {
 		return (
 			<section className={"folder status-" + this.props.status}>
-				<h3>{this.props.name}</h3>
-				<p className="path">{this.props.path}</p>
+				<h2>{this.props.name}</h2>
+				<Path path={this.props.path} />
 				
 				<div className="badge-wrapper">
 					<Badge label={this.props.items} />

@@ -15,9 +15,10 @@
     "tests"
   ],
   "dependencies": {
-    "typeplate-starter-kit": "~1.1.4"
+    "typeplate-starter-kit": "~1.1.4",
   },
   "devDependencies": {
-    "modularized-normalize-scss": "~3.0.1"
+    "modularized-normalize-scss": "~3.0.1",
+    "jQuery.dotdotdot": "~1.6.14"
   }
 }
