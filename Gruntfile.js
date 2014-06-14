@@ -68,6 +68,16 @@ module.exports = function (grunt) {
                     config: './config.rb'
                 }
             }
+        },
+        uglify: {
+            libraries: {
+                files: {
+                    'build/assets/js/libraries.js': [
+                        './bower_components/jquery/dist/jquery.js',
+                        './bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.js',
+                    ]
+                }
+            }
         }
     });
 
@@ -76,6 +86,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-browser-sync');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('default', [
         'build',
@@ -91,6 +102,7 @@ module.exports = function (grunt) {
         'copy:locales',
         'copy:manifest',
         'copy:main',
-        'compass:dist'
+        'compass:dist',
+        'uglify:libraries'
     ]);
 };
