@@ -1,4 +1,11 @@
 .folder {
+	$padding-top-bottom: 0.5;
+
+	@include clearfix;
+	@include padding-trailer($padding-top-bottom);
+	@include bleed-x(1/8);
+	border-color: $border-color;
+
 	.path {
 		@include span(11);
 	}
@@ -7,4 +14,13 @@
 		text-align: right;
 		@include span(1 last);
 	}
+
+	&.status-invalid {
+		//background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	& + .folder {
+		@include leading-border(1px, $padding-top-bottom);
+	}
+
 }

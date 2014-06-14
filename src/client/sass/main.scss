@@ -36,25 +36,12 @@ body {
 }
 
 #wrapper {
-	background-color: rgba(104, 0, 122, .8);
+	background-color: rgba(104, 0, 122, $wrapper-bg-alpha);
 	//@include debug-vertical-alignment();
 }
 
 .footer {
 	@include squish(2);
-}
-
-.folder.status-invalid {
-	background: red;
-}
-
-.folder {
-	@include padding-trailer();
-}
-
-.folder + .folder {
-	@include leading-border();
-	//border-top: 1px solid rgba(255, 255, 255, .15);
 }
 
 main {

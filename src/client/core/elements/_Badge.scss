@@ -1,9 +1,10 @@
 .badge {
-	background: rgba(255, 255, 255, .15);
-	border-radius: 3px;
-	display: inline-block;
+	@include bleed-y($base-half-leader / 8);
+	@include adjust-font-size-to($base-font-size * .75);
 
-	@include bleed-y($base-half-leader / 4);
-	padding-left: $base-leader;
-	padding-right: $base-leader;
+	background: rgba(255, 255, 255, .15);
+	border-radius: $badge-border-radius;
+	display: inline-block;
+	padding-left: $base-leader * 1.5;
+	padding-right: $base-leader * 1.5;
 }

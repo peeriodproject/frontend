@@ -22,6 +22,7 @@ $font-weight-heavy			: 700;
 $font-weight-black			: 800;
 
 
+// Vertical Rhythm
 // -------------------------------------//
 
 $base-font-size: 18px;
@@ -30,5 +31,33 @@ $base-line-height: $base-font-size * 1.6;
 $relative-font-sizing: false;
 $round-to-nearest-half-line: true;
 
-$button-border-radius: 3px / $base-font-size * 1rem;
+$wrapper-bg-alpha: 1;
+
+// Globals
+// -------------------------------------//
+
+$base-color: #fff;
+
+$border-radius: 3px / $base-font-size * 1rem;
+
+$border-alpha: 0.15;
+$border-color: rgba($base-color, $border-alpha);
+
+$hover-alpha: 0.15;
+$hover-color: rgba($base-color, $hover-alpha);
+
+$active-alpha: 0.3;
+$active-color: rgba($base-color, $active-alpha);
+
+
+// Button
+// -------------------------------------//
+
+$button-border-radius: $border-radius;
 $button-border-width: 1px;
+
+
+// Badge
+// -------------------------------------//
+
+$badge-border-radius: $border-radius;
