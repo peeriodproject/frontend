@@ -26,6 +26,7 @@
     "react-tools": "^0.10.0",
     "grunt-contrib-compass": "^0.8.0",
     "grunt-browser-sync": "^0.9.1",
-    "grunt-contrib-uglify": "^0.5.0"
+    "grunt-contrib-uglify": "^0.5.0",
+    "chroma-js": "^0.5.7"
   }
 }
