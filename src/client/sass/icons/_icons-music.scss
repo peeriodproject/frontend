@@ -1,0 +1,38 @@
+@include font-face("linea-music", font-files(
+		"linea-music-10.woff",
+		"linea-music-10.ttf",
+		"linea-music-10.svg"
+	), "linea-music-10.eot", normal, normal);
+
+$icons-music: (
+	beginning-button	: "a",
+	bell				: "b",
+	cd					: "c",
+	diapason			: "d",
+	eject-button		: "e",
+	end-button			: "f",
+	fastforward-button	: "g",
+	headphones			: "h",
+	ipod				: "i",
+	loudspeaker			: "j",
+	microphone			: "k",
+	microphone-old		: "l",
+	mixer				: "m",
+	mute				: "n",
+	note-multiple		: "o",
+	note-single			: "p",
+	pause-button		: "q",
+	play-button			: "r",
+	playlist			: "s",
+	radio-ghettoblaster	: "t",
+	radio-portable		: "u",
+	record				: "v",
+	recordplayer		: "w",
+	repeat-button		: "x",
+	rewind-button		: "y",
+	shuffle-button		: "z",
+	stop-button			: "A",
+	tape				: "B",
+	volume-down			: "C",
+	volume-up			: "D"
+)
