@@ -1,13 +1,17 @@
 @include establish-baseline;
 
 h1 {
-	@include adjust-font-size-to(42px);
+	@include adjust-font-size-to(45px);
 }
 
 h2 {
-	@include adjust-font-size-to(36px);
+	@include adjust-font-size-to(32px);
 }
 
 h3 {
-	@include adjust-font-size-to(25px);
+	@include adjust-font-size-to(23px);
+}
+
+h4 {
+	@include adjust-font-size-to(16px);
 }
