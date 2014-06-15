@@ -2,8 +2,7 @@
 	@include bleed-y($base-half-leader / 8);
 	@include adjust-font-size-to($base-font-size * .75);
 
-	background: rgba(255, 255, 255, .15);
-	border-radius: $badge-border-radius;
+	border-radius: $base-line-height / 2;//$badge-border-radius;
 	display: inline-block;
 	padding-left: $base-leader * 1.5;
 	padding-right: $base-leader * 1.5;

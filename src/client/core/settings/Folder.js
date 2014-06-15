@@ -7,6 +7,7 @@ var React = require('react');
 var Link = require('react-router-component').Link;
 var Badge = require('../elements/Badge');
 var Path = require('../elements/Path');
+var IconButton = require('../elements/IconButton');
 
 var Folder = React.createClass({
 	getDefaultProps: function () {
@@ -18,16 +19,55 @@ var Folder = React.createClass({
 		}
 	},
 
+	getInitialState: function () {
+		return {
+			actionButtonHoverClassName: '',
+			hoverClassName: ''
+		}
+	},
+
+	getBadge: function () {
+		var badge = (<div className='badge-wrapper'>
+						<Badge label={this.props.items} />
+					</div>);
+
+		return this.props.status === 'active' ? badge : null;
+	},
+
+	onMouseEnter: function () {
+		this.setState({
+			hoverClassName: ' bg-hover',
+			actionButtonHoverClassName: ' bg-active'
+		});
+	},
+
+	onMouseLeave: function () {
+		this.setState({
+			hoverClassName: '',
+			actionButtonHoverClassName: ''
+		});
+	},
+
+	removeFolder: function (e) {
+		console.log(e);
+	},
+
 	render: function () {
 		return (
-			<section className={"folder status-" + this.props.status}>
-				<h2>{this.props.name}</h2>
-				<Path path={this.props.path} />
-				
-				<div className="badge-wrapper">
-					<Badge label={this.props.items} />
+			<div className={'folder bg-border' + this.state.hoverClassName} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+				<i className={'bg-color-light status-' + this.props.status}></i>
+
+				<section>
+					<h3>{this.props.name}</h3>
+					<Path path={this.props.path} color='dark' />
+					
+					{this.getBadge()}
+				</section>
+
+				<div className={'action-buttons' + this.state.actionButtonHoverClassName}>
+					<IconButton className='remove' onClick={this.removeFolder} />
 				</div>
-			</section>
+			</div>
 		)
 	}
 });

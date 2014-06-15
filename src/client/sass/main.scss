@@ -9,14 +9,12 @@
 @import "grids";
 @import "rhythm";
 @import "stickyFooter";
+@import "icons";
 
 @import "../core/elements/Button";
 @import "../core/elements/Badge";
-
-// http://zoerooney.com/blog/web-development/clean-sticky-footer-sass-mixin/
-
-//@import "_typeplate-vars";
-//@import "../../../bower_components/typeplate-starter-kit/scss/_typeplate.scss";
+@import "../core/elements/IconButton";
+@import "../core/elements/Path";
 
 @include sticky-footer(3rem);
 @include border-box-sizing;

@@ -11,7 +11,8 @@ var Path = React.createClass({
 		return {
 			path: '',
 			seperator: '/',
-			filenameClassName: 'filename'
+			filenameClassName: 'filename',
+			color: ''
 		}
 	},
 
@@ -61,10 +62,12 @@ var Path = React.createClass({
 	 * Renders the path inside a div.path element
 	 */
 	render: function (argument) {
+		var colorClassName = this.props.color ? ' bg-color-' + this.props.color : '';
+
 		this.setupPath();
-		
+
 		return (
-			<div className="path" dangerouslySetInnerHTML={{ __html: this.getPath() }}></div>
+			<div className={'path' + colorClassName} dangerouslySetInnerHTML={{ __html: this.getPath() }}></div>
 		)
 	}
 });

@@ -29,7 +29,7 @@ var Badge = React.createClass({
 
 	render: function (argument) {
 		return (
-			<div className="badge">
+			<div className="badge bg-hover">
 				{this.getLabel()}
 			</div>
 		)

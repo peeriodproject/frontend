@@ -28,7 +28,7 @@ var Button = React.createClass({
 
 	render: function () {
 		return (
-			<button type={this.props.type} onClick={this.props.onClick}>{this.state.label}</button>
+			<button className='btn' type={this.props.type} onClick={this.props.onClick}>{this.state.label}</button>
 		)
 	}
 });
