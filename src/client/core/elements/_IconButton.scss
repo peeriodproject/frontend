@@ -1,0 +1,23 @@
+.icon-btn {
+	@include adjust-font-size-to(20px);
+
+	outline: none;
+	border: none;
+	background-color: transparent;
+	padding: 0;
+
+	transition: color 0.25s ease;
+
+	// - - - -
+	
+	border-radius: $base-line-height / 2;
+	@include bleed(1/2);
+
+	&[class*='bg-color'] {
+		transition: color 0.25s ease;
+	}
+
+	&.bg-color-inverted {
+		//background-color: red;
+	}
+}
