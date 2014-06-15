@@ -31,23 +31,10 @@ $base-line-height: $base-font-size * 1.6;
 $relative-font-sizing: false;
 $round-to-nearest-half-line: true;
 
-$wrapper-bg-alpha: 1;
-
 // Globals
 // -------------------------------------//
 
-$base-color: #fff;
-
 $border-radius: 3px / $base-font-size * 1rem;
-
-$border-alpha: 0.15;
-$border-color: rgba($base-color, $border-alpha);
-
-$hover-alpha: 0.15;
-$hover-color: rgba($base-color, $hover-alpha);
-
-$active-alpha: 0.3;
-$active-color: rgba($base-color, $active-alpha);
 
 
 // Button

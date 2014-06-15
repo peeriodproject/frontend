@@ -3,20 +3,17 @@
   "version": "0.0.0",
   "homepage": "https://github.com/joernroeder/abschluss_frontend",
   "authors": [
-    "Jörn Röder <kontakt@joernroeder.de>"
+    "Jonathan Pirnay <mail@johnnycrab.com>",
+    "Jörn Röder <kontakt@joernroeder.de>"
   ],
   "license": "MIT",
   "private": true,
   "ignore": [
-    "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
   ],
-  "dependencies": {
-    "typeplate-starter-kit": "~1.1.4",
-  },
   "devDependencies": {
     "modularized-normalize-scss": "~3.0.1",
     "jQuery.dotdotdot": "~1.6.14"
