@@ -107,7 +107,7 @@ var BackgroundHandler = React.createClass({
 	render: function () {
 		//var wrapper = '#wrapper { background-color: ; }';
 		var styles = this.createStyles([
-			this.createElementStyles('#wrapper, .bg', {
+			this.createElementStyles('body, .bg', {
 				'background-color': this.getBackgroundColor().hex()
 			}),
 

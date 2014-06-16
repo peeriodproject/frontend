@@ -24,18 +24,49 @@
 body {
 	@include container;
 
+	background-image: none;
+
 	font-family: "Aileron";
 	font-weight: $font-weight-thin;
 	-webkit-font-smoothing: antialiased;
 
 	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
+
+	transition: transform 0.2s;
+	transform-style: preserve-3d;
+	perspective: 900px;
+}
+
+#dialog-wrapper {
+	@include background-image(linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0)));
+
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	opacity: 0.01;
+
+	transition: opacity 0.25s ease;
+}
+
+.dialog-open #dialog-wrapper {
+	opacity: 1;
 }
 
 #wrapper {
 	//background-color: rgba(104, 0, 122, $wrapper-bg-alpha);
 	//@include debug-vertical-alignment();
-	@include show-grid(overlay);
+	//@include show-grid(overlay);
+
+	transform-style: preserve-3d;
+	transform-origin: 50% 100%;
+	transition: transform 0.25s;
+	perspective: 900px;
+}
+
+.dialog-open #wrapper {
+	transform: rotateX(10deg);
 }
 
 .footer {
@@ -47,6 +78,7 @@ body {
 }
 
 main {
+	@include clearfix;
 	@include padding-leader(3);
 }
 

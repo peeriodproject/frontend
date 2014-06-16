@@ -1,5 +1,7 @@
 .shared-folders-handler {
 	$squish: 2;
+
+	@include clearfix;
 	@include squish(2);
 
 	@include nested(12 - ($squish * 2)) {
