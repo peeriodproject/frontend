@@ -13,22 +13,64 @@ var Button = React.createClass({
 
 	getDefaultProps: function () {
 		return {
+			className: '',
 			label: 'elements_button_label',
 			type: 'button',
-			onClick: function () {
-			}
+			onClick: function () {},
+			onMouseEnter: function () {},
+			onMouseLeave: function () {}
 		}
 	},
 
 	getInitialState: function () {
 		return {
+			hoverClassName: '',
 			label: this.i18n(this.props.label)
 		};
 	},
 
+	handleMouseClick: function (e) {
+		var self = this;
+		
+		e.preventDefault();
+		e.target.blur();
+
+		this.setState({
+			hoverClassName: 'bg-active '
+		});
+
+		setTimeout(function () {
+			self.props.onClick();
+		}, 0);
+	},
+
+	handleMouseEnter: function (e) {
+		this.setState({
+			hoverClassName: 'bg-hover bg-border-dark '
+		});
+
+		this.props.onMouseEnter(e);
+	},
+
+	handleMouseLeave: function (e) {
+		this.setState({
+			hoverClassName: ''
+		});
+
+		this.props.onMouseLeave(e);
+	},
+
 	render: function () {
 		return (
-			<button className='btn' type={this.props.type} onClick={this.props.onClick}>{this.state.label}</button>
+			<button
+				className={'btn bg-border-middle ' + this.state.hoverClassName + this.props.className}
+				type={this.props.type}
+				onClick={this.handleMouseClick}
+				onMouseEnter={this.handleMouseEnter} 
+				onMouseLeave={this.handleMouseLeave}
+			>
+				{this.state.label}
+			</button>
 		)
 	}
 });
