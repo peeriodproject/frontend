@@ -69,6 +69,14 @@ module.exports = function (grunt) {
                 }
             }
         },
+        cssmin: {
+            libraries: {
+                src: [
+                    './bower_components/animate.css/animate.css'
+                ],
+                dest: 'build/assets/css/libraries.css',
+            }
+        },
         uglify: {
             libraries: {
                 files: {
@@ -85,8 +93,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
     grunt.registerTask('default', [
         'build',
@@ -103,6 +112,7 @@ module.exports = function (grunt) {
         'copy:manifest',
         'copy:main',
         'compass:dist',
-        'uglify:libraries'
+        'uglify:libraries',
+        'cssmin:libraries'
     ]);
 };

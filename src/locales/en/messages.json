@@ -24,5 +24,9 @@
 	"elements_button_label": {
 		"message": "Button",
 		"description": "The default button label"
+	},
+	"addFolder_dialog_title": {
+		"message": "Add Folder",
+		"description": "Add Folder dialog title"
 	}
 }

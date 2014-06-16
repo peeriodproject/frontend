@@ -40,7 +40,7 @@ var Button = React.createClass({
 		});
 
 		setTimeout(function () {
-			self.props.onClick();
+			self.props.onClick(e);
 		}, 0);
 	},
 

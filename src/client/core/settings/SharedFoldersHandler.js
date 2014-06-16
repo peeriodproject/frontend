@@ -7,14 +7,24 @@ var React = require('react');
 var Link = require('react-router-component').Link;
 //var Async = require('react-async');
 
+var events = require('../events/EventEmitterMixin');
+
 var Folder = require('./Folder');
 var Button = require('../elements/Button');
 
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
+var DialogHandler = require('../dialog/DialogHandler');
+
 var SharedFoldersHandler = React.createClass({
-	mixins: [ChannelMixin, I18nMixin],
+	
+	mixins: [
+		ChannelMixin,
+		I18nMixin,
+		events.mixinFor('dialogOpen'),
+		events.mixinFor('folderAdded')
+	],
 
 	channelName: 'folder',
 	initialState: { folders: [] },
@@ -26,7 +36,12 @@ var SharedFoldersHandler = React.createClass({
 	},
 
 	addFolder: function(event) {
-		this.channel.send('addFolder', prompt('add path', '/torrent'));
+		this.emitDialogOpen('addFolderDialog');
+	},
+
+	onFolderAdded: function (path) {
+		console.log('folder added:', path);
+		//this.channel.send('addFolder', path);
 	},
 
 	render: function() {

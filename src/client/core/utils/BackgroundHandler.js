@@ -79,6 +79,13 @@ var BackgroundHandler = React.createClass({
 		])(alpha);
 	},
 
+	getInvertedAlphaColor: function (alpha) {
+		return Chroma.scale([
+			this.getInvertedColor(),
+			new Chroma(this.getColor())
+		])(1 - alpha);
+	},
+
 	getTransitionForKey: function (key, transitionDuration) {
 		var duration = transitionDuration || this.props.intervalInSeconds;
 		return 'transition: ' + key + ' ' + duration + 's linear';
@@ -119,6 +126,26 @@ var BackgroundHandler = React.createClass({
 				'background-color': this.getAlphaColor(this.props.activeAlpha).hex()
 			}),
 
+			this.createElementStyles('.bg-color-background', {
+				'background-color': this.getColor().hex(),
+				'color': this.getInvertedColor().hex()
+			}),
+
+			this.createElementStyles('.bg-color-background-light', {
+				'background-color': this.getAlphaColor(1 - 0.1).hex(), //this.getInvertedAlphaColor(1 - 0.1).hex(),
+				'color': this.getInvertedColor().hex()
+			}),
+
+			this.createElementStyles('.bg-color-background-middle', {
+				'background-color': this.getAlphaColor(1 - 0.25).hex(),
+				'color': this.getInvertedColor().hex()
+			}),
+
+			this.createElementStyles('.bg-color-background-dark', {
+				'background-color': this.getAlphaColor(1 - 0.40).hex(),
+				'color': this.getInvertedColor().hex()
+			}),
+
 			// color sheme
 			this.createElementStyles('.bg-color-light', {
 				'color': this.getAlphaColor(0.3).hex()
@@ -139,6 +166,18 @@ var BackgroundHandler = React.createClass({
 			// border
 			this.createElementStyles('.bg-border', {
 				'border-color': this.getColor().hex()
+			}),
+
+			this.createElementStyles('.bg-border-inverted-light', {
+				'border-color': this.getInvertedAlphaColor(0.15).hex()
+			}),
+
+			this.createElementStyles('.bg-border-inverted-middle', {
+				'border-color': this.getInvertedAlphaColor(0.35).hex()
+			}),
+
+			this.createElementStyles('.bg-border-inverted-dark', {
+				'border-color': this.getInvertedAlphaColor(0.55).hex()
 			}),
 
 			this.createElementStyles('.bg-border-light', {

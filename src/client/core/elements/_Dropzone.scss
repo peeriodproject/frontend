@@ -1,0 +1,15 @@
+.dropzone {
+	@include padding-leader(0.5);
+	@include padding-trailer(0.5);
+	//@include bleed-x(0.25);
+
+	@include rhythm-borders(1px);
+
+	height: rhythm(13);
+	box-sizing: border-box;
+
+	//background: #eee;
+
+
+
+}

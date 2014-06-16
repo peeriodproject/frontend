@@ -10,6 +10,9 @@ button.btn {
 
 	@include rhythm-borders($button-border-width, .25, $base-font-size, solid);
 
+	padding-left: 2rem;
+	padding-right: 2rem;
+
 	&:before {
 		@include adjust-font-size-to(19px);
 		vertical-align: text-bottom;

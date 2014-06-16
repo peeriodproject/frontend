@@ -11,8 +11,12 @@
 @import "stickyFooter";
 @import "icons";
 
+@import "../core/dialog/DialogHandler";
+@import "../core/dialog/AddFolderDialog";
+
 @import "../core/elements/Button";
 @import "../core/elements/Badge";
+@import "../core/elements/Dropzone";
 @import "../core/elements/IconButton";
 @import "../core/elements/Path";
 
@@ -33,25 +37,13 @@ body {
 	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
 
-	transition: transform 0.2s;
+	//transition: transform 0.2s ease-out;
 	transform-style: preserve-3d;
 	perspective: 900px;
 }
 
-#dialog-wrapper {
-	@include background-image(linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0)));
-
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: 100;
-	opacity: 0.01;
-
-	transition: opacity 0.25s ease;
-}
-
-.dialog-open #dialog-wrapper {
-	opacity: 1;
+.hidden {
+	display: none;
 }
 
 #wrapper {
@@ -61,12 +53,12 @@ body {
 
 	transform-style: preserve-3d;
 	transform-origin: 50% 100%;
-	transition: transform 0.25s;
+	transition: transform 0.25s ease-out, background-color 1.5s linear;
 	perspective: 900px;
 }
 
 .dialog-open #wrapper {
-	transform: rotateX(10deg);
+	transform: rotateX(5deg);
 }
 
 .footer {
