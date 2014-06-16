@@ -1,5 +1,5 @@
 .icon-btn {
-	@include adjust-font-size-to(20px);
+	@include adjust-font-size-to(23px);
 
 	outline: none;
 	border: none;
@@ -8,6 +8,11 @@
 
 	transition: color 0.25s ease;
 
+	&:before {	
+		// @todo move to @icon mixin
+		vertical-align: middle;
+	}
+
 	// - - - -
 	
 	border-radius: $base-line-height / 2;
@@ -15,9 +20,5 @@
 
 	&[class*='bg-color'] {
 		transition: color 0.25s ease;
-	}
-
-	&.bg-color-inverted {
-		//background-color: red;
 	}
 }

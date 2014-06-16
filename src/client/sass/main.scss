@@ -16,6 +16,8 @@
 @import "../core/elements/IconButton";
 @import "../core/elements/Path";
 
+// http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/
+
 @include sticky-footer(3rem);
 @include border-box-sizing;
 
@@ -33,14 +35,19 @@ body {
 #wrapper {
 	//background-color: rgba(104, 0, 122, $wrapper-bg-alpha);
 	//@include debug-vertical-alignment();
+	@include show-grid(overlay);
 }
 
 .footer {
 	@include squish(2);
 }
 
+* {
+	background-color: transparent;
+}
+
 main {
-	//padding-top: leader(3);
+	@include padding-leader(3);
 }
 
 a {

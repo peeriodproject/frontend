@@ -5,6 +5,7 @@
 	@include nested(12 - ($squish * 2)) {
 		header {
 			@include span(full);
+			@include margin-trailer(2);
 			
 			h1 {
 				@include span(6);
@@ -15,6 +16,8 @@
 
 				button {
 					@include span(full);
+
+					@include icon("arrows-plus");
 				}
 			}
 		}

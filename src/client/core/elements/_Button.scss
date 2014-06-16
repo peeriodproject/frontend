@@ -2,28 +2,18 @@ button.btn {
 	padding: 0;
 	margin: 0;
 
-	background: transparent;
+	outline: none;
 	box-sizing: border-box;
 
 	border-radius: $button-border-radius;
+	box-sizing: border-box;
 
-	//@include margin-leader(.25, $base-font-size);
-/*	border-color: #fff;
-	border-width: 1px;
-
-	@include leading-border(1px, .5);
-	@include trailing-border(1px, .5);*/
 	@include rhythm-borders($button-border-width, .25, $base-font-size, solid);
 
-	&:hover,
-	&.hover,
-	&:focus {
-		outline: none;
-		background-color: rgba(255,255,255, .15);
-	}
-
-	&:active,
-	&.active {
-		background-color: rgba(255,255,255, .3);
+	&:before {
+		@include adjust-font-size-to(19px);
+		vertical-align: text-bottom;
+		margin-right: gutter(0.25rem);
+		margin-left: -0.5rem;
 	}
 }
