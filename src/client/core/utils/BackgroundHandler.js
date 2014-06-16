@@ -138,10 +138,22 @@ var BackgroundHandler = React.createClass({
 
 			// border
 			this.createElementStyles('.bg-border', {
+				'border-color': this.getColor().hex()
+			}),
+
+			this.createElementStyles('.bg-border-light', {
 				'border-color': this.getAlphaColor(0.15).hex()
 			}),
 
-			this.createElementStyles('body, a', {
+			this.createElementStyles('.bg-border-middle', {
+				'border-color': this.getAlphaColor(0.35).hex()
+			}),
+
+			this.createElementStyles('.bg-border-dark', {
+				'border-color': this.getAlphaColor(0.55).hex()
+			}),
+
+			this.createElementStyles('body, a, .bg-color', {
 				'color': this.getColor().hex()
 			})
 		]);
