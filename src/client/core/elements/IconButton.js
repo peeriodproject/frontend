@@ -24,7 +24,7 @@ var IconButton = React.createClass({
 
 	handleMouseEnter: function (e) {
 		this.setState({
-			hoverClassName: 'bg-color-inverted '
+			hoverClassName: 'bg-color '
 		});
 
 		this.props.onMouseEnter(e);
@@ -42,8 +42,8 @@ var IconButton = React.createClass({
 		return (
 			<button 
 				type='button'
-				className={'icon-btn ' + this.state.hoverClassName + this.props.className} 
-				onClick={this.props.handleClick} 
+				className={'icon-btn bg-color-dark ' + this.state.hoverClassName + this.props.className} 
+				onClick={this.props.onClick} 
 				onMouseEnter={this.handleMouseEnter} 
 				onMouseLeave={this.handleMouseLeave}
 			></button>

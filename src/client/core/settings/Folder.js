@@ -54,7 +54,7 @@ var Folder = React.createClass({
 
 	render: function () {
 		return (
-			<div className={'folder bg-border' + this.state.hoverClassName} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+			<div className={'folder bg-border-light' + this.state.hoverClassName} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
 				<i className={'bg-color-light status-' + this.props.status}></i>
 
 				<section>

@@ -26,22 +26,7 @@ var SharedFoldersHandler = React.createClass({
 	},
 
 	addFolder: function(event) {
-		event.preventDefault();
-		event.target.blur();
-
 		this.channel.send('addFolder', prompt('add path', '/torrent'));
-
-		/*var folders = this.state.folders || [];
-		folders.push({
-			name: 'foo-' + Date.now(),
-			path: '/fdkjg/.dfg/fhgg',
-			status: 'foo',
-			items: 135
-		});
-
-		this.setState({
-			folders: folders
-		});*/
 	},
 
 	render: function() {
@@ -57,12 +42,12 @@ var SharedFoldersHandler = React.createClass({
 		return (
 			<main className="main">
 				<section className="shared-folders-handler">
-					{/*<header>
-						<h1>{this.i18n('settings_sharedFolders_title')}</h1>
+					<header>
+						<h1 className='bg-color-dark'>{this.i18n('settings_sharedFolders_title')}</h1>
 						<div className="add-folder-button">
 							<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
 						</div>
-					</header>*/}
+					</header>
 					
 					{folders}
 				</section>
