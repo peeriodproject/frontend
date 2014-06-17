@@ -26,13 +26,24 @@ var SharedFoldersHandler = React.createClass({
 		events.mixinFor('folderAdded')
 	],
 
-	channelName: 'folder',
-	initialState: { folders: [] },
+	channelNames: [
+		'folder',
+		'folderdropzone'
+	],
+	
+	initialChannelsState: { 
+		folders: []
+	},
 
-	updateChannelState: function (state) {
-		this.replaceState({
+	updateFolderChannelState: function (state) {
+		this.setState({
 			folders: state
 		});
+	},
+
+	updateChannelState: function (channel, state) {
+		console.log(channel);
+		console.log(state);		
 	},
 
 	addFolder: function(event) {
@@ -41,7 +52,7 @@ var SharedFoldersHandler = React.createClass({
 
 	onFolderAdded: function (path) {
 		console.log('folder added:', path);
-		//this.channel.send('addFolder', path);
+		//this.folderChannel.send('addFolder')
 	},
 
 	render: function() {
