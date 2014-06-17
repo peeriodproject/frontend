@@ -41,13 +41,25 @@ var SharedFoldersHandler = React.createClass({
 		});
 	},
 
+	updateFolderdropzoneChannelState: function (paths) {
+		console.log('got state from dropzone channel:', paths);
+
+		if (paths.length) {
+			for (var i = 0, l = paths.length; i < l; i++) {
+				this.folderChannel.send('addFolder', paths[i]);
+			}
+		}
+		//console.log(state);
+	},
+
 	updateChannelState: function (channel, state) {
-		console.log(channel);
+		console.log('got event from unhandled channel:', channel);
 		console.log(state);		
 	},
 
 	addFolder: function(event) {
-		this.emitDialogOpen('addFolderDialog');
+		this.folderdropzoneChannel.send('open');
+		//this.emitDialogOpen('addFolderDialog');
 	},
 
 	onFolderAdded: function (path) {
