@@ -7,7 +7,22 @@ var DialogHandler = require('./core/dialog/DialogHandler')({
 });
 
 // make socket available to components
-window.socket = new Primus('http://localhost:3000/');
+var socket = new Primus('http://localhost:3000/');
+
+socket.on('reconnect', function () {
+	console.log('Reconnect attempt started');
+});
+
+socket.on('reconnecting', function (opts) {
+	console.log('Reconnecting in %d ms', opts.timeout);
+	console.log('This is attempt %d out of %d', opts.attempt, opts.retries);
+});
+
+socket.on('end', function () {
+	console.log('Connection closed');
+});
+
+window.socket = socket;
 
 // enable the React developer tools!
 window.React = React;
