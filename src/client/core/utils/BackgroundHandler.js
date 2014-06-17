@@ -86,22 +86,43 @@ var BackgroundHandler = React.createClass({
 		])(1 - alpha);
 	},
 
-	getTransitionForKey: function (key, transitionDuration) {
+	getTransitions: function (transitions) {
+		var styles = [];
+
+		for (var i = 0, l = transitions.length; i < l; i++) {
+			var tansition = transitions[i];
+			var duration = tansition.duration || this.props.intervalInSeconds;
+
+			styles.push(tansition.key + ' ' + duration + 's linear');
+		}
+
+		return 'transition: ' + styles.join(', ');
+	},
+
+	/*getTransitionForKey: function (key, transitionDuration) {
 		var duration = transitionDuration || this.props.intervalInSeconds;
 		return 'transition: ' + key + ' ' + duration + 's linear';
-	},
+	},*/
 
 	createElementStyles: function (selector, styles, transitionDuration) {
 		var keys = Object.keys(styles);
 		var style = [];
+		var transitions = [];
 		
 		for (var i = 0, l = keys.length; i < l; i++) {
 			var key = keys[i];
 			style.push(key + ': ' + styles[key]);
 
 			if (this.props.transitionKeys.indexOf(key) !== -1) {
-				style.push(this.getTransitionForKey(key, transitionDuration));
+				transitions.push({
+					key: key,
+					duration: transitionDuration
+				});
 			}
+		}
+
+		if (transitions.length) {
+			style.push(this.getTransitions(transitions));
 		}
 
 		return selector + ' {\n\t' + style.join(';\n\t') + '\n}';
