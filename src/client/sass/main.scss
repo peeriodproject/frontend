@@ -40,6 +40,8 @@ body {
 	//transition: transform 0.2s ease-out;
 	transform-style: preserve-3d;
 	perspective: 900px;
+
+	transition: color 1.5s linear, background-color 1.5s linear !important;
 }
 
 .hidden {
