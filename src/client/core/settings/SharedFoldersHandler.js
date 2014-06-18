@@ -16,6 +16,7 @@ var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
 var DialogHandler = require('../dialog/DialogHandler');
+var AddFolderDialog = require('../dialog/AddFolderDialog');
 
 var SharedFoldersHandler = React.createClass({
 	
@@ -23,7 +24,8 @@ var SharedFoldersHandler = React.createClass({
 		ChannelMixin,
 		I18nMixin,
 		events.mixinFor('dialogOpen'),
-		events.mixinFor('folderAdded')
+		events.mixinFor('folderAdded'),
+		events.mixinFor('backgroundColorChange')
 	],
 
 	channelNames: [
@@ -42,29 +44,31 @@ var SharedFoldersHandler = React.createClass({
 	},
 
 	updateFolderdropzoneChannelState: function (paths) {
-		console.log('got state from dropzone channel:', paths);
-
 		if (paths.length) {
 			for (var i = 0, l = paths.length; i < l; i++) {
 				this.folderChannel.send('addFolder', paths[i]);
 			}
 		}
-		//console.log(state);
 	},
 
 	updateChannelState: function (channel, state) {
-		console.log('got event from unhandled channel:', channel);
-		console.log(state);		
+		console.warn('got event from unhandled channel:', channel);
+		console.warn(state);		
 	},
 
 	addFolder: function(event) {
-		this.folderdropzoneChannel.send('open');
+		this.folderdropzoneChannel.send('open', this._background);
 		//this.emitDialogOpen('addFolderDialog');
 	},
 
-	onFolderAdded: function (path) {
-		console.log('folder added:', path);
-		//this.folderChannel.send('addFolder')
+	onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
+		// the background isn't added to the state as we're just piping it to the dropzone!
+		this.folderdropzoneChannel.send('background', {
+			background: background,
+			color: color,
+			inverted: inverted,
+			invertedBackgroundColor: invertedBackgroundColor
+		});
 	},
 
 	render: function() {

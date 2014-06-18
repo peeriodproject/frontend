@@ -25,6 +25,11 @@
 @include sticky-footer(3rem);
 @include border-box-sizing;
 
+html {
+	background-color: #000;
+	color: #000;
+}
+
 body {
 	@include container;
 
