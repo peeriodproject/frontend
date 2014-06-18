@@ -56,9 +56,13 @@ var SharedFoldersHandler = React.createClass({
 		console.warn(state);		
 	},
 
-	addFolder: function(event) {
+	addFolder: function (event) {
 		this.folderdropzoneChannel.send('open', this._background);
 		//this.emitDialogOpen('addFolderDialog');
+	},
+
+	removeFolder: function (path) {
+		this.folderChannel.send('removeFolder', path);
 	},
 
 	onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
@@ -77,7 +81,7 @@ var SharedFoldersHandler = React.createClass({
 		if (this.state.folders && this.state.folders.length) {
 			for (var i in this.state.folders) {
 				var folder = this.state.folders[i];
-				folders[folder.path] = <Folder name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
+				folders[folder.path] = <Folder onRemove={this.removeFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
 			}
 		}
 
