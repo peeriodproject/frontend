@@ -17,6 +17,8 @@ var Folder = React.createClass({
 			items: 0,
 			status: 'idle',
 			onRemove: function () {
+			},
+			onRefresh: function () {
 			}
 		}
 	},
@@ -54,7 +56,17 @@ var Folder = React.createClass({
 		this.props.onRemove(this.props.path);
 	},
 
+	refreshFolder: function (e) {
+		this.props.onRefresh(this.props.path);
+	},
+
 	render: function () {
+		var refreshButton;
+
+		if (this.props.status !== 'active') {
+			refreshButton = (<IconButton className='sync' onClick={this.refreshFolder} />)
+		}
+
 		return (
 			<div className={'folder bg-border-light' + this.state.hoverClassName} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
 				<i className={'bg-color-light status-' + this.props.status}></i>
@@ -67,6 +79,7 @@ var Folder = React.createClass({
 				</section>
 
 				<div className={'action-buttons' + this.state.actionButtonHoverClassName}>
+					{refreshButton}
 					<IconButton className='remove' onClick={this.removeFolder} />
 				</div>
 			</div>
