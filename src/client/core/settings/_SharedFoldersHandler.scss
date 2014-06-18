@@ -15,6 +15,7 @@
 
 			.add-folder-button {
 				@include span(2 last);
+				@include padding-leader(0.2);
 
 				button {
 					@include span(full);

@@ -37,8 +37,10 @@
 	}
 
 	.badge-wrapper {
+		@include span(2 last);
+
 		text-align: right;
-		@include span(1 last);
+		padding-right: gutter();
 	}
 
 	&.status-invalid {
@@ -57,20 +59,30 @@
 		right: 0;
 		top: 0;
 		height: 100%;
+		
 		padding-top: rhythm(1.75);
+		padding-right: gutter();
+
 		opacity: 0.01;
-		text-align: center;
+		text-align: right;
 
 		transition: background-color 0.25s ease;
 		transition: opacity 0.25s ease;
 
 		&.bg-active {
 			opacity: 1;
-		}	
-	}
+		}
 
-	.action-buttons .remove {
-		@include icon("basic-trashcan");
-		//background-color: pink;
+		.icon-btn {
+			@include gutters(0.5rem);
+		}
+
+		.sync {
+			@include icon("arrows-rotate");
+		}
+
+		.remove {
+			@include icon("basic-trashcan");
+		}
 	}
 }
