@@ -15,7 +15,9 @@ var Folder = React.createClass({
 			name: '',
 			path: '',
 			items: 0,
-			status: 'idle'
+			status: 'idle',
+			onRemove: function () {
+			}
 		}
 	},
 
@@ -49,7 +51,7 @@ var Folder = React.createClass({
 	},
 
 	removeFolder: function (e) {
-		console.log(e);
+		this.props.onRemove(this.props.path);
 	},
 
 	render: function () {
