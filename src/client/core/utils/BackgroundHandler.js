@@ -6,9 +6,13 @@
 var React = require('react');
 var Chroma = require('chroma-js');
 
-window.Chroma = Chroma;
+var events = require('../events/EventEmitterMixin');
 
 var BackgroundHandler = React.createClass({
+
+	mixins: [
+		events.mixinFor('backgroundColorChange')
+	],
 
 	getDefaultProps: function () {
 		return {
@@ -24,8 +28,10 @@ var BackgroundHandler = React.createClass({
 		return {
 			secondsElapsed: Math.round(Math.random() * 255),
 			color: new Chroma('#fff'),
+			invertedBackground: new Chroma('#fff'),
 			background: new Chroma('#000'),
-			invert: new Chroma('#000')
+			invert: new Chroma('#000'),
+			invertedBackgroundColor: new Chroma('#000')
 		};
 	},
 
@@ -33,16 +39,34 @@ var BackgroundHandler = React.createClass({
 		var secondsElapsed = this.state.secondsElapsed + 1;
 		var background = new Chroma('hsl(' + (this.state.secondsElapsed % 255) +  ', 100%, ' + (this.state.secondsElapsed % 100) + '%)');
 		var color = this.getColor();
+		var invertedBackgroundColor = color;
+		var backgroundHsl = background.hsl();
+		var invertedBackground;
 
 		if (Chroma.contrast(background, color) < this.props.minContrast) {
 			color = this.toggleColor();
 		}
+
+		// invert color
+		var h = backgroundHsl.shift();
+		h = h + 180 % 360;
+		backgroundHsl.unshift(h);
+
+		invertedBackground = new Chroma.hsl(backgroundHsl[0], backgroundHsl[1], backgroundHsl[2]);
+
+		if (Chroma.contrast(invertedBackground, color) < this.props.minContrast) {
+			invertedBackgroundColor = this.toggleColor(invertedBackgroundColor);
+		}
+
+		this.emitBackgroundColorChange(background.hex(), color.hex(), invertedBackground.hex(), invertedBackgroundColor.hex());
 
 		this.setState({
 			secondsElapsed: secondsElapsed,
 			color: color,
 			invert: this.toggleColor(color),
 			background: background,
+			invertedBackground: invertedBackground,
+			invertedBackgroundColor: invertedBackgroundColor
 		});
 	},
 
