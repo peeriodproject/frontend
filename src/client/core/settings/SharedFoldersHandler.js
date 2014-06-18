@@ -65,6 +65,11 @@ var SharedFoldersHandler = React.createClass({
 		this.folderChannel.send('removeFolder', path);
 	},
 
+	refreshFolder: function (path) {
+		// we're checking all folder paths at once.
+		this.folderChannel.send('syncFolders');
+	},
+
 	onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
 		// the background isn't added to the state as we're just piping it to the dropzone!
 		this.folderdropzoneChannel.send('background', {
@@ -81,7 +86,7 @@ var SharedFoldersHandler = React.createClass({
 		if (this.state.folders && this.state.folders.length) {
 			for (var i in this.state.folders) {
 				var folder = this.state.folders[i];
-				folders[folder.path] = <Folder onRemove={this.removeFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
+				folders[folder.path] = <Folder onRemove={this.removeFolder} onRefresh={this.refreshFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
 			}
 		}
 
