@@ -36,11 +36,12 @@ describe('CLIENT --> CORE --> ELEMENT --> Button', function() {
 		var buttonInstance = TestUtils.findRenderedDOMComponentWithTag(button, 'button');
 
 		expect(buttonInstance.getDOMNode().textContent).toEqual('value-key');
+		expect(buttonInstance.getDOMNode().className).toContain('btn');
 		expect(buttonInstance.getDOMNode().className).toContain('class-name');
 		expect(buttonInstance.getDOMNode().type).toEqual('submit');
 	});
 
-	it('should correctly call the given callback with the event as first argument on click and add "bg-active" to the className attribute', function () {
+	it('should correctly call the given callback with the event as first argument on click and add "*active*" to the className attribute', function () {
 		var React = require('react/addons');
 		var Button = require('../../../../src/client/core/element/Button');
 		var TestUtils = React.addons.TestUtils;
@@ -57,10 +58,10 @@ describe('CLIENT --> CORE --> ELEMENT --> Button', function() {
 		expect(onClickFn.mock.calls.length).toEqual(1);
 		expect(getName(onClickFn.mock.calls[0][0])).toEqual('SyntheticEvent');
 
-		expect(buttonInstance.getDOMNode().className).toContain('bg-active');
+		expect(buttonInstance.getDOMNode().className).toContain('active');
 	});
 
-	it('should correctly call the given callback with the event as the first arguments on enter and add "bg-hover bg-border-dark" to the className attribute', function () {
+	it('should correctly call the given callback with the event as the first arguments on enter and add "*hover*" to the className attribute', function () {
 		var React = require('react/addons');
 		var Button = require('../../../../src/client/core/element/Button');
 		var TestUtils = React.addons.TestUtils;
@@ -77,10 +78,10 @@ describe('CLIENT --> CORE --> ELEMENT --> Button', function() {
 		expect(onMouseEnterFn.mock.calls.length).toEqual(1);
 		expect(getName(onMouseEnterFn.mock.calls[0][0])).toEqual('SyntheticMouseEvent');
 
-		expect(buttonInstance.getDOMNode().className).toContain('bg-hover bg-border-dark');
+		expect(buttonInstance.getDOMNode().className).toContain('hover');
 	});
 
-	it('should correctly call the given callback with the event as the first arguments on leave and remove "bg-hover bg-border-dark" from the className attribute', function () {
+	it('should correctly call the given callback with the event as the first arguments on leave and remove "*hover*" from the className attribute', function () {
 		var React = require('react/addons');
 		var Button = require('../../../../src/client/core/element/Button');
 		var TestUtils = React.addons.TestUtils;
@@ -98,7 +99,7 @@ describe('CLIENT --> CORE --> ELEMENT --> Button', function() {
 		expect(onMouseLeaveFn.mock.calls.length).toEqual(1);
 		expect(getName(onMouseLeaveFn.mock.calls[0][0])).toEqual('SyntheticMouseEvent');
 
-		expect(buttonInstance.getDOMNode().className).not.toContain('bg-hover bg-border-dark');
+		expect(buttonInstance.getDOMNode().className).not.toContain('hover');
 	});
 
 });
