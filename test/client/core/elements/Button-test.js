@@ -34,11 +34,12 @@ describe('CLIENT --> CORE --> ELEMENT --> Button', function() {
 		TestUtils.renderIntoDocument(button);
 
 		var buttonInstance = TestUtils.findRenderedDOMComponentWithTag(button, 'button');
+		var node = buttonInstance.getDOMNode();
 
-		expect(buttonInstance.getDOMNode().textContent).toEqual('value-key');
-		expect(buttonInstance.getDOMNode().className).toContain('btn');
-		expect(buttonInstance.getDOMNode().className).toContain('class-name');
-		expect(buttonInstance.getDOMNode().type).toEqual('submit');
+		expect(node.textContent).toEqual('value-key');
+		expect(node.className).toContain('btn');
+		expect(node.className).toContain('class-name');
+		expect(node.type).toEqual('submit');
 	});
 
 	it('should correctly call the given callback with the event as first argument on click and add "*active*" to the className attribute', function () {

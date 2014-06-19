@@ -5,7 +5,7 @@
   },
   "jest": {
     "cacheDirectory": "<rootDir>/.jest-cache",
-    "collectCoverage": true,
+    "collectCoverage": false,
     "testDirectoryName": "test",
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "unmockedModulePathPatterns": [
