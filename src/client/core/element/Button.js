@@ -39,9 +39,7 @@ var Button = React.createClass({
 			hoverClassName: 'bg-active '
 		});
 
-		setTimeout(function () {
-			self.props.onClick(e);
-		}, 0);
+		self.props.onClick(e);
 	},
 
 	handleMouseEnter: function (e) {
