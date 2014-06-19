@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var Button = require('../elements/Button');
+var Button = require('../element/Button');
 
 var events = require('../events/EventEmitterMixin');
 

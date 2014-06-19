@@ -10,7 +10,7 @@ var Link = require('react-router-component').Link;
 var events = require('../events/EventEmitterMixin');
 
 var Folder = require('./Folder');
-var Button = require('../elements/Button');
+var Button = require('../element/Button');
 
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');

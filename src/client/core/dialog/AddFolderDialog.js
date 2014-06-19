@@ -6,8 +6,8 @@
 var React = require('react');
 var events = require('../events/EventEmitterMixin');
 
-var Button = require('../elements/Button');
-var Dropzone = require('../elements/Dropzone');
+var Button = require('../element/Button');
+var Dropzone = require('../element/Dropzone');
 
 var I18nMixin = require('../i18n/I18nMixin');
 

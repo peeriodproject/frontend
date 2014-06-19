@@ -5,9 +5,9 @@
 
 var React = require('react');
 var Link = require('react-router-component').Link;
-var Badge = require('../elements/Badge');
-var Path = require('../elements/Path');
-var IconButton = require('../elements/IconButton');
+var Badge = require('../element/Badge');
+var Path = require('../element/Path');
+var IconButton = require('../element/IconButton');
 
 var Folder = React.createClass({
 	getDefaultProps: function () {
