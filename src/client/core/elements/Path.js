@@ -30,7 +30,7 @@ var Path = React.createClass({
 	 */
 	componentDidMount: function () {
 		this.$node = $(this.getDOMNode());
-
+		
 		this.$node.height(this.$node.height()).dotdotdot({
 			after: '.' + this.props.filenameClassName,
 			wrap: 'letter',
