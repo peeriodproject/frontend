@@ -86,6 +86,17 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+        jsdoc : {
+            dist : {
+                src: [
+                    'src/**/*.js'
+                ],
+                options: {
+                    destination: 'docs',
+                    configure: './jsdoc.json'
+                }
+            }
         }
     });
 
@@ -96,6 +107,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-browser-sync');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('default', [
         'build',
@@ -113,6 +125,7 @@ module.exports = function (grunt) {
         'copy:main',
         'compass:dist',
         'uglify:libraries',
-        'cssmin:libraries'
+        'cssmin:libraries',
+        'jsdoc'
     ]);
 };

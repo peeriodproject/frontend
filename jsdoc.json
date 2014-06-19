@@ -1,0 +1,25 @@
+{
+	"tags": {
+		"allowUnknownTags" : true
+	},
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "source": {
+        "include": "./src"
+    },
+	"opts": {
+		"template"	: "./node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
+		"recurse"	: true,
+        "private": true,
+        "explain": false
+    },
+	"templates" : {
+		"cleverLinks"     : true,
+		"monospaceLinks"  : false
+	},
+	"markdown"  : {
+        "parser"   : "gfm",
+        "hardwrap" : true
+    }	
+}

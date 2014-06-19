@@ -1,5 +1,7 @@
 {
-  "dependencies": {},
+  "dependencies": {
+    "envify": "^1.2.1"
+  },
   "scripts": {
     "test": "jest"
   },
@@ -29,6 +31,7 @@
     "grunt-browser-sync": "^0.9.1",
     "grunt-contrib-uglify": "^0.5.0",
     "chroma-js": "^0.5.7",
-    "grunt-contrib-cssmin": "^0.10.0"
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-jsdoc": "^0.5.6"
   }
 }
