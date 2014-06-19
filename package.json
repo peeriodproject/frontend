@@ -9,7 +9,8 @@
     "testDirectoryName": "test",
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "unmockedModulePathPatterns": [
-      "<rootDir>/src/node_modules/react"
+      "<rootDir>/node_modules/react",
+      "<rootDir>/src/client/core/i18n/I18nMixin"
     ]
   },
   "devDependencies": {
