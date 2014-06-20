@@ -28,5 +28,14 @@
 	"addFolder_dialog_title": {
 		"message": "Add Folder",
 		"description": "Add Folder dialog title"
+	},
+	"folder_refreshButton_tooltipContent": {
+		"message": "Sync Folder",
+		"description": "Try to find and add an invalid path to the shared folders"
+	},
+
+	"folder_removeButton_tooltipContent": {
+		"message": "Remove Folder",
+		"description": "The tooltip content of the 'remove folder' icon"
 	}
 }
