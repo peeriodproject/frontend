@@ -5,7 +5,11 @@
 
 var React = require('react');
 
+var TooltipMixin = require('../tooltip/TooltipMixin');
+
 var IconButton = React.createClass({
+
+	mixins: [TooltipMixin],
 
 	getInitialState: function () {
 		return {

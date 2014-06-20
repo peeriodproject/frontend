@@ -9,7 +9,12 @@ var Badge = require('../element/Badge');
 var Path = require('../element/Path');
 var IconButton = require('../element/IconButton');
 
+var I18nMixin = require('../i18n/I18nMixin');
+
 var Folder = React.createClass({
+
+	mixins: [I18nMixin],
+
 	getDefaultProps: function () {
 		return {
 			name: '',
@@ -20,14 +25,14 @@ var Folder = React.createClass({
 			},
 			onRefresh: function () {
 			}
-		}
+		};
 	},
 
 	getInitialState: function () {
 		return {
 			actionButtonHoverClassName: '',
 			hoverClassName: ''
-		}
+		};
 	},
 
 	getBadge: function () {
@@ -64,7 +69,7 @@ var Folder = React.createClass({
 		var refreshButton;
 
 		if (this.props.status !== 'active') {
-			refreshButton = (<IconButton className='sync' onClick={this.refreshFolder} />)
+			refreshButton = (<IconButton className='sync' onClick={this.refreshFolder} tooltipContent={this.i18n('folder_refreshButton_tooltipContent')} />)
 		}
 
 		return (
@@ -80,7 +85,7 @@ var Folder = React.createClass({
 
 				<div className={'action-buttons' + this.state.actionButtonHoverClassName}>
 					{refreshButton}
-					<IconButton className='remove' onClick={this.removeFolder} />
+					<IconButton className='remove' onClick={this.removeFolder} tooltipContent={this.i18n('folder_removeButton_tooltipContent')} />
 				</div>
 			</div>
 		)

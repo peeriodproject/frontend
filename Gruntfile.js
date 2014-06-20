@@ -72,7 +72,8 @@ module.exports = function (grunt) {
         cssmin: {
             libraries: {
                 src: [
-                    './bower_components/animate.css/animate.css'
+                    './bower_components/animate.css/animate.css',
+                    './bower_components/tether-tooltip/css/tooltip-theme-arrows.css'
                 ],
                 dest: 'build/assets/css/libraries.css',
             }
@@ -83,6 +84,7 @@ module.exports = function (grunt) {
                     'build/assets/js/libraries.js': [
                         './bower_components/jquery/dist/jquery.js',
                         './bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.js',
+                        './bower_components/tether-tooltip/tooltip.js',
                     ]
                 }
             }
