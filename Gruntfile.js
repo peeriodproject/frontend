@@ -87,6 +87,7 @@ module.exports = function (grunt) {
                         './bower_components/tether-tooltip/tooltip.js',
                         './vendor/formjs/underscore-min.js',
                         './vendor/formjs/build/forms.js'
+                        './bower_components/d3/d3.js'
                     ]
                 }
             }

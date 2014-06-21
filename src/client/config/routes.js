@@ -10,5 +10,9 @@ module.exports = [
 	{
 		path: '/folders/:folder',
 		handler: require('../core/settings/SharedFoldersHandler')
+	},
+	{
+		path: '/search/:query',
+		handler: require('../core/search/SearchHandler')
 	}
 ];

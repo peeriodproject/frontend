@@ -22,7 +22,7 @@
 
 // http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/
 
-@include sticky-footer(3rem);
+@include sticky-footer($footer-height);
 @include border-box-sizing;
 
 html {
@@ -41,6 +41,7 @@ body {
 
 	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
+	@import "../core/search/SearchHandler";
 
 	//transition: transform 0.2s ease-out;
 	transform-style: preserve-3d;

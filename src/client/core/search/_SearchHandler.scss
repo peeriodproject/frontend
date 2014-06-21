@@ -1,0 +1,27 @@
+.search-handler {
+	$squish: 2;
+
+	@include clearfix;
+
+	.search-form {
+		@include squish($squish);
+
+		@include nested(12 - ($squish * 2)) {
+		}
+	}
+
+	.network-speed-chart {
+		@include span(full);
+
+		position: absolute;
+		bottom: $footer-height;
+		height: rhythm(10);
+
+		
+		.line {
+			fill: none;
+  			stroke: #000;
+  			stroke-width: 1.5px;
+  		}
+	}
+}
