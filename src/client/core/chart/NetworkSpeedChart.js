@@ -11,6 +11,17 @@ var NetworkSpeedChart = React.createClass({
 
 	_inverval: null,
 	_svg: null,
+	_x: null,
+	_y: null,
+	_line: null,
+	
+	_uploadData: null,
+	_downloadData: null,
+	
+	_pathWrapper: null,
+	_uploadPath: null,
+	_downloadPath: null,
+	_downloadBackgroundPath: null,
 
 	getDefaultProps: function () {
 		return {
@@ -54,6 +65,7 @@ var NetworkSpeedChart = React.createClass({
 
 		this._uploadData = d3.range(this.props.n).map(function() { return 0; });
 		this._downloadData = d3.range(this.props.n).map(function() { return 0; });
+		//this._downloadBackgroundData = d3.range(this.props.n).map(function() { return 0; });
 		
 		this._pathWrapper = this._svg.append('g');
 		this._uploadPath = this._pathWrapper
@@ -67,15 +79,20 @@ var NetworkSpeedChart = React.createClass({
 				.data([this._downloadData])
 				.attr('class', 'line download');
 
+		this._downloadBackgroundPath = this._pathWrapper
+			.append('path')
+				.data([this._downloadData])
+				.attr('class', 'line background');
+
 		this.tick();
 		
 		// dummy data generator
 		setInterval(function () {
 			self.setState({
-				upload: Math.random() * 256,
-				download: Math.random() * 1024
+				upload: Math.max(0, Math.min(256, self.state.upload + ((Math.random() - 0.5) * (Math.random() * 5)))),
+				download: Math.max(0, Math.min(1024, self.state.download + ((Math.random() - 0.5) * (Math.random() * 20))))
 			});
-		}, 1000);
+		}, 5000);
 	},
 
 	componentWillUnmount: function() {
@@ -102,12 +119,14 @@ var NetworkSpeedChart = React.createClass({
 		// push the accumulated count onto the back, and reset the count
 		this._uploadData.push(this.state.upload);
 		this._downloadData.push(this.state.download);
+		//this._downloadBackgroundPath.push(this.state.download);
 
 		this._pathWrapper.attr('transform', null);
 
 		// redraw the line
 		this._uploadPath.attr('d', this._line);
 		this._downloadPath.attr('d', this._line);
+		this._downloadBackgroundPath.attr('d', this._line);
 
 		// slide the line left
 		this._pathWrapper.transition()
@@ -119,6 +138,7 @@ var NetworkSpeedChart = React.createClass({
 		// pop the old data point off the front
 		this._uploadData.shift();
 		this._downloadData.shift();
+		//this._downloadBackgroundPath.shift();
 	},
 
 	render: function () {

@@ -239,6 +239,14 @@ var BackgroundHandler = React.createClass({
 
 			this.createElementStyles('body, a, .bg-color', {
 				'color': this.getColor().hex()
+			}),
+
+			this.createElementStyles('svg .line', {
+				'stroke': this.getAlphaColor(0.15).hex()
+			}),
+
+			this.createElementStyles('svg .line.background', {
+				'stroke': this.getBackgroundColor().hex()
 			})
 		]);
 

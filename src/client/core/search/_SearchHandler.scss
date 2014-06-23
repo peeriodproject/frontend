@@ -16,12 +16,23 @@
 		position: absolute;
 		bottom: $footer-height;
 		height: rhythm(10);
+		overflow: visible;
 
 		
 		.line {
 			fill: none;
-  			stroke: #000;
-  			stroke-width: 1.5px;
+
+			&.upload {
+  				stroke-width: 1.75px;
+  			}
+
+  			&.download {
+  				stroke-width: 4px;
+  			}
+
+  			&.background {
+  				stroke-width: 1.5px;
+  			}
   		}
 	}
 }
