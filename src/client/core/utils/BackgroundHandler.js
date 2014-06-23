@@ -11,7 +11,7 @@ var events = require('../events/EventEmitterMixin');
 var BackgroundHandler = React.createClass({
 
 	mixins: [
-		events.mixinFor('backgroundColorChange')
+		//events.mixinFor('backgroundColorChange')
 	],
 
 	getDefaultProps: function () {
@@ -58,7 +58,7 @@ var BackgroundHandler = React.createClass({
 			invertedBackgroundColor = this.toggleColor(invertedBackgroundColor);
 		}
 
-		this.emitBackgroundColorChange(background.hex(), color.hex(), invertedBackground.hex(), invertedBackgroundColor.hex());
+		//this.emitBackgroundColorChange(background.hex(), color.hex(), invertedBackground.hex(), invertedBackgroundColor.hex());
 
 		this.setState({
 			secondsElapsed: secondsElapsed,
@@ -211,6 +211,10 @@ var BackgroundHandler = React.createClass({
 			// border
 			this.createElementStyles('.bg-border', {
 				'border-color': this.getColor().hex()
+			}),
+
+			this.createElementStyles('.bg-border-background', {
+				'border-color': this.getBackgroundColor().hex()
 			}),
 
 			this.createElementStyles('.bg-border-inverted-light', {

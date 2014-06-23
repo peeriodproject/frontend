@@ -13,7 +13,8 @@ var IconButton = React.createClass({
 
 	getInitialState: function () {
 		return {
-			hoverClassName: ''
+			hoverClassName: '',
+			tooltipOpenClass: ''
 		};
 	},
 
@@ -46,7 +47,7 @@ var IconButton = React.createClass({
 		return (
 			<button 
 				type='button'
-				className={'icon-btn bg-color-dark ' + this.state.hoverClassName + this.props.className} 
+				className={'icon-btn bg-color-dark ' + this.state.hoverClassName + this.props.className + this.state.tooltipOpenClass} 
 				onClick={this.props.onClick} 
 				onMouseEnter={this.handleMouseEnter} 
 				onMouseLeave={this.handleMouseLeave}

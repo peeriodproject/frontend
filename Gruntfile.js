@@ -73,7 +73,8 @@ module.exports = function (grunt) {
             libraries: {
                 src: [
                     './bower_components/animate.css/animate.css',
-                    './bower_components/tether-tooltip/css/tooltip-theme-arrows.css'
+                    './bower_components/tether-tooltip/css/tooltip-theme-arrows.css',
+                    './bower_components/select/css/select-theme-default.css'
                 ],
                 dest: 'build/assets/css/libraries.css',
             }
@@ -84,9 +85,10 @@ module.exports = function (grunt) {
                     'build/assets/js/libraries.js': [
                         './bower_components/jquery/dist/jquery.js',
                         './bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.js',
-                        './bower_components/tether-tooltip/tooltip.js',
-                        './vendor/formjs/underscore-min.js',
-                        './vendor/formjs/build/forms.js'
+                        './bower_components/tether/tether.js',
+                        './bower_components/drop/drop.js',
+                        './bower_components/tether-tooltip/js/tooltip.js',
+                        './bower_components/select/js/select.js',
                         './bower_components/d3/d3.js'
                     ]
                 }
@@ -131,6 +133,6 @@ module.exports = function (grunt) {
         'compass:dist',
         'uglify:libraries',
         'cssmin:libraries',
-        'jsdoc'
+        //'jsdoc'
     ]);
 };

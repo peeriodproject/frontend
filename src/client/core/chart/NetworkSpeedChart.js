@@ -25,7 +25,7 @@ var NetworkSpeedChart = React.createClass({
 
 	getDefaultProps: function () {
 		return {
-			n			: 243,
+			n			: 100,
 			duration	: 750
 		};
 	},

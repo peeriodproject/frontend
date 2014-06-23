@@ -25,17 +25,25 @@ var TooltipMixin = {
 	componentDidMount: function() {
 		var el = this.getDOMNode();
 
+		if (!this.props.tooltipContent && !this.props.enableTooltip) {
+			return;
+		}
+
 		this._tooltip = new Tooltip({
 			target		: el,
 			position	: this._getTooltipOption('getTooltipPosition'),
-			content		: this._getTooltipOption('getTooltipContent'),
+			content		: '',
 			openOn		: null/*,
 			classes		: 'my-tether-theme'*/
 		});
 
-		el.addEventListener('mouseenter', this.onMouseEnter, false);
-		el.addEventListener('mouseleave', this.onMouseLeave, false);
-		
+		if (!this.props.tooltipOpenOn || this.props.tooltipOpenOn === 'hover') {
+			el.addEventListener('mouseenter', this.openTooltip, false);
+			el.addEventListener('mouseleave', this.closeTooltip, false);
+		}
+		else if (this.props.tooltipOpenOn === 'click') {
+			el.addEventListener('click', this.toggleTooltip, false);
+		}
 	},
 
 	_getTooltipOption: function (methodName) {
@@ -48,6 +56,10 @@ var TooltipMixin = {
 
 	_getTooltipPosition: function () {
 		return this.props.tooltipPosition ? this.props.tooltipPosition : 'top center';
+	},
+
+	_getTooltipOpenClass: function () {
+		return this.props.tooltipOpenClass ? this.props.tooltipOpenClass : '';
 	},
 
 	/**
@@ -65,24 +77,61 @@ var TooltipMixin = {
 	componentWillUnmount: function() {
 		var el = this.getDOMNode();
 
-		el.removeEventListener('mouseenter', this.onMouseEnter);
-		el.removeEventListener('mouseleave', this.onMouseLeave);
+		el.removeEventListener('mouseenter', this.openTooltip);
+		el.removeEventListener('mouseleave', this.closeTooltip);
+		el.removeEventListener('click', this.toggleTooltip);
 
-		this._tooltip.destroy();
+		// todo remove temporary typo fix
+		if (this._tooltip.destory) {
+			this._tooltip.destory();
+		}
+		else {
+			this._tooltip.destroy();
+		}
+	},
+
+	tooltipIsOpen: function () {
+		return (this._tooltip && this._tooltip.drop.isOpened());
 	},
 
 	/**
-	 * Opens the tooltip whenever the mouse entered the DOM node
+	 * Opens the tooltip
 	 */
-	onMouseEnter: function() {
+	openTooltip: function() {
+		this.setState({
+			tooltipOpenClass: ' ' + this._getTooltipOption('getTooltipOpenClass')
+		});
+
 		this._tooltip.open();
+
+		if (this.props.onTooltipOpen) {
+			this.props.onTooltipOpen();
+		}
+	},
+
+	toggleTooltip: function () {
+		if (!this._tooltip.drop.isOpened()) {
+			this.update(this._getTooltipOption('getTooltipContent'));
+			this.openTooltip();
+		}
+		else {
+			this.closeTooltip();
+		}
 	},
 
 	/**
 	 * Closes the tooltip whenever the mouse left the DOM node
 	 */
-	onMouseLeave: function() {
+	closeTooltip: function() {
 		this._tooltip.close();
+
+		this.setState({
+			tooltipOpenClass: ''
+		});
+
+		if (this.props.onTooltipClose) {
+			this.props.onTooltipClose();
+		}
 	},
 
 	/**
