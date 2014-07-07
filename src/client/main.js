@@ -30,7 +30,7 @@ window.React = React;
 if (typeof window !== 'undefined') {
 	window.onload = function() {
 		React.renderComponent(DialogHandler(), document.getElementById('dialogHandler'));
-		React.renderComponent(BackgroundHandler(), document.getElementById('backgroundHandler'));
+		//React.renderComponent(BackgroundHandler(), document.getElementById('backgroundHandler'));
 		React.renderComponent(Router(), document.getElementById('page'));
 	};
 }
