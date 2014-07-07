@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = function (grunt) {
     grunt.initConfig({
         browserify: {
@@ -39,10 +41,11 @@ module.exports = function (grunt) {
                 dest  : 'build/assets'
             },
             icons   : {
-                cwd   : 'src/',
+                nonull: true,
+                cwd   : 'src/icons/app',
                 expand: true,
-                src   : ['./icons/*'],
-                dest  : 'build/assets/'
+                src   : ['**'],
+                dest  : 'build/assets/icons'
 
             },
             locales : {
@@ -53,13 +56,20 @@ module.exports = function (grunt) {
 
             },
             manifest: {
+                nonull: true,
                 src : ['src/manifest.json'],
                 dest: 'build/manifest.json'
 
             },
             main: {
+                nonull: true,
                 src: ['src/client/index.html'],
-                dest: 'build/index.html'
+                dest: 'build/index.html',
+                options: {
+                    process: function (content, srcpath) {
+                        return content.replace('{{ svgIcons }}', fs.readFileSync('./src/icons/svg_output/icons.svg', 'utf8'));
+                    }
+                }
             }
         },
         compass: {
@@ -94,6 +104,60 @@ module.exports = function (grunt) {
                 }
             }
         },
+        clean: {
+            build: ['build/assets'],
+            icons: [   
+                'src/icons/svg_compressed',
+                'src/icons/svg_output'
+            ]
+        },
+
+        svgmin: { //minimize SVG files
+            options: {
+                plugins: [
+                    { removeViewBox: false },
+                    { removeUselessStrokeAndFill: false }
+                ]
+            },
+            dist: {
+                expand: true,
+                cwd: 'src/icons/svg',
+                src: ['*.svg'],
+                dest: 'src/icons/svg_compressed',
+                ext: '.svg'
+            }
+        },
+
+        /*grunticon: { //makes SVG icons into a CSS file
+            myIcons: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/icons/svg_compressed',
+                    src: ['*.svg'],
+                    dest: 'src/icons/svg_output'
+                }],
+                options: {
+                    datasvgcss: '_icons.scss',
+                    cssprefix: '.icon-',
+                    template: "src/client/sass/sass-icon-template.hbs"
+                }
+            }
+        },*/
+
+        svgstore: {
+            options: {
+                prefix : 'icon-', // This will prefix each ID
+                svg: { // will be added as attributes to the resulting SVG
+                    viewBox : '0 0 100 100'
+                }
+            },
+            default : {
+                files: {
+                    'src/icons/svg_output/icons.svg': ['src/icons/svg_compressed/*.svg'],
+                },
+            },
+        },
+
         jsdoc : {
             dist : {
                 src: [
@@ -114,6 +178,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-browser-sync');
+
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-svgmin');
+    grunt.loadNpmTasks('grunt-grunticon');
+
+    grunt.loadNpmTasks('grunt-svgstore');
+
     grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('default', [
@@ -123,13 +194,17 @@ module.exports = function (grunt) {
 
     ]);
 
+    //grunt.registerTask('icons', ['clean', 'svgmin', 'grunticon']);
+    grunt.registerTask('svgicons', ['clean:icons', 'svgmin', 'svgstore:default', 'copy:main']);
+
     grunt.registerTask('build', [
+        'svgicons',
+        'clean:build',
         'browserify:app',
         'copy:fonts',
         'copy:icons',
         'copy:locales',
         'copy:manifest',
-        'copy:main',
         'compass:dist',
         'uglify:libraries',
         'cssmin:libraries',
