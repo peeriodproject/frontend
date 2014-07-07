@@ -1,24 +1,38 @@
 .icon-btn {
-	@include adjust-font-size-to(23px);
+	@include adjust-font-size-to($icon-button-font-size);
 
 	outline: none;
 	border: none;
 	background-color: transparent;
 	padding: 0;
 
-	transition: color 0.25s ease;
+	svg use {
+		@include transition(fill .25s ease);
+		fill: $icon-color;
+	}
 
-	&:before {	
+	&:hover,
+	&:focus {
+		svg use {
+			fill: $icon-color-hover;
+		}
+	}
+
+
+	//transition: color 0.25s ease;
+
+	/*&:before {	
 		// @todo move to @icon mixin
 		vertical-align: middle;
-	}
+	}*/
 
 	// - - - -
 	
-	border-radius: $base-line-height / 2;
-	@include bleed(1/2);
+	//border-radius: $base-line-height / 2;
+	//@include bleed(1/2);
 
-	&[class*='bg-color'] {
+	/*&[class*='bg-color'] {
 		transition: color 0.25s ease;
-	}
+	}*/
+	//border: 1px solid red;
 }

@@ -1,0 +1,122 @@
+.search-form-wrapper {
+	$squish: 2;
+
+	@include clearfix;
+	@include pad($squish);
+	@include padding-leader(2);
+	@include padding-trailer(2);
+
+	border-bottom: 1px solid;
+
+	@include nested(12 - ($squish * 2)) {
+
+		.logo-wrapper {
+			@include span(1);
+			//@include clearfix;
+
+			.logo {
+				background-color: deeppink;
+				padding-bottom: rhythm(3);
+				display: block;
+				position: relative;
+				width: rhythm(3);
+				float: right;
+			}
+
+			.badge {
+				position: absolute;
+				top: 0;
+				right: 0;
+				background: #000;
+				color: #fff;
+				margin-top: strip-units($badge-font-size) / strip-units($base-font-size) * -1rem;
+				-webkit-transform: translateX(50%);
+				-ms-transform: translateX(50%);
+				transform: translateX(50%);
+			}
+		}
+
+		.search-form {
+			@include span(6);
+			//@include clearfix;
+			
+			&:before {
+				z-index: 9;
+			}
+
+			&:after {
+				z-index: 10;
+				//border-color: red !important;
+			}
+
+			background-color: #fff;
+			border: 1px solid $input-border-color;
+			border-radius: $border-radius;
+			height: rhythm(3);
+
+			@include arrow-lazy($direction: left, $size: 10px, $color: $input-border-color, $center: 50%, $margin: 0, $pseudo: before);
+			@include arrow-lazy($direction: left, $size: 9px, $color: #fff, $center: 50%, $margin: 0, $pseudo: after);
+		
+			@include nested(6) {
+				.search-input {
+					padding: 0;
+
+					@include adjust-font-size-to(23px, 2);
+					@include padding-leader(1/2, 23px);
+					@include padding-trailer(1/2, 23px);
+					
+					@include span(5);
+					@include gutters(2rem inside);
+					
+					border: none;
+					outline: none;
+					background-color: transparent;
+
+					color: $dark-color;
+					//box-sizing: content-box;
+					//@include trailing-border(1px);
+				}
+
+				button {
+					opacity: 1;
+					@include transition(opacity 0.15s ease);
+				}
+
+				button.clear {
+					left: span(5) - (gutter() / 2);
+					top: rhythm(1, $icon-button-font-size);
+					height: rhythm(1, $icon-button-font-size);
+
+					position: absolute;
+
+					.icon svg use {
+						fill: $icon-color-light;
+					}
+
+					&:hover,
+					&:focus {
+						.icon svg use {
+							fill: $icon-color;
+						}
+					}
+
+					&[disabled] {
+						opacity: 0;
+					}
+				}
+
+				button.search {
+					@include span(1 last);
+
+					height: rhythm(3, $icon-button-font-size);
+
+					&[disabled] {
+						.icon svg use {
+							fill: $icon-color-light;
+						}
+					}
+				}
+			}
+		}
+	}
+}

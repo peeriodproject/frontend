@@ -1,9 +1,11 @@
 .badge {
 	@include bleed-y($base-half-leader / 8);
-	@include adjust-font-size-to($base-font-size * .75);
-
-	border-radius: $base-line-height / 2;//$badge-border-radius;
+	@include adjust-font-size-to($badge-font-size);
+	
+	border-radius: rhythm(0.5, $badge-font-size);
+	//border-radius: $base-line-height / 2;//$badge-border-radius;
 	display: inline-block;
 	padding-left: $base-leader * 1.5;
 	padding-right: $base-leader * 1.5;
+	font-weight: bold;
 }

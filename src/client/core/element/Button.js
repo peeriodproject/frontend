@@ -19,13 +19,13 @@ var Button = React.createClass({
 			onClick: function () {},
 			onMouseEnter: function () {},
 			onMouseLeave: function () {}
-		}
+		};
 	},
 
 	getInitialState: function () {
 		return {
 			hoverClassName: '',
-			label: this.i18n(this.props.label)
+			label: (typeof this.props.label === 'string') ? this.i18n(this.props.label) : this.props.label
 		};
 	},
 

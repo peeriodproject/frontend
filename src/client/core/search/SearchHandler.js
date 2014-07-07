@@ -11,6 +11,7 @@ var I18nMixin = require('../i18n/I18nMixin');
 var IconButton = require('../element/IconButton');
 var FormFactory = require('../form/FormFactory');
 
+var SearchForm = require('./SearchForm');
 var NetworkSpeedChart = require('../chart/NetworkSpeedChart');
 
 var SearchHandler = React.createClass({
@@ -90,31 +91,8 @@ var SearchHandler = React.createClass({
 	render: function () {
 		return (
 			<main className='main'>
-				<section className='search-handler'>
-					<section className='search-form'>
-						<div className='search-form-wrapper'>
-							<div className='search-bar-wrapper bg-border-light'>
-								<input className='search-input' type='text' placeholder='Search...' />
-								<div className='search-button-wrapper'>
-									<IconButton className={'search-button' + this.state.searchButtonClass} onMouseEnter={this.onSearchButtonEnter} onMouseLeave={this.onSearchButtonLeave} ref='searchButton'/>
-									<IconButton 
-										className={'advanced-search-button bg-border-background' + this.state.searchButtonAdvClass} 
-										onClick={this.onAdvancedSearchButtonClick}
-										onMouseEnter={this.onSearchButtonEnter} 
-										onMouseLeave={this.onSearchButtonLeave} 
-										tooltipPosition='bottom right' 
-										tooltipContent={this.getAdvancedSearchList()} 
-										tooltipOpenOn='click'
-										tooltipOpenClass='bg-active'
-										ref='advButton' />
-								</div>
-							</div>
-						</div>
-						{this.getForm()}
-					</section>
-
-					<NetworkSpeedChart />
-				</section>
+				<SearchForm />
+				{/*<NetworkSpeedChart />*/}
 			</main>
 		)
 

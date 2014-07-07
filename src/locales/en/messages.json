@@ -37,5 +37,10 @@
 	"folder_removeButton_tooltipContent": {
 		"message": "Remove Folder",
 		"description": "The tooltip content of the 'remove folder' icon"
+	},
+
+	"search_input_placeholder": {
+		"message": "Search FOOBAR...",
+		"description": "The placeholder text of the main search field."
 	}
 }

@@ -11,6 +11,8 @@ $susy: (
 		rem: true
 	),
 	debug: (
-		image: show
+		image: show,
+		output: background,
+		toggle: top right,
 	)
 );

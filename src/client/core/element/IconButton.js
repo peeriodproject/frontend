@@ -6,6 +6,7 @@
 var React = require('react');
 
 var TooltipMixin = require('../tooltip/TooltipMixin');
+var SvgIcon = require('./SvgIcon');
 
 var IconButton = React.createClass({
 
@@ -21,6 +22,8 @@ var IconButton = React.createClass({
 	getDefaultProps: function () {
 		return {
 			className: '',
+			icon: '',
+			disabled: false,
 			onClick: function () {},
 			onMouseEnter: function () {},
 			onMouseLeave: function () {}
@@ -44,14 +47,19 @@ var IconButton = React.createClass({
 	},
 
 	render: function () {
+		var disabledAtt = this.state.disabled ? disabled : null;
+
 		return (
 			<button 
 				type='button'
-				className={'icon-btn bg-color-dark ' + this.state.hoverClassName + this.props.className + this.state.tooltipOpenClass} 
+				className={'icon-btn ' + this.state.hoverClassName + this.props.className + this.state.tooltipOpenClass} 
 				onClick={this.props.onClick} 
+				disabled={this.props.disabled}
 				onMouseEnter={this.handleMouseEnter} 
 				onMouseLeave={this.handleMouseLeave}
-			></button>
+			>
+				<SvgIcon icon={this.props.icon} />
+			</button>
 		)
 	}
 });

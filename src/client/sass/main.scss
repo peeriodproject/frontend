@@ -1,68 +1,100 @@
 @import "../../../bower_components/modularized-normalize-scss/normalize";
 
+@import "bourbon/bourbon";
+@import "fonts";
+
 @import "compass";
 @import "compass/reset";
 @import "compass/typography/vertical_rhythm";
 
 @import "variables";
-@import "fonts";
 @import "grids";
 @import "rhythm";
+
+@import "arrows";
 @import "stickyFooter";
 @import "icons";
 
+//@import "../../icons/svg_output/icons";
+
 @import "../core/dialog/DialogHandler";
-@import "../core/dialog/AddFolderDialog";
+//@import "../core/dialog/AddFolderDialog";
 
 @import "../core/element/Button";
 @import "../core/element/Badge";
-@import "../core/element/Dropzone";
+//@import "../core/element/Dropzone";
 @import "../core/element/IconButton";
 @import "../core/element/Path";
+
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
 
 // http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/
 
 @include sticky-footer($footer-height);
 @include border-box-sizing;
 
-html {
-	background-color: #000;
-	color: #000;
-}
-
 body {
+	background-color: $background-color;
+
 	@include container;
 
-	background-image: none;
-
-	font-family: "Aileron";
-	font-weight: $font-weight-thin;
+	font-family: "GandhiSans";
+	//font-weight: $font-weight-thin;
 	-webkit-font-smoothing: antialiased;
 
+	text-rendering: optimizeLegibility;
+	-webkit-font-feature-settings: "kern";
+	font-kerning: normal;
+
+	color: $main-color;
+
+	@import "../core/search/SearchForm";
 	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
 	@import "../core/search/SearchHandler";
 
 	//transition: transform 0.2s ease-out;
-	transform-style: preserve-3d;
-	perspective: 900px;
+	/*transform-style: preserve-3d;
+	perspective: 900px;*/
 
-	transition: color $background-animation-duration linear, background-color $background-animation-duration linear !important;
+	//@include show-grid(overlay);
+
+	//transition: color $background-animation-duration linear, background-color $background-animation-duration linear !important;
 }
 
 .hidden {
 	display: none;
 }
 
-#wrapper {
-	//background-color: rgba(104, 0, 122, $wrapper-bg-alpha);
-	//@include debug-vertical-alignment();
-	//@include show-grid(overlay);
-
+.icon {
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
+
+	svg {
+		max-height: $icon-dimension;
+		width: $icon-dimension;
+		display: inline;
+		position: relative;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+	}
+}
+
+#wrapper {
+	/*transform-style: preserve-3d;
 	transform-origin: 50% 100%;
 	transition: transform 0.25s ease-out, background-color $background-animation-duration linear;
-	perspective: 900px;
+	perspective: 900px;*/
+	//@include show-grid();
+	//@include debug-vertical-alignment();
 }
 
 .dialog-open #wrapper {
@@ -73,17 +105,16 @@ body {
 	@include squish(2);
 }
 
-* {
+/** {
 	background-color: transparent;
-}
+}*/
 
 main {
 	@include clearfix;
-	@include padding-leader(3);
 }
 
 a {
-	font-weight: $font-weight-regular;
+	//font-weight: $font-weight-regular;
 	//color: #fff;
 	text-decoration: none;
 

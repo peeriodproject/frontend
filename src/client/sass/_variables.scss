@@ -1,46 +1,48 @@
-
-// $Custom Font Weights
-// 
-// UltraLight	: 100			
-// Thin			: 200						
-// Light		: 300						
-// Regular		: 400			
-// SemiBold		: 500			
-// Bold			: 600						
-// Heavy		: 700						
-// Black		: 800						
-// 
-// -------------------------------------//
-
-$font-weight-ultra-light    : 100;
-$font-weight-thin			: 200;
-$font-weight-light			: 300;
-$font-weight-regular		: 400;
-$font-weight-semi-bold		: 500;
-$font-weight-bold			: 600;
-$font-weight-heavy			: 700;
-$font-weight-black			: 800;
-
-
 // Vertical Rhythm
 // -------------------------------------//
 
 $base-font-size: 16px;
-$base-line-height: $base-font-size * 1.6;
+$base-line-height: $base-font-size * 1.375;
 //$rhythm-unit: "rem";
 $relative-font-sizing: false;
 $round-to-nearest-half-line: true;
+
 
 // Globals
 // -------------------------------------//
 
 $border-radius: 3px / $base-font-size * 1rem;
 $background-animation-duration: 1.5s;
+$background-color: #f0f0f0;
+$dark-background-color: #e6e6e6;
+
+
+// Colors
+// -------------------------------------//
+
+$main-color: #6b6b6b;
+$dark-color: #3c3c3c;
+$green-color: #00d97e;
+
+$input-border-color: #d2d2d2;
+
+
+// Icons
+// -------------------------------------//
+
+$icon-button-font-size: 23px;
+$icon-dimension: (24 / strip-units($base-font-size)) * 1rem;
+
+$icon-color-light: #d2d2d2;
+$icon-color: #5b5b5b;
+$icon-color-hover: #141414;
+
 
 // Footer
 // -------------------------------------//
 
 $footer-height: 3rem;
+
 
 // Button
 // -------------------------------------//
@@ -48,12 +50,15 @@ $footer-height: 3rem;
 $button-border-radius: $border-radius;
 $button-border-width: 1px;
 
+
 // Dialog
 // -------------------------------------//
 
 $dialog-border-radius: $base-font-size / 2;
 
+
 // Badge
 // -------------------------------------//
 
 $badge-border-radius: $border-radius;
+$badge-font-size: $base-font-size * .75;

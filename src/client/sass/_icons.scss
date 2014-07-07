@@ -1,36 +1,36 @@
 //@import "../../../bower_components/sass-icon-fonts/mixins/_ico-fonts.scss";
-@import "./icons/icons-arrows";
-@import "./icons/icons-basic";
-@import "./icons/icons-basic-elaboration";
-@import "./icons/icons-ecommerce";
-@import "./icons/icons-music";
-@import "./icons/icons-software";
-@import "./icons/icons-weather";
+//@import "./icons/icons-arrows";
+//@import "./icons/icons-basic";
+//@import "./icons/icons-basic-elaboration";
+//@import "./icons/icons-ecommerce";
+//@import "./icons/icons-music";
+//@import "./icons/icons-software";
+//@import "./icons/icons-weather";
+//
+//$icon-font-base: "linea";
+//
+//$icon-font-face-map: (
+//	arrows		: $icons-arrows,
+//	basic		: $icons-basic,
+//	elaboration	: $icons-basic-elaboration,
+//	ecommerce	: $icons-ecommerce,
+//	music		: $icons-music,
+//	software	: $icons-software,
+//	weather		: $icons-weather
+//);
+//
+//%ico-font-base {
+//  speak: none;
+//  font-style: normal !important;
+//  font-weight: normal !important;
+//  font-variant: normal !important;
+//  text-transform: none !important;
+//  line-height: 1;
+//  -webkit-font-smoothing: antialiased;
+//  -moz-osx-font-smoothing: grayscale;
+//}
 
-$icon-font-base: "linea";
-
-$icon-font-face-map: (
-	arrows		: $icons-arrows,
-	basic		: $icons-basic,
-	elaboration	: $icons-basic-elaboration,
-	ecommerce	: $icons-ecommerce,
-	music		: $icons-music,
-	software	: $icons-software,
-	weather		: $icons-weather
-);
-
-%ico-font-base {
-  speak: none;
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-@mixin icon($identifier) {
+/*@mixin icon($identifier) {
 	$index: str-index($identifier, "-");
 	$font-face: str-slice($identifier, 0, str-index($identifier, "-") - 1);
 	$font-family: $icon-font-base + "-" + $font-face;
@@ -41,4 +41,13 @@ $icon-font-face-map: (
 		@extend %ico-font-base;
 		content: map-get(map-get($icon-font-face-map, $font-face), $key);
 	}
+}*/
+
+%icon {
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+@mixin icon($identifier) {
+	//@extend %icon-#{$identifier} !optional;
 }

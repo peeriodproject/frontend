@@ -3,7 +3,7 @@
 
 	@include clearfix;
 
-	.search-form {
+	/*.search-form {
 		$search-button-size: 28px;
 
 		@include squish($squish);
@@ -79,7 +79,7 @@
 			border-top-right-radius: $border-radius;
 			//border-bottom-right-radius: $border-radius;
 		}
-	}
+	}*/
 
 	.network-speed-chart {
 		@include span(full);
@@ -93,6 +93,7 @@
 		
 		.line {
 			fill: none;
+			stroke: $main-color;
 
 			&.upload {
   				stroke-width: 1.75px;
