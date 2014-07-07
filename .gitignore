@@ -30,3 +30,5 @@ node_modules
 /build/
 /.sass-cache/
 /bower_components/
+/src/icons/svg_compressed/
+/src/icons/svg_output/
