@@ -1,0 +1,100 @@
+.menu {
+	$squish: 1;
+
+	@include transition(max-height 0.25s ease);
+
+	position: fixed;
+	top: rhythm($search-form-padding * 2 + $search-form-height);
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+
+	z-index: 50;
+
+	background: $menu-background-color;
+	color: $menu-color;
+
+	max-height: 0;
+
+	&.is-open {
+		max-height: rhythm(15);
+	}
+
+	&:not(.is-open) nav > ul {
+		margin-top: -10%;
+		padding-bottom: 10%;
+		opacity: 0;
+	}
+
+	nav {
+		$duration: 0.15s;
+
+		@include clearfix;
+		@include pad($squish);
+		@include padding-leader(2);
+		@include padding-trailer(2);
+
+		&> ul {
+			@include clearfix;
+			//@include container(12 center inside);
+
+			@include transition(padding $duration ease, margin $duration ease, opacity $duration ease);
+		
+			opacity: 1;
+
+			li {
+				@include gallery(4 of 12);
+			}
+		}
+	}
+
+	.menu-buttons {
+		@include clearfix;
+		@include pad(0.5);
+		@include leading-border(1px);
+		@include padding-trailer(1);
+
+		border-color: $menu-divider-color;
+		text-align: right;
+
+		a {
+			$icon-dim: 1.2em;
+
+			@include transition(color 0.15s ease);
+
+			color: $menu-buttons-color;
+			text-transform: uppercase;
+
+			&:hover,
+			&:focus {
+				color: $menu-buttons-color-hover;
+				text-decoration: none;
+
+				.icon svg use {
+					fill: $menu-buttons-color-hover;
+				}
+			}
+
+			.icon {
+				display: inline;
+				width: $icon-dim;
+				height: $icon-dim;
+			}
+
+			.icon svg {
+				@include transform(none);
+
+				width: $icon-dim;
+				height: $icon-dim;
+				vertical-align: text-bottom;
+				top: 0;
+
+				use {
+					@include transition(fill 0.15s ease);
+
+					fill: $menu-buttons-color;
+				}
+			}
+		}
+	}
+}

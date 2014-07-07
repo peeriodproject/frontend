@@ -1,0 +1,37 @@
+.menu-button-wrapper {
+	$button-height: 2;
+
+	position: fixed;
+	top: rhythm($search-form-padding + (($search-form-height - $button-height) / 2));
+	right: 0;
+	z-index: 200;
+
+	padding-right: span(0.5 wide);
+
+	.menu-button {
+		height: rhythm($button-height, $icon-button-font-size);
+		width: rhythm($button-height, $icon-button-font-size);
+		border: 1px solid $input-border-color;
+
+		border-radius: $button-border-radius;
+
+		.icon svg use {
+			fill: #a4a4a4;
+		}
+
+		&:hover,
+		&:focus {
+			.icon svg use {
+				fill: $icon-color-hover;
+			}
+		}
+
+		&.is-open {
+			background-color: $menu-background-color;
+
+			.icon svg use {
+				fill: $menu-heading-color;
+			}
+		}
+	}
+}

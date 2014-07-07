@@ -8,10 +8,11 @@ var React = require('react');
 var I18nMixin = require('../i18n/I18nMixin');
 
 var Badge = require('../element/Badge');
-//var Button = require('../element/Button');
 var IconButton = require('../element/IconButton');
 
 var SearchForm = React.createClass({
+
+	_$input: null,
 
 	mixins: [
 		I18nMixin
@@ -19,19 +20,60 @@ var SearchForm = React.createClass({
 
 	getInitialState: function () {
 		return {
-			buttonsDisabled: true
+			disabled: true,
+			inputValue: ''
 		}
+	},
+
+	componentDidMount: function () {
+		this._$input = $(this.refs.searchField.getDOMNode());
+		
+		if (this._$input && !this.state.inputValue) {
+			this._$input.focus();
+		}
+	},
+
+	componentWillUnmount: function () {
+		this._$input = null;
 	},
 
 	handleInputChange: function (event) {
 		this.setState({
-			buttonsDisabled: event.target.value ? false : true
+			inputValue: event.target.value,
+			disabled: event.target.value ? false : true,
+			submitted: false
 		});
 	},
 
-	render: function () {
-		//var icon = <SvgIcon icon='icon-magnifying_glass' />;
+	handleClearButtonClick: function (event) {
+		event.target.blur();
 
+		if (this._$input) {
+			this._$input.focus();
+		}
+
+		this.setState({
+			inputValue: '',
+			disabled: true,
+			submitted: false
+		});
+	},
+
+	handleSubmit: function (event) {
+		event.preventDefault();
+
+		if (this.state.disabled || this.state.submitted) {
+			return;
+		}
+
+		this.setState({
+			submitted: true
+		});
+
+		console.log('starting search for:', this.state.inputValue);
+	},
+
+	render: function () {
 		return (
 			<section className='search-form-wrapper'>
 				<div className='logo-wrapper'>
@@ -39,15 +81,27 @@ var SearchForm = React.createClass({
 						<Badge label='0' />
 					</a>
 				</div>
-				<form className='search-form'>
+				<form className='search-form' ref='searchForm' onSubmit={this.handleSubmit}>
 					<input 
 						type='text' 
 						placeholder={this.i18n('search_input_placeholder')}
 						className='search-input'
-						onChange={this.handleInputChange} />
+						ref='searchField'
+						onChange={this.handleInputChange}
+						value={this.state.inputValue} />
 
-					<IconButton className='clear' disabled={this.state.buttonsDisabled} icon='close' />
-					<IconButton className='search' disabled={this.state.buttonsDisabled} icon='magnifying_glass' type='submit' />
+					<IconButton 
+						className='clear'
+						icon='close'
+						disabled={this.state.disabled}
+						onClick={this.handleClearButtonClick} />
+
+					<IconButton
+						className='search'
+						icon='magnifying_glass'
+						type='submit'
+						disabled={this.state.disabled}
+						onClick={this.handleSubmit} />
 				</form>
 			</section>
 		)

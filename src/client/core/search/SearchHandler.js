@@ -14,6 +14,9 @@ var FormFactory = require('../form/FormFactory');
 var SearchForm = require('./SearchForm');
 var NetworkSpeedChart = require('../chart/NetworkSpeedChart');
 
+var Menu = require('../menu/Menu');
+var MenuButton = require('../menu/MenuButton');
+
 var SearchHandler = React.createClass({
 	
 	mixins: [
@@ -90,8 +93,11 @@ var SearchHandler = React.createClass({
 
 	render: function () {
 		return (
-			<main className='main'>
+			<main className='main has-search-form'>
+				<MenuButton />
 				<SearchForm />
+				<Menu />
+				<div className="dummy"></div>
 				{/*<NetworkSpeedChart />*/}
 			</main>
 		)

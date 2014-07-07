@@ -1,12 +1,24 @@
+.main.has-search-form {
+	margin-top: rhythm($search-form-height + ($search-form-padding * 2));
+}
+
 .search-form-wrapper {
 	$squish: 2;
 
 	@include clearfix;
 	@include pad($squish);
-	@include padding-leader(2);
-	@include padding-trailer(2);
+	@include padding-leader($search-form-padding);
+	@include padding-trailer($search-form-padding);
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
 
 	border-bottom: 1px solid;
+	background-color: rgba($background-color, 0.9);
+
 
 	@include nested(12 - ($squish * 2)) {
 
@@ -15,12 +27,15 @@
 			//@include clearfix;
 
 			.logo {
-				background-color: deeppink;
 				padding-bottom: rhythm(3);
 				display: block;
 				position: relative;
 				width: rhythm(3);
 				float: right;
+
+				// dummy logo
+				background-color: darken($background-color, 10%);
+				border-radius: 10px;
 			}
 
 			.badge {
@@ -52,7 +67,7 @@
 			background-color: #fff;
 			border: 1px solid $input-border-color;
 			border-radius: $border-radius;
-			height: rhythm(3);
+			height: rhythm($search-form-height);
 
 			@include arrow-lazy($direction: left, $size: 10px, $color: $input-border-color, $center: 50%, $margin: 0, $pseudo: before);
 			@include arrow-lazy($direction: left, $size: 9px, $color: #fff, $center: 50%, $margin: 0, $pseudo: after);

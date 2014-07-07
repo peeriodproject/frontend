@@ -50,6 +50,9 @@ body {
 
 	color: $main-color;
 
+	@import "../core/menu/Menu";
+	@import "../core/menu/MenuButton";
+
 	@import "../core/search/SearchForm";
 	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
@@ -86,6 +89,11 @@ body {
 		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 	}
+}
+
+.dummy {
+	height: 2000px;
+	background-color: rgba(0,255,255, 0.1);
 }
 
 #wrapper {
