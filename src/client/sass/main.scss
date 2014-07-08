@@ -8,6 +8,7 @@
 @import "compass/typography/vertical_rhythm";
 
 @import "variables";
+@import "mixins";
 @import "grids";
 @import "rhythm";
 
@@ -89,6 +90,10 @@ body {
 		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 	}
+}
+
+.btn {
+
 }
 
 .dummy {

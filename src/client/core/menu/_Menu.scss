@@ -1,5 +1,6 @@
 .menu {
 	$squish: 1;
+	$item-width: 4;
 
 	@include transition(max-height 0.25s ease);
 
@@ -43,7 +44,28 @@
 			opacity: 1;
 
 			li {
-				@include gallery(4 of 12);
+				@include gallery($item-width of 12);
+
+				@include nested($item-width) {
+					
+					h1,h2,h3 {
+						@include prefix(1);
+
+						color: $menu-heading-color;
+					}
+
+					&> span.icon {
+						@include span(1);
+					}
+
+					&> div {
+						@include span(3 last);
+
+						&> a {
+							@include icon-button($menu-heading-color, $green-color);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -58,43 +80,7 @@
 		text-align: right;
 
 		a {
-			$icon-dim: 1.2em;
-
-			@include transition(color 0.15s ease);
-
-			color: $menu-buttons-color;
-			text-transform: uppercase;
-
-			&:hover,
-			&:focus {
-				color: $menu-buttons-color-hover;
-				text-decoration: none;
-
-				.icon svg use {
-					fill: $menu-buttons-color-hover;
-				}
-			}
-
-			.icon {
-				display: inline;
-				width: $icon-dim;
-				height: $icon-dim;
-			}
-
-			.icon svg {
-				@include transform(none);
-
-				width: $icon-dim;
-				height: $icon-dim;
-				vertical-align: text-bottom;
-				top: 0;
-
-				use {
-					@include transition(fill 0.15s ease);
-
-					fill: $menu-buttons-color;
-				}
-			}
+			@include icon-button($menu-buttons-color, $menu-buttons-color-hover);
 		}
 	}
 }

@@ -1,0 +1,49 @@
+%icon-button {
+	@include transition(color 0.15s ease);
+
+	text-transform: uppercase;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+
+	.icon {
+		display: inline;
+		width: $icon-button-dimension;
+		height: $icon-button-dimension;
+		
+		svg {
+			@include transform(none);
+
+			width: $icon-button-dimension;
+			height: $icon-button-dimension;
+			vertical-align: text-bottom;
+			top: 0;
+
+			use {
+				@include transition(fill 0.15s ease);
+			}
+		}
+	}
+}
+
+@mixin icon-button($color: $main-color, $color-hover: $dark-color) {
+	@extend %icon-button;
+
+	color: $color;
+
+	&:hover,
+	&:focus {
+		color: $color-hover;
+	
+		.icon svg use {
+			fill: $color-hover;
+		}
+	}
+
+	.icon svg use {
+		fill: $color;
+	}
+
+}

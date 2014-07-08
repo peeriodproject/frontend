@@ -46,7 +46,8 @@ var SearchForm = React.createClass({
 	},
 
 	handleClearButtonClick: function (event) {
-		event.target.blur();
+		event.preventDefault();
+		event.currentTarget.blur();
 
 		if (this._$input) {
 			this._$input.focus();
@@ -61,6 +62,7 @@ var SearchForm = React.createClass({
 
 	handleSubmit: function (event) {
 		event.preventDefault();
+		event.currentTarget.blur();
 
 		if (this.state.disabled || this.state.submitted) {
 			return;
