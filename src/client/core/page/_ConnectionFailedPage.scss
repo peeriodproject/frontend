@@ -1,0 +1,13 @@
+.page.connection-failed {
+
+	a.btn {
+		border-color: $green-color;
+
+		&:hover,
+		&:focus {
+			background-color: $green-color;
+			color: #fff;
+		}
+	}
+
+}
