@@ -14,6 +14,8 @@ var FormFactory = require('../form/FormFactory');
 var SearchForm = require('./SearchForm');
 var NetworkSpeedChart = require('../chart/NetworkSpeedChart');
 
+var DownloadProgressBar = require('../element/DownloadProgressBar');
+
 var Menu = require('../menu/Menu');
 var MenuButton = require('../menu/MenuButton');
 
@@ -101,6 +103,7 @@ var SearchHandler = React.createClass({
 			<main className='main has-search-form'>
 				<MenuButton />
 				<SearchForm />
+				<DownloadProgressBar />
 				<Menu>
 					<AppStatusMenuItem />
 					<SharedFolderMenuItem />

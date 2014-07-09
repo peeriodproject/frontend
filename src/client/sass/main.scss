@@ -26,6 +26,7 @@
 //@import "../core/element/Dropzone";
 @import "../core/element/IconButton";
 @import "../core/element/Path";
+@import "../core/element/DownloadProgressBar";
 
 @function strip-units($number) {
   @return $number / ($number * 0 + 1);
@@ -58,6 +59,8 @@ body {
 	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
 	@import "../core/search/SearchHandler";
+
+	@import "../core/page/ConnectionFailedPage";
 
 	//transition: transform 0.2s ease-out;
 	/*transform-style: preserve-3d;
@@ -99,6 +102,12 @@ body {
 .dummy {
 	height: 2000px;
 	background-color: rgba(0,255,255, 0.1);
+}
+
+.page {
+	@include squish(2);
+	@include padding-leader(1);
+	@include padding-trailer(1);
 }
 
 #wrapper {
