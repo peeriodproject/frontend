@@ -17,6 +17,11 @@ var NetworkSpeedChart = require('../chart/NetworkSpeedChart');
 var Menu = require('../menu/Menu');
 var MenuButton = require('../menu/MenuButton');
 
+// menu items
+var AppStatusMenuItem = require('../menu/AppStatusMenuItem');
+var SharedFolderMenuItem = require('../menu/SharedFolderMenuItem');
+var DownloadsMenuItem = require('../menu/DownloadsMenuItem');
+
 var SearchHandler = React.createClass({
 	
 	mixins: [
@@ -96,7 +101,11 @@ var SearchHandler = React.createClass({
 			<main className='main has-search-form'>
 				<MenuButton />
 				<SearchForm />
-				<Menu />
+				<Menu>
+					<AppStatusMenuItem />
+					<SharedFolderMenuItem />
+					<DownloadsMenuItem />
+				</Menu>
 				<div className="dummy"></div>
 				{/*<NetworkSpeedChart />*/}
 			</main>
