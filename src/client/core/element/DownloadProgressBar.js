@@ -9,7 +9,9 @@ var DownloadProgressBar = React.createClass({
 
 	render: function () {
 		return (
-			<progress className='download-progress-bar' max='100' value='75'></progress>
+			<div className='download-progress-bar'>
+				<progress max='100' value='75'></progress>
+			</div>
 		)
 	}
 
