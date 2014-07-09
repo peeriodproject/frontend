@@ -27,10 +27,8 @@ module.exports.mixinFor = function (eventName, events) {
             if (!this["on" + pascal]) {
                 return;
             }
-
-            events.off(eventName, this["on" + pascal]);
-
-            console.log('removed from: ' + "on" + pascal);
+            
+            events.removeListener(eventName, this["on" + pascal]);
         }
     };
 

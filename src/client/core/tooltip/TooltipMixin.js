@@ -81,6 +81,10 @@ var TooltipMixin = {
 		el.removeEventListener('mouseleave', this.closeTooltip);
 		el.removeEventListener('click', this.toggleTooltip);
 
+		if (!this._tooltip) {
+			return;
+		}
+		
 		// todo remove temporary typo fix
 		if (this._tooltip.destory) {
 			this._tooltip.destory();
