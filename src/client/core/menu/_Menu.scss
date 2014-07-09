@@ -1,6 +1,8 @@
 .menu {
 	$squish: 1;
 	$item-width: 4;
+	$content-width: 3.5;
+	$icon-dim: 70%;
 
 	@include transition(max-height 0.25s ease);
 
@@ -46,23 +48,53 @@
 			li {
 				@include gallery($item-width of 12);
 
+				position: relative;
+				overflow: hidden;
+
 				@include nested($item-width) {
 					
-					h1,h2,h3 {
+					// todo use proper heading!
+					h3 {
 						@include prefix(1);
+						@include span($content-width);
 
 						color: $menu-heading-color;
 					}
 
 					&> span.icon {
 						@include span(1);
+
+						position: relative;
+						padding-bottom: span(1);
+
+						svg {
+							width: $icon-dim;
+							max-height: $icon-dim;
+							position: absolute;
+
+							top: 0;
+							left: (100% - $icon-dim) / 2;
+
+							@include transform(none);
+
+							&.current use {
+								fill: lighten($menu-buttons-color, 30%);
+							}
+
+							use {
+								fill: $menu-buttons-color;
+							}
+						}
 					}
 
 					&> div {
-						@include span(3 last);
+						@include span($content-width - 1); // width - icon
 
 						&> a {
+							@include margin-leader(1);
 							@include icon-button($menu-heading-color, $green-color);
+
+							display: inline-block;
 						}
 					}
 				}
@@ -81,6 +113,8 @@
 
 		a {
 			@include icon-button($menu-buttons-color, $menu-buttons-color-hover);
+
+			text-transform: uppercase;
 		}
 	}
 }

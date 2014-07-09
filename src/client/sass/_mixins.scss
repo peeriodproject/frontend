@@ -1,8 +1,6 @@
 %icon-button {
 	@include transition(color 0.15s ease);
 
-	text-transform: uppercase;
-
 	&:hover,
 	&:focus {
 		text-decoration: none;
