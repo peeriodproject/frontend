@@ -3,13 +3,13 @@
 }
 
 .search-form-wrapper {
-	$squish: 2;
 
 	@include clearfix;
-	@include pad($squish);
+	@include pad($search-form-squish);
 	@include padding-leader($search-form-padding);
 	@include padding-trailer($search-form-padding);
 
+	@include nested(12 - ($search-form-squish * 2)) {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -20,7 +20,6 @@
 	background-color: rgba($background-color, 0.9);
 
 
-	@include nested(12 - ($squish * 2)) {
 
 		.logo-wrapper {
 			@include span(1);

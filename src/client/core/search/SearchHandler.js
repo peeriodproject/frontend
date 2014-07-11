@@ -8,21 +8,9 @@ var React = require('react');
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
-var IconButton = require('../element/IconButton');
-var FormFactory = require('../form/FormFactory');
+var SearchHeader = require('./SearchHeader');
 
-var SearchForm = require('./SearchForm');
 var NetworkSpeedChart = require('../chart/NetworkSpeedChart');
-
-var DownloadProgressBar = require('../element/DownloadProgressBar');
-
-var Menu = require('../menu/Menu');
-var MenuButton = require('../menu/MenuButton');
-
-// menu items
-var AppStatusMenuItem = require('../menu/AppStatusMenuItem');
-var SharedFolderMenuItem = require('../menu/SharedFolderMenuItem');
-var DownloadsMenuItem = require('../menu/DownloadsMenuItem');
 
 var SearchHandler = React.createClass({
 	
@@ -101,14 +89,7 @@ var SearchHandler = React.createClass({
 	render: function () {
 		return (
 			<main className='main has-search-form'>
-				<MenuButton />
-				<SearchForm />
-				<DownloadProgressBar />
-				<Menu>
-					<AppStatusMenuItem />
-					<SharedFolderMenuItem />
-					<DownloadsMenuItem />
-				</Menu>
+				<SearchHeader />
 				<div className="dummy"></div>
 				{/*<NetworkSpeedChart />*/}
 			</main>

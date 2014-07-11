@@ -15,8 +15,6 @@ var AppStatusMenuItem = React.createClass({
 	mixins: [I18nMixin],
 
 	render: function () {
-		this.i18n(this.props.label);
-
 		return (
 			<li>
 				<h3>{ this.i18n('menu_item_appStatus_title') }</h3>
