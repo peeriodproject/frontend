@@ -8,8 +8,6 @@ var React = require('react');
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
-var SearchHeader = require('./SearchHeader');
-
 var NetworkSpeedChart = require('../chart/NetworkSpeedChart');
 
 var SearchHandler = React.createClass({
@@ -88,11 +86,10 @@ var SearchHandler = React.createClass({
 
 	render: function () {
 		return (
-			<main className='main has-search-header'>
-				<SearchHeader />
+			<section className='search-handler'>
 				<div className="dummy"></div>
 				{/*<NetworkSpeedChart />*/}
-			</main>
+			</section>
 		)
 
 	}

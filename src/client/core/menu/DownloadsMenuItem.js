@@ -5,7 +5,7 @@
 
 var React = require('react');
 
-var Link = require('react-router-component').Link;
+var MenuLink = require('./MenuLink');
 
 var I18nMixin = require('../i18n/I18nMixin');
 var SvgIcon = require('../element/SvgIcon');
@@ -30,9 +30,9 @@ var DownloadsMenuItem = React.createClass({
 				<SvgIcon icon='download' extraLayer='current' extraStyles={styles} />
 				<div>
 					<p>{ this.i18n('menu_item_downloads_text') }</p>
-					<Link href='/folders/foobar'>
+					<MenuLink href='/folders/foobar'>
 						{ this.i18n('menu_item_downloads_button_label') } »
-					</Link>
+					</MenuLink>
 				</div>
 			</li>
 		)

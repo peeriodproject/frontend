@@ -5,7 +5,7 @@
 
 var React = require('react');
 
-var Link = require('react-router-component').Link;
+var MenuLink = require('./MenuLink');
 
 var I18nMixin = require('../i18n/I18nMixin');
 var SvgIcon = require('../element/SvgIcon');

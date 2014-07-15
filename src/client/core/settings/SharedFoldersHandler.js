@@ -100,24 +100,21 @@ var SharedFoldersHandler = React.createClass({
 		}
 
 		return (
-			<main className='main has-search-header'>
-				<SearchHeader />
-				<section className='shared-folders-handler'>
-					<header>
-						<h1>{this.i18n('settings_sharedFolders_title')}</h1>
-						{/*<div className='add-folder-button'>
-							<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
-						</div>*/}
-						<div className='add-folder-button'>
-							<a href='#' ref='addFolderButton' onClick={this.handleAddFolderButtonClick}>
-								<SvgIcon icon='plus' /> {this.i18n('settings_sharedFolders_addFolderButton_label')}
-							</a>
-						</div>
-					</header>
-					
-					{folders}
-				</section>
-			</main>
+			<section className='shared-folders-handler'>
+				<header>
+					<h1>{this.i18n('settings_sharedFolders_title')}</h1>
+					{/*<div className='add-folder-button'>
+						<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
+					</div>*/}
+					<div className='add-folder-button'>
+						<a href='#' ref='addFolderButton' onClick={this.handleAddFolderButtonClick}>
+							<SvgIcon icon='plus' /> {this.i18n('settings_sharedFolders_addFolderButton_label')}
+						</a>
+					</div>
+				</header>
+				
+				{folders}
+			</section>
 		)
 	}
 });
