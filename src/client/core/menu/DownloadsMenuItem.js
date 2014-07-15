@@ -30,7 +30,7 @@ var DownloadsMenuItem = React.createClass({
 				<SvgIcon icon='download' extraLayer='current' extraStyles={styles} />
 				<div>
 					<p>{ this.i18n('menu_item_downloads_text') }</p>
-					<MenuLink href='/folders/foobar'>
+					<MenuLink href='/folders'>
 						{ this.i18n('menu_item_downloads_button_label') } »
 					</MenuLink>
 				</div>

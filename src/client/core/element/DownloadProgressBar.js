@@ -36,7 +36,7 @@ var DownloadProgressBar = React.createClass({
 	},
 
 	getTooltipContent: function () {
-		return (<span><strong>{this.getFlooredProgress()}%</strong> – less than a minute left.</span>)
+		return (<span><strong>{this.getFlooredProgress()}%</strong> – XXX time left.</span>)
 	},
 
 	getFlooredProgress: function () {
