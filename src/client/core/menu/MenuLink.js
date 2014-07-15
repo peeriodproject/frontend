@@ -21,7 +21,6 @@ var MenuLink = React.createClass({
 
 	render: function() {
 		return this.transferPropsTo(Router.Link({
-			className: className,
 			onClick: this.closeMenu
 		}, this.props.children));
 	}
