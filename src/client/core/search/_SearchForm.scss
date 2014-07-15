@@ -1,23 +1,19 @@
-.main.has-search-form {
-	margin-top: rhythm($search-form-height + ($search-form-padding * 2));
-}
-
 .search-form-wrapper {
-
-	@include clearfix;
 	@include pad($search-form-squish);
 	@include padding-leader($search-form-padding);
 	@include padding-trailer($search-form-padding);
 
-	@include nested(12 - ($search-form-squish * 2)) {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 100;
+	@extend %clearfix;
 
-	border-bottom: 1px solid;
-	background-color: rgba($background-color, 0.9);
+	@include nested(12 - ($search-form-squish * 2)) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 100;
+
+		border-bottom: 1px solid;
+		background-color: rgba($background-color, 0.9);
 
 
 

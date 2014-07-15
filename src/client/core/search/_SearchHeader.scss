@@ -1,7 +1,12 @@
+.main.has-search-header {
+	padding-top: rhythm($search-header-height);
+}
+
 .search-header {
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 0;
 	width: 0;
+	z-index: 50;
 }
