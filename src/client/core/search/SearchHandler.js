@@ -88,7 +88,7 @@ var SearchHandler = React.createClass({
 
 	render: function () {
 		return (
-			<main className='main has-search-form'>
+			<main className='main has-search-header'>
 				<SearchHeader />
 				<div className="dummy"></div>
 				{/*<NetworkSpeedChart />*/}
