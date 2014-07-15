@@ -13,6 +13,8 @@ var I18nMixin = require('../i18n/I18nMixin');
 
 var Folder = React.createClass({
 
+	_refreshTimeout: null,
+
 	mixins: [I18nMixin],
 
 	getDefaultProps: function () {
@@ -21,9 +23,12 @@ var Folder = React.createClass({
 			path: '',
 			items: 0,
 			status: 'idle',
+			refreshIndicatorDurationInMs: 500,
 			onRemove: function () {
 			},
 			onRefresh: function () {
+			},
+			onShow: function () {
 			}
 		};
 	},
@@ -31,22 +36,15 @@ var Folder = React.createClass({
 	getInitialState: function () {
 		return {
 			actionButtonHoverClassName: '',
-			hoverClassName: ''
+			hoverClassName: '',
+			refreshClassName: ''
 		};
-	},
-
-	getBadge: function () {
-		var badge = (<div className='badge-wrapper'>
-						<Badge label={this.props.items} />
-					</div>);
-
-		return this.props.status === 'active' ? badge : null;
 	},
 
 	onMouseEnter: function () {
 		this.setState({
-			hoverClassName: ' bg-hover',
-			actionButtonHoverClassName: ' bg-active'
+			hoverClassName: '',
+			actionButtonHoverClassName: ''
 		});
 	},
 
@@ -62,30 +60,56 @@ var Folder = React.createClass({
 	},
 
 	refreshFolder: function (e) {
+		var self = this;
 		this.props.onRefresh(this.props.path);
+
+		if (this._refreshTimeout) {
+			clearTimeout(this._refreshTimeout);
+		}
+
+		this._refreshTimeout = setTimeout(function () {
+			self.setState({
+				refreshClassName: ''
+			});
+		}, this.props.refreshIndicatorDurationInMs);
+
+		this.setState({
+			refreshClassName: 'refreshing'
+		});
+	},
+
+	showFolder: function (e) {
+		this.props.onShow(this.props.path);
 	},
 
 	render: function () {
 		var refreshButton;
+		var showButton;
 
 		if (this.props.status !== 'active') {
-			refreshButton = (<IconButton className='sync' onClick={this.refreshFolder} tooltipContent={this.i18n('folder_refreshButton_tooltipContent')} />)
+			refreshButton = (<IconButton 
+				className={this.state.refreshClassName}
+				icon='sync'
+				onClick={this.refreshFolder}
+				tooltipContent={this.i18n('folder_refreshButton_tooltipContent')} />)
+		}
+		else {
+			showButton = (<IconButton icon='view' onClick={this.showFolder} tooltipContent={this.i18n('folder_showButton_tooltipContent')} />)
 		}
 
 		return (
-			<div className={'folder bg-border-light' + this.state.hoverClassName} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-				<i className={'bg-color-light status-' + this.props.status}></i>
-
-				<section>
-					<h3>{this.props.name}</h3>
-					<Path path={this.props.path} color='dark' />
+			<div className={'folder' + this.state.hoverClassName} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+				<h2>{this.props.name}</h2>
+				<Path path={this.props.path} />
 					
-					{this.getBadge()}
-				</section>
+				<div className='badge-wrapper'>
+					<Badge label={this.props.items} className={'status-' + this.props.status} />
+				</div>
 
 				<div className={'action-buttons' + this.state.actionButtonHoverClassName}>
+					{showButton}
 					{refreshButton}
-					<IconButton className='remove' onClick={this.removeFolder} tooltipContent={this.i18n('folder_removeButton_tooltipContent')} />
+					<IconButton icon='bin' onClick={this.removeFolder} tooltipContent={this.i18n('folder_removeButton_tooltipContent')} />
 				</div>
 			</div>
 		)
