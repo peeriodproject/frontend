@@ -32,13 +32,11 @@
   @return $number / ($number * 0 + 1);
 }
 
-// http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/
-
 @include sticky-footer($footer-height);
 @include border-box-sizing;
 
 body {
-	background-color: $background-color;
+	background-color: $dark-background-color;
 
 	@include container;
 

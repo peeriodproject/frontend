@@ -14,6 +14,7 @@ $round-to-nearest-half-line: true;
 $border-radius: 3px / $base-font-size * 1rem;
 $background-animation-duration: 1.5s;
 $background-color: #f0f0f0;
+$background-color-hover: #fff;
 $dark-background-color: #e6e6e6;
 
 
@@ -23,6 +24,7 @@ $dark-background-color: #e6e6e6;
 $main-color: #6b6b6b;
 $dark-color: #3c3c3c;
 $green-color: #00d97e;
+$red-color: #ff0045;
 
 $input-border-color: #d2d2d2;
 
@@ -52,6 +54,9 @@ $footer-height: 3rem;
 $button-border-radius: $border-radius;
 $button-border-width: 1px;
 
+$button-background-color: $background-color;
+$button-border-color: $input-border-color;
+
 
 // Dialog
 // -------------------------------------//
@@ -62,15 +67,24 @@ $dialog-border-radius: $base-font-size / 2;
 // Badge
 // -------------------------------------//
 
+$badge-background-color: #a4a4a4;
+$badge-color: #fff;
 $badge-border-radius: $border-radius;
-$badge-font-size: $base-font-size * 0.75;
+$badge-font-size: $base-font-size * (14 / strip-units($base-font-size));
 
 
 // SearchForm
 // -------------------------------------//
+
 $search-form-squish: 2;
 $search-form-height: 3;
 $search-form-padding: 2;
+
+
+// SearchHeader
+// -------------------------------------//
+
+$search-header-height: $search-form-height + ($search-form-padding * 2);
 
 
 // Menu
