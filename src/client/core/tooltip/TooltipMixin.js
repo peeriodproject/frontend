@@ -23,8 +23,8 @@ var TooltipMixin = {
 	//_isOpen: false,
 
 	componentDidMount: function() {
-		var el = this.getDOMNode();
-
+		var el = this._getTooltipOption('getTooltipElement');
+		
 		if (!this.props.tooltipContent && !this.props.enableTooltip) {
 			return;
 		}
@@ -60,6 +60,10 @@ var TooltipMixin = {
 
 	_getTooltipOpenClass: function () {
 		return this.props.tooltipOpenClass ? this.props.tooltipOpenClass : '';
+	},
+
+	_getTooltipElement: function () {
+		return this.getDOMNode();
 	},
 
 	/**
