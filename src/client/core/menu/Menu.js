@@ -51,7 +51,7 @@ var Menu = React.createClass({
 					</ul>
 				</nav>
 				<div className='menu-buttons'>
-					<a href='' ref='closeButton' onClick={this.handleCloseClick}>
+					<a href='#' ref='closeButton' onClick={this.handleCloseClick}>
 						<SvgIcon icon='close' /> Close
 					</a>
 				</div>

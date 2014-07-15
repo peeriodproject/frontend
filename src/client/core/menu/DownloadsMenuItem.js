@@ -26,7 +26,7 @@ var DownloadsMenuItem = React.createClass({
 
 		return (
 			<li>
-				<h3>{ this.i18n('menu_item_downloads_title') }</h3>
+				<h2>{ this.i18n('menu_item_downloads_title') }</h2>
 				<SvgIcon icon='download' extraLayer='current' extraStyles={styles} />
 				<div>
 					<p>{ this.i18n('menu_item_downloads_text') }</p>

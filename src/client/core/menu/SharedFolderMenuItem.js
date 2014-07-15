@@ -17,7 +17,7 @@ var SharedFolderMenuItem = React.createClass({
 	render: function () {
 		return (
 			<li>
-				<h3>{ this.i18n('menu_item_sharedFolder_title') }</h3>
+				<h2>{ this.i18n('menu_item_sharedFolder_title') }</h2>
 				<SvgIcon icon='folder' />
 				<div>
 					<p>{ this.i18n('menu_item_sharedFolder_text') }</p>
