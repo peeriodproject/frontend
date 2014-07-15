@@ -50,6 +50,8 @@ body {
 
 	color: $main-color;
 
+	overflow-x: hidden;
+
 	@import "../core/menu/Menu";
 	@import "../core/menu/MenuButton";
 
@@ -68,6 +70,10 @@ body {
 	//@include show-grid(overlay);
 
 	//transition: color $background-animation-duration linear, background-color $background-animation-duration linear !important;
+}
+
+strong {
+	font-weight: bold;
 }
 
 .hidden {
@@ -94,8 +100,8 @@ body {
 	}
 }
 
-.btn {
-
+.tooltip {
+	z-index: 900;
 }
 
 .dummy {
@@ -131,7 +137,7 @@ body {
 }*/
 
 main {
-	@include clearfix;
+	@extend %clearfix;
 }
 
 a {

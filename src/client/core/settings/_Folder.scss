@@ -83,10 +83,11 @@
 		padding-right: gutter($width);
 
 		opacity: 0.01;
-		//opacity: 1;
 		text-align: right;
 
-		background-color: $background-color-hover;
+		$gradient-color: $background-color-hover;
+		@include linear-gradient(-90deg, rgba($gradient-color, 1) 0%, rgba($gradient-color, 1) 4em, rgba($gradient-color, 0) 100%, $fallback: rgba(0,0,0,0));
+		//background-color: $background-color-hover;
 
 		.icon-btn {
 			@include icon-button($icon-color-light);
@@ -95,9 +96,9 @@
 			&:last-child {
 				margin-right: 0;
 
-				.icon-bin svg {
+				/*.icon-bin svg {
 					margin-right: -0.25em;
-				}
+				}*/
 			}
 
 			&.refreshing .icon-sync use {
