@@ -1,6 +1,7 @@
 .download-progress-bar {
 	$onePixel: (1 / strip-units($base-font-size)) * 1rem;
 	$hoverDelay: 0.3s;
+	$hover-height: 11;
 
 	@include bleed-y(0.5rem);
 
@@ -16,7 +17,7 @@
 		progress[value] {
 			@include transition(margin 0.25s $hoverDelay ease, height 0.25s $hoverDelay ease);
 
-			height: 11 * $onePixel;
+			height: $hover-height * $onePixel;
 			margin-top: $onePixel * -5;
 		}
 	}
@@ -40,5 +41,14 @@
 		&::-webkit-progress-value {
 			background-color: $green-color;
 		}
+	}
+
+	.download-tooltip-target {
+		height: $hover-height * $onePixel;
+		width: $hover-height * $onePixel;
+		border: 1px solid red;
+		position: absolute;
+		top: 0;
+		margin-left: floor($hover-height / 2) * -$onePixel;
 	}
 }
