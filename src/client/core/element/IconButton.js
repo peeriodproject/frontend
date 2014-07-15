@@ -30,9 +30,15 @@ var IconButton = React.createClass({
 		};
 	},
 
+	handleMouseClick: function (e) {
+		this.props.onClick(e);
+		
+		e.currentTarget.blur();
+	},
+
 	handleMouseEnter: function (e) {
 		this.setState({
-			hoverClassName: 'bg-color '
+			hoverClassName: ''
 		});
 
 		this.props.onMouseEnter(e);
@@ -53,7 +59,7 @@ var IconButton = React.createClass({
 			<button 
 				type='button'
 				className={'icon-btn ' + this.state.hoverClassName + this.props.className + this.state.tooltipOpenClass} 
-				onClick={this.props.onClick} 
+				onClick={this.handleMouseClick} 
 				disabled={this.props.disabled}
 				onMouseEnter={this.handleMouseEnter} 
 				onMouseLeave={this.handleMouseLeave}
