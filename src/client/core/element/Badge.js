@@ -13,6 +13,7 @@ var Badge = React.createClass({
 
 	getDefaultProps: function () {
 		return {
+			className: '',
 			label: ''
 		}
 	},
@@ -28,8 +29,10 @@ var Badge = React.createClass({
 	},
 
 	render: function (argument) {
+		var className = this.props.className ? ' ' + this.props.className : '';
+
 		return (
-			<div className="badge bg-hover">
+			<div className={'badge' + className}>
 				{this.getLabel()}
 			</div>
 		)
