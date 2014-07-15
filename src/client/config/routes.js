@@ -8,11 +8,11 @@ module.exports = [
 		handler: require('../core/foo/FooHandler')
 	},
 	{
-		path: '/folders/:folder',
+		path: '/folders(/:folder)',
 		handler: require('../core/settings/SharedFoldersHandler')
 	},
 	{
-		path: '/search/:query',
+		path: '/search(/:query)',
 		handler: require('../core/search/SearchHandler')
 	}
 ];
