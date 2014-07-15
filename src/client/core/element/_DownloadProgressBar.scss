@@ -25,6 +25,9 @@
 	progress[value] {
 		@include transition(margin 0.25s 0 ease, height 0.25s 0 ease);
 		
+		position: relative;
+		z-index: 60;
+
 		// Reset the default appearance
 		-webkit-appearance: none;
 		appearance: none;
@@ -44,11 +47,12 @@
 	}
 
 	.download-tooltip-target {
+		position: absolute;
+		
 		height: $hover-height * $onePixel;
 		width: $hover-height * $onePixel;
-		border: 1px solid red;
-		position: absolute;
-		top: 0;
+		top: $hover-height * $onePixel;
 		margin-left: floor($hover-height / 2) * -$onePixel;
+		z-index: 40;
 	}
 }

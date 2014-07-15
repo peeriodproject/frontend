@@ -33,8 +33,11 @@ var TooltipMixin = {
 			target		: el,
 			position	: this._getTooltipOption('getTooltipPosition'),
 			content		: '',
-			openOn		: null/*,
-			classes		: 'my-tether-theme'*/
+			openOn		: null,
+			thetherOption: {
+				moveElement: false
+			}
+			/*classes		: 'my-tether-theme'*/
 		});
 
 		if (!this.props.tooltipOpenOn || this.props.tooltipOpenOn === 'hover') {
@@ -112,14 +115,15 @@ var TooltipMixin = {
 
 		this._tooltip.open();
 
+		this.update(this._getTooltipOption('getTooltipContent'));
+
 		if (this.props.onTooltipOpen) {
 			this.props.onTooltipOpen();
 		}
 	},
 
 	toggleTooltip: function () {
-		if (!this._tooltip.drop.isOpened()) {
-			this.update(this._getTooltipOption('getTooltipContent'));
+		if (!this._tooltip || !this._tooltip.drop.isOpened()) {
 			this.openTooltip();
 		}
 		else {
@@ -131,7 +135,9 @@ var TooltipMixin = {
 	 * Closes the tooltip whenever the mouse left the DOM node
 	 */
 	closeTooltip: function() {
-		this._tooltip.close();
+		if (this._tooltip) {
+			this._tooltip.close();
+		}
 
 		this.setState({
 			tooltipOpenClass: ''
@@ -150,7 +156,7 @@ var TooltipMixin = {
 	update: function(content) {
 		var self = this;
 
-		if (!content) {
+		if (!content || !this._tooltip) {
 			return;
 		}
 		else if (typeof content === 'string') {
@@ -158,8 +164,14 @@ var TooltipMixin = {
 		}
 		
 		React.renderComponent(content, this._tooltip.drop.content, function() {
-			self._tooltip.drop.position();
+			self._tooltip.drop.position()
 		});	
+	},
+
+	updateTooltipPosition: function () {
+		if (this._tooltip && this._tooltip.drop.isOpened()) {
+			this._tooltip.drop.position();
+		}
 	}
 };
 
