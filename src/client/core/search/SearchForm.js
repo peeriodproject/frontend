@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react');
+var Link = require('react-router-component').Link;
 
 var I18nMixin = require('../i18n/I18nMixin');
 
@@ -79,9 +80,9 @@ var SearchForm = React.createClass({
 		return (
 			<section className='search-form-wrapper'>
 				<div className='logo-wrapper'>
-					<a className='logo'>
+					<Link href='/search' className='logo'>
 						<Badge label='0' />
-					</a>
+					</Link>
 				</div>
 				<form className='search-form' ref='searchForm' onSubmit={this.handleSubmit}>
 					<input 
