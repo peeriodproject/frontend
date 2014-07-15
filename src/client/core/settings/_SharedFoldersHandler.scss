@@ -1,26 +1,48 @@
 .shared-folders-handler {
-	$squish: 2;
+	$squish: 3;
 
-	@include clearfix;
 	@include squish($squish);
+	@extend %clearfix;
 
 	@include nested(12 - ($squish * 2)) {
 		header {
 			@include span(full);
+			@include padding-leader(3);
 			@include margin-trailer(2);
 			
 			h1 {
-				@include span(6);
+				@include span(4);
+				color: $dark-color;
 			}
 
 			.add-folder-button {
 				@include span(2 last);
-				@include padding-leader(0.2);
+				//@include padding-leader(0.2);
 
 				button {
 					@include span(full);
 
 					@include icon("arrows-plus");
+				}
+
+				a {
+					@include icon-button;
+					@extend button.btn;
+
+					@include rhythm-borders($button-border-width, 0.5, $base-font-size, solid);
+					@include transition(background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease);
+
+					display: block;
+					text-align: center;
+					
+					background-color: $button-background-color;
+					border-color: $button-border-color;
+
+					&:hover,
+					&:focus {
+						background-color: $background-color-hover;
+						border-color: $dark-color;
+					}
 				}
 			}
 		}

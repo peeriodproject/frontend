@@ -10,13 +10,16 @@ var Link = require('react-router-component').Link;
 var events = require('../events/EventEmitterMixin');
 
 var Folder = require('./Folder');
-var Button = require('../element/Button');
+//var Button = require('../element/Button');
+var SvgIcon = require('../element/SvgIcon');
 
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
-var DialogHandler = require('../dialog/DialogHandler');
-var AddFolderDialog = require('../dialog/AddFolderDialog');
+//var DialogHandler = require('../dialog/DialogHandler');
+//var AddFolderDialog = require('../dialog/AddFolderDialog');
+
+var SearchHeader = require('../search/SearchHeader');
 
 var SharedFoldersHandler = React.createClass({
 	
@@ -56,7 +59,9 @@ var SharedFoldersHandler = React.createClass({
 		console.warn(state);		
 	},
 
-	addFolder: function (event) {
+	handleAddFolderButtonClick: function (event) {
+		event.preventDefault();
+
 		this.folderdropzoneChannel.send('open', this._background);
 		//this.emitDialogOpen('addFolderDialog');
 	},
@@ -68,6 +73,10 @@ var SharedFoldersHandler = React.createClass({
 	refreshFolder: function (path) {
 		// we're checking all folder paths at once.
 		this.folderChannel.send('syncFolders');
+	},
+
+	showFolder: function (path) {
+		this.folderChannel.send('showFolder', path);
 	},
 
 	onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
@@ -86,17 +95,23 @@ var SharedFoldersHandler = React.createClass({
 		if (this.state.folders && this.state.folders.length) {
 			for (var i in this.state.folders) {
 				var folder = this.state.folders[i];
-				folders[folder.path] = <Folder onRemove={this.removeFolder} onRefresh={this.refreshFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
+				folders[folder.path] = <Folder onRemove={this.removeFolder} onRefresh={this.refreshFolder} onShow={this.showFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
 			}
 		}
 
 		return (
-			<main className='main'>
+			<main className='main has-search-header'>
+				<SearchHeader />
 				<section className='shared-folders-handler'>
 					<header>
-						<h1 className='bg-color-dark'>{this.i18n('settings_sharedFolders_title')}</h1>
-						<div className='add-folder-button'>
+						<h1>{this.i18n('settings_sharedFolders_title')}</h1>
+						{/*<div className='add-folder-button'>
 							<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
+						</div>*/}
+						<div className='add-folder-button'>
+							<a href='#' ref='addFolderButton' onClick={this.handleAddFolderButtonClick}>
+								<SvgIcon icon='plus' /> {this.i18n('settings_sharedFolders_addFolderButton_label')}
+							</a>
 						</div>
 					</header>
 					
