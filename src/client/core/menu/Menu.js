@@ -38,6 +38,10 @@ var Menu = React.createClass({
 		event.preventDefault();
 		
 		this.emitMenuClose();
+
+		setTimeout(function () {
+			window.dispatchEvent(new Event('resize'));
+		}, 200);
 	},
 
 	render: function () {
