@@ -128,22 +128,6 @@ module.exports = function (grunt) {
             }
         },
 
-        /*grunticon: { //makes SVG icons into a CSS file
-            myIcons: {
-                files: [{
-                    expand: true,
-                    cwd: 'src/icons/svg_compressed',
-                    src: ['*.svg'],
-                    dest: 'src/icons/svg_output'
-                }],
-                options: {
-                    datasvgcss: '_icons.scss',
-                    cssprefix: '.icon-',
-                    template: "src/client/sass/sass-icon-template.hbs"
-                }
-            }
-        },*/
-
         svgstore: {
             options: {
                 prefix : 'icon-', // This will prefix each ID
@@ -171,21 +155,18 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-browser-sync');
-
+    grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-svgmin');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-grunticon');
-
-    grunt.loadNpmTasks('grunt-svgstore');
-
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-svgmin');
+    grunt.loadNpmTasks('grunt-svgstore');
 
     grunt.registerTask('default', [
         'build',
@@ -194,7 +175,6 @@ module.exports = function (grunt) {
 
     ]);
 
-    //grunt.registerTask('icons', ['clean', 'svgmin', 'grunticon']);
     grunt.registerTask('svgicons', ['clean:icons', 'svgmin', 'svgstore:default', 'copy:main']);
 
     grunt.registerTask('build', [
