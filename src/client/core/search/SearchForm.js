@@ -6,6 +6,7 @@
 var React = require('react');
 var Link = require('react-router-component').Link;
 
+var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
 var Badge = require('../element/Badge');
@@ -16,8 +17,17 @@ var SearchForm = React.createClass({
 	_$input: null,
 
 	mixins: [
+		ChannelMixin,
 		I18nMixin
 	],
+
+	channelNames: [
+		'search'
+	],
+
+	initialChannelsState: { 
+		queryValue: null
+	},
 
 	getInitialState: function () {
 		return {
@@ -32,10 +42,28 @@ var SearchForm = React.createClass({
 		if (this._$input && !this.state.inputValue) {
 			this._$input.focus();
 		}
+
+		window.addEventListener('unload', this.handleWindowUnload);
 	},
 
 	componentWillUnmount: function () {
 		this._$input = null;
+
+		window.removeListener('unload', this.handleWindowUnload);
+	},
+
+	updateSearchChannelState: function (state) {
+		var query = state.currentQuery;
+
+		if (!query) {
+			return;
+		}
+
+		this.setState({
+			queryValue: query,
+			inputValue: (this.state.inputValue ? this.state.inputValue : query),
+			submitted: true
+		});
 	},
 
 	handleInputChange: function (event) {
@@ -59,6 +87,8 @@ var SearchForm = React.createClass({
 			disabled: true,
 			submitted: false
 		});
+
+		this.searchChannel.send('removeQuery');
 	},
 
 	handleSubmit: function (event) {
@@ -73,7 +103,21 @@ var SearchForm = React.createClass({
 			submitted: true
 		});
 
+		this.searchChannel.send('addQuery', this.state.inputValue);
+
 		console.log('starting search for:', this.state.inputValue);
+	},
+
+	/**
+	 * removes running queries.
+	 *
+	 * todo we should move this to the background.js 
+	 * and do the clean up whenever the browser closes!
+	 *
+	 * @return {[type]} [description]
+	 */
+	handleWindowUnload: function () {
+		this.searchChannel.send('removeQuery');
 	},
 
 	render: function () {
