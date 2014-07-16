@@ -20,7 +20,7 @@ var DownloadProgressBar = React.createClass({
 			tooltipOpenOn: 'manual',
 			enableTooltip: true,
 			tooltipDelayInMs: 500,
-			tooltipPosition: 'bottom right'
+			tooltipPosition: 'bottom center'
 		};
 	},
 
@@ -36,7 +36,27 @@ var DownloadProgressBar = React.createClass({
 	},
 
 	getTooltipContent: function () {
-		return (<span><strong>{this.getFlooredProgress()}%</strong> – XXX time left.</span>)
+		var downloads = [];
+
+		for (var i = 0, l = 5; i < l; i++) {
+			var download = (<li>
+				<header>
+					Lon...ilename.txt
+				</header>
+				<span>2 min left...</span>
+				<progress value='30' max='100'></progress>
+			</li>);
+
+			downloads.push(download);
+		}
+
+		return (
+			<div className='downloads'>
+				<strong>{this.getFlooredProgress()}%</strong> – XXX time left.
+				<ul>
+					{downloads}
+				</ul>
+			</div>);
 	},
 
 	getFlooredProgress: function () {
