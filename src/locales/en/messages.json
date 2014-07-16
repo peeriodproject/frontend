@@ -42,5 +42,13 @@
 	"search_input_placeholder": {
 		"message": "Search FOOBAR...",
 		"description": "The placeholder text of the main search field."
+	},
+	"page_connectionFailed_title": {
+		"message": "Connection Failed",
+		"description" "The title of the page that will show up whenever the fontend can not connect to the deamon"
+	},
+	"page_connectionFailed_text": {
+		"message": "Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.",
+		"description": "The text that will be shown on the below the `page_connectionFailed_title`"
 	}
 }

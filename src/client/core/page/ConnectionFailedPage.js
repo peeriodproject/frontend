@@ -5,7 +5,13 @@
 
 var React = require('react');
 
+var I18nMixin = require('../i18n/I18nMixin');
+
 var ConnectionFailedPage = React.createClass({
+
+	mixins: [
+		I18nMixin
+	],
 
 	onReconnectClick: function (event) {
 		event.preventDefault();
@@ -20,11 +26,9 @@ var ConnectionFailedPage = React.createClass({
 					<div className='wrapper'>
 						<article>
 							<header>
-								<h1>Connection Failed</h1>
+								<h1>{ this.i18n('page_connectionFailed_title') }</h1>
 							</header>
-							<p>
-								Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
-							</p>
+							<p>{ this.i18n('page_connectionFailed_text') }</p>
 
 							<a href='#' className='btn' onClick={this.onReconnectClick}>
 								Reconnect
