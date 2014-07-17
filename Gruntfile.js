@@ -83,7 +83,6 @@ module.exports = function (grunt) {
             libraries: {
                 src: [
                     './bower_components/animate.css/animate.css',
-                    './bower_components/tether-tooltip/css/tooltip-theme-arrows.css',
                     './bower_components/select/css/select-theme-default.css'
                 ],
                 dest: 'build/assets/css/libraries.css',
