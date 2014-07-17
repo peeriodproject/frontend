@@ -96,3 +96,13 @@ $menu-heading-color: #f0f0f0;
 $menu-buttons-color: #595959;
 $menu-buttons-color-hover: lighten($menu-buttons-color, 10%);
 $menu-divider-color: #4f4f4f;
+
+
+// Tooltip
+// -------------------------------------//
+
+$tooltip-background-color: $menu-background-color;
+$tooltip-color: $menu-heading-color;
+$tooltip-dark-color: $main-color;
+$tooltip-middle-color: $menu-color;
+$tooltip-divider-color: $menu-divider-color;

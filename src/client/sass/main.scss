@@ -28,6 +28,8 @@
 @import "../core/element/Path";
 @import "../core/element/DownloadProgressBar";
 
+@import "../core/tooltip/Tooltip";
+
 @function strip-units($number) {
   @return $number / ($number * 0 + 1);
 }

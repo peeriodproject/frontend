@@ -1,0 +1,30 @@
+@import "../../../../bower_components/tether/sass/mixins/pointer-events";
+@import "../../../../bower_components/tether/sass/helpers/tether";
+@import "../../../../bower_components/tether/sass/helpers/tether-theme-arrows";
+
+$themePrefix: "tooltip";
+$themeName: "arrows";
+$arrowSize: 8px;
+$backgroundColor: $tooltip-background-color;
+$color: $tooltip-color;
+$useDropShadow: false;
+
+@include tether($themePrefix: $themePrefix);
+@include tether-theme-arrows($themePrefix: $themePrefix, $themeName: $themeName, $arrowSize: $arrowSize, $backgroundColor: $backgroundColor, $color: $color, $useDropShadow: $useDropShadow);
+
+// Just a few additions
+
+.#{$themePrefix}-element.#{$themePrefix}-theme-arrows {
+	@include pointer-events(none);
+	/*@include transform(translateZ(0));
+	@include transition(opacity 0.1s);
+
+	&.drop-after-open {
+		opacity: 1;
+	}*/
+
+	.#{$themePrefix}-content {
+		padding: 0.45em 1em 0.25em;
+		border-radius: 0;
+	}
+}
