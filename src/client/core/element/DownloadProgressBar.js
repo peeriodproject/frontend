@@ -27,7 +27,7 @@ var DownloadProgressBar = React.createClass({
 	getInitialState: function () {
 		return {
 			tooltipTargetX: 0,
-			progress: 75
+			progress: 75.5
 		}
 	},
 
@@ -37,22 +37,19 @@ var DownloadProgressBar = React.createClass({
 
 	getTooltipContent: function () {
 		var downloads = [];
+		var i = 0;
 
-		for (var i = 0, l = 5; i < l; i++) {
-			var download = (<li>
-				<header>
-					Lon...ilename.txt
-				</header>
-				<span>2 min left...</span>
-				<progress value='30' max='100'></progress>
-			</li>);
-
-			downloads.push(download);
-		}
+		this.props.children.map(function(child) {
+          downloads.push(<li key={i}>{child}</li>);
+          i++;
+        });
 
 		return (
-			<div className='downloads'>
-				<strong>{this.getFlooredProgress()}%</strong> – XXX time left.
+			<div className='download-progress-bar-tooltip'>
+				<header>
+					<h2>{i} Downloads</h2>
+					<span>10 minutes remaining</span>
+				</header>
 				<ul>
 					{downloads}
 				</ul>
@@ -63,7 +60,15 @@ var DownloadProgressBar = React.createClass({
 		return Math.floor(this.state.progress);
 	},
 
+	hasDownloads: function () {
+		return this.props.children.length ? true : false;
+	},
+
 	handleOnMouseMove: function (event) {
+		if (!this.hasDownloads()) {
+			return;
+		}
+
 		this.setState({
 			tooltipTargetX: event.pageX
 		});
@@ -73,6 +78,10 @@ var DownloadProgressBar = React.createClass({
 
 	handleMouseEnter: function (event) {
 		var self = this;
+
+		if (!this.hasDownloads()) {
+			return;
+		}
 
 		this._showTooltipTimeout = setTimeout(function () {
 			self.openTooltip();

@@ -1,5 +1,6 @@
+$onePixel: (1 / strip-units($base-font-size)) * 1rem;
+
 .download-progress-bar {
-	$onePixel: (1 / strip-units($base-font-size)) * 1rem;
 	$hoverDelay: 0.3s;
 	$hover-height: 11;
 
@@ -54,5 +55,78 @@
 		top: $hover-height * $onePixel;
 		margin-left: floor($hover-height / 2) * -$onePixel;
 		z-index: 40;
+	}
+}
+
+.download-progress-bar-tooltip {
+
+	&> header {
+		@extend %clearfix;
+
+		h2 {
+			float: left;
+		}
+
+		/*span {
+			float: right;
+		}*/
+	}
+
+	li {
+		@include padding-leader(0.75);
+		@include trailing-border(1px, 0.75);
+
+		border-color: $tooltip-divider-color;
+
+		&:last-child {
+			margin-bottom: 0;
+			border-bottom: none;
+		}
+	}
+
+	.download {
+		progress[value] {
+			$background: darken($tooltip-background-color, 10%);
+			$height: $onePixel * 2;
+			$margin: (rhythm(1) /2) - strip-units($height);
+
+			-webkit-appearance: none;
+			appearance: none;
+			display: block;
+			width: 100%;
+			height: $height;
+			margin: $margin 0;
+
+			&::-webkit-progress-bar {
+				background-color: $background;
+			}
+
+			&::-webkit-progress-value {
+				@include linear-gradient(to right, mix($background, $green-color, 20%), $green-color);
+				background-color: $green-color;
+			}
+		}
+
+		span {
+			@include adjust-font-size-to(14px);
+			font-style: italic;
+			color: $tooltip-dark-color;
+
+			&.speed {
+				&:before {
+					content: " (";
+				}
+
+				&:after {
+					content: ")";
+				}
+			}
+
+			&.time {
+				&:before {
+					content: " – ";
+				}
+			}
+		}
 	}
 }
