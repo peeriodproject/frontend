@@ -53,8 +53,7 @@
 
 				@include nested($item-width) {
 					
-					// todo use proper heading!
-					h3 {
+					h2 {
 						@include prefix(1);
 						@include span($content-width);
 
