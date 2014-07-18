@@ -15,6 +15,9 @@
 		vertical-align: middle;
 
 		&> article {
+			@extend %clearfix;
+			@include padding-trailer(6); // moved to "optical" center
+
 			width: span(5);
 			margin: 0 auto;
 			text-align: center;
