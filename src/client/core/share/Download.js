@@ -65,6 +65,13 @@ var Download = React.createClass({
 		return prog;
 	},
 
+	/**
+	 * Returns the given size in a human readable format
+	 *
+	 * @param  {number} bytes The number of bytes
+	 *
+	 * @return {string}       The formatted size with extension
+	 */
 	getSizeWithExtension: function (bytes) {
 		if (bytes === 0) {
 			return '0 Byte';

@@ -9,11 +9,34 @@
 		li {
 			@include margin-trailer(1.5);
 
+			position: relative;
+
 			background-color: #fff;
 			border-radius: $border-radius;
 
 			&:last-child {
 				margin-bottom: 0;
+			}
+
+			.download-progress {
+				position: absolute;
+				width: 100%;
+				bottom: 0;
+				z-index: 10;
+
+				height: 34%;
+				background-color: $green-color;
+
+				opacity: 1;
+
+				display: none;
+
+				&:hover {
+					opacity: 0.2;
+				}
+			}
+
+			.result-content {
 			}
 
 			footer.meta {
@@ -23,7 +46,7 @@
 
 				border-top: 1px solid;
 				border-color: $search-result-border-color;
-				line-height: 200%;
+				line-height: 250%;
 				text-align: right;
 
 				.download-btn {

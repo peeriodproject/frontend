@@ -43,13 +43,13 @@ var SearchForm = React.createClass({
 			this._$input.focus();
 		}
 
-		window.addEventListener('unload', this.handleWindowUnload);
+		//window.addEventListener('unload', this.handleWindowUnload);
 	},
 
 	componentWillUnmount: function () {
 		this._$input = null;
 
-		window.removeListener('unload', this.handleWindowUnload);
+		//window.removeListener('unload', this.handleWindowUnload);
 	},
 
 	updateSearchChannelState: function (state) {

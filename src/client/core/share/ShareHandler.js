@@ -9,7 +9,7 @@ var Link = require('react-router-component').Link;
 
 var events = require('../events/EventEmitterMixin');
 
-var Folder = require('./Folder');
+var Download = require('./Download');
 //var Button = require('../element/Button');
 var SvgIcon = require('../element/SvgIcon');
 
@@ -29,7 +29,7 @@ var SharedFoldersHandler = React.createClass({
 	],
 
 	channelNames: [
-		'folder',
+		'share',
 		'folderdropzone'
 	],
 	
@@ -37,17 +37,16 @@ var SharedFoldersHandler = React.createClass({
 		folders: []
 	},
 
-	updateFolderChannelState: function (state) {
-		this.setState({
+	updateShareChannelState: function (state) {
+		console.log('share state', state);
+		/*this.setState({
 			folders: state
-		});
+		});*/
 	},
 
 	updateFolderdropzoneChannelState: function (paths) {
 		if (paths.length) {
-			for (var i = 0, l = paths.length; i < l; i++) {
-				this.folderChannel.send('addFolder', paths[i]);
-			}
+			this.shareChannel.send('updateDownloadDestination', paths[0]);
 		}
 	},
 
@@ -56,14 +55,14 @@ var SharedFoldersHandler = React.createClass({
 		console.warn(state);		
 	},
 
-	handleAddFolderButtonClick: function (event) {
+	handleDownloadDestionationButtonClick: function (event) {
 		event.preventDefault();
 
 		this.folderdropzoneChannel.send('open', this._background);
 		//this.emitDialogOpen('addFolderDialog');
 	},
 
-	removeFolder: function (path) {
+	/*removeFolder: function (path) {
 		this.folderChannel.send('removeFolder', path);
 	},
 
@@ -74,9 +73,9 @@ var SharedFoldersHandler = React.createClass({
 
 	showFolder: function (path) {
 		this.folderChannel.send('showFolder', path);
-	},
+	},*/
 
-	onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
+	/*onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
 		// the background isn't added to the state as we're just piping it to the dropzone!
 		this.folderdropzoneChannel.send('background', {
 			background: background,
@@ -84,7 +83,7 @@ var SharedFoldersHandler = React.createClass({
 			inverted: inverted,
 			invertedBackgroundColor: invertedBackgroundColor
 		});
-	},
+	},*/
 
 	render: function() {
 		var folders = {};
@@ -97,15 +96,12 @@ var SharedFoldersHandler = React.createClass({
 		}
 
 		return (
-			<section className='shared-folders-handler'>
+			<section className='share-handler'>
 				<header>
-					<h1>{this.i18n('settings_sharedFolders_title')}</h1>
-					{/*<div className='add-folder-button'>
-						<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
-					</div>*/}
-					<div className='add-folder-button'>
-						<a href='#' ref='addFolderButton' onClick={this.handleAddFolderButtonClick}>
-							<SvgIcon icon='plus' /> {this.i18n('settings_sharedFolders_addFolderButton_label')}
+					<h1>{this.i18n('settings_share_title')}</h1>
+					<div className='download-destionation-button'>
+						<a href='#' ref='downloadDestinationButton' onClick={this.handleDownloadDestionationButtonClick}>
+							<SvgIcon icon='plus' /> {this.i18n('settings_share_downloadDestionationButton_label')}
 						</a>
 					</div>
 				</header>

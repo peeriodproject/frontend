@@ -14,5 +14,9 @@ module.exports = [
 	{
 		path: '/search(/:query)',
 		handler: require('../core/search/SearchHandler')
+	},
+	{
+		path: '/share',
+		handler: require('../core/share/ShareHandler')
 	}
 ];

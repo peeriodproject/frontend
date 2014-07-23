@@ -20,7 +20,8 @@ var SearchResults = React.createClass({
 	],
 
 	channelNames: [
-		'search'
+		'search',
+		'share'
 	],
 
 	getInitialState: function () {
@@ -35,6 +36,17 @@ var SearchResults = React.createClass({
 		return fields._template ? fields._template : 'text';
 	},
 
+	handleDownloadStart: function (resultId) {
+		console.log('Sending download down the wire');
+		this.shareChannel.send('addDownload', resultId, function (bar) {
+			console.log('foo', bar);
+		});
+	},
+
+	handleDownloadAbort: function (resultId) {
+		this.shareChannel.send('removeDownload', resultId);
+	},
+
 	updateSearchChannelState: function (state) {
 		console.log('channel update!');
 		console.log(state);
@@ -46,6 +58,10 @@ var SearchResults = React.createClass({
 		this.setState({
 			results: state.currentResults
 		});
+	},
+
+	updateShareChannelState: function (state) {
+		console.log('foo', state);
 	},
 
 	render: function () {
@@ -63,7 +79,7 @@ var SearchResults = React.createClass({
 				}
 
 				results[hit.response._id] = (
-					<SearchResult>
+					<SearchResult resultId={hit.response._id} onDownloadStart={this.handleDownloadStart} onDownloadAbort={this.handleDownloadAbort}>
 						<template fields={hit.fields} response={hit.response} />
 					</SearchResult>
 				)

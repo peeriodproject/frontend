@@ -65,7 +65,7 @@ body {
 	@import "../core/search/SearchHandler";
 	@import "../core/search/SearchResults";
 
-	//@import "../core/share/Download";
+	@import "../core/share/Download";
 	@import "../core/share/DownloadProgressBar";
 
 	@import "../core/page/ConnectionFailedPage";
