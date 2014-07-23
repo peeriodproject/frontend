@@ -9,8 +9,7 @@ var IconButton = require('../element/IconButton');
 var FormFactory = require('../form/FormFactory');
 
 var SearchForm = require('./SearchForm');
-var Download = require('../element/Download');
-var DownloadProgressBar = require('../element/DownloadProgressBar');
+var DownloadProgressBar = require('../share/DownloadProgressBar');
 
 var Menu = require('../menu/Menu');
 var MenuButton = require('../menu/MenuButton');
@@ -22,18 +21,25 @@ var DownloadsMenuItem = require('../menu/DownloadsMenuItem');
 
 var SearchHeader = React.createClass({
 
+	_headroom: null,
+
+	componentDidMount: function () {
+		this._headroom = new Headroom(this.getDOMNode());
+		console.log(this._headroom);
+
+		this._headroom.init();
+	},
+
+	componentWillUnmount: function () {
+		this._headroom.destroy();
+	},
+
 	render: function () {
 		return (
 			<section className='search-header'>
 				<MenuButton />
 				<SearchForm />
-				<DownloadProgressBar>
-					<Download progress={Math.random() * 100} />
-					<Download progress={Math.random() * 100} />
-					<Download progress={Math.random() * 100} />
-					<Download progress={Math.random() * 100} />
-					<Download progress={Math.random() * 100} />
-				</DownloadProgressBar>
+				<DownloadProgressBar />
 				<Menu>
 					<AppStatusMenuItem />
 					<SharedFolderMenuItem />

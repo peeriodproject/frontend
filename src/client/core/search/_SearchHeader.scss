@@ -6,7 +6,16 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 0;
-	width: 0;
+	width: 100%;
 	z-index: 50;
+
+	@include transition(transform 0.2s linear);
+
+	&.headroom--pinned {
+		@include transform(translateY(0%));
+	}
+
+	&.headroom--unpinned {
+		@include transform(translateY(-100%));
+	}
 }

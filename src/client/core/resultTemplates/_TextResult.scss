@@ -1,0 +1,18 @@
+.text-result {
+	@include gutters(2rem inside);
+
+	@include padding-leader(1);
+	@include padding-trailer(1);
+
+	h1 {
+		@include adjust-font-size-to(23px);
+		@include padding-trailer(0.25);
+
+		color: $dark-color;
+	}
+
+	h1 em,
+	p em {
+		font-weight: bold;
+	}
+}

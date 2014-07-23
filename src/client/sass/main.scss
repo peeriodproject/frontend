@@ -26,9 +26,10 @@
 //@import "../core/element/Dropzone";
 @import "../core/element/IconButton";
 @import "../core/element/Path";
-@import "../core/element/DownloadProgressBar";
 
 @import "../core/tooltip/Tooltip";
+
+@import "../core/resultTemplates/TextResult";
 
 @function strip-units($number) {
   @return $number / ($number * 0 + 1);
@@ -62,6 +63,10 @@ body {
 	@import "../core/settings/SharedFoldersHandler";
 	@import "../core/search/SearchHeader";
 	@import "../core/search/SearchHandler";
+	@import "../core/search/SearchResults";
+
+	//@import "../core/share/Download";
+	@import "../core/share/DownloadProgressBar";
 
 	@import "../core/page/ConnectionFailedPage";
 

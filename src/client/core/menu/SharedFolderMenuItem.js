@@ -21,7 +21,7 @@ var SharedFolderMenuItem = React.createClass({
 				<SvgIcon icon='folder' />
 				<div>
 					<p>{ this.i18n('menu_item_sharedFolder_text') }</p>
-					<MenuLink href='/folders/foobar'>
+					<MenuLink href='/folders'>
 						{ this.i18n('menu_item_sharedFolder_button_label') } »
 					</MenuLink>
 				</div>

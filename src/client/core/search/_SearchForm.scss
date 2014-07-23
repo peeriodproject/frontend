@@ -6,7 +6,7 @@
 	@extend %clearfix;
 
 	@include nested(12 - ($search-form-squish * 2)) {
-		position: fixed;
+		position: relative;
 		top: 0;
 		left: 0;
 		width: 100%;

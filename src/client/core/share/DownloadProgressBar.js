@@ -5,15 +5,31 @@
 
 var React = require('react');
 
+var ChannelMixin = require('../socket/ChannelMixin');
 var TooltipMixin = require('../tooltip/TooltipMixin');
+
+var Download = require('./Download');
 
 var DownloadProgressBar = React.createClass({
 
 	_showTooltipTimeout: null,
 
 	mixins: [
+		ChannelMixin,
 		TooltipMixin
 	],
+
+	channelNames: [
+		'share'
+	],
+
+	initialChannelsState: { 
+		downloads: {},
+		destination: {
+			path: '',
+			error: null
+		}
+	},
 
 	getDefaultProps: function () {
 		return {
@@ -31,37 +47,57 @@ var DownloadProgressBar = React.createClass({
 		}
 	},
 
+	updateShareChannelState: function (state) {
+		console.log('share state', state);
+		this.setState(state);
+	},
+
 	getTooltipElement: function () {
 		return this.refs.tooltipTarget.getDOMNode();
 	},
 
 	getTooltipContent: function () {
-		var downloads = [];
-		var i = 0;
-
-		this.props.children.map(function(child) {
-          downloads.push(<li key={i}>{child}</li>);
-          i++;
-        });
-
 		return (
 			<div className='download-progress-bar-tooltip'>
-				<header>
+				{/*<header>
 					<h2>{i} Downloads</h2>
 					<span>10 minutes remaining</span>
-				</header>
+				</header>*/}
 				<ul>
-					{downloads}
+					{this.getDownloads()}
 				</ul>
 			</div>);
 	},
 
-	getFlooredProgress: function () {
-		return Math.floor(this.state.progress);
+	getDownloads: function () {
+		var downloads = [];
+		var downloadIds = Object.keys(this.state.downloads);
+		var downloadLength = downloadIds.length;
+
+		if (!downloadLength) {
+			return downloads;
+		}
+		
+		for (var i = 0; i < downloadLength; i++) {
+			var id = downloadIds[i];
+			var data = this.state.downloads[id];
+			
+			var download = <Download
+				created={data.created}
+				id={data.id}
+				loaded={data.loaded}
+				name={data.name}
+				size={data.size}
+				status={data.status} />;
+
+			downloads.push(<li key={id}>{download}</li>);
+		};
+
+		return downloads;
 	},
 
 	hasDownloads: function () {
-		return this.props.children.length ? true : false;
+		return Object.keys(this.state.downloads).length ? true : false;
 	},
 
 	handleOnMouseMove: function (event) {
