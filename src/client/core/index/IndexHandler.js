@@ -18,6 +18,8 @@ var Page = React.createClass({
 	},
 
 	render: function() {
+		console.log(this);
+		
 		return (
 			<div>
 				<h1>Ridiculus Tristique</h1>

@@ -4,10 +4,10 @@
 'use strict';
 
 var React = require('react');
-var Router = require('react-router-component');
+var ReactRouter = require('react-router-component');
 
-var Locations = Router.Locations;
-var Location = Router.Location;
+var Locations = ReactRouter.Locations;
+var Location = ReactRouter.Location;
 
 var SearchHeader = require('../search/SearchHeader');
 
@@ -18,6 +18,15 @@ var SearchHeader = require('../search/SearchHeader');
  */
 var Router = function (routes) {
 	return React.createClass({
+
+		onBeforeNavigation: function () {
+			console.log(arguments);
+		},
+
+		onNavigation: function () {
+			console.log(arguments);
+		},
+
 		render: function() {
 			var locations = [];
 
@@ -27,15 +36,22 @@ var Router = function (routes) {
 				locations.push(<Location path={route.path} handler={route.handler} />);
 			}
 
+			var locationRouter = (
+				<Locations hash onBeforeNavigation={this.onBeforeNavigation} onNavigation={this.onNavigation}>
+					{locations}
+				</Locations>
+			)
+
+			//console.log(locationRouter.getRouterState());
+			console.log(locationRouter);
+
 			return (
 				<main className='main has-search-header'>
 					<Locations hash>
 						<Location path='*' handler={SearchHeader} />
 					</Locations>
 
-					<Locations hash>
-						{locations}
-					</Locations>
+					{locationRouter}
 				</main>
 			);
 		}

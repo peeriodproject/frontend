@@ -37,6 +37,12 @@ var SearchForm = React.createClass({
 		}
 	},
 
+	getDefaultProps: function () {
+		return {
+			isFullscreen: false
+		}
+	},
+
 	componentDidMount: function () {
 		this._$input = $(this.refs.searchField.getDOMNode());
 		
@@ -124,8 +130,10 @@ var SearchForm = React.createClass({
 	},
 
 	render: function () {
+		var fullscreenClassName = this.props.isFullscreen ? ' fullscreen' : '';
+
 		return (
-			<section className='search-form-wrapper'>
+			<section className={'search-form-wrapper' + fullscreenClassName}>
 				<div className='logo-wrapper'>
 					<Link href='/search' className='logo'>
 						<Badge label='0' />
@@ -153,6 +161,7 @@ var SearchForm = React.createClass({
 						disabled={this.state.disabled}
 						onClick={this.handleSubmit} />
 				</form>
+				<p>Mollis Ultricies Inceptos Vestibulum <Link href='http://joernroeder.de'>Nullam</Link></p>
 			</section>
 		)
 	}

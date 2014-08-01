@@ -11,6 +11,15 @@
 
 	@include transition(transform 0.2s linear);
 
+	&.index {
+		height: 100%;
+		background-color: rgba($background-color, 1);
+
+		.download-progress-bar {
+			display: none;
+		}
+	}
+
 	&.headroom--pinned {
 		@include transform(translateY(0%));
 	}

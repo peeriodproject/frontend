@@ -5,6 +5,25 @@
 
 	@extend %clearfix;
 
+	&.fullscreen {
+		padding-top: 0;
+		padding-bottom: 0;
+
+		top: 50%;
+		//margin-top: rhythm(-$search-form-height / 3 * 2);
+		margin-top: rhythm(-$search-form-height);
+
+		.logo-wrapper .logo {
+			width: rhythm(5);
+			padding-bottom: rhythm(5);
+			margin-top: rhythm(-1);
+		}
+
+		p {
+			display: block;
+		}
+	}
+
 	@include nested(12 - ($search-form-squish * 2)) {
 		position: relative;
 		top: 0;
@@ -12,7 +31,7 @@
 		width: 100%;
 		z-index: 100;
 
-		border-bottom: 1px solid;
+		//border-bottom: 1px solid;
 		background-color: rgba($background-color, 0.9);
 
 
@@ -127,6 +146,16 @@
 					}
 				}
 			}
+		}
+
+		p {
+			@include margin-leader(0.5);
+			//@include pre(1);
+			@include span(7 last);
+			@include suffix(1);
+			padding-left: gutter(2rem inside);
+
+			display: none;
 		}
 	}
 }
