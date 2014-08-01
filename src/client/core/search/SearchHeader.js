@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react');
+var Link = require('react-router-component').Link;
 
 var IconButton = require('../element/IconButton');
 var FormFactory = require('../form/FormFactory');
@@ -46,20 +47,26 @@ var SearchHeader = React.createClass({
 	},
 
 	setLocationClassName: function (props) {
+		var indexRouteName = ' route-index';
 		var route = props._ && props._.length ? props._[0].substr(1) : '';
-		console.log(props._);
-		console.log(route);
+		var locationClassName = route ? ' route-' + route : indexRouteName;
 
 		this.setState({
-			locationClassName: route ? '' : ' index'
+			locationClassName: locationClassName,
+			isFullscreen: (locationClassName === indexRouteName)
 		});
 	},
 
 	render: function () {
 		return (
 			<section className={'search-header' + this.state.locationClassName}>
+				<div className='animation-helper'></div>
 				<MenuButton />
-				<SearchForm isFullscreen={(this.state.locationClassName ? true : false)} />
+				
+				<SearchForm isFullscreen={this.state.isFullscreen} locationClassName={this.state.locationClassName}>
+					<p>Mollis Ultricies Inceptos Vestibulum <Link href='http://joernroeder.de'>Nullam</Link></p>
+				</SearchForm>
+
 				<DownloadProgressBar />
 				<Menu>
 					<AppStatusMenuItem />

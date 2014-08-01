@@ -4,6 +4,8 @@
     //border-color: $color;
 
     &:#{$pseudo} {
+        @include transition-property(border-color);
+
         position: absolute;
         content: "";
         width: 0;

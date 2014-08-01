@@ -6,6 +6,7 @@
 var React = require('react');
 var Router = require('react-router-component');
 var Link = require('react-router-component').Link;
+var NavigatableMixin = require('react-router-component').NavigatableMixin;
 
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
@@ -18,6 +19,7 @@ var SearchForm = React.createClass({
 	_$input: null,
 
 	mixins: [
+		NavigatableMixin,
 		ChannelMixin,
 		I18nMixin
 	],
@@ -39,7 +41,8 @@ var SearchForm = React.createClass({
 
 	getDefaultProps: function () {
 		return {
-			isFullscreen: false
+			isFullscreen: false,
+			locationClassName: ''
 		}
 	},
 
@@ -69,22 +72,12 @@ var SearchForm = React.createClass({
 		this.setState({
 			queryValue: query,
 			inputValue: (this.state.inputValue ? this.state.inputValue : query),
+			disabled: false,
 			submitted: true
 		});
 	},
 
-	handleInputChange: function (event) {
-		this.setState({
-			inputValue: event.target.value,
-			disabled: event.target.value ? false : true,
-			submitted: false
-		});
-	},
-
-	handleClearButtonClick: function (event) {
-		event.preventDefault();
-		event.currentTarget.blur();
-
+	removeQuery: function () {
 		if (this._$input) {
 			this._$input.focus();
 		}
@@ -98,10 +91,7 @@ var SearchForm = React.createClass({
 		this.searchChannel.send('removeQuery');
 	},
 
-	handleSubmit: function (event) {
-		event.preventDefault();
-		event.currentTarget.blur();
-
+	startQuery: function (value) {
 		if (this.state.disabled || this.state.submitted) {
 			return;
 		}
@@ -110,11 +100,49 @@ var SearchForm = React.createClass({
 			submitted: true
 		});
 
-		this.searchChannel.send('addQuery', this.state.inputValue);
+		this.searchChannel.send('addQuery', value);
 
-		Router.navigate('/search');
+		this.navigate('/search');
 
-		console.log('starting search for:', this.state.inputValue);
+		console.log('starting search for:', value);
+	},
+
+	handleInputChange: function (event) {
+		this.setState({
+			inputValue: event.target.value,
+			disabled: event.target.value ? false : true,
+			submitted: false
+		});
+	},
+
+	handleInputFocus: function (event) {
+		this.setState({
+			focus: true
+		});
+	},
+
+	handleInputBlur: function (event) {
+		this.setState({
+			focus: false
+		});
+	},
+
+	handleClearButtonClick: function (event) {
+		event.preventDefault();
+		event.currentTarget.blur();
+
+		this.removeQuery();
+	},
+
+	handleLogoClick: function () {
+		this.removeQuery();
+	},
+
+	handleSubmit: function (event) {
+		event.preventDefault();
+		event.currentTarget.blur();
+
+		this.startQuery(this.state.inputValue);
 	},
 
 	/**
@@ -131,21 +159,24 @@ var SearchForm = React.createClass({
 
 	render: function () {
 		var fullscreenClassName = this.props.isFullscreen ? ' fullscreen' : '';
+		var focusClassName = this.state.focus ? ' focus' : '';
 
 		return (
-			<section className={'search-form-wrapper' + fullscreenClassName}>
+			<section className={'search-form-wrapper' + fullscreenClassName + this.props.locationClassName}>
 				<div className='logo-wrapper'>
-					<Link href='/search' className='logo'>
-						<Badge label='0' />
+					<Link href='/' className='logo' onClick={this.handleLogoClick}>
+						<img src='/assets/icons/icon128.png' />
 					</Link>
 				</div>
-				<form className='search-form' ref='searchForm' onSubmit={this.handleSubmit}>
+				<form className={'search-form' + focusClassName} ref='searchForm' onSubmit={this.handleSubmit}>
 					<input 
 						type='text' 
 						placeholder={this.i18n('search_input_placeholder')}
 						className='search-input'
 						ref='searchField'
 						onChange={this.handleInputChange}
+						onFocus={this.handleInputFocus}
+						onBlur={this.handleInputBlur}
 						value={this.state.inputValue} />
 
 					<IconButton 
@@ -161,7 +192,7 @@ var SearchForm = React.createClass({
 						disabled={this.state.disabled}
 						onClick={this.handleSubmit} />
 				</form>
-				<p>Mollis Ultricies Inceptos Vestibulum <Link href='http://joernroeder.de'>Nullam</Link></p>
+				{this.props.children}
 			</section>
 		)
 	}

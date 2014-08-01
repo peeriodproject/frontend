@@ -28,6 +28,7 @@ $green-color: #00d97e;
 $red-color: #ff0045;
 
 $input-border-color: #d2d2d2;
+$input-border-color-hover: darken($input-border-color, 15%);
 
 
 // Icons
@@ -80,6 +81,9 @@ $badge-font-size: $base-font-size * (14 / strip-units($base-font-size));
 $search-form-squish: 2;
 $search-form-height: 3;
 $search-form-padding: 2;
+$search-form-index-transition-duration: 0.5s;
+$search-form-index-transition-timing-function: ease-in;
+$search-form-index-transition-delay: 1s;
 
 
 // SearchHeader
@@ -118,4 +122,5 @@ $search-result-meta-color: $input-border-color;
 $search-result-border-color: $background-color;
 
 // Share
+// -------------------------------------//
 $progress-background-color: darken($dark-background-color, 10%);
