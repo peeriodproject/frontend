@@ -24,11 +24,36 @@
 	padding-bottom: $bottom;
 	margin-bottom: -$bottom;*/
 	
+	&.status-error,
 	&.status-invalid {
 		background-color: $red-color;
 	}
 
-	&.status-active {
+	&.status-active,
+	&.status-valid {
 		background-color: $green-color;
+	}
+
+	.icon {
+		margin-top: -$onePixel * 2;
+		margin-bottom: -$onePixel;
+		display: block;
+		//padding-bottom: $onePixel;
+		height: strip-units($base-line-height) / strip-units($badge-font-size) * 1rem;
+
+		&.icon-loading use {
+			//@include transition(none);
+			@include animation(spin 2s linear infinite);
+			@include transform-origin(center);
+		}
+
+		svg {
+			max-height: 1rem;
+			width: 1rem;
+
+			use {
+				fill: $badge-color;
+			}
+		}
 	}
 }

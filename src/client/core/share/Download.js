@@ -5,130 +5,163 @@
 
 var React = require('react');
 
-var countdown = require('countdown');
+var Badge = require('../element/Badge');
+var IconButton = require('../element/IconButton');
+var SvgIcon = require('../element/SvgIcon');
+
+var DownloadMixin = require('./DownloadMixin');
+var I18nMixin = require('../i18n/I18nMixin');
 
 var Download = React.createClass({
+	
+	mixins: [
+		DownloadMixin,
+		I18nMixin
+	],
 
-	_updateTimeout: null,
+	_downloadStatus: {
+		valid: ['COMPLETED'],
+		neutral: ['REQUESTING_FILE', 'TRANSFER_STARTED', 'MANUAL_ABORT'],
+		invalid: ['FS_ERROR', 'REMOTE_ABORT', 'TIMED_OUT', 'PROTOCOL_ERR']
+	},
 
 	getDefaultProps: function () {
 		return {
-			created		: 0,
-			id			: '',
-			loaded		: 0,
-			name		: '',
-			size		: 0,
-			status		: '',
-			progress	: Math.random() * 100
+			onCancel: function () {
+			},
+			onRemove: function () {
+			},
+			onShow: function () {
+			}
 		};
 	},
 
-	getInitialState: function () {
-		return {
-			averageSpeed: 0,
-			now: 0,
-			timeLeft: 0
-		};
+	isInStatusGroup: function (group, status) {
+		return this._downloadStatus[group].indexOf(status) !== -1;
 	},
 
-	componentDidMount: function () {
-		this.calcTimeAndSpeed();
-
-		this._startUpdateTimeout();
-	},
-	// @see http://stackoverflow.com/a/7312237
-	componentWillReceiveProps: function (nextProps) {
-		this.calcTimeAndSpeed(nextProps);
-	},
-
-	_startUpdateTimeout: function () {
-		var _this = this;
-
-		if (this._updateTimeout) {
-			clearTimeout(this._updateTimeout);
-		}
-
-		this._updateTimeout = setTimeout(function () {
-			_this.calcTimeAndSpeed();
-			_this._startUpdateTimeout();
-		}, 200);
-	},
-
-	/**
-	 * Returns the progress as a decimal value 0 <= i <= 1
-	 *
-	 * @returns {number} the state of the download progress
-	 */
-	getProgress: function () {
-		var prog = (this.props.loaded / this.props.size);
-
-		return prog;
-	},
-
-	/**
-	 * Returns the given size in a human readable format
-	 *
-	 * @param  {number} bytes The number of bytes
-	 *
-	 * @return {string}       The formatted size with extension
-	 */
-	getSizeWithExtension: function (bytes) {
-		if (bytes === 0) {
-			return '0 Byte';
-		}
-
-		var k = 1024;
-		var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-		var i = Math.floor(Math.log(bytes) / Math.log(k));
-
-		return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
-	},
-
-	calcTimeAndSpeed: function (props) {
-		props = props || this.props;
-
-		var now = new Date().getTime();
-		var timeElapsed = now - this.props.created;
-		var speed = this.props.loaded / timeElapsed;
-		var timeLeft = (this.props.size - this.props.loaded) / speed;
-
-		this.setState({
-			timeLeft: timeLeft,
-			now: now,
-			averageSpeed: this.getAverageSpeed(speed * 1000) // ms to s
-		});
-	},
-
-	// @see http://stackoverflow.com/a/3841706
-	getAverageSpeed: function (lastSpeed) {
-		var SMOOTHING_FACTOR = 0.45;
+	getStatusIcon: function () {
+		var status = this.props.status;
+		var icon = '';
 		
-		// exponential moving average
-		return SMOOTHING_FACTOR * lastSpeed + (1 - SMOOTHING_FACTOR) * this.state.averageSpeed;
+		// checks are performed by array length
+		if (this.isInStatusGroup('valid', status)) {
+			icon = 'tick';
+		}
+		else if (this.isInStatusGroup('neutral', status)) {
+			icon = 'loading';
+		}
+		else if (this.isInStatusGroup('invalid', status)) {
+			icon = 'warning';
+		}
+
+		return icon;
 	},
 
-	getTimeLeft: function () {
-		return countdown(new Date().getTime() + this.state.timeLeft).toString();
+	getElementStatus: function () {
+		var status = this.props.status;
+		var elementStatus = '';
+		
+		// checks are performed by array length
+		if (this.isInStatusGroup('valid', status)) {
+			elementStatus = 'valid';
+		}
+		else if (this.isInStatusGroup('neutral', status)) {
+			elementStatus = 'neutral';
+		}
+		else if (this.isInStatusGroup('invalid', status)) {
+			elementStatus = 'invalid';
+		}
+
+		return elementStatus;
+	},
+
+	transformStatus: function (str) {
+		var frags = str.split('_');
+
+		for (var i = 0, l = frags.length; i < l; i++) {
+		  frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+		}
+
+		str = frags.join('');
+		
+		return str.charAt(0).toLowerCase() + str.slice(1);
+	},
+
+	getStatusDescription: function () {
+		return this.i18n('download_status_' + this.transformStatus(this.props.status.toLowerCase()), '');
+	},
+
+	cancelDownload: function () {
+		this.props.onCancel(this.props.id);
+	},
+
+	showDownload: function () {
+		this.props.onShow(this.props.id);
+	},
+
+	removeDownload: function () {
+		this.props.onRemove(this.props.id);
 	},
 
 	render: function () {
-		if (!this.props.status) {
-			return null;
+		var showButton;
+		var removeButton;
+		var cancelButton;
+
+		var statusDescription;
+		var statusDescriptionTag;
+
+		var elementStatus = this.getElementStatus();
+		var progress = elementStatus === 'neutral' ? <progress value={this.getProgress() * 100} max='100'></progress> : null;
+
+		if (this.props.status === 'COMPLETED') {
+			showButton = (<IconButton icon='view' onClick={this.showDownload} tooltipContent={this.i18n('download_showButton_tooltipContent')} />)
+		}
+
+		// still loading
+		if (elementStatus === 'neutral') {
+			statusDescriptionTag = (
+				<p className={'status-description ' + elementStatus}>
+					<span className='size'>
+						{this.getSizeWithExtension(this.props.loaded)} of {this.getSizeWithExtension(this.props.size)}
+					</span>
+					<span className='speed'>{this.getSizeWithExtension(this.state.averageSpeed)}/s</span>
+					<span className='time'>{this.getTimeLeft()}</span>
+				</p>
+			)
+
+			cancelButton = <IconButton icon='close' onClick={this.cancelDownload} tooltipContent={this.i18n('download_cancelButton_tooltipContent')} />;
+		}
+		else {
+			statusDescription = this.getStatusDescription();
+		
+			if (statusDescription) {
+				statusDescriptionTag = <p className={'status-description ' + elementStatus}>{statusDescription}</p>
+			}
+
+			removeButton = <IconButton icon='bin' onClick={this.removeDownload} tooltipContent={this.i18n('download_removeButton_tooltipContent')} />;
 		}
 
 		return (
-			<div className='download'>
-				<header>
-					{this.props.name}
-				</header>
-				
-				<progress value={this.getProgress() * 100} max='100'></progress>
+			<div className={'download'}>
+				<h3>{this.props.name}</h3>
+				{statusDescriptionTag}
 
-				<span className='size'>
-					{this.getSizeWithExtension(this.props.loaded)} of {this.getSizeWithExtension(this.props.size)}
-				</span>
-				<span className='speed'>{this.getSizeWithExtension(this.state.averageSpeed)}/s</span>
-				<span className='time'>{this.getTimeLeft()}</span>
+				{progress}
+					
+				<div className='badge-wrapper'>
+					{/*<Badge className={'status-' + elementStatus} label='i' />*/}
+					<Badge className={'status-' + elementStatus}>
+						<SvgIcon icon={this.getStatusIcon()} />
+					</Badge>
+				</div>
+
+				<div className='action-buttons'>
+					{showButton}
+					{removeButton}
+					{cancelButton}
+				</div>
 			</div>
 		)
 	}

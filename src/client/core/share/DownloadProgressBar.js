@@ -8,7 +8,7 @@ var React = require('react');
 var ChannelMixin = require('../socket/ChannelMixin');
 var TooltipMixin = require('../tooltip/TooltipMixin');
 
-var Download = require('./Download');
+var DownloadProgressBarItem = require('./DownloadProgressBarItem');
 
 var DownloadProgressBar = React.createClass({
 
@@ -42,8 +42,7 @@ var DownloadProgressBar = React.createClass({
 
 	getInitialState: function () {
 		return {
-			tooltipTargetX: 0,
-			progress: 75.5
+			tooltipTargetX: 0
 		}
 	},
 
@@ -82,7 +81,7 @@ var DownloadProgressBar = React.createClass({
 			var id = downloadIds[i];
 			var data = this.state.downloads[id];
 			
-			var download = <Download
+			var download = <DownloadProgressBarItem
 				created={data.created}
 				id={data.id}
 				loaded={data.loaded}
@@ -94,6 +93,23 @@ var DownloadProgressBar = React.createClass({
 		};
 
 		return downloads;
+	},
+
+	getAverageDownloadProgress: function () {
+		var progress = 0;
+		var downloads = this.getDownloads();
+
+		if (!downloads.length) {
+			return progress;
+		}
+
+		for (var i = 0, l = downloads.length; i < l; i++) {
+			var download = downloads[i];
+
+			progress += (download.loaded / download.size);
+		}
+
+		return (progress / downloads.length) * 100;
 	},
 
 	hasDownloads: function () {
@@ -142,14 +158,14 @@ var DownloadProgressBar = React.createClass({
 		};
 
 		return (
-			<div className='download-progress-bar' 
+			<div className={'download-progress-bar' + (this.hasDownloads() ? ' has-downloads' : '')}
 				onMouseMove={this.handleOnMouseMove}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseLeave={this.handleMouseLeave}>
 
 				<progress 
 					max='100'
-					value={this.state.progress}>
+					value={this.getAverageDownloadProgress()}>
 				</progress>
 				<div ref='tooltipTarget' className='download-tooltip-target' style={tooltipTargetStyles}></div>
 			</div>

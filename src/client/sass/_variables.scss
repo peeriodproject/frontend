@@ -23,6 +23,7 @@ $dark-background-color: #e6e6e6;
 
 $main-color: #6b6b6b;
 $dark-color: #3c3c3c;
+$h1-color: lighten($dark-color, 5%);
 $green-color: #00d97e;
 $red-color: #ff0045;
 
@@ -115,3 +116,6 @@ $search-results-squish: 3;
 $search-result-meta-background-color: #fafafa;
 $search-result-meta-color: $input-border-color;
 $search-result-border-color: $background-color;
+
+// Share
+$progress-background-color: darken($dark-background-color, 10%);

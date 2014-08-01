@@ -1,0 +1,106 @@
+.share-handler {
+	$squish: 3;
+
+	@include squish($squish);
+	@extend %clearfix;
+
+	@include nested(12 - ($squish * 2)) {
+		& > header {
+			@include span(full);
+			@include padding-leader(3);
+			@extend %clearfix;
+			
+			h1 {
+				@include span(3);
+				color: $h1-color;
+			}
+
+			.download-destination-button {
+				@include span(3 last);
+				//@include padding-leader(0.2);
+
+				button {
+					@include span(full);
+
+					@include icon("arrows-plus");
+				}
+
+				a {
+					@include icon-button;
+					@extend button.btn;
+
+					@include rhythm-borders($button-border-width, 0.5, $base-font-size, solid);
+					@include transition(background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease);
+
+					display: block;
+					text-align: center;
+					
+					background-color: $button-background-color;
+					border-color: $button-border-color;
+
+					&:hover,
+					&:focus {
+						background-color: $background-color-hover;
+						border-color: $dark-color;
+					}
+
+					&.error {
+						border-color: $red-color;
+						color: $red-color;
+					}
+
+					&.solved {
+						border-color: $green-color;
+						color: $green-color;
+					}
+				}
+			}
+		}
+		
+		section {
+			@include span(full);
+			@include padding-leader(1.5);
+
+			header {
+				@include span(full);
+				@include padding-trailer(0.5);
+			}
+
+			& + section {
+				@include margin-leader(1);
+			}
+		}
+
+		.section-buttons {
+			@include span(2 last);
+
+			text-align: right;
+
+			.icon-btn {
+				@include icon-button($icon-color-light);
+				@include gutters(3);
+		
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+
+		h2 {
+			@include span(4);
+
+			color: $dark-color;
+		}
+
+		.download-list,
+		.upload-list {
+			li {
+				@extend %clearfix;
+				
+				& + li {
+					@include margin-leader(1.5);
+				}
+			}
+		}
+	}
+}

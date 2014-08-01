@@ -1,123 +1,29 @@
 .folder {
-	$width: 6;
-	$bleed-left: gutter($width);
-	$padding-top-bottom: 0.5;
 	$refresh-rotation-degree: 360deg;
 
-	@include span(full);
-	@include padding-trailer($padding-top-bottom);
-	@include padding-leader($padding-top-bottom);
-	@include box-sizing(content-box);
-	@include transition(background-color 0.15s ease);
-
-	@extend %clearfix;
-
-	position: relative;
-	background-color: $background-color;
-	border-radius: $border-radius;
-
-	margin-left: -$bleed-left;
-	padding-left: $bleed-left;
-
-	/*&> i {
-		@include span(1);
-		@include adjust-font-size-to(28px);
-		
-		padding-top: rhythm(0.75);
-		//font-size: 175%;
-		//width: span(1);
-		text-align: center;
-
-		&.status-active {
-			@include icon("elaboration-folder-check");
-		}
-
-		&.status-invalid {
-			@include icon("elaboration-briefcase-remove");
-		}
-	}*/
-
-	&:hover {
-		background-color: $background-color-hover;
-
-		.action-buttons {
-			opacity: 1;
-		}
+	@extend %listItem;
+	
+	& + .folder {
+		@include margin-leader(1.5);
 	}
-
-	&:hover .action-buttons {
-		opacity: 1;
-	}
-
-	h2 {
-		color: $dark-color;
-	}
-
+	
 	.path {
 		@include span(10);
 	}
 
-	.badge-wrapper {
-		@include span(2 last);
-
-		text-align: right;
-		padding-right: gutter($width);
-	}
-
-	& + .folder {
-		@include margin-leader(1.5);
-	}
-
-	.action-buttons {
-		@include span(1.5 of $width last);
-		//@include gutters($width inside);
-		@include transition(background-color 0.25s ease, opacity 0.25s ease);
-
-		position: absolute;
-		right: 0;
-		top: 0;
-		height: 100%;
-		
-		padding-top: rhythm(1.75);
-		padding-left: gutter($width);
-		padding-right: gutter($width);
-
-		opacity: 0.01;
-		text-align: right;
-
-		$gradient-color: $background-color-hover;
-		@include linear-gradient(-90deg, rgba($gradient-color, 1) 0%, rgba($gradient-color, 1) 4em, rgba($gradient-color, 0) 100%, $fallback: rgba(0,0,0,0));
-		//background-color: $background-color-hover;
-
-		.icon-btn {
-			@include icon-button($icon-color-light);
-			@include gutters(2);
-	
-			&:last-child {
-				margin-right: 0;
-
-				/*.icon-bin svg {
-					margin-right: -0.25em;
-				}*/
-			}
-
-			&.refreshing .icon-sync use {
-				@include transition(transform 0.5s ease);
-				@include transform(rotate($refresh-rotation-degree));
-			}
-
-			.icon-sync svg {
-				@include transform(scale(0.9));
-
-				use {
-					@include transition(none);
-					@include transform-origin(center);
-				}
-			}
+	.action-buttons .icon-btn {
+		&.refreshing .icon-sync use {
+			@include transition(transform 0.5s ease);
+			@include transform(rotate($refresh-rotation-degree));
 		}
 
-		.remove {
-			//@include icon("basic-trashcan");
+		.icon-sync svg {
+			@include transform(scale(0.9));
+
+			use {
+				@include transition(none);
+				@include transform-origin(center);
+			}
 		}
-	}
+	}	
 }

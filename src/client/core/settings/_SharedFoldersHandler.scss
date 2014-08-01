@@ -9,10 +9,12 @@
 			@include span(full);
 			@include padding-leader(3);
 			@include margin-trailer(2);
+
+			@extend %clearfix;
 			
 			h1 {
 				@include span(4);
-				color: $dark-color;
+				color: $h1-color;
 			}
 
 			.add-folder-button {

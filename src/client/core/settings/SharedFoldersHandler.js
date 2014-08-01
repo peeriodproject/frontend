@@ -43,7 +43,9 @@ var SharedFoldersHandler = React.createClass({
 		});
 	},
 
-	updateFolderdropzoneChannelState: function (paths) {
+	updateFolderdropzoneChannelState: function (state) {
+		var paths = state.sharedFolders || [];
+
 		if (paths.length) {
 			for (var i = 0, l = paths.length; i < l; i++) {
 				this.folderChannel.send('addFolder', paths[i]);
@@ -59,7 +61,7 @@ var SharedFoldersHandler = React.createClass({
 	handleAddFolderButtonClick: function (event) {
 		event.preventDefault();
 
-		this.folderdropzoneChannel.send('open', this._background);
+		this.folderdropzoneChannel.send('open', 'sharedFolders');
 		//this.emitDialogOpen('addFolderDialog');
 	},
 
@@ -76,7 +78,7 @@ var SharedFoldersHandler = React.createClass({
 		this.folderChannel.send('showFolder', path);
 	},
 
-	onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
+	/*onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
 		// the background isn't added to the state as we're just piping it to the dropzone!
 		this.folderdropzoneChannel.send('background', {
 			background: background,
@@ -84,7 +86,7 @@ var SharedFoldersHandler = React.createClass({
 			inverted: inverted,
 			invertedBackgroundColor: invertedBackgroundColor
 		});
-	},
+	},*/
 
 	render: function() {
 		var folders = {};

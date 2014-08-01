@@ -8,6 +8,7 @@
 @import "compass/typography/vertical_rhythm";
 
 @import "variables";
+@import "animations";
 @import "mixins";
 @import "grids";
 @import "rhythm";
@@ -20,6 +21,9 @@
 
 @import "../core/dialog/DialogHandler";
 //@import "../core/dialog/AddFolderDialog";
+
+@import "../core/element/ListItem";
+@import "../core/element/errorTour";
 
 @import "../core/element/Button";
 @import "../core/element/Badge";
@@ -59,14 +63,17 @@ body {
 	@import "../core/menu/MenuButton";
 
 	@import "../core/search/SearchForm";
-	@import "../core/settings/Folder";
-	@import "../core/settings/SharedFoldersHandler";
 	@import "../core/search/SearchHeader";
 	@import "../core/search/SearchHandler";
 	@import "../core/search/SearchResults";
 
+	@import "../core/settings/Folder";
+	@import "../core/settings/SharedFoldersHandler";
+
 	@import "../core/share/Download";
 	@import "../core/share/DownloadProgressBar";
+	@import "../core/share/Upload";
+	@import "../core/share/ShareHandler";
 
 	@import "../core/page/ConnectionFailedPage";
 

@@ -25,7 +25,12 @@ var Badge = React.createClass({
 	},*/
 
 	getLabel: function () {
-		return this.props.label && isNaN(this.props.label) ? this.i18n(this.props.label) : this.props.label;
+		if (this.props.children) {
+			return this.props.children;
+		}
+		else {
+			return this.props.label && isNaN(this.props.label) ? this.i18n(this.props.label) : this.props.label;
+		}
 	},
 
 	render: function (argument) {

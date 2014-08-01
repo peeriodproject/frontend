@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var Link = require('react-router-component').Link;
+
 var Badge = require('../element/Badge');
 var Path = require('../element/Path');
 var IconButton = require('../element/IconButton');
@@ -15,7 +15,9 @@ var Folder = React.createClass({
 
 	_refreshTimeout: null,
 
-	mixins: [I18nMixin],
+	mixins: [
+		I18nMixin
+	],
 
 	getDefaultProps: function () {
 		return {
@@ -35,24 +37,8 @@ var Folder = React.createClass({
 
 	getInitialState: function () {
 		return {
-			actionButtonHoverClassName: '',
-			hoverClassName: '',
 			refreshClassName: ''
 		};
-	},
-
-	onMouseEnter: function () {
-		this.setState({
-			hoverClassName: '',
-			actionButtonHoverClassName: ''
-		});
-	},
-
-	onMouseLeave: function () {
-		this.setState({
-			hoverClassName: '',
-			actionButtonHoverClassName: ''
-		});
 	},
 
 	removeFolder: function (e) {
@@ -98,15 +84,15 @@ var Folder = React.createClass({
 		}
 
 		return (
-			<div className={'folder' + this.state.hoverClassName} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-				<h2>{this.props.name}</h2>
+			<div className='folder'>
+				<h3>{this.props.name}</h3>
 				<Path path={this.props.path} />
 					
 				<div className='badge-wrapper'>
 					<Badge label={this.props.items} className={'status-' + this.props.status} />
 				</div>
 
-				<div className={'action-buttons' + this.state.actionButtonHoverClassName}>
+				<div className='action-buttons'>
 					{showButton}
 					{refreshButton}
 					<IconButton icon='bin' onClick={this.removeFolder} tooltipContent={this.i18n('folder_removeButton_tooltipContent')} />

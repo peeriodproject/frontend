@@ -1,0 +1,31 @@
+.upload {
+	$onePixel: (1 / strip-units($base-font-size)) * 1rem;
+	
+	@extend %listItem;
+
+	position: relative;
+	overflow: hidden;
+
+	.progress {
+		$height: $onePixel * 5;
+
+		$firstColor: rgba($green-color, 0.75);
+		$secondColor: transparent; //desaturate($green-color, 45%);
+		//$foo: $progress-background-color;
+
+		@include linear-gradient(45deg, $firstColor 25%, $secondColor 25%, $secondColor 50%, $firstColor 50%, $firstColor 75%, $secondColor 75%, $secondColor);
+		background-color: transparent;
+
+		@include animation(uploadProgress 0.25s linear infinite);
+
+		background-size: 1rem 1rem;
+
+		display: block;
+		width: 100%;
+		height: $height;
+		position: absolute;
+		z-index: 100;
+		bottom: 0;
+		left: 0;
+	}
+}

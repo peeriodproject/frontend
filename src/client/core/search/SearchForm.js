@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react');
+var Router = require('react-router-component');
 var Link = require('react-router-component').Link;
 
 var ChannelMixin = require('../socket/ChannelMixin');
@@ -104,6 +105,8 @@ var SearchForm = React.createClass({
 		});
 
 		this.searchChannel.send('addQuery', this.state.inputValue);
+
+		Router.navigate('/search');
 
 		console.log('starting search for:', this.state.inputValue);
 	},

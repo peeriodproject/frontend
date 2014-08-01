@@ -1,0 +1,60 @@
+.download {
+	$onePixel: (1 / strip-units($base-font-size)) * 1rem;
+	
+	@extend %listItem;
+
+	position: relative;
+	overflow: hidden;
+
+	.status-description {
+		@include span(10);
+		@include transition(color 0.15s ease);
+
+		&.invalid {
+			color: $red-color;
+		}
+
+		span {
+			&.speed {
+				&:before {
+					content: " (";
+				}
+
+				&:after {
+					content: ")";
+				}
+			}
+
+			&.time {
+				&:before {
+					content: " – ";
+				}
+			}
+		}
+	}
+
+	progress[value] {
+		$height: $onePixel * 5;
+
+		-webkit-appearance: none;
+		appearance: none;
+		display: block;
+		width: 100%;
+		height: $height;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+
+		border-radius: $border-radius;
+
+		&::-webkit-progress-bar {
+			background-color: $progress-background-color;
+		}
+
+		&::-webkit-progress-value {
+			@include linear-gradient(to right, mix($progress-background-color, $green-color, 20%), $green-color);
+			background-color: $green-color;
+		}
+	}
+
+}

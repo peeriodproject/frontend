@@ -10,7 +10,12 @@ var Link = require('react-router-component').Link;
 var events = require('../events/EventEmitterMixin');
 
 var Download = require('./Download');
+var DownloadDestination = require('./DownloadDestination');
+
+var Upload = require('./Upload');
+
 //var Button = require('../element/Button');
+var IconButton = require('../element/IconButton');
 var SvgIcon = require('../element/SvgIcon');
 
 var ChannelMixin = require('../socket/ChannelMixin');
@@ -34,17 +39,19 @@ var SharedFoldersHandler = React.createClass({
 	],
 	
 	initialChannelsState: { 
-		folders: []
+		destination: {
+			error: null,
+			path: ''
+		}
 	},
 
 	updateShareChannelState: function (state) {
-		console.log('share state', state);
-		/*this.setState({
-			folders: state
-		});*/
+		this.setState(state);
 	},
 
-	updateFolderdropzoneChannelState: function (paths) {
+	updateFolderdropzoneChannelState: function (state) {
+		var paths = state.downloadDestination || [];
+
 		if (paths.length) {
 			this.shareChannel.send('updateDownloadDestination', paths[0]);
 		}
@@ -55,11 +62,19 @@ var SharedFoldersHandler = React.createClass({
 		console.warn(state);		
 	},
 
-	handleDownloadDestionationButtonClick: function (event) {
+	handleDownloadDestinationButtonClick: function (event) {
 		event.preventDefault();
 
-		this.folderdropzoneChannel.send('open', this._background);
+		this.folderdropzoneChannel.send('open', 'downloadDestination');
 		//this.emitDialogOpen('addFolderDialog');
+	},
+
+	showDownloads: function () {
+		console.log('todo: show downloads folder');
+	},
+
+	removeDownloads: function () {
+		console.log('todo: clean up the downloads list / iteration over downloads and send removeFolder down the wire');
 	},
 
 	/*removeFolder: function (path) {
@@ -86,27 +101,49 @@ var SharedFoldersHandler = React.createClass({
 	},*/
 
 	render: function() {
-		var folders = {};
+		var downloads = {};
 
-		if (this.state.folders && this.state.folders.length) {
+		/*if (this.state.downloads && this.state.folders.length) {
 			for (var i in this.state.folders) {
 				var folder = this.state.folders[i];
 				folders[folder.path] = <Folder onRemove={this.removeFolder} onRefresh={this.refreshFolder} onShow={this.showFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
 			}
-		}
+		}*/
 
 		return (
 			<section className='share-handler'>
 				<header>
 					<h1>{this.i18n('settings_share_title')}</h1>
-					<div className='download-destionation-button'>
-						<a href='#' ref='downloadDestinationButton' onClick={this.handleDownloadDestionationButtonClick}>
-							<SvgIcon icon='plus' /> {this.i18n('settings_share_downloadDestionationButton_label')}
-						</a>
-					</div>
+					<DownloadDestination 
+						error={this.state.destination.error}
+						path={this.state.destination.path}
+						onDestinationButtonClick={this.handleDownloadDestinationButtonClick} />
 				</header>
-				
-				{folders}
+
+				<section>
+					<header>
+						<h2>{this.i18n('settings_share_downloads_title')}</h2>
+						<div className='section-buttons'>
+							<IconButton icon='view' onClick={this.showDownloads} tooltipContent={this.i18n('settings_share_downloads_showButton_tooltipContent')} />
+							<IconButton icon='bin' onClick={this.removeDownloads} tooltipContent={this.i18n('settings_share_download_removeButton_tooltipContent')} />
+						</div>
+					</header>
+
+					<ul className='download-list'>
+						<li><Download id='123abc' name='Filename.txt' created={new Date().getTime()} loaded={456789} size={897867} status='FS_ERROR' /></li>
+						<li><Download id='abc123' name='Filename.txt' created={new Date().getTime()} loaded={456789} size={897867} status='TRANSFER_STARTED' /></li>
+					</ul>
+				</section>
+
+				<section>
+					<header>
+						<h2>{this.i18n('settings_share_uploads_title')}</h2>
+					</header>
+
+					<ul className='upload-list'>
+						<li><Upload id='321cba' name='Filename.txt' path='/path/to/file.txt' status='UPLOAD_STARTED' /></li>
+					</ul>
+				</section>
 			</section>
 		)
 	}

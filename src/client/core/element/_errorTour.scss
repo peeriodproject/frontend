@@ -1,0 +1,148 @@
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+
+@import "../../../../bower_components/tether/sass/mixins/pointer-events";
+
+// Bring in base shepherd styles come from a tether helpers
+
+@import "../../../../bower_components/tether/sass/helpers/tether";
+@import "../../../../bower_components/tether/sass/helpers/tether-theme-arrows";
+
+$themePrefix: "shepherd";
+$arrowSize: 8px;
+$errorBackgroundColor: $red-color;
+$successBackgroundColor: $green-color;
+$errorColor: $dark-background-color;
+$successColor: #fff;
+$useDropShadow: false;
+
+$headerBackgroundColor: #eeeeee;
+
+@include tether($themePrefix: $themePrefix);
+
+@include tether-theme-arrows($themePrefix: $themePrefix, $themeName: "error", $arrowSize: $arrowSize, $backgroundColor: $errorBackgroundColor, $color: $errorColor, $useDropShadow: $useDropShadow);
+@include tether-theme-arrows($themePrefix: $themePrefix, $themeName: "success", $arrowSize: $arrowSize, $backgroundColor: $successBackgroundColor, $color: $successColor, $useDropShadow: $useDropShadow);
+
+// Shepherd specific styles
+
+.#{$themePrefix}-element.#{$themePrefix}-theme-error,
+.#{$themePrefix}-element.#{$themePrefix}-theme-success {
+	@include transition(visibility 0s 0.15s, opacity 15s ease);
+
+	display: block;
+	visibility: hidden;
+	opacity: 0;
+
+	&.#{$themePrefix}-open {
+		@include transition(opacity 0.15s ease);
+
+		visibility: visible;
+		opacity: 1;
+	}
+	
+	// Make the arrow 5color the same as the header color when the arrow is on the top
+	&.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-center, &.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-right.#{$themePrefix}-target-attached-bottom, &.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-left.#{$themePrefix}-target-attached-bottom {
+		&.#{$themePrefix}-has-title .#{$themePrefix}-content:before {
+			border-bottom-color: $headerBackgroundColor;
+		}
+	}
+
+	&.#{$themePrefix}-has-title .#{$themePrefix}-content header {
+		@include padding-leader(0.5);
+		@include padding-trailer(0.25);
+
+		@include gutters(2rem inside);
+		//background: $headerBackgroundColor;
+		//padding: 1em;
+		
+		a.shepherd-cancel-link {
+			padding: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	&.#{$themePrefix}-has-cancel-link .#{$themePrefix}-content header h3 {
+		float: left;
+	}
+
+	.#{$themePrefix}-content {
+		padding: 0;
+		max-width: 21em;
+
+		header {
+			@extend %clearfix;
+			//@include border-radius($border-radius $border-radius 0 0);
+			
+			h3 {
+				@include adjust-font-size-to(23px);
+
+				overflow: hidden;
+
+				/*margin: 0;
+				line-height: 1;
+				font-weight: normal;*/
+			}
+			
+			a.shepherd-cancel-link {
+				float: right;
+				text-decoration: none;
+				font-size: 1.25em;
+				line-height: 0.8em;
+				font-weight: normal;
+				color: rgba(0, 0, 0, 0.5);
+				opacity: 0.25;
+				position: relative;
+				top: 0.1em;
+				padding: 0.8em;
+				margin-bottom: -0.8em;
+				
+				&:hover {
+					opacity: 1;
+				}
+			}
+		}
+		.#{$themePrefix}-text {
+			@include padding-trailer(0.5);
+			@include gutters(2rem inside);
+			//padding: 0.5em 1em;
+			
+			p {
+				margin: 0 0 0.5em 0;
+				line-height: 1.3em;
+
+				overflow: hidden;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+		footer {
+			//padding: 0 1em 1em;
+			
+			.#{$themePrefix}-buttons {
+				text-align: right;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+
+				li {
+					display: inline;
+					padding: 0;
+					margin: 0;
+
+					.shepherd-button {
+						@include inline-block;
+						cursor: pointer;
+						margin: 0 0.5em 0 0;
+						text-decoration: none;
+					}
+
+					&:last-child .shepherd-button {
+						margin-right: 0;
+					}
+				}
+			}
+		}
+	}
+}

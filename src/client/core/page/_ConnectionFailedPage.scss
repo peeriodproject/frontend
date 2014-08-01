@@ -28,6 +28,19 @@
 		}
 	}
 
+	.app-icon {
+		$dim: 128px;
+
+		@include padding-trailer(1.5);
+		@include box-sizing(content-box);
+
+		height: $dim;
+		width: $dim;
+		margin: 0 auto;
+
+		opacity: 0.2;
+	}
+
 	a.btn {
 		border-color: $green-color;
 

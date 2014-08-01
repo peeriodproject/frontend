@@ -12,17 +12,16 @@ window.App = {
 	_windowLoaded: false,
 	_connected: false,
 	_maxReconnectAttempts: 1,
+	_backendUrl: 'http://localhost:7474/',
 
 	connect: function (attempts) {
 		attempts = attempts || 0;
-
-		console.log('Trying to connect to the backend...');
 
 		try {
 			attempts++;
 
 			// make socket available to components
-			var socket = new Primus('http://localhost:7474/');
+			var socket = new Primus(this._backendUrl);
 
 			socket.on('reconnect', function () {
 				console.log('Reconnect attempt started');
@@ -69,7 +68,7 @@ window.App = {
 	},
 
 	connectionFailed: function () {
-		React.renderComponent(ConnectionFailedPage(), document.getElementById('page'));
+		React.renderComponent(ConnectionFailedPage({ url: this._backendUrl, onReconnect: this.start() }), document.getElementById('page'));
 	}
 
 

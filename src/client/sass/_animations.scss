@@ -1,0 +1,17 @@
+@include keyframes(uploadProgress) {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 0 1rem;
+	}
+}
+
+@include keyframes(spin) {
+    0% {
+        @include transform(rotate(0deg));
+    }
+    100% {
+        @include transform(rotate(359deg));
+    }
+}

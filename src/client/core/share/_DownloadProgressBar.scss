@@ -14,7 +14,7 @@ $onePixel: (1 / strip-units($base-font-size)) * 1rem;
 	
 	z-index: 100;
 
-	&:hover {
+	&.has-downloads:hover {
 		progress[value] {
 			@include transition(margin 0.25s $hoverDelay ease, height 0.25s $hoverDelay ease);
 
