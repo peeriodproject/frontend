@@ -26,7 +26,7 @@
 		.download-progress-bar {
 			@include transition(none);
 		}
-		
+
 	}
 
 	&:not(.route-search).route-index {
@@ -34,13 +34,14 @@
 
 		height: 100%;
 		background-color: $background-color;
-		
+
 		.animation-helper {
 			@include transition-property(none);
 
-			top: rhythm(-$search-form-height);
+			top: 0;
 			opacity: 1;
 			height: 50%;
+			padding-top: rhythm($search-form-padding);
 		}
 
 		.download-progress-bar {
@@ -50,15 +51,18 @@
 	}
 
 	.animation-helper {
-		@include transition(opacity $duration $timing ($duration + $delay), height $duration $timing $delay);
+		@include transition(opacity $duration $timing ($duration + $delay), height $duration $timing $delay, padding $duration $timing $delay);
+		@include box-sizing(content-box);
 
 		position: absolute;
 		top: 0;
 		left: 0;
 		height: 0;
+		padding: 0;
 		width: 100%;
 		opacity: 0;
 		background-color: $background-color;
+		z-index: 400;
 	}
 
 	.download-progress-bar {

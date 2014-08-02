@@ -68,7 +68,7 @@ var SearchHeader = React.createClass({
 				</SearchForm>
 
 				<DownloadProgressBar />
-				<Menu>
+				<Menu locationClassName={this.state.locationClassName}>
 					<AppStatusMenuItem />
 					<SharedFolderMenuItem />
 					<DownloadsMenuItem />

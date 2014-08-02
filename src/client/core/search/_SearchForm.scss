@@ -3,7 +3,7 @@
 	@include padding-leader($search-form-padding);
 	@include padding-trailer($search-form-padding);
 
-	@include transition-property (padding, top, margin);
+	@include transition-property (padding, top, margin, max-height);
 	@include transition-duration($search-form-index-transition-duration);
 	@include transition-timing-function($search-form-index-transition-timing-function);
 	@include transition-delay($search-form-index-transition-delay);
@@ -28,6 +28,7 @@
 		//margin-top: rhythm(-$search-form-height / 3 * 2);
 		margin-top: rhythm(-$search-form-height);
 		margin-bottom: rhythm(-$search-form-height);
+		max-height: rhythm($search-form-height + $search-form-padding);
 
 		.logo-wrapper .logo {
 			@include transition(none);
@@ -53,10 +54,10 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-		z-index: 100;
+		z-index: 500;
 
-		//border-bottom: 1px solid;
 		background-color: rgba($background-color, 0.9);
+		max-height: rhythm($search-form-height + ($search-form-padding * 2));
 
 
 
@@ -81,9 +82,18 @@
 				//border-radius: 10px;
 
 				img {
+					@include transition(opacity 0.15s ease);
+
 					display: block;
 					min-width: 100%;
 					max-width: 100%;
+
+					opacity: 0.45;
+
+					&:hover,
+					&:focus {
+						opacity: 1;
+					}
 				}
 			}
 

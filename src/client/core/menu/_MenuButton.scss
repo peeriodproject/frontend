@@ -4,7 +4,7 @@
 	position: fixed;
 	top: rhythm($search-form-padding + (($search-form-height - $button-height) / 2));
 	right: 0;
-	z-index: 200;
+	z-index: 600;
 
 	padding-right: span(0.5 wide);
 

@@ -1,0 +1,49 @@
+.menu.route-index {
+	$button-height: 2;
+	$button-top: rhythm($search-form-padding + (($search-form-height - $button-height) / 2));
+	$button-h: rhythm($button-height);
+
+	@include transition(max-height 0.25s ease);
+	@extend %clearfix;
+
+	position: fixed;
+	top: $button-top + $button-h;
+	right: span(0.5 wide);
+
+	z-index: 700;
+
+	max-height: 0;
+
+	&.is-open {
+		max-height: rhythm(15);
+	}
+
+	&:not(.is-open) nav {
+		opacity: 0;
+
+		& > ul {
+			margin-top: -10%;
+			padding-bottom: 10%;
+			opacity: 0;
+		}
+	}
+
+	nav {
+		@include transition(opacity 0.15s ease);
+		@extend %clearfix;
+
+		$duration: 0.15s;
+
+		@include arrow-lazy($direction: top, $size: 0.5rem, $color: $menu-background-color, $center: 95%, $margin: 0, $pseudo: before);
+
+		background: $menu-background-color;
+		border-radius: $button-border-radius;
+		color: $menu-color;
+		margin-top: 1rem;
+		opacity: 1;
+
+		&> ul {
+			@include transition(padding $duration ease, margin $duration ease, opacity $duration ease);
+		}
+	}
+}

@@ -18,7 +18,8 @@ var Menu = React.createClass({
 
 	getInitialState: function () {
 		return {
-			isOpen: false
+			isOpen: false,
+			locationClassName: ''
 		};
 	},
 
@@ -44,7 +45,7 @@ var Menu = React.createClass({
 		var isOpenClassName = this.state.isOpen ? ' is-open' : '';
 
 		return (
-			<section className={'menu' + isOpenClassName}>
+			<section className={'menu' + isOpenClassName + this.props.locationClassName}>
 				<nav>
 					<ul>
 						{this.props.children}

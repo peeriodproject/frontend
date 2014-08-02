@@ -1,4 +1,8 @@
 .menu {
+	overflow: hidden;
+}
+
+.menu:not(.route-index) {
 	$squish: 1;
 	$item-width: 4;
 	$content-width: 3.5;
@@ -10,7 +14,6 @@
 	top: rhythm($search-form-padding * 2 + $search-form-height);
 	left: 0;
 	width: 100%;
-	overflow: hidden;
 
 	z-index: 50;
 
@@ -18,6 +21,9 @@
 	color: $menu-color;
 
 	max-height: 0;
+
+	background: $menu-background-color;
+	color: $menu-color;
 
 	&.is-open {
 		max-height: rhythm(15);

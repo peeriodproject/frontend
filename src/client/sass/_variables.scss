@@ -81,9 +81,9 @@ $badge-font-size: $base-font-size * (14 / strip-units($base-font-size));
 $search-form-squish: 2;
 $search-form-height: 3;
 $search-form-padding: 2;
-$search-form-index-transition-duration: 0.5s;
+$search-form-index-transition-duration: 0.55s;
 $search-form-index-transition-timing-function: ease-in;
-$search-form-index-transition-delay: 1s;
+$search-form-index-transition-delay: 0.45s;
 
 
 // SearchHeader
