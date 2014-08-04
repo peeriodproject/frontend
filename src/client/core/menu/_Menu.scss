@@ -1,5 +1,31 @@
 .menu {
 	overflow: hidden;
+	$icons-fill-color: lighten($menu-buttons-color, 10%);
+
+	li {
+		cursor: pointer;
+
+		&:hover {
+			span.icon svg:not(.current) use {
+				fill: $icons-fill-color;
+			}
+		}
+	}
+
+	span.icon {
+		svg {
+			&.current use {
+				//fill: lighten($menu-buttons-color, 30%);
+				fill: $green-color;
+			}
+
+			use {
+				@include transition(fill 0.15s ease);
+
+				fill: mix($icons-fill-color, $menu-buttons-color);
+			}
+		}
+	}
 }
 
 .menu:not(.route-index) {
@@ -54,6 +80,12 @@
 			li {
 				@include gallery($item-width of 12);
 
+				&:hover {
+					a {
+						color: $green-color;
+					}
+				}
+
 				position: relative;
 				overflow: hidden;
 
@@ -81,14 +113,6 @@
 							left: (100% - $icon-dim) / 2;
 
 							@include transform(none);
-
-							&.current use {
-								fill: lighten($menu-buttons-color, 30%);
-							}
-
-							use {
-								fill: $menu-buttons-color;
-							}
 						}
 					}
 

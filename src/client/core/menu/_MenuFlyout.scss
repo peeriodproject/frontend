@@ -20,21 +20,30 @@
 
 	&:not(.is-open) nav {
 		opacity: 0;
+		margin-top: 0.5rem;
 
 		& > ul {
-			margin-top: -10%;
-			padding-bottom: 10%;
+			margin-top: -0.5rem;
+			padding-bottom: -0.5rem;
 			opacity: 0;
 		}
 	}
 
 	nav {
-		@include transition(opacity 0.15s ease);
+		@include transition(opacity 0.15s ease, margin 0.15s ease-in-out);
+		@include padding-leader(1);
+		@include padding-trailer(1);
+
 		@extend %clearfix;
 
 		$duration: 0.15s;
 
 		@include arrow-lazy($direction: top, $size: 0.5rem, $color: $menu-background-color, $center: 95%, $margin: 0, $pseudo: before);
+		
+		&:before {
+			left: auto;
+			right: 1rem;
+		}
 
 		background: $menu-background-color;
 		border-radius: $button-border-radius;
@@ -44,6 +53,58 @@
 
 		&> ul {
 			@include transition(padding $duration ease, margin $duration ease, opacity $duration ease);
+
+			padding-left: 1rem;
+			padding-right: 1rem;
 		}
+
+		li {
+			@include padding-trailer(0.5);
+
+			&:last-child {
+				padding-bottom: 0;
+			}
+
+			&:hover {
+				h2 {
+					color: $green-color;
+				}
+			}
+
+			position: relative;
+
+			h2 {
+				@include adjust-font-size-to($base-font-size);
+				@include transition(color 0.15s ease);
+
+				position: relative;
+				padding-left: 2.5rem;
+				color: $menu-heading-color;
+
+				z-index: 720;
+			}
+
+			.icon {
+				position: absolute;
+				top: 0;
+				z-index: 710;
+
+				width: 1.5rem;
+				height: 1.5rem;
+				float: left;
+
+				svg {
+					position: absolute;
+				}
+			}
+
+			& > div {
+				display: none;
+			}
+		}
+	}
+
+	.menu-buttons {
+		display: none;
 	}
 }
