@@ -21,5 +21,15 @@
 		}
 	},
 
+	"background": {
+		"scripts": [
+			"background/background.js"
+		]
+	},
+
+	"permissions": [
+		"contextMenus"
+	],
+
 	"content_security_policy": "script-src 'self' http://localhost:7474 http://localhost:3000 http://localhost:3001; object-src 'self'"
 }

@@ -30,8 +30,18 @@ module.exports = function (grunt) {
             }
         },
         watch     : {
-            files: ['./src/**/*.js'],
-            tasks: ['browserify:app']
+            client: {
+                files: ['./src/client/**/*.js'],
+                tasks: ['browserify:app']
+            },
+            background: {
+                files: ['./src/background/*'],
+                tasks: [
+                    'clean:background',
+                    //'copy:background',
+                    'uglify:background'
+                ]
+            }
         },
         copy      : {
             fonts   : {
@@ -70,7 +80,12 @@ module.exports = function (grunt) {
                         return content.replace('{{ svgIcons }}', fs.readFileSync('./src/icons/svg_output/icons.svg', 'utf8'));
                     }
                 }
-            }
+            }/*,
+            background: {
+                notnull: true,
+                src: ['src/background/background.html'],
+                dest: 'build/background/background.html'
+            }*/
         },
         compass: {
             dist: {
@@ -98,15 +113,24 @@ module.exports = function (grunt) {
                         './bower_components/drop/drop.js',
                         './bower_components/tether-tooltip/js/tooltip.js',
                         './bower_components/shepherd.js/js/shepherd.js',
-                        './bower_components/headroom.js/dist/headroom.js'                        
+                        './bower_components/headroom.js/dist/headroom.js',
+                        './bower_components/html2canvas/build/html2canvas.js'
                         //'./bower_components/select/js/select.js',
                         //'./bower_components/d3/d3.js'
+                    ]
+                }
+            },
+            background: {
+                files: {
+                    'build/background/background.js': [
+                        'src/background/background.js'
                     ]
                 }
             }
         },
         clean: {
-            build: ['build/assets'],
+            assets: ['build/assets'],
+            background: ['build/background'],
             icons: [   
                 'src/icons/svg_compressed',
                 'src/icons/svg_output'
@@ -180,14 +204,17 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'svgicons',
-        'clean:build',
+        'clean:assets',
+        'clean:background',
         'browserify:app',
         'copy:fonts',
         'copy:icons',
         'copy:locales',
         'copy:manifest',
+        //'copy:background',
         'compass:dist',
         'uglify:libraries',
+        'uglify:background',
         'cssmin:libraries',
         //'jsdoc'
     ]);

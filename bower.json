@@ -23,5 +23,8 @@
     "select": "~0.5.2",
     "tether": "~0.6.5",
     "shepherd.js": "~0.5.1"
+  },
+  "dependencies": {
+    "html2canvas": "~0.4.1",
   }
 }
