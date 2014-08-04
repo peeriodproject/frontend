@@ -8,6 +8,8 @@ var React = require('react');
 var ChannelMixin = require('../socket/ChannelMixin');
 var TooltipMixin = require('../tooltip/TooltipMixin');
 
+var events = require('../events/EventEmitterMixin');
+
 var DownloadProgressBarItem = require('./DownloadProgressBarItem');
 
 var DownloadProgressBar = React.createClass({
@@ -16,7 +18,8 @@ var DownloadProgressBar = React.createClass({
 
 	mixins: [
 		ChannelMixin,
-		TooltipMixin
+		TooltipMixin,
+		events.mixinFor('averageDownloadProgress')
 	],
 
 	channelNames: [
@@ -42,12 +45,23 @@ var DownloadProgressBar = React.createClass({
 
 	getInitialState: function () {
 		return {
-			tooltipTargetX: 0
+			tooltipTargetX: 0,
+			averageDownloadProgress: 0
 		}
+	},
+
+	componentWillUpdate: function () {
+
 	},
 
 	updateShareChannelState: function (state) {
 		console.log('share state', state);
+
+		state.downloads = this.getRelevantDownloadsFromState(state);
+		state.averageDownloadProgress = this.getAverageDownloadProgress(state);
+
+		this.emitAverageDownloadProgress(state.averageDownloadProgress);
+
 		this.setState(state);
 	},
 
@@ -58,29 +72,41 @@ var DownloadProgressBar = React.createClass({
 	getTooltipContent: function () {
 		return (
 			<div className='download-progress-bar-tooltip'>
-				{/*<header>
-					<h2>{i} Downloads</h2>
-					<span>10 minutes remaining</span>
-				</header>*/}
 				<ul>
 					{this.getDownloads()}
 				</ul>
 			</div>);
 	},
 
-	getDownloads: function () {
+	getRelevantDownloadsFromState: function (state) {
 		var downloads = [];
-		var downloadIds = Object.keys(this.state.downloads);
+		var downloadIds = Object.keys(state.downloads);
 		var downloadLength = downloadIds.length;
 
 		if (!downloadLength) {
 			return downloads;
 		}
-		
+
 		for (var i = 0; i < downloadLength; i++) {
 			var id = downloadIds[i];
-			var data = this.state.downloads[id];
+			var data = state.downloads[id];
 			
+			if (['CREATED', 'REQUESTING_FILE', 'TRANSFER_STARTED'].indexOf(data.status) === -1) {
+				continue;
+			}
+
+			downloads.push(data);
+		}
+
+		return downloads;
+	},
+
+	getDownloads: function () {
+		var downloads = [];
+		
+		for (var i = 0; i < this.state.downloads.length; i++) {
+			var data = this.state.downloads[i];
+
 			var download = <DownloadProgressBarItem
 				created={data.created}
 				id={data.id}
@@ -89,31 +115,32 @@ var DownloadProgressBar = React.createClass({
 				size={data.size}
 				status={data.status} />;
 
-			downloads.push(<li key={id}>{download}</li>);
+			downloads.push(<li key={data.id}>{download}</li>);
 		};
 
 		return downloads;
 	},
 
-	getAverageDownloadProgress: function () {
+	getAverageDownloadProgress: function (state) {
 		var progress = 0;
-		var downloads = this.getDownloads();
 
-		if (!downloads.length) {
+		state = state || this.state;
+		
+		if (!state.downloads.length) {
 			return progress;
 		}
 
-		for (var i = 0, l = downloads.length; i < l; i++) {
-			var download = downloads[i];
+		for (var i = 0, l = state.downloads.length; i < l; i++) {
+			var download = state.downloads[i];
 
 			progress += (download.loaded / download.size);
 		}
 
-		return (progress / downloads.length) * 100;
+		return (progress / state.downloads.length) * 100;
 	},
 
 	hasDownloads: function () {
-		return Object.keys(this.state.downloads).length ? true : false;
+		return this.state.downloads.length ? true : false;
 	},
 
 	handleOnMouseMove: function (event) {
@@ -165,7 +192,7 @@ var DownloadProgressBar = React.createClass({
 
 				<progress 
 					max='100'
-					value={this.getAverageDownloadProgress()}>
+					value={this.state.averageDownloadProgress}>
 				</progress>
 				<div ref='tooltipTarget' className='download-tooltip-target' style={tooltipTargetStyles}></div>
 			</div>

@@ -10,6 +10,10 @@
 		@include span(10);
 		@include transition(color 0.15s ease);
 
+		&.valid {
+			color: $green-color;
+		}
+
 		&.invalid {
 			color: $red-color;
 		}

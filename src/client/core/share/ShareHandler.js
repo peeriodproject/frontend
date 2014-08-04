@@ -46,6 +46,17 @@ var SharedFoldersHandler = React.createClass({
 	},
 
 	updateShareChannelState: function (state) {
+
+		if (state.uploads) {
+			for (var id in state.uploads) {
+				if (!Upload.isInStatusGroup('neutral', state.uploads[id].status)) {
+					this.removeUpload(id);
+
+					delete state.uploads[id];
+				}
+			}
+		}
+
 		this.setState(state);
 	},
 
@@ -70,18 +81,43 @@ var SharedFoldersHandler = React.createClass({
 	},
 
 	showDownloads: function () {
-		console.log('todo: show downloads folder');
+		alert('todo: open the download destination');
+	},
+
+	showDownload: function (id) {
+		alert('todo: open the download destination');
+		this.shareChannel.send('showDownload', id);
 	},
 
 	removeDownloads: function () {
-		console.log('todo: clean up the downloads list / iteration over downloads and send removeFolder down the wire');
+		if (this.state.downloads) {
+			for (var id in this.state.downloads) {
+				var status = this.state.downloads[id].status;
+
+				if (Download.isRemovableStatus(status)) {
+					this.removeDownload(id);
+				}
+			}
+		}
 	},
 
-	/*removeFolder: function (path) {
-		this.folderChannel.send('removeFolder', path);
+	removeDownload: function (id) {
+		this.shareChannel.send('removeDownload', id);
 	},
 
-	refreshFolder: function (path) {
+	removeUpload: function (id) {
+		this.shareChannel.send('removeUpload', id);
+	},
+
+	cancelDownload: function (id) {
+		this.shareChannel.send('cancelDownload', id);
+	},
+
+	cancelUpload: function (id) {
+		this.shareChannel.send('cancelUpload', id);
+	},
+
+	/*refreshFolder: function (path) {
 		// we're checking all folder paths at once.
 		this.folderChannel.send('syncFolders');
 	},
@@ -101,14 +137,70 @@ var SharedFoldersHandler = React.createClass({
 	},*/
 
 	render: function() {
-		var downloads = {};
+		var downloads = [];
+		var uploads = [];
+		var downloadListOrNotice;
+		var uploadListOrNotice;
 
-		/*if (this.state.downloads && this.state.folders.length) {
-			for (var i in this.state.folders) {
-				var folder = this.state.folders[i];
-				folders[folder.path] = <Folder onRemove={this.removeFolder} onRefresh={this.refreshFolder} onShow={this.showFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
+		if (this.state.downloads && Object.keys(this.state.downloads).length) {
+			var downloadIds = Object.keys(this.state.downloads);
+
+			for (var i = 0, l = downloadIds.length; i < l; i++) {
+				var id = downloadIds[i];
+				var data = this.state.downloads[id];
+				var download = <Download
+					created={data.created}
+					id={data.id}
+					loaded={data.loaded}
+					name={data.name}
+					size={data.size}
+					status={data.status}
+					onCancel={this.cancelDownload}
+					onRemove={this.removeDownload}
+					onShow={this.showDownload} />;
+
+				downloads.push(<li key={id}>{download}</li>);
 			}
-		}*/
+
+			downloadListOrNotice = (
+				<ul className='download-list'>
+					{downloads}
+				</ul>
+			);
+		}
+		else {
+			downloadListOrNotice = (
+				<p className='no-downloads notice'>{this.i18n('settings_share_downloads_noUploadsRunning_notice')}</p>
+			);
+		}
+
+		if (this.state.uploads && Object.keys(this.state.uploads).length) {
+			var uploadIds = Object.keys(this.state.uploads);
+
+			for (var i = 0, l = uploadIds.length; i < l; i++) {
+				var id = uploadIds[i];
+				var data = this.state.uploads[id];
+				var upload = <Upload
+					id={data.id}
+					name={data.name}
+					path={data.path}
+					status={data.status}
+					onCancel={this.cancelUpload} />;
+
+				uploads.push(<li key={id}>{upload}</li>);
+			}
+
+			uploadListOrNotice = (
+				<ul className='upload-list'>
+					{uploads}
+				</ul>
+			)
+		}
+		else {
+			uploadListOrNotice = (
+				<p className='no-uploads notice'>{this.i18n('settings_share_uploads_noUploadsRunning_notice')}</p>
+			)
+		}
 
 		return (
 			<section className='share-handler'>
@@ -124,15 +216,12 @@ var SharedFoldersHandler = React.createClass({
 					<header>
 						<h2>{this.i18n('settings_share_downloads_title')}</h2>
 						<div className='section-buttons'>
-							<IconButton icon='view' onClick={this.showDownloads} tooltipContent={this.i18n('settings_share_downloads_showButton_tooltipContent')} />
-							<IconButton icon='bin' onClick={this.removeDownloads} tooltipContent={this.i18n('settings_share_download_removeButton_tooltipContent')} />
+							<IconButton icon='view' onClick={this.showDownloads} tooltipContent={this.i18n('settings_share_downloads_showDownloadsButton_tooltipContent')} />
+							<IconButton icon='bin' onClick={this.removeDownloads} tooltipContent={this.i18n('settings_share_download_removeStoppedDownloadsButton_tooltipContent')} />
 						</div>
 					</header>
 
-					<ul className='download-list'>
-						<li><Download id='123abc' name='Filename.txt' created={new Date().getTime()} loaded={456789} size={897867} status='FS_ERROR' /></li>
-						<li><Download id='abc123' name='Filename.txt' created={new Date().getTime()} loaded={456789} size={897867} status='TRANSFER_STARTED' /></li>
-					</ul>
+					{downloadListOrNotice}
 				</section>
 
 				<section>
@@ -140,9 +229,7 @@ var SharedFoldersHandler = React.createClass({
 						<h2>{this.i18n('settings_share_uploads_title')}</h2>
 					</header>
 
-					<ul className='upload-list'>
-						<li><Upload id='321cba' name='Filename.txt' path='/path/to/file.txt' status='UPLOAD_STARTED' /></li>
-					</ul>
+					{uploadListOrNotice}
 				</section>
 			</section>
 		)

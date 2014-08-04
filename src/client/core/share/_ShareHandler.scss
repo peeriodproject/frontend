@@ -73,7 +73,8 @@
 
 		.section-buttons {
 			@include span(2 last);
-
+			
+			padding-right: gutter(6);
 			text-align: right;
 
 			.icon-btn {

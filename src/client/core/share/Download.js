@@ -19,10 +19,79 @@ var Download = React.createClass({
 		I18nMixin
 	],
 
-	_downloadStatus: {
-		valid: ['COMPLETED'],
-		neutral: ['REQUESTING_FILE', 'TRANSFER_STARTED', 'MANUAL_ABORT'],
-		invalid: ['FS_ERROR', 'REMOTE_ABORT', 'TIMED_OUT', 'PROTOCOL_ERR']
+	statics: {
+		isInStatusGroup: function (group, status) {
+			var downloadStatus = {
+				valid: ['COMPLETED'],
+				neutral: ['MANUAL_ABORT'],
+				loading: ['CREATED', 'REQUESTING_FILE', 'TRANSFER_STARTED'],
+				invalid: ['FS_ERROR', 'REMOTE_ABORT', 'TIMED_OUT', 'PROTOCOL_ERR']
+			};
+			
+			return downloadStatus[group].indexOf(status) !== -1;
+		},
+
+		isRemovableStatus: function (status) {
+			var removableStatus = [
+				'COMPLETED',
+				'MANUAL_ABORT',
+				'FS_ERROR',
+				'REMOTE_ABORT',
+				'TIMED_OUT',
+				'PROTOCOL_ERR'
+			];
+
+			return removableStatus.indexOf(status) !== -1;
+		},
+
+		getStatusIcon: function (status) {
+			var icon = '';
+			
+			// checks are performed by array length
+			if (this.isInStatusGroup('valid', status)) {
+				icon = 'tick';
+			}
+			else if (status === 'REQUESTING_FILE') {
+				icon = 'loading';
+			}
+			else if (this.isInStatusGroup('invalid', status)) {
+				icon = 'warning';
+			}
+
+			return icon;
+		},
+
+		getElementStatus: function (status) {
+			var elementStatus = '';
+			
+			// checks are performed by array length
+			if (this.isInStatusGroup('valid', status)) {
+				elementStatus = 'valid';
+			}
+			else if (status === 'TRANSFER_STARTED') {
+				elementStatus = 'loading';
+			}
+			else if (this.isInStatusGroup('neutral', status) || this.isInStatusGroup('loading', status)) {
+				elementStatus = 'neutral';
+			}
+			else if (this.isInStatusGroup('invalid', status)) {
+				elementStatus = 'invalid';
+			}
+
+			return elementStatus;
+		},
+
+		transformStatus: function (str) {
+			var frags = str.split('_');
+
+			for (var i = 0, l = frags.length; i < l; i++) {
+			  frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+			}
+
+			str = frags.join('');
+			
+			return str.charAt(0).toLowerCase() + str.slice(1);
+		}
 	},
 
 	getDefaultProps: function () {
@@ -36,60 +105,8 @@ var Download = React.createClass({
 		};
 	},
 
-	isInStatusGroup: function (group, status) {
-		return this._downloadStatus[group].indexOf(status) !== -1;
-	},
-
-	getStatusIcon: function () {
-		var status = this.props.status;
-		var icon = '';
-		
-		// checks are performed by array length
-		if (this.isInStatusGroup('valid', status)) {
-			icon = 'tick';
-		}
-		else if (this.isInStatusGroup('neutral', status)) {
-			icon = 'loading';
-		}
-		else if (this.isInStatusGroup('invalid', status)) {
-			icon = 'warning';
-		}
-
-		return icon;
-	},
-
-	getElementStatus: function () {
-		var status = this.props.status;
-		var elementStatus = '';
-		
-		// checks are performed by array length
-		if (this.isInStatusGroup('valid', status)) {
-			elementStatus = 'valid';
-		}
-		else if (this.isInStatusGroup('neutral', status)) {
-			elementStatus = 'neutral';
-		}
-		else if (this.isInStatusGroup('invalid', status)) {
-			elementStatus = 'invalid';
-		}
-
-		return elementStatus;
-	},
-
-	transformStatus: function (str) {
-		var frags = str.split('_');
-
-		for (var i = 0, l = frags.length; i < l; i++) {
-		  frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
-		}
-
-		str = frags.join('');
-		
-		return str.charAt(0).toLowerCase() + str.slice(1);
-	},
-
 	getStatusDescription: function () {
-		return this.i18n('download_status_' + this.transformStatus(this.props.status.toLowerCase()), '');
+		return this.i18n('download_status_' + this.type.transformStatus(this.props.status.toLowerCase()), '');
 	},
 
 	cancelDownload: function () {
@@ -112,15 +129,19 @@ var Download = React.createClass({
 		var statusDescription;
 		var statusDescriptionTag;
 
-		var elementStatus = this.getElementStatus();
-		var progress = elementStatus === 'neutral' ? <progress value={this.getProgress() * 100} max='100'></progress> : null;
+		var elementStatus = this.type.getElementStatus(this.props.status);
+
+		var progress = elementStatus === 'loading' ? <progress value={this.getProgress() * 100} max='100'></progress> : null;
+
+		var statusIcon = this.type.getStatusIcon(this.props.status);
+		var badge;
 
 		if (this.props.status === 'COMPLETED') {
 			showButton = (<IconButton icon='view' onClick={this.showDownload} tooltipContent={this.i18n('download_showButton_tooltipContent')} />)
 		}
 
 		// still loading
-		if (elementStatus === 'neutral') {
+		if (elementStatus === 'loading') {
 			statusDescriptionTag = (
 				<p className={'status-description ' + elementStatus}>
 					<span className='size'>
@@ -143,6 +164,16 @@ var Download = React.createClass({
 			removeButton = <IconButton icon='bin' onClick={this.removeDownload} tooltipContent={this.i18n('download_removeButton_tooltipContent')} />;
 		}
 
+		if (statusIcon) {
+			badge = (
+				<div className='badge-wrapper'>
+					<Badge className={'status-' + elementStatus}>
+						<SvgIcon icon={statusIcon} />
+					</Badge>
+				</div>
+			)
+		}
+
 		return (
 			<div className={'download'}>
 				<h3>{this.props.name}</h3>
@@ -150,12 +181,7 @@ var Download = React.createClass({
 
 				{progress}
 					
-				<div className='badge-wrapper'>
-					{/*<Badge className={'status-' + elementStatus} label='i' />*/}
-					<Badge className={'status-' + elementStatus}>
-						<SvgIcon icon={this.getStatusIcon()} />
-					</Badge>
-				</div>
+				{badge}
 
 				<div className='action-buttons'>
 					{showButton}

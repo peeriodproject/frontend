@@ -84,7 +84,7 @@ $onePixel: (1 / strip-units($base-font-size)) * 1rem;
 		}
 	}
 
-	.download {
+	.progress-bar-item {
 		progress[value] {
 			$background: darken($tooltip-background-color, 10%);
 			$height: $onePixel * 2;

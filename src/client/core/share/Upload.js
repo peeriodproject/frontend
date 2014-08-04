@@ -12,13 +12,19 @@ var I18nMixin = require('../i18n/I18nMixin');
 
 var Upload = React.createClass({
 	
-	_uploadStatus: {
-		neutral: ['RATIFYING_REQUEST', 'UPLOAD_STARTED'],
-	},
-
 	mixins: [
 		I18nMixin
 	],
+
+	statics: {
+		isInStatusGroup: function (group, status) {
+			var uploadStatus = {
+				neutral: ['RATIFYING_REQUEST', 'UPLOAD_STARTED']
+			};
+			
+			return uploadStatus[group].indexOf(status) !== -1;
+		}
+	},
 
 	getDefaultProps: function () {
 		return {
@@ -35,21 +41,14 @@ var Upload = React.createClass({
 		};
 	},
 
-	isInStatusGroup: function (group, status) {
-		return this._uploadStatus[group].indexOf(status) !== -1;
-	},
-
 	cancelUpload: function () {
 		this.props.onCancel(this.props.id);
 	},
 
 	render: function () {
-		if (!this.isInStatusGroup('neutral', this.props.status)) {
-			return null;
-		}
-
-		console.log('render');
-
+		/*if (!this.type.isInStatusGroup('neutral', this.props.status)) {
+			return (<span className='hidden'></span>);
+		}*/
 		return (
 			<div className={'upload'}>
 				<h3>{this.props.name}</h3>
