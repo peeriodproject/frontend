@@ -1,0 +1,39 @@
+$maxWidth: 400px;
+
+.dropzone-renderer-wrapper {
+	@extend %clearfix;
+
+	position: absolute;
+	left: 9999; 
+	top: 0;
+}
+
+.dropzone-renderer {
+	max-width: $maxWidth;
+	text-align: center;
+
+	h2 {
+		color: $menu-heading-color;
+	}
+
+	p {
+		color: $menu-color;
+	}
+}
+
+.dropzone-button-renderer {
+	max-width: $maxWidth;
+
+	.btn {
+		display: inline-block;
+		border-color: $menu-buttons-color;
+		color: $menu-heading-color;
+	}
+	.btn.hover {
+		display: inline-block;
+		border-color: $green-color;
+		color: #fff;
+		//background-color: $green-color;
+	}
+
+}

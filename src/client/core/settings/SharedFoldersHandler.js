@@ -9,6 +9,7 @@ var Link = require('react-router-component').Link;
 
 var events = require('../events/EventEmitterMixin');
 
+var DropzoneBackroundRenderer = require('../utils/DropzoneBackroundRenderer');
 var Folder = require('./Folder');
 //var Button = require('../element/Button');
 var SvgIcon = require('../element/SvgIcon');
@@ -21,6 +22,9 @@ var I18nMixin = require('../i18n/I18nMixin');
 
 var SharedFoldersHandler = React.createClass({
 	
+	_dropzoneBackground: null,
+	_dropzoneButton: null,
+
 	mixins: [
 		ChannelMixin,
 		I18nMixin,
@@ -53,16 +57,10 @@ var SharedFoldersHandler = React.createClass({
 		}
 	},
 
-	updateChannelState: function (channel, state) {
-		console.warn('got event from unhandled channel:', channel);
-		console.warn(state);		
-	},
-
 	handleAddFolderButtonClick: function (event) {
 		event.preventDefault();
 
-		this.folderdropzoneChannel.send('open', 'sharedFolders');
-		//this.emitDialogOpen('addFolderDialog');
+		this.folderdropzoneChannel.send('open', 'sharedFolders', this._dropzoneBackground, this._dropzoneButton);
 	},
 
 	removeFolder: function (path) {
@@ -78,18 +76,23 @@ var SharedFoldersHandler = React.createClass({
 		this.folderChannel.send('showFolder', path);
 	},
 
-	/*onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
-		// the background isn't added to the state as we're just piping it to the dropzone!
-		this.folderdropzoneChannel.send('background', {
-			background: background,
-			color: color,
-			inverted: inverted,
-			invertedBackgroundColor: invertedBackgroundColor
-		});
-	},*/
+	dropzoneRendered: function (data) {
+		this._dropzoneBackground = data.background;
+		this._dropzoneButton = data.button;
+	},
 
 	render: function() {
+		var dropzone;
 		var folders = {};
+
+		if (!this.state.hasRenderedDropzone) {
+			dropzone = (
+				<DropzoneBackroundRenderer
+					title={this.i18n('dropzone_selectSharedFolder_title')}
+					description={this.i18n('dropzone_selectSharedFolder_description')}
+					onRendered={this.dropzoneRendered} />
+			)
+		}
 
 		if (this.state.folders && this.state.folders.length) {
 			for (var i in this.state.folders) {
@@ -102,9 +105,6 @@ var SharedFoldersHandler = React.createClass({
 			<section className='shared-folders-handler'>
 				<header>
 					<h1>{this.i18n('settings_sharedFolders_title')}</h1>
-					{/*<div className='add-folder-button'>
-						<Button onClick={this.addFolder} label='settings_sharedFolders_addFolderButton_label' />
-					</div>*/}
 					<div className='add-folder-button'>
 						<a href='#' ref='addFolderButton' onClick={this.handleAddFolderButtonClick}>
 							<SvgIcon icon='plus' /> {this.i18n('settings_sharedFolders_addFolderButton_label')}
@@ -113,6 +113,7 @@ var SharedFoldersHandler = React.createClass({
 				</header>
 				
 				{folders}
+				{dropzone}
 			</section>
 		)
 	}
