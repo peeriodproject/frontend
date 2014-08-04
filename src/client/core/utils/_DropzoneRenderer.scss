@@ -4,7 +4,7 @@ $maxWidth: 400px;
 	@extend %clearfix;
 
 	position: absolute;
-	left: 9999; 
+	left: 9999px; // it seems like the renderer won't render stuff that was pushed too far...
 	top: 0;
 }
 
