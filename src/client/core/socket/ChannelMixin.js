@@ -1,10 +1,13 @@
+'use strict';
+
 var ChannelMixin = {
 
 	_channels: [],
+	_onChannelCallbacks: {},
 
 	_setupChannel: function (name) {
 		var self = this;
-		var channelName = name + 'Channel';
+		var channelName = this.getChannelName(name);
 		var onCallback = function () {
 			var args = arguments || [];
 
@@ -18,6 +21,12 @@ var ChannelMixin = {
 
 		this[channelName].on('update', onCallback);
 		this[channelName].send('getInitialState', onCallback);
+
+		this._onChannelCallbacks[channelName] = onCallback;
+	},
+
+	getChannelName: function (name) {
+		return name + 'Channel';
 	},
 
 	getChannel: function (channelName) {
@@ -32,13 +41,15 @@ var ChannelMixin = {
 		var self = this;
 
 		if (!this.channelNames) {
-			console.error('no channel names specified!');
+			if (console) {
+				console.error('no channel names specified!');
+			}
 			return;
 		}
 
 		for (var i = 0, l = this.channelNames.length; i < l; i++) {
 			this._setupChannel(this.channelNames[i]);
-		};
+		}
 
 		return this.initialChannelsState;
 	},
@@ -56,6 +67,16 @@ var ChannelMixin = {
 		else {
 			this.updateChannelState.apply(this, args);
 		}
+	},
+
+	componentWillUnmount: function () {
+		for (var i = 0, l = this.channelNames.length; i < l; i++) {
+			var channelName = this.getChannelName(this.channelNames[i]);
+
+			if (this[channelName]) {
+				this[channelName].off('update', this._onChannelCallbacks[channelName]);
+			}
+		};
 	}
 
 };
