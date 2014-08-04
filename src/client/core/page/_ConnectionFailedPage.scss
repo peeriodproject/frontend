@@ -17,6 +17,7 @@
 		&> article {
 			@extend %clearfix;
 			@include padding-trailer(6); // moved to "optical" center
+			@include animation(slideDown 0.75s ease forwards);
 
 			width: span(5);
 			margin: 0 auto;
@@ -44,12 +45,37 @@
 	a.btn {
 		border-color: $green-color;
 
-		&:hover,
-		&:focus,
-		&:active {
-			background-color: $green-color;
-			color: #fff;
-		}
+		@include hover-green-background;
+	}
+
+	$delay: 0.15s;
+
+	.app-icon,
+	header,
+	p,
+	a.btn {
+		@include animation-name(fadeIn);
+		@include animation-duration(0.25s);
+		@include animation-timing-function(ease);
+		@include animation-fill-mode(forwards);
+
+		opacity: 0;
+	}
+
+	header  {
+		@include animation-delay($delay * 1);
+	}
+
+	p {
+		@include animation-delay($delay * 0);
+	}
+
+	.app-icon {
+		@include animation-delay($delay * 2);
+	}
+
+	a.btn {
+		@include animation-delay($delay * 3);
 	}
 
 }

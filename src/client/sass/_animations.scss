@@ -1,17 +1,55 @@
 @include keyframes(uploadProgress) {
-	0% {
+	from {
 		background-position: 0 0;
 	}
-	100% {
+	to {
 		background-position: 0 1rem;
 	}
 }
 
 @include keyframes(spin) {
-    0% {
+    from {
         @include transform(rotate(0deg));
     }
-    100% {
+    to {
         @include transform(rotate(359deg));
     }
+}
+
+@include keyframes(fadeIn) {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@include keyframes(slideDown) {
+	from {
+		@include transform(translateY(-2rem));
+	}
+	to {
+		@include transform(translateY(0));
+	}
+}
+
+@include keyframes(fadeOut) {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@include keyframes(greenBackgroundToTransparent) {
+	from {
+		background-color: $green-color;
+		color: #fff;
+	}
+	to {
+		background-color: rgba($green-color, 0);
+		color: $dark-color;
+	}
 }

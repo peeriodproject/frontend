@@ -46,6 +46,19 @@
 
 }
 
+@mixin hover-green-background($color:#fff) {
+	@include transition-property(background-color, color);
+	@include transition-duration(0.15s);
+	@include transition-timing-function(ease);
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: $green-color;
+		color: $color;
+	}
+}
+
 // @see http://blog.teamtreehouse.com/a-better-clearfix-with-sass
 %clearfix {
 	&:after {
