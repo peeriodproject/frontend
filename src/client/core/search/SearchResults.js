@@ -51,12 +51,8 @@ var SearchResults = React.createClass({
 		console.log('channel update!');
 		console.log(state);
 
-		if (!state.currentResults) {
-			return;
-		}
-
 		this.setState({
-			results: state.currentResults
+			results: state.currentResults || {}
 		});
 	},
 

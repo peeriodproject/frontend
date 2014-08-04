@@ -8,6 +8,7 @@ var Router = require('react-router-component');
 var Link = require('react-router-component').Link;
 var NavigatableMixin = require('react-router-component').NavigatableMixin;
 
+var BackgroundPageMessageMixin = require('../socket/BackgroundPageMessageMixin');
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
@@ -20,8 +21,13 @@ var SearchForm = React.createClass({
 
 	mixins: [
 		NavigatableMixin,
+		BackgroundPageMessageMixin,
 		ChannelMixin,
 		I18nMixin
+	],
+
+	messages: [
+		'startQuery'
 	],
 
 	channelNames: [
@@ -77,8 +83,8 @@ var SearchForm = React.createClass({
 		});
 	},
 
-	removeQuery: function () {
-		if (this._$input) {
+	removeQuery: function (ignoreUi) {
+		if (this._$input && !ignoreUi) {
 			this._$input.focus();
 		}
 
@@ -97,14 +103,24 @@ var SearchForm = React.createClass({
 		}
 
 		this.setState({
+			inputValue: value,
+			//disabled: this.state.inputValue === value
 			submitted: true
 		});
 
 		this.searchChannel.send('addQuery', value);
 
 		this.navigate('/search');
+	},
 
-		console.log('starting search for:', value);
+	onStartQueryMessage: function (message) {
+		var value = message.value || '';
+
+		if (value) {
+			this.removeQuery(true);
+			this.setState({	disabled: false	});
+			this.startQuery(value);
+		}
 	},
 
 	handleInputChange: function (event) {
@@ -135,7 +151,7 @@ var SearchForm = React.createClass({
 	},
 
 	handleLogoClick: function () {
-		this.removeQuery();
+		//this.removeQuery();
 	},
 
 	handleSubmit: function (event) {
@@ -164,7 +180,7 @@ var SearchForm = React.createClass({
 		return (
 			<section className={'search-form-wrapper' + fullscreenClassName + this.props.locationClassName}>
 				<div className='logo-wrapper'>
-					<Link href='/' className='logo' onClick={this.handleLogoClick}>
+					<Link href='/search' className='logo' onClick={this.handleLogoClick}>
 						<img src='/assets/icons/icon128.png' />
 					</Link>
 				</div>

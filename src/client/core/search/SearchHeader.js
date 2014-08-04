@@ -64,7 +64,7 @@ var SearchHeader = React.createClass({
 				<MenuButton />
 				
 				<SearchForm isFullscreen={this.state.isFullscreen} locationClassName={this.state.locationClassName}>
-					<p>Mollis Ultricies Inceptos Vestibulum <Link href='http://joernroeder.de'>Nullam</Link></p>
+					<p>Mollis Ultricies Inceptos Vestibulum <a href='http://joernroeder.de'>Nullam</a></p>
 				</SearchForm>
 
 				<DownloadProgressBar />
