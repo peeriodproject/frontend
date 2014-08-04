@@ -13,6 +13,10 @@
 		"message": "peeriod",
 		"description": "The lowercase keyword to enable the omnibox instant search."
 	},
+	"contextMenu_searchSelection_title": {
+		"message": "Search in Peeriod",
+		"description": ""
+	},
 	"settings_sharedFolders_title": {
 		"message": "Shared Folders",
 		"description": "The title of the 'Shared Folders' settings page"
