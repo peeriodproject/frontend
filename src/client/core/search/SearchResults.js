@@ -214,7 +214,7 @@ var SearchResults = React.createClass({
 			<div className='search-results'>
 				<div className={'search-results-overlay' + overlayIsActiveClassName} onClick={this.hideOverlay}></div>
 				<ul className='search-results-list'>
-					{/**results*/}
+					{results}
 					{/*<li style={{ height: '9000px' }}></li>*/}
 				</ul>
 			</div>
