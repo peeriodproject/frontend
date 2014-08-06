@@ -138,6 +138,10 @@ var SearchForm = React.createClass({
 	},
 
 	handleInputBlur: function (event) {
+		if (!event.target.value) {
+			this.removeQuery();
+		}
+		
 		this.setState({
 			focus: false
 		});

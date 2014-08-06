@@ -6,14 +6,15 @@
 var React = require('react');
 var Link = require('react-router-component').Link;
 
+var Badge = require('../element/Badge');
 var IconButton = require('../element/IconButton');
 var FormFactory = require('../form/FormFactory');
 
 var SearchForm = require('./SearchForm');
+var SearchResultsNotification = require('./SearchResultsNotification');
 var DownloadProgressBar = require('../share/DownloadProgressBar');
 
 var Menu = require('../menu/Menu');
-var MenuButton = require('../menu/MenuButton');
 
 // menu items
 var AppStatusMenuItem = require('../menu/AppStatusMenuItem');
@@ -25,9 +26,12 @@ var SearchHeader = React.createClass({
 	_headroom: null,
 
 	componentDidMount: function () {
-		this.setLocationClassName(this.props);
+		var node = this.getDOMNode();
 
-		this._headroom = new Headroom(this.getDOMNode());
+		this.setLocationClassName(this.props);
+		this._headroom = new Headroom(node, {
+			offset: node.offsetHeight
+		});
 
 		this._headroom.init();
 	},
@@ -61,7 +65,6 @@ var SearchHeader = React.createClass({
 		return (
 			<section className={'search-header' + this.state.locationClassName}>
 				<div className='animation-helper'></div>
-				<MenuButton />
 				
 				<SearchForm isFullscreen={this.state.isFullscreen} locationClassName={this.state.locationClassName}>
 					<p>Mollis Ultricies Inceptos Vestibulum <a href='http://joernroeder.de'>Nullam</a></p>
@@ -73,6 +76,8 @@ var SearchHeader = React.createClass({
 					<SharedFolderMenuItem />
 					<DownloadsMenuItem />
 				</Menu>
+
+				<SearchResultsNotification />
 			</section>
 		)
 	}

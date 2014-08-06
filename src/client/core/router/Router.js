@@ -9,6 +9,7 @@ var ReactRouter = require('react-router-component');
 var Locations = ReactRouter.Locations;
 var Location = ReactRouter.Location;
 
+var MenuButton = require('../menu/MenuButton');
 var SearchHeader = require('../search/SearchHeader');
 
 /**
@@ -47,6 +48,8 @@ var Router = function (routes) {
 
 			return (
 				<main className='main has-search-header'>
+					<MenuButton />
+
 					<Locations hash>
 						<Location path='*' handler={SearchHeader} />
 					</Locations>

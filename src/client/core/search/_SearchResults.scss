@@ -1,61 +1,123 @@
-.search-results-list {
+.search-results-notification-wrapper {
+	@include visible-transition;
 	@include squish($search-results-squish);
 	@extend %clearfix;
 
-	@include padding-leader(2);
-	@include padding-trailer(2);
+	position: relative;
+	z-index: 200;
 
-	@include nested(12 - ($search-results-squish * 2)) {
-		li {
-			@include margin-trailer(1.5);
+	.search-results-notification {
+		@include padding-leader(1);
+		@include padding-trailer(1);
+		@include bleed-x(gutter(12 - ($search-results-squish * 2)));
 
-			position: relative;
+		background-color: $search-results-notification-background;
+		color: $menu-color;
 
-			background-color: #fff;
-			border-radius: $border-radius;
+		.badge:not(.length-1) {
+			padding: 0 0.35em;
+		}
 
-			&:last-child {
-				margin-bottom: 0;
+		a {
+			@include transition(color 0.15s ease);
+
+			color: $menu-heading-color;
+
+			&:hover,
+			&:focus {
+				color: #fff;
 			}
+		}
+	}
+}
 
-			.download-progress {
-				position: absolute;
-				width: 100%;
-				bottom: 0;
-				z-index: 10;
+.search-header:not(.route-index):not(.route-search) {
+	.search-results-notification-wrapper {
+		@include hidden-transition;
+	}
+}
 
-				height: 34%;
-				background-color: $green-color;
+.search-results {
+	position: relative;
 
-				opacity: 1;
+	.search-results-overlay {
+		@include hidden-transition;
 
-				display: none;
+		position: fixed;
+		//border: 10px solid red;
+		background-color: rgba($dark-background-color, 0.9);
+		top: 0;
+		left: 0;
 
-				&:hover {
-					opacity: 0.2;
+		width: 100%;
+		height: 100%;
+
+		z-index: 45;
+
+		&.active {
+			@include visible-transition;
+		}
+	}
+
+	.search-results-list {
+		@include squish($search-results-squish);
+		@extend %clearfix;
+
+		@include padding-leader(2);
+		@include padding-trailer(2);
+
+		@include nested(12 - ($search-results-squish * 2)) {
+			li {
+				@include margin-trailer(1.5);
+
+				position: relative;
+
+				background-color: #fff;
+				border-radius: $border-radius;
+
+				&:last-child {
+					margin-bottom: 0;
 				}
-			}
 
-			.result-content {
-			}
+				.download-progress {
+					position: absolute;
+					width: 100%;
+					bottom: 0;
+					z-index: 10;
 
-			footer.meta {
-				//@include gutters(2rem inside);
-				background-color: $search-result-meta-background-color;
-				color: $search-result-meta-color;
-
-				border-top: 1px solid;
-				border-color: $search-result-border-color;
-				line-height: 250%;
-				text-align: right;
-
-				.download-btn {
-					@include icon-button(darken(#fff, 10%), #fff);
-
-					display: inline-block;
+					height: 34%;
 					background-color: $green-color;
-					color: #fff;
-					padding: 0 2rem;
+
+					opacity: 1;
+
+					display: none;
+
+					&:hover {
+						opacity: 0.2;
+					}
+				}
+
+				.result-content {
+				}
+
+				footer.meta {
+					//@include gutters(2rem inside);
+					background-color: $search-result-meta-background-color;
+					color: $search-result-meta-color;
+
+					border-top: 1px solid;
+					border-color: $search-result-border-color;
+					line-height: 250%;
+					text-align: right;
+
+					.download-btn {
+						@include icon-button(darken(#fff, 10%), #fff);
+
+						display: inline-block;
+						background-color: $green-color;
+						color: #fff;
+						padding: 0 2rem;
+					}
 				}
 			}
 		}

@@ -51,45 +51,10 @@ var SearchHandler = React.createClass({
 		return forms;
 	},
 
-	onSearchButtonEnter: function (e) {
-		this.setState({
-			searchButtonClass: ' bg-hover',
-			searchButtonAdvClass: ' bg-hover'
-		});
-	},
-
-	onSearchButtonLeave: function (e) {
-		if (!this.refs.advButton.tooltipIsOpen()) {
-			this.setState({
-				searchButtonClass: '',
-				searchButtonAdvClass: ''
-			});
-		}
-	},
-
-	getAdvancedSearchList: function () {
-		return React.DOM.div({}, 'foobario');
-		//return (<div><h1>Foobario</h1></div>)
-	},
-
-	onAdvancedSearchButtonClick: function (e) {
-		/*if (this.state.searchButtonAdvClass.indexOf('bg-active') === -1) {
-			this.setState({
-				searchButtonAdvClass: ' bg-active'
-			});
-		}
-		else {
-			this.setState({
-				searchButtonAdvClass: this.state.searchButtonAdvClass.replace('bg-active', '')
-			});
-		}*/
-	},
-
 	render: function () {
 		return (
 			<section className='search-handler'>
 				<SearchResults />
-				<div className="dummy"></div>
 				{/*<NetworkSpeedChart />*/}
 			</section>
 		)

@@ -68,13 +68,13 @@
 	}
 }
 
-@mixin visible-transition ($duration, $delay:0, $timing:linear) {
+@mixin visible-transition ($duration:0.25s, $delay:0, $timing:linear) {
 	visibility: visible;
 	opacity: 1;
 	transition: opacity $duration $timing $delay;
 }
 
-@mixin hidden-transition ($duration, $delay:0, $timing:linear) {
+@mixin hidden-transition ($duration:0.25s, $delay:0, $timing:linear) {
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 0s $delay, opacity $duration $timing;
