@@ -175,8 +175,10 @@
 
 					position: absolute;
 
-					.icon svg use {
-						fill: $icon-color-light;
+					.icon {
+						svg use {
+							fill: $icon-color-light;
+						}
 					}
 
 					&:hover,
@@ -196,9 +198,24 @@
 
 					height: rhythm(3, $icon-button-font-size);
 
-					&[disabled] {
-						.icon svg use {
+					.icon {
+						&.icon-loading use {
+							@include animation(spin 2s linear infinite);
+							@include transform-origin(center);
+
 							fill: $icon-color-light;
+						}
+
+						&.icon-tick use {
+							fill: $green-color;
+						}
+					}
+
+					&[disabled] {
+						.icon {
+							svg use {
+								fill: $icon-color-light;
+							}
 						}
 					}
 				}

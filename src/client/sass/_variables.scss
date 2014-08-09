@@ -47,7 +47,7 @@ $icon-button-dimension: 1.2em;
 // Footer
 // -------------------------------------//
 
-$footer-height: 3rem;
+$footer-height: rhythm(3);
 
 
 // Button
@@ -122,6 +122,7 @@ $search-results-notification-background: #3c3c3c;
 $search-result-meta-background-color: #fafafa;
 $search-result-meta-color: $input-border-color;
 $search-result-border-color: $background-color;
+$search-result-inner-padding: 2rem;
 
 // Share
 // -------------------------------------//

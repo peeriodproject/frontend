@@ -1,0 +1,38 @@
+.feature-wrapper {
+	@extend %clearfix;
+
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+
+	.feature {
+		@include transition(opacity 0.15s ease);
+
+		width: span(4);
+		margin: 0 auto;
+		min-width: 600px; // image width
+
+		opacity: 0.3;
+
+		&:hover {
+			@include transition-delay(0.35s);
+
+			opacity: 1;
+		}
+
+		img {
+			display: block;
+			margin: 0 auto;
+		}
+
+		.content-wrapper {
+			@include gutters($search-result-inner-padding inside);
+			@include padding-leader(1);
+			@include padding-trailer(1);
+
+			background-color: mix(#fff, $background-color);
+			border-bottom-right-radius: $border-radius;
+			border-bottom-left-radius: $border-radius;
+		}
+	}
+}

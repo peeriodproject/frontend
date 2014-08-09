@@ -59,6 +59,32 @@
 		}
 	}
 
+	.search-results-not-started-notice {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 40;
+	}
+
+	.search-results-not-found-wrapper {
+		@include squish($search-results-squish);
+		@extend %clearfix;
+
+		@include nested(12 - ($search-results-squish * 2)) {
+			.search-results-not-found {
+				@include margin-leader(2);
+				@include padding-leader(1);
+				@include padding-trailer(1);
+				@include gutters($search-result-inner-padding inside);
+
+				background-color: $background-color;
+				border-radius: $border-radius;
+			}
+		}
+	}
+
 	.search-results-list {
 		@include squish($search-results-squish);
 		@extend %clearfix;
@@ -72,7 +98,7 @@
 
 				position: relative;
 
-				background-color: #fff;
+				background-color: $background-color-hover;
 				border-radius: $border-radius;
 
 				&:last-child {
@@ -101,6 +127,8 @@
 				}
 
 				footer.meta {
+					@extend %clearfix;
+
 					//@include gutters(2rem inside);
 					background-color: $search-result-meta-background-color;
 					color: $search-result-meta-color;
@@ -109,14 +137,27 @@
 					border-color: $search-result-border-color;
 					line-height: 250%;
 					text-align: right;
+					border-bottom-right-radius: $border-radius;
+					border-bottom-left-radius: $border-radius;
+					overflow: hidden;
 
-					.download-btn {
-						@include icon-button(darken(#fff, 10%), #fff);
+					.seperator {
+						color: mix($search-result-meta-color, $search-result-meta-background-color, 75%);
+					}
 
-						display: inline-block;
-						background-color: $green-color;
-						color: #fff;
-						padding: 0 2rem;
+					.result-meta {
+						@include span(3);
+						@include gutters($search-result-inner-padding inside);
+
+						.created {
+							font-style: italic;
+						}
+
+						text-align: left;
+					}
+
+					.download-btn-wrapper {
+						@include span(3 last);
 					}
 				}
 			}

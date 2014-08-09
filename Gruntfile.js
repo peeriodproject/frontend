@@ -58,6 +58,12 @@ module.exports = function (grunt) {
                 dest  : 'build/assets/icons'
 
             },
+            images: {
+                cwd: 'src/images',
+                expand: true,
+                src   : ['**'],
+                dest  : 'build/assets/images'
+            },
             locales : {
                 cwd: 'src/locales/',
                 expand: true,
@@ -209,6 +215,7 @@ module.exports = function (grunt) {
         'browserify:app',
         'copy:fonts',
         'copy:icons',
+        'copy:images',
         'copy:locales',
         'copy:manifest',
         //'copy:background',

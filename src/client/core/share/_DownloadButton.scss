@@ -1,0 +1,63 @@
+.download-btn-wrapper {
+	$onePixel: (1 / strip-units($base-font-size)) * 1rem;
+
+	display: inline-block;
+	position: relative;
+
+	&.loading {
+		.download-btn {
+			background-color: mix(desaturate($green-color, 25%), $dark-background-color, 15%);
+		}
+
+		.progress-bar {
+			bottom: 0;
+		}
+	}
+
+	&.invalid .download-btn {
+		background-color: $red-color;
+	}
+
+	&.neutral .download-btn {
+		background-color: $input-border-color;
+	}
+
+	.download-btn {
+		$hover-color: #fff;
+
+		@include icon-button(darken(#fff, 10%), $hover-color);
+		@include transition(background-color 0.25s ease);
+
+		display: inline-block;
+		background-color: $green-color;
+		color: #fff;
+		padding: 0 2rem;
+		border: none;
+		outline: none;
+
+		&[disabled="true"] .icon {
+			&.icon-loading use {
+				@include animation(spin 2s linear infinite);
+				@include transform-origin(center);
+			}
+			
+			svg use {
+				fill: $hover-color;
+			}
+		}
+	}
+
+	.progress-bar {
+		$height: $onePixel * 2;
+
+		@include transition(bottom 0.15s ease);
+
+		position: absolute;
+		bottom: -$height;
+		height: $height;
+		background-color: $green-color;
+		width: 50%;
+	}
+
+
+}

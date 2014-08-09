@@ -11,10 +11,8 @@
 	};
 
 	var startSearchFromOmnibox = function (text) {
-		console.log('starting search from omnibox');
 		if (text) {
 			startSearch(text);
-			console.log('started');
 		}
 	};
 

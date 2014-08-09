@@ -49,12 +49,18 @@ var SearchResultsNotification = React.createClass({
 	},
 
 	onSearchResultsNotificationsEnabled: function () {
-		this.setState({
-			isEnabled: true
-		});
+		if (!this.state.isEnabled) {
+			this.setState({
+				isEnabled: true
+			});
 
-		this.resetAmount();
-		console.log('__ ENABLED & SYNCED __');
+			this.resetAmount();
+
+			console.log('__ ENABLED & SYNCED __');
+		}
+		else {
+			console.log('__ ALREADY ENABLED __');
+		}
 	},
 
 	onSearchResultsNotificationsDisabled: function () {
@@ -86,6 +92,8 @@ var SearchResultsNotification = React.createClass({
 	render: function () {
 		var pendingResultsAmount = this.state.totalResultsAmount - this.state.loadedResultsAmount;
 		var notification;
+
+		console.log('bade counter', pendingResultsAmount);
 
 		if (pendingResultsAmount > 0 && this.state.isEnabled) {
 			notification = (

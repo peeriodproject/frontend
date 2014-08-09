@@ -1,5 +1,5 @@
 .text-result {
-	@include gutters(2rem inside);
+	@include gutters($search-result-inner-padding inside);
 
 	@include padding-leader(1);
 	@include padding-trailer(1);

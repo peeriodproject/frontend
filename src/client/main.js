@@ -2,6 +2,7 @@ var React = require('react');
 //var BackgroundHandler = require('./core/utils/BackgroundHandler');
 var ConnectionFailedPage = require('./core/page/ConnectionFailedPage');
 var Router = require('./core/router/Router')(require('./config/routes'));
+var Footer = require('./core/element/Footer');
 
 var DialogHandler = require('./core/dialog/DialogHandler')({
 	'addFolderDialog': require('./core/dialog/AddFolderDialog')
@@ -63,6 +64,7 @@ window.App = {
 		React.renderComponent(DialogHandler(), document.getElementById('dialogHandler'));
 		//React.renderComponent(BackgroundHandler(), document.getElementById('backgroundHandler'));
 		React.renderComponent(Router(), document.getElementById('page'));
+		React.renderComponent(Footer(), document.getElementById('page-footer'));
 
 		this._running = true;
 	},

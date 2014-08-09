@@ -61,6 +61,18 @@ var Download = React.createClass({
 			return icon;
 		},
 
+		getStatusGroupIcon: function (status) {
+			var groups = ['valid', 'neutral', 'loading', 'invalid'];
+
+			for (var i = 0, l = groups.length; i < l; i++) {
+				if (this.isInStatusGroup(groups[i], status)) {
+					return groups[i];
+				}
+			}
+
+			return '';
+		},
+
 		getElementStatus: function (status) {
 			var elementStatus = '';
 			
@@ -145,9 +157,9 @@ var Download = React.createClass({
 			statusDescriptionTag = (
 				<p className={'status-description ' + elementStatus}>
 					<span className='size'>
-						{this.getSizeWithExtension(this.props.loaded)} of {this.getSizeWithExtension(this.props.size)}
+						{this.type.getSizeWithExtension(this.props.loaded)} of {this.type.getSizeWithExtension(this.props.size)}
 					</span>
-					<span className='speed'>{this.getSizeWithExtension(this.state.averageSpeed)}/s</span>
+					<span className='speed'>{this.type.getSizeWithExtension(this.state.averageSpeed)}/s</span>
 					<span className='time'>{this.getTimeLeft()}</span>
 				</p>
 			)

@@ -4,6 +4,27 @@ var DownloadMixin = {
 
 	_updateTimeout: null,
 
+	statics: {
+		/**
+		 * Returns the given size in a human readable format
+		 *
+		 * @param  {number} bytes The number of bytes
+		 *
+		 * @return {string}       The formatted size with extension
+		 */
+		getSizeWithExtension: function (bytes) {
+			if (bytes === 0) {
+				return '0 Byte';
+			}
+
+			var k = 1024;
+			var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+			var i = Math.floor(Math.log(bytes) / Math.log(k));
+
+			return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+		},
+	},
+
 	getDefaultProps: function () {
 		return {
 			created		: 0,
@@ -61,25 +82,6 @@ var DownloadMixin = {
 		var prog = (this.props.loaded / this.props.size);
 
 		return prog;
-	},
-
-	/**
-	 * Returns the given size in a human readable format
-	 *
-	 * @param  {number} bytes The number of bytes
-	 *
-	 * @return {string}       The formatted size with extension
-	 */
-	getSizeWithExtension: function (bytes) {
-		if (bytes === 0) {
-			return '0 Byte';
-		}
-
-		var k = 1024;
-		var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-		var i = Math.floor(Math.log(bytes) / Math.log(k));
-
-		return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
 	},
 
 	calcTimeAndSpeed: function (props) {

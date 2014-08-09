@@ -41,7 +41,8 @@ var SearchForm = React.createClass({
 	getInitialState: function () {
 		return {
 			disabled: true,
-			inputValue: ''
+			inputValue: '',
+			gotResults: false
 		}
 	},
 
@@ -52,6 +53,20 @@ var SearchForm = React.createClass({
 		}
 	},
 
+	getSearchIcon: function () {
+		var loadingStates = ['CREATED', 'GOT_RESULTS'];
+		var icon = 'magnifying_glass';
+
+		if (this.state.status === 'COMPLETE' && this.state.gotResults) {
+			icon = 'tick';
+		}
+		else if (loadingStates.indexOf(this.state.status) !== -1) {
+			icon = 'loading';
+		}
+
+		return icon;
+	},
+
 	componentDidMount: function () {
 		this._$input = $(this.refs.searchField.getDOMNode());
 		
@@ -59,27 +74,28 @@ var SearchForm = React.createClass({
 			this._$input.focus();
 		}
 
+		/*if (!this.state.queryValue) {
+			//console.log('component mounted! routing to /');
+			this.navigate('/');
+		}*/
 		//window.addEventListener('unload', this.handleWindowUnload);
 	},
 
 	componentWillUnmount: function () {
 		this._$input = null;
-
-		//window.removeListener('unload', this.handleWindowUnload);
 	},
 
 	updateSearchChannelState: function (state) {
-		var query = state.currentQuery;
-
-		if (!query) {
-			return;
-		}
+		var query = state.currentQuery || '';
+		var inputValue = this.state.inputValue && state.currentQueryStatus ? this.state.inputValue : query;
 
 		this.setState({
 			queryValue: query,
-			inputValue: (this.state.inputValue ? this.state.inputValue : query),
-			disabled: false,
-			submitted: true
+			inputValue: inputValue,
+			disabled: inputValue ? false : true,
+			submitted: query === inputValue ? true : false,
+			status: state.currentQueryStatus,
+			gotResults: state.currentResults && state.currentResults.total ? true : false
 		});
 	},
 
@@ -91,7 +107,9 @@ var SearchForm = React.createClass({
 		this.setState({
 			inputValue: '',
 			disabled: true,
-			submitted: false
+			submitted: false,
+			status: '',
+			gotResults: false
 		});
 
 		this.searchChannel.send('removeQuery');
@@ -105,7 +123,8 @@ var SearchForm = React.createClass({
 		this.setState({
 			inputValue: value,
 			//disabled: this.state.inputValue === value
-			submitted: true
+			submitted: true,
+			status: 'CREATED'
 		});
 
 		this.searchChannel.send('addQuery', value);
@@ -154,8 +173,17 @@ var SearchForm = React.createClass({
 		this.removeQuery();
 	},
 
-	handleLogoClick: function () {
-		//this.removeQuery();
+	handleLogoClick: function (e) {
+		e.preventDefault();
+
+		if (this.state.queryValue) {
+			this.navigate('/search');
+		}
+		else {
+			this.navigate('/');
+		}
+
+		return false;
 	},
 
 	handleSubmit: function (event) {
@@ -180,6 +208,9 @@ var SearchForm = React.createClass({
 	render: function () {
 		var fullscreenClassName = this.props.isFullscreen ? ' fullscreen' : '';
 		var focusClassName = this.state.focus ? ' focus' : '';
+		var searchIcon = this.getSearchIcon();
+
+		console.log(this.state.status);
 
 		return (
 			<section className={'search-form-wrapper' + fullscreenClassName + this.props.locationClassName}>
@@ -207,7 +238,7 @@ var SearchForm = React.createClass({
 
 					<IconButton
 						className='search'
-						icon='magnifying_glass'
+						icon={searchIcon}
 						type='submit'
 						disabled={this.state.disabled}
 						onClick={this.handleSubmit} />

@@ -1,0 +1,41 @@
+.inner-footer {
+	@include padding-leader(1);
+	@include padding-trailer(1);
+	@include leading-border(1px);
+
+	$color: mix($main-color, $dark-background-color, 75%);
+
+	border-color: $input-border-color;
+	
+	@include icon-button($menu-buttons-color, $menu-buttons-color-hover);
+
+	color: $color;
+
+	a {
+		@include transition(color 0.15s ease);
+		color: $main-color;
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			color: $dark-color;
+			text-decoration: none;
+		}
+	}
+
+	.seperator {
+		color: mix($color, $dark-background-color, 65%);
+	}
+
+	.icon-heart {
+		svg {
+			width: 1rem;
+			height: 1rem;
+			top: -0.05rem;
+
+			use {
+				fill: mix($red-color, $dark-background-color, 30%) !important;
+			}
+		}
+	}
+}
