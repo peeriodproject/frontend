@@ -40,7 +40,7 @@ var ChannelMixin = {
 	getInitialState: function () {
 		var self = this;
 
-		if (!this.channelNames) {
+		if (!this.channelNames || !this.channelNames.length) {
 			if (console) {
 				console.error('no channel names specified!');
 			}

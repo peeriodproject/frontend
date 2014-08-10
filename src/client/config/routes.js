@@ -18,5 +18,9 @@ module.exports = [
 	{
 		path: '/share',
 		handler: require('../core/share/ShareHandler')
+	},
+	{
+		path: '/status',
+		handler: require('../core/status/AppStatusHandler')
 	}
 ];

@@ -1,15 +1,25 @@
 .inner-footer {
+	@include margin-leader(3);
 	@include padding-leader(1);
 	@include padding-trailer(1);
 	@include leading-border(1px);
+	//@include squish(1);
+	@include gutters(2rem inside);
+	@include transition(opacity 0.25s ease);
 
 	$color: mix($main-color, $dark-background-color, 75%);
 
 	border-color: $input-border-color;
+	text-align: center;
 	
 	@include icon-button($menu-buttons-color, $menu-buttons-color-hover);
 
 	color: $color;
+	opacity: 0.5;
+
+	&:hover {
+		opacity: 1;
+	}
 
 	a {
 		@include transition(color 0.15s ease);

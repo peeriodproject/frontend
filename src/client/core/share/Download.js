@@ -118,7 +118,7 @@ var Download = React.createClass({
 	},
 
 	getStatusDescription: function () {
-		return this.i18n('download_status_' + this.type.transformStatus(this.props.status.toLowerCase()), '');
+		return this.i18n('download_status_' + this.type.transformStatus(this.props.status.toLowerCase()));
 	},
 
 	cancelDownload: function () {

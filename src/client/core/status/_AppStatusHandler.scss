@@ -1,0 +1,79 @@
+.app-status-handler {
+	$squish: 1;
+	$nested: 12 - ($squish * 2);
+
+	@include squish($squish);
+	@extend %clearfix;
+
+	@include nested($nested) {
+		header {
+			@include squish(1);
+			@extend %clearfix;
+
+			//@include span(full);
+			@include padding-leader(3);
+			@include margin-trailer(2);
+
+			text-align: center;
+		}
+
+		.stats-wrapper {
+			@include span(full);
+			//@include margin-leader(2);
+			
+			.stats {
+				@include gallery(($nested / 3));
+				overflow: hidden;
+
+				&> ul,
+				&> p,
+				&> div {
+					@include margin-leader(1);
+				}
+
+				li {
+					@include padding-leader(0.25);
+					@include padding-trailer(0.25);
+
+					&:first-child {
+						padding-top: 0;
+
+						.icon {
+							top: 0;
+						}
+					}
+
+					position: relative;
+					padding-left: 2.5rem;
+
+					&.is-valid {
+						.icon svg use {
+							fill: $green-color;
+						}
+					}
+
+					&.is-invalid {
+						.icon svg use {
+							fill: $red-color;
+						}
+					}
+				}
+				
+				.icon {
+					position: absolute;
+					top: rhythm(0.25);
+					left: 0;
+					//z-index: 710;
+
+					width: 1.5rem;
+					height: 1.5rem;
+					float: left;
+
+					svg {
+						position: absolute;
+					}
+				}
+			}
+		}
+	}
+}

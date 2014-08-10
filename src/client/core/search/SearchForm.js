@@ -31,19 +31,19 @@ var SearchForm = React.createClass({
 	],
 
 	channelNames: [
-		'search'
+		'search',
+		'protocol'
 	],
 
 	initialChannelsState: { 
-		queryValue: null
-	},
-
-	getInitialState: function () {
-		return {
-			disabled: true,
-			inputValue: '',
-			gotResults: false
-		}
+		// state defaults
+		queryValue: null,
+		searchEnabled: true,
+		
+		// client defaults
+		disabled: true,
+		inputValue: '',
+		gotResults: false
 	},
 
 	getDefaultProps: function () {
@@ -70,9 +70,9 @@ var SearchForm = React.createClass({
 	componentDidMount: function () {
 		this._$input = $(this.refs.searchField.getDOMNode());
 		
-		if (this._$input && !this.state.inputValue) {
+		/*if (this._$input && !this.state.inputValue) {
 			this._$input.focus();
-		}
+		}*/
 
 		/*if (!this.state.queryValue) {
 			//console.log('component mounted! routing to /');
@@ -99,6 +99,15 @@ var SearchForm = React.createClass({
 		});
 	},
 
+	updateProtocolChannelState: function (state) {
+		console.log('got protocol state');
+		var searchEnabled = state.numOfHydraCircuits && state.numOfHydraCircuits > 0 ? true : false;
+
+		this.setState({
+			searchEnabled: searchEnabled
+		});
+	},
+
 	removeQuery: function (ignoreUi) {
 		if (this._$input && !ignoreUi) {
 			this._$input.focus();
@@ -116,7 +125,7 @@ var SearchForm = React.createClass({
 	},
 
 	startQuery: function (value) {
-		if (this.state.disabled || this.state.submitted) {
+		if (this.state.disabled || !this.state.searchEnabled || this.state.submitted) {
 			return;
 		}
 
@@ -157,6 +166,8 @@ var SearchForm = React.createClass({
 	},
 
 	handleInputBlur: function (event) {
+		console.log('blur');
+
 		if (!event.target.value) {
 			this.removeQuery();
 		}
@@ -173,8 +184,9 @@ var SearchForm = React.createClass({
 		this.removeQuery();
 	},
 
-	handleLogoClick: function (e) {
-		e.preventDefault();
+	handleLogoClick: function (event) {
+		event.preventDefault();
+		event.currentTarget.blur();
 
 		if (this.state.queryValue) {
 			this.navigate('/search');
@@ -209,40 +221,47 @@ var SearchForm = React.createClass({
 		var fullscreenClassName = this.props.isFullscreen ? ' fullscreen' : '';
 		var focusClassName = this.state.focus ? ' focus' : '';
 		var searchIcon = this.getSearchIcon();
-
-		console.log(this.state.status);
+		var isEnabledClassName = !this.state.searchEnabled ? ' search-disabled' : '';
 
 		return (
-			<section className={'search-form-wrapper' + fullscreenClassName + this.props.locationClassName}>
+			<section className={'search-form-wrapper' + fullscreenClassName + isEnabledClassName + this.props.locationClassName}>
 				<div className='logo-wrapper'>
 					<Link href='/search' className='logo' onClick={this.handleLogoClick}>
 						<img src='/assets/icons/icon128.png' />
 					</Link>
 				</div>
+
 				<form className={'search-form' + focusClassName} ref='searchForm' onSubmit={this.handleSubmit}>
+					<div className='search-disabled-notice'>
+						{this.i18n('searchForm_searchIsDisabled_title')}
+					</div>
+
 					<input 
 						type='text' 
 						placeholder={this.i18n('search_input_placeholder')}
 						className='search-input'
 						ref='searchField'
+						autoFocus
 						onChange={this.handleInputChange}
 						onFocus={this.handleInputFocus}
 						onBlur={this.handleInputBlur}
+						disabled={!this.state.searchEnabled}
 						value={this.state.inputValue} />
 
 					<IconButton 
 						className='clear'
 						icon='close'
-						disabled={this.state.disabled}
+						disabled={this.state.disabled || !this.state.searchEnabled}
 						onClick={this.handleClearButtonClick} />
 
 					<IconButton
 						className='search'
 						icon={searchIcon}
 						type='submit'
-						disabled={this.state.disabled}
+						disabled={this.state.disabled || !this.state.searchEnabled}
 						onClick={this.handleSubmit} />
 				</form>
+
 				{this.props.children}
 			</section>
 		)

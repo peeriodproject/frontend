@@ -27,10 +27,11 @@ var SearchHeader = React.createClass({
 
 	componentDidMount: function () {
 		var node = this.getDOMNode();
+		var indicator = this.refs.searchFormHeightIndicator.getDOMNode();
 
 		this.setLocationClassName(this.props);
 		this._headroom = new Headroom(node, {
-			offset: node.offsetHeight
+			offset: indicator.offsetHeight
 		});
 
 		this._headroom.init();
@@ -65,6 +66,7 @@ var SearchHeader = React.createClass({
 		return (
 			<section className={'search-header' + this.state.locationClassName}>
 				<div className='animation-helper'></div>
+				<div className='search-form-height–indicator' ref='searchFormHeightIndicator'></div>
 				
 				<SearchForm isFullscreen={this.state.isFullscreen} locationClassName={this.state.locationClassName}>
 					<p>Mollis Ultricies Inceptos Vestibulum <a href='http://joernroeder.de'>Nullam</a></p>

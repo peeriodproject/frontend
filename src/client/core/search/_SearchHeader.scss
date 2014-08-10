@@ -65,6 +65,13 @@
 		z-index: 400;
 	}
 
+	.search-form-height–indicator {
+		position: absolute;
+		height: rhythm($search-form-padding * 2 + $search-form-height);
+		border: 1px solid red;
+		visibility: hidden;
+	}
+
 	.download-progress-bar {
 		@include visible-transition(0.25s, ($duration + $delay - 0.125s));
 		//@include visible-transition(0.25s, 10s);

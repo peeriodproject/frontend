@@ -49,6 +49,28 @@
 		}
 	}
 
+	&.search-disabled {
+		$background: mix(#fff, $background-color, 75%);
+
+		.search-form,
+		.search-form.focus {
+			@include arrow-lazy($direction: left, $size: 10px, $color: $red-color, $center: 50%, $margin: 0, $pseudo: before);
+			@include arrow-lazy($direction: left, $size: 9px, $color: $background, $center: 50%, $margin: 0, $pseudo: after);
+
+			border-color: $red-color;
+			background-color: $background;
+
+			.search-disabled-notice {
+				@include visible-transition;
+			}
+
+			input,
+			button {
+				opacity: 0;
+			}
+		}
+	}
+
 	@include nested(12 - ($search-form-squish * 2)) {
 		position: relative;
 		top: 0;
@@ -97,7 +119,7 @@
 				}
 			}
 
-			.badge {
+			/*.badge {
 				position: absolute;
 				top: 0;
 				right: 0;
@@ -107,7 +129,7 @@
 				-webkit-transform: translateX(50%);
 				-ms-transform: translateX(50%);
 				transform: translateX(50%);
-			}
+			}*/
 		}
 
 		// input border effect
@@ -145,21 +167,44 @@
 			@include arrow-lazy($direction: left, $size: 9px, $color: #fff, $center: 50%, $margin: 0, $pseudo: after);
 		
 			@include nested(6) {
+				.search-disabled-notice {
+					@include adjust-font-size-to(23px, 2);
+					@include padding-leader(1/2, 23px);
+					@include padding-trailer(1/2, 23px);
+					@include gutters($search-form-inner-padding inside);
+					@include hidden-transition;
+
+					position: absolute;
+					width: 100%;
+					
+					color: mix($red-color, $search-form-placeholder-color);
+				}
+
 				.search-input {
 					padding: 0;
 
 					@include adjust-font-size-to(23px, 2);
-					@include padding-leader(1/2, 23px);
-					@include padding-trailer(1/2, 23px);
+					@include margin-leader(1/2, 23px);
+					@include margin-trailer(1/2, 23px);
 					
 					@include span(5);
-					@include gutters(2rem inside);
+					@include gutters($search-form-inner-padding inside);
+
+					@include transition(opacity 0.15s ease);
+
+					line-height: normal;
+					height: strip-units($base-line-height) / 23 * 2em;
 					
 					border: none;
 					outline: none;
 					background-color: transparent;
 
 					color: $dark-color;
+					opacity: 1;
+
+					@include placeholder {
+						color: $search-form-placeholder-color;
+					}
 
 				}
 

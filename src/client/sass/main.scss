@@ -80,6 +80,8 @@ body {
 	@import "../core/share/Upload";
 	@import "../core/share/ShareHandler";
 
+	@import "../core/status/AppStatusHandler";
+
 	@import "../core/page/ConnectionFailedPage";
 
 	//transition: transform 0.2s ease-out;
@@ -148,7 +150,7 @@ strong {
 }
 
 .footer {
-	@include squish(2);
+	@include span(full);
 }
 
 /** {

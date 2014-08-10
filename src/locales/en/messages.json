@@ -71,5 +71,45 @@
 	"settings_share_downloadDestinationButton_label": {
 		"message": "Set Download Destination",
 		"description": "The title of the downloads destination button"
+	},
+	"appStatus_proxy_needsNoProxyAndIsProxyingFor_title": {
+		"message": "No Proxy needed. $proxingForCount$",
+		"description": "A message that indicates that the app does not need a proxy and is eventually proxing for 'proxingForCount' other apps.",
+		"placeholders": {
+			"proxingForCount": {
+				"content": "$1",
+				"example": "<strong>1</strong>"
+			}
+		}
+	},
+	"appStatus_proxy_needsProxyAndHasNumOfProxies_title": {
+		"message": "Proxy needed. $numOfProxys$",
+		"description": "...",
+		"placeholders": {
+			"numOfProxys": {
+				"content": "$1",
+				"example": "<strong>1</strong>"
+			}
+		}
+	},
+	"appStatus_hydra_numOfHydraCircuits_singular_title": {
+		"message": "Maintaining currently $numOfCircuits$ circuit",
+		"description": "A message that indicates that the app is currently maintaining a single circuit.",
+		"placeholders": {
+			"numOfCircuits": {
+				"content": "$1",
+				"example": "<strong>1</strong>"
+			}
+		}
+	},
+	"appStatus_hydra_numOfHydraCircuits_plural_title": {
+		"message": "Maintaining currently $numOfCircuits$ circuits",
+		"description": "A message that indicates that the app is currently maintaining a multiple circuits.",
+		"placeholders": {
+			"numOfCircuits": {
+				"content": "$1",
+				"example": "<strong>2</strong>"
+			}
+		}
 	}
 }

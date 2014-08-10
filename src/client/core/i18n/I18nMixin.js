@@ -1,5 +1,7 @@
 var sentWarningFor = [];
 
+var Interpolate = require('react-interpolate-component');
+
 /**
  * provides internationalisation via chrome.i18n
  *
@@ -11,12 +13,28 @@ var I18nMixin = {
 	 * Returns the localized string for the specified key
 	 *
 	 * @param  {string} key
-	 * @param  {string} fallback
 	 *
 	 * @return {string}
 	 */
-	i18n: function (key, fallback) {
-		var value = chrome.i18n.getMessage(key);
+	i18n: function (key, placeholders) {
+		var placeholderMap = {};
+		var chromePlaceholders;
+		var value;
+
+		placeholders = placeholders || [];
+
+		if (placeholders.length) {
+			chromePlaceholders = [];
+
+			for (var i = 0, l = placeholders.length; i < l; i++) {
+				var placeholderKey = 'placeholder-' + i;
+
+				placeholderMap[placeholderKey] = placeholders[i];
+				chromePlaceholders[i] = '%(' + placeholderKey + ')s';
+			}
+		}
+
+		value = chrome.i18n.getMessage(key, chromePlaceholders);
 
 		if (!value) {
 			if (sentWarningFor.indexOf(key) === -1) {
@@ -24,10 +42,10 @@ var I18nMixin = {
 				sentWarningFor.push(key);
 			}
 			
-			value = fallback || '__' + key + '__';
+			return  '__' + key + '__';
 		}
-
-		return value;
+		
+		return chromePlaceholders && chromePlaceholders.length ? Interpolate(placeholderMap, value) : value;
 	}
 };
 

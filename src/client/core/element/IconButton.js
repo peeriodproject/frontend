@@ -30,26 +30,26 @@ var IconButton = React.createClass({
 		};
 	},
 
-	handleMouseClick: function (e) {
-		this.props.onClick(e);
+	handleMouseClick: function (event) {
+		this.props.onClick(event);
 		
-		e.currentTarget.blur();
+		event.currentTarget.blur();
 	},
 
-	handleMouseEnter: function (e) {
+	handleMouseEnter: function (event) {
 		this.setState({
 			hoverClassName: ''
 		});
 
-		this.props.onMouseEnter(e);
+		this.props.onMouseEnter(event);
 	},
 
-	handleMouseLeave: function (e) {
+	handleMouseLeave: function (event) {
 		this.setState({
 			hoverClassName: ''
 		});
 
-		this.props.onMouseLeave(e);
+		this.props.onMouseLeave(event);
 	},
 
 	render: function () {
@@ -64,7 +64,7 @@ var IconButton = React.createClass({
 				onMouseEnter={this.handleMouseEnter} 
 				onMouseLeave={this.handleMouseLeave}
 			>
-				<SvgIcon icon={this.props.icon} />
+				<SvgIcon icon={this.props.icon} onClick={this.handleMouseClick} />
 			</button>
 		)
 	}
