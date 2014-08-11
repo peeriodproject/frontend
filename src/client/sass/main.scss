@@ -82,6 +82,8 @@ body {
 
 	@import "../core/status/AppStatusHandler";
 
+	@import "../core/welcome/WelcomeHandler";
+
 	@import "../core/page/ConnectionFailedPage";
 
 	//transition: transform 0.2s ease-out;

@@ -6,11 +6,13 @@
 var React = require('react');
 var ReactRouter = require('react-router-component');
 
+var NotFound = ReactRouter.NotFound
 var Locations = ReactRouter.Locations;
 var Location = ReactRouter.Location;
 
 var MenuButton = require('../menu/MenuButton');
 var SearchHeader = require('../search/SearchHeader');
+var WelcomeHandler = require('../welcome/WelcomeHandler');
 
 /**
  * The router acts as the main entrypoint to the application
@@ -37,8 +39,10 @@ var Router = function (routes) {
 				locations.push(<Location path={route.path} handler={route.handler} />);
 			}
 
+			//locations.push(<NotFound handler={WelcomeHandler} />);
+
 			var locationRouter = (
-				<Locations hash onBeforeNavigation={this.onBeforeNavigation} onNavigation={this.onNavigation}>
+				<Locations hash onBeforeNavigation={this.firstRunCheck}>
 					{locations}
 				</Locations>
 			)

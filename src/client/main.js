@@ -56,12 +56,23 @@ window.App = {
 		}
 	},
 
+	checkFirstRun: function () {
+		if (!window.localStorage.getItem('hasSeenWelcomeNotice')) {
+			window.history.pushState({}, '', '#/welcome');
+		}
+		else if (window.location.hash.indexOf('/welcome') !== -1) {
+			window.history.pushState({}, '', '#/');
+		}
+	},
+
 	start: function () {
 		if (this._running || !this._windowLoaded || !this._connected) {
 			return;
 		}
 
-		React.renderComponent(DialogHandler(), document.getElementById('dialogHandler'));
+		this.checkFirstRun();
+
+		//React.renderComponent(DialogHandler(), document.getElementById('dialogHandler'));
 		//React.renderComponent(BackgroundHandler(), document.getElementById('backgroundHandler'));
 		React.renderComponent(Router(), document.getElementById('page'));
 		React.renderComponent(Footer(), document.getElementById('page-footer'));

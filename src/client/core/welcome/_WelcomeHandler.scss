@@ -1,0 +1,22 @@
+.welcome-handler {
+	$squish: 3;
+
+	@include squish($squish);
+	@extend %clearfix;
+
+	text-align: center;
+
+	@include nested(12 - ($squish * 2)) {
+		header {
+			@include span(full);
+			@include padding-leader(3);
+			@include margin-trailer(2);
+
+			@extend %clearfix;
+		}
+
+		p {
+			@include span(full);
+		}
+	}
+}

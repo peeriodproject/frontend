@@ -22,5 +22,9 @@ module.exports = [
 	{
 		path: '/status',
 		handler: require('../core/status/AppStatusHandler')
+	},
+	{
+		path: '/welcome',
+		handler: require('../core/welcome/WelcomeHandler')
 	}
 ];
