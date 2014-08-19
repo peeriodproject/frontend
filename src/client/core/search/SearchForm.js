@@ -57,6 +57,9 @@ var SearchForm = React.createClass({
 		var loadingStates = ['CREATED', 'GOT_RESULTS'];
 		var icon = 'magnifying_glass';
 
+		if (!this.state.searchEnabled) {
+			icon = 'warning';
+		}
 		if (this.state.status === 'COMPLETE' && this.state.gotResults) {
 			icon = 'tick';
 		}
@@ -100,7 +103,6 @@ var SearchForm = React.createClass({
 	},
 
 	updateProtocolChannelState: function (state) {
-		console.log('got protocol state');
 		var searchEnabled = state.numOfHydraCircuits && state.numOfHydraCircuits > 0 ? true : false;
 
 		this.setState({
@@ -113,6 +115,10 @@ var SearchForm = React.createClass({
 			this._$input.focus();
 		}
 
+		if (this.state.submitted) {
+			this.searchChannel.send('removeQuery');
+		}
+
 		this.setState({
 			inputValue: '',
 			disabled: true,
@@ -120,8 +126,6 @@ var SearchForm = React.createClass({
 			status: '',
 			gotResults: false
 		});
-
-		this.searchChannel.send('removeQuery');
 	},
 
 	startQuery: function (value) {
@@ -166,10 +170,11 @@ var SearchForm = React.createClass({
 	},
 
 	handleInputBlur: function (event) {
-		console.log('blur');
+		console.log('input blur', event.target);
+		event.target.blur();
 
 		if (!event.target.value) {
-			this.removeQuery();
+			this.removeQuery(true);
 		}
 		
 		this.setState({
@@ -221,6 +226,7 @@ var SearchForm = React.createClass({
 		var fullscreenClassName = this.props.isFullscreen ? ' fullscreen' : '';
 		var focusClassName = this.state.focus ? ' focus' : '';
 		var searchIcon = this.getSearchIcon();
+		var loadingClassName = searchIcon === 'loading' ? ' loading' : '';
 		var isEnabledClassName = !this.state.searchEnabled ? ' search-disabled' : '';
 
 		return (
@@ -255,7 +261,7 @@ var SearchForm = React.createClass({
 						onClick={this.handleClearButtonClick} />
 
 					<IconButton
-						className='search'
+						className={'search' + loadingClassName}
 						icon={searchIcon}
 						type='submit'
 						disabled={this.state.disabled || !this.state.searchEnabled}

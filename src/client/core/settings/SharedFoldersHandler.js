@@ -17,6 +17,8 @@ var SvgIcon = require('../element/SvgIcon');
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
 
+var NoSharedFoldersNotice = require('./NoSharedFoldersNotice');
+
 //var DialogHandler = require('../dialog/DialogHandler');
 //var AddFolderDialog = require('../dialog/AddFolderDialog');
 
@@ -83,6 +85,8 @@ var SharedFoldersHandler = React.createClass({
 
 	render: function() {
 		var dropzone;
+		var noSharedFoldersNotice;
+		var hasFoldersClassName = '';
 		var folders = {};
 
 		if (!this.state.hasRenderedDropzone) {
@@ -95,14 +99,23 @@ var SharedFoldersHandler = React.createClass({
 		}
 
 		if (this.state.folders && this.state.folders.length) {
+			hasFoldersClassName = ' has-folders';
+
 			for (var i in this.state.folders) {
 				var folder = this.state.folders[i];
 				folders[folder.path] = <Folder onRemove={this.removeFolder} onRefresh={this.refreshFolder} onShow={this.showFolder} name={folder.name} path={folder.path} status={folder.status} items={folder.items} />;
 			}
 		}
+		else {
+			noSharedFoldersNotice = (
+				<NoSharedFoldersNotice
+					title={this.i18n('settings_sharedFolders_noSharedFoldersNotice_title')}
+					description={this.i18n('settings_sharedFolders_noSharedFoldersNotice_description')} />
+			);
+		}
 
 		return (
-			<section className='shared-folders-handler'>
+			<section className={'shared-folders-handler' + hasFoldersClassName}>
 				<header>
 					<h1>{this.i18n('settings_sharedFolders_title')}</h1>
 					<div className='add-folder-button'>
@@ -113,6 +126,7 @@ var SharedFoldersHandler = React.createClass({
 				</header>
 				
 				{folders}
+				{noSharedFoldersNotice}
 				{dropzone}
 			</section>
 		)

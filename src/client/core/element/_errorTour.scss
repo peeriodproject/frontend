@@ -76,6 +76,7 @@ $headerBackgroundColor: #eeeeee;
 			h3 {
 				@include adjust-font-size-to(23px);
 
+				font-style: $notice-font-style;
 				overflow: hidden;
 
 				/*margin: 0;
@@ -110,6 +111,7 @@ $headerBackgroundColor: #eeeeee;
 				margin: 0 0 0.5em 0;
 				line-height: 1.3em;
 
+				font-style: $notice-font-style;
 				overflow: hidden;
 
 				&:last-child {

@@ -47,7 +47,8 @@ var SearchResults = React.createClass({
 			query: null,
 			results: null,
 			frozenResults: null,
-			downloads: {}
+			downloads: {},
+			overlayTimedOut: false
 		}
 	},
 
@@ -69,21 +70,6 @@ var SearchResults = React.createClass({
 
 	getDownload: function (downloadId) {
 		return this.state.downloads[downloadId] || {};
-
-
-
-		/*if (this.state.downloads.length) {
-			for (var i = 0, l = this.state.downloads.length; i < l; i++) {
-				console.log(this.state.downloads[i].id, '-->', downloadId);
-
-				if (this.state.downloads[i].id === downloadId) {
-					console.log('FOUND DOWNLOAD');
-					return this.state.downloads[i];
-				}
-			}
-		}
-		
-		return null;*/
 	},
 
 	handleDownloadStart: function (resultId) {
@@ -168,6 +154,10 @@ var SearchResults = React.createClass({
 			nextState.frozenResults = null;
 		}
 
+		if (this.state.overlayTimedOut && ((nextState.results && nextState.results.total) || nextState.status === 'COMPLETE')) {
+				this.hideOverlay();
+			}
+
 		// results amount is above freezing. -> updating results
 		if (nextState.results && nextState.results.total) {
 			console.log('has results', nextState.status);
@@ -218,13 +208,17 @@ var SearchResults = React.createClass({
 			console.log('setting overlay timeout');
 			this._overlayTimeout = setTimeout(function () {
 				console.log('clearing overlay');
-				_this.hideOverlay()
+				//_this.hideOverlay()
+				_this.setState({
+					overlayTimedOut: true
+				});
 
 				_this._overlayTimeout = null;
 			}, this.props.hideOverlayTimeoutDelay);
 			this.emitSearchResultsNotificationsDisabled();
 
 			nextState.overlayIsActive = true;
+			nextState.overlayTimedOut = false;
 		}
 		else {
 			nextState.frozenResults = null;
@@ -312,7 +306,9 @@ var SearchResults = React.createClass({
 		return (
 			<div className='search-results'>
 				<div className={'search-results-overlay' + overlayIsActiveClassName} onClick={this.hideOverlay}>
-					<div className=''>Click to hide overlay</div>
+					<div className='notice-wrapper'>
+						<div className='click-to-hide-notice'>Click to hide overlay</div>
+					</div>
 				</div>
 				{noSearchStartedNotice}
 				{noResultsFoundNotice}

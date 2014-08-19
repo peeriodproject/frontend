@@ -4,6 +4,7 @@ var ChannelMixin = {
 
 	_channels: [],
 	_onChannelCallbacks: {},
+	_gotInitialChannelState: {},
 
 	_setupChannel: function (name) {
 		var self = this;
@@ -54,9 +55,22 @@ var ChannelMixin = {
 		return this.initialChannelsState;
 	},
 
+	gotInitialState: function (channelName) {
+		return this._gotInitialChannelState[channelName] ? true : false;
+	},
+
+	gotStateClassName: function (channelName) {
+		return this._gotInitialChannelState[channelName] ? ' got-' + channelName + '-channel-state' : '';
+	},
+
 	onChannelUpdate: function () {
 		var args = arguments;
-		var channelUpdateName = 'update' + this.firstCharToUpperCase(args[0]) + 'ChannelState';
+		var channelName = args[0];
+		var channelUpdateName = 'update' + this.firstCharToUpperCase(channelName) + 'ChannelState';
+
+		if (!this._gotInitialChannelState[channelName]) {
+			this._gotInitialChannelState[channelName] = true;
+		}
 
 		if (this[channelUpdateName]) {
 			// remove channelName from args

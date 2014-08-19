@@ -71,8 +71,8 @@ var AppStatusHandler = React.createClass({
 		var desiredAmountOfCircuitsReached = this.state.protocolState.numOfHydraCircuits === this.state.protocolState.desiredAmountOfCircuits;
 		var reachedIcon = desiredAmountOfCircuitsReached ? 'tick' : 'close';
 		var reachedLabel = desiredAmountOfCircuitsReached ? 'valid' : 'invalid';
-
-		//console.log(this.state.protocolState);
+		var hasHydrasIcon = this.state.protocolState.numOfHydraCircuits ? 'tick' : 'close';
+		var hasHydraClassName = this.state.protocolState.numOfHydraCircuits ? 'valid' : 'invalid';
 
 		// num of circuits reached
 		if (desiredAmountOfCircuitsReached) {
@@ -102,16 +102,16 @@ var AppStatusHandler = React.createClass({
 		//desiredAmountOfCircuitsReached
 
 		stats.push(
+			<li className={'is-' + hasHydraClassName + ' ' + badgeClassName}>
+				<SvgIcon icon={hasHydrasIcon} /> {this.i18n(numOfHydraCircuitsLabel, placeholders)}
+			</li>
+		);
+
+		stats.push(
 			<li className={'is-' + reachedLabel}>
 				<SvgIcon icon={reachedIcon} /> {this.i18n('appStatus_hydra_desiredAmountOfCircuitsReached_' + reachedLabel + '_title')}
 			</li>
 		)
-
-		stats.push(
-			<li>
-				{this.i18n(numOfHydraCircuitsLabel, placeholders)}
-			</li>
-		);
 		
 		return stats;
 	},

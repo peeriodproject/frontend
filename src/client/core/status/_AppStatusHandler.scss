@@ -12,12 +12,13 @@
 
 			//@include span(full);
 			@include padding-leader(3);
-			@include margin-trailer(2);
+			@include margin-trailer(1.5);
 
 			text-align: center;
 		}
 
 		.stats-wrapper {
+			@extend %clearfix;
 			@include span(full);
 			//@include margin-leader(2);
 			

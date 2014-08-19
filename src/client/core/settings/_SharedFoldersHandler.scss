@@ -3,14 +3,23 @@
 
 	@include squish($squish);
 	@extend %clearfix;
+	
+	&.has-folders header {
+		border-color: transparent;
+	}
 
 	@include nested(12 - ($squish * 2)) {
 		header {
 			@include span(full);
 			@include padding-leader(3);
-			@include margin-trailer(2);
+			//@include margin-trailer(2);
+			@include trailing-border(1px, 2);
 
 			@extend %clearfix;
+
+			border-color: $input-border-color;
+			position: relative;
+			z-index: 45;
 			
 			h1 {
 				@include span(4);

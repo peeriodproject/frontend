@@ -64,10 +64,24 @@
 			header {
 				@include span(full);
 				@include padding-trailer(0.5);
+
+				h2 {
+					@include span(4);
+
+					color: $dark-color;
+				}
 			}
 
 			& + section {
 				@include margin-leader(1);
+				@include leading-border(1px, 1);
+
+				border-color: $input-border-color;
+				border-style: dashed;
+			}
+
+			p.notice {
+				font-style: $notice-font-style;
 			}
 		}
 
@@ -85,12 +99,6 @@
 					margin-right: 0;
 				}
 			}
-		}
-
-		h2 {
-			@include span(4);
-
-			color: $dark-color;
 		}
 
 		.download-list,

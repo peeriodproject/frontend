@@ -1,0 +1,72 @@
+.no-shared-folders-notice-wrapper {
+	$squish: 3;
+	$header-height: 7;
+
+	@include pad($squish);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: rhythm(($search-form-padding * 2) + $search-form-height + $header-height);
+	padding-bottom: $footer-height;
+
+	display: table;
+	text-align: center;	
+
+
+	.no-shared-folders-notice {
+		$nested: 12 - ($squish * 2);
+
+		//@include container();
+		@extend %clearfix;
+
+		display: table-cell;
+		vertical-align: middle;
+		overflow: hidden;
+		
+		@include nested($nested) {
+			$icon-width: 4rem;
+
+			width: span($nested);
+			min-height: $icon-width;
+
+			.icon-wrapper {
+				//@include span($nested / 6);
+				width: $icon-width;
+				height: $icon-width;
+				position: absolute;
+				margin-top: 0.25rem;
+
+				.icon svg {
+					max-height: $icon-width;
+					width: $icon-width;
+
+					use {
+						fill: $dark-color;
+					}
+				}
+
+				.badge {
+					position: absolute;
+					bottom: 0.25rem;
+					left: $icon-width - 0.75rem;
+				}
+			}
+			.content {
+				padding-left: gutter();
+				margin-left: $icon-width;
+				text-align: left;
+				font-style: $notice-font-style;
+
+				h2 {
+					@include adjust-font-size-to(23px);
+					@include margin-trailer(0.25, 23px);
+
+					color: $red-color;
+				}
+			}
+		}
+	}
+}

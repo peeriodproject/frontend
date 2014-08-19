@@ -65,8 +65,12 @@
 			}
 
 			input,
-			button {
+			button:not(.search) {
 				opacity: 0;
+			}
+
+			button.search[disabled] .icon svg use {
+				fill: mix($red-color, $background, 25%);
 			}
 		}
 	}
@@ -167,33 +171,31 @@
 			@include arrow-lazy($direction: left, $size: 9px, $color: #fff, $center: 50%, $margin: 0, $pseudo: after);
 		
 			@include nested(6) {
-				.search-disabled-notice {
+				.search-disabled-notice,
+				.search-input {
 					@include adjust-font-size-to(23px, 2);
 					@include padding-leader(1/2, 23px);
 					@include padding-trailer(1/2, 23px);
 					@include gutters($search-form-inner-padding inside);
+					@include span(5);
+				}
+
+				.search-disabled-notice {				
 					@include hidden-transition;
 
 					position: absolute;
 					width: 100%;
-					
 					color: mix($red-color, $search-form-placeholder-color);
+					font-style: $notice-font-style;
 				}
 
 				.search-input {
-					padding: 0;
-
-					@include adjust-font-size-to(23px, 2);
-					@include margin-leader(1/2, 23px);
-					@include margin-trailer(1/2, 23px);
-					
-					@include span(5);
-					@include gutters($search-form-inner-padding inside);
-
 					@include transition(opacity 0.15s ease);
 
+					//padding: 0;
 					line-height: normal;
-					height: strip-units($base-line-height) / 23 * 2em;
+					height: (strip-units($base-line-height) / 23) * 3em - (2 / strip-units($base-line-height));
+
 					
 					border: none;
 					outline: none;
@@ -220,12 +222,6 @@
 
 					position: absolute;
 
-					.icon {
-						svg use {
-							fill: $icon-color-light;
-						}
-					}
-
 					&:hover,
 					&:focus {
 						.icon svg use {
@@ -236,12 +232,30 @@
 					&[disabled] {
 						opacity: 0;
 					}
+
+					.icon {
+						svg use {
+							fill: $icon-color-light;
+						}
+					}
 				}
 
 				button.search {
 					@include span(1 last);
 
 					height: rhythm(3, $icon-button-font-size);
+
+					&[disabled] {
+						.icon {
+							svg use {
+								fill: $icon-color-light;
+							}
+						}
+					}
+
+					&.loading {
+						cursor: default;
+					}
 
 					.icon {
 						&.icon-loading use {
@@ -253,14 +267,6 @@
 
 						&.icon-tick use {
 							fill: $green-color;
-						}
-					}
-
-					&[disabled] {
-						.icon {
-							svg use {
-								fill: $icon-color-light;
-							}
 						}
 					}
 				}

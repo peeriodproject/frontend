@@ -11,6 +11,7 @@ var events = require('../events/EventEmitterMixin');
 
 var Download = require('./Download');
 var DownloadDestination = require('./DownloadDestination');
+var DropzoneBackroundRenderer = require('../utils/DropzoneBackroundRenderer');
 
 var Upload = require('./Upload');
 
@@ -26,6 +27,9 @@ var I18nMixin = require('../i18n/I18nMixin');
 
 var SharedFoldersHandler = React.createClass({
 	
+	_dropzoneBackground: null,
+	_dropzoneButton: null,
+
 	mixins: [
 		ChannelMixin,
 		I18nMixin,
@@ -76,7 +80,7 @@ var SharedFoldersHandler = React.createClass({
 	handleDownloadDestinationButtonClick: function (event) {
 		event.preventDefault();
 
-		this.folderdropzoneChannel.send('open', 'downloadDestination');
+		this.folderdropzoneChannel.send('open', 'downloadDestination', this._dropzoneBackground, this._dropzoneButton);
 		//this.emitDialogOpen('addFolderDialog');
 	},
 
@@ -136,14 +140,37 @@ var SharedFoldersHandler = React.createClass({
 		});
 	},*/
 
+	dropzoneRendered: function (data) {
+		this._dropzoneBackground = data.background;
+		this._dropzoneButton = data.button;
+	},
+
 	render: function() {
+		var dropzone;
+		var downloadSectionButtons = [];
 		var downloads = [];
 		var uploads = [];
 		var downloadListOrNotice;
 		var uploadListOrNotice;
 
+		if (!this.state.hasRenderedDropzone) {
+			dropzone = (
+				<DropzoneBackroundRenderer
+					title={this.i18n('dropzone_selectDownloadDestination_title')}
+					description={this.i18n('dropzone_selectDownloadDestination_description')}
+					onRendered={this.dropzoneRendered} />
+			)
+		}
+
 		if (this.state.downloads && Object.keys(this.state.downloads).length) {
 			var downloadIds = Object.keys(this.state.downloads);
+
+			downloadSectionButtons.push(
+				<IconButton icon='view' onClick={this.showDownloads} tooltipContent={this.i18n('settings_share_downloads_showDownloadsButton_tooltipContent')} />
+			);
+			downloadSectionButtons.push(
+				<IconButton icon='bin' onClick={this.removeDownloads} tooltipContent={this.i18n('settings_share_download_removeStoppedDownloadsButton_tooltipContent')} />
+			);
 
 			for (var i = 0, l = downloadIds.length; i < l; i++) {
 				var id = downloadIds[i];
@@ -216,8 +243,7 @@ var SharedFoldersHandler = React.createClass({
 					<header>
 						<h2>{this.i18n('settings_share_downloads_title')}</h2>
 						<div className='section-buttons'>
-							<IconButton icon='view' onClick={this.showDownloads} tooltipContent={this.i18n('settings_share_downloads_showDownloadsButton_tooltipContent')} />
-							<IconButton icon='bin' onClick={this.removeDownloads} tooltipContent={this.i18n('settings_share_download_removeStoppedDownloadsButton_tooltipContent')} />
+							{downloadSectionButtons}
 						</div>
 					</header>
 
@@ -231,6 +257,8 @@ var SharedFoldersHandler = React.createClass({
 
 					{uploadListOrNotice}
 				</section>
+
+				{dropzone}
 			</section>
 		)
 	}
