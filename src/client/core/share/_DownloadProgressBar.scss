@@ -59,72 +59,84 @@ $onePixel: (1 / strip-units($base-font-size)) * 1rem;
 }
 
 .download-progress-bar-tooltip {
-
-	&> header {
-		@extend %clearfix;
-
-		h2 {
-			float: left;
+	&:not(.tooltip-element-attached-center) .tooltip-content {
+		&:before {
+			bottom: 100%;
+			left: 50%;
+			margin-left: -$tooltip-arrow-size;
+			border-bottom-color: #3c3c3c;
 		}
 
-		/*span {
-			float: right;
-		}*/
+		margin-top: $tooltip-arrow-size;
 	}
 
-	li {
-		@include padding-leader(0.75);
-		@include trailing-border(1px, 0.75);
+	.tooltip-content {
+		&> header {
+			@extend %clearfix;
 
-		border-color: $tooltip-divider-color;
-
-		&:last-child {
-			margin-bottom: 0;
-			border-bottom: none;
-		}
-	}
-
-	.progress-bar-item {
-		progress[value] {
-			$background: darken($tooltip-background-color, 10%);
-			$height: $onePixel * 2;
-			$margin: (rhythm(1) /2) - strip-units($height);
-
-			-webkit-appearance: none;
-			appearance: none;
-			display: block;
-			width: 100%;
-			height: $height;
-			margin: $margin 0;
-
-			&::-webkit-progress-bar {
-				background-color: $background;
+			h2 {
+				float: left;
 			}
 
-			&::-webkit-progress-value {
-				@include linear-gradient(to right, mix($background, $green-color, 20%), $green-color);
-				background-color: $green-color;
+			/*span {
+				float: right;
+			}*/
+		}
+
+		li {
+			@include padding-leader(0.75);
+			@include trailing-border(1px, 0.75);
+
+			border-color: $tooltip-divider-color;
+
+			&:last-child {
+				margin-bottom: 0;
+				border-bottom: none;
 			}
 		}
 
-		span {
-			@include adjust-font-size-to(14px);
-			font-style: italic;
-			color: $tooltip-dark-color;
+		.progress-bar-item {
+			progress[value] {
+				$background: darken($tooltip-background-color, 10%);
+				$height: $onePixel * 2;
+				$margin: (rhythm(1) /2) - strip-units($height);
 
-			&.speed {
-				&:before {
-					content: " (";
+				-webkit-appearance: none;
+				appearance: none;
+				display: block;
+				width: 100%;
+				height: $height;
+				margin: $margin 0;
+
+				&::-webkit-progress-bar {
+					background-color: $background;
 				}
 
-				&:after {
-					content: ")";
+				&::-webkit-progress-value {
+					@include linear-gradient(to right, mix($background, $green-color, 20%), $green-color);
+					background-color: $green-color;
 				}
 			}
 
-			&.time {
-				&:before {
-					content: " – ";
+			span {
+				@include adjust-font-size-to(14px);
+				font-style: italic;
+				color: $tooltip-dark-color;
+
+				&.speed {
+					&:before {
+						content: " (";
+					}
+
+					&:after {
+						content: ")";
+					}
+				}
+
+				&.time {
+					&:before {
+						content: " – ";
+					}
 				}
 			}
 		}

@@ -39,7 +39,8 @@ var DownloadProgressBar = React.createClass({
 			tooltipOpenOn: 'manual',
 			enableTooltip: true,
 			tooltipDelayInMs: 500,
-			tooltipPosition: 'bottom center'
+			tooltipPosition: 'bottom center',
+			tooltipClassName: 'download-progress-bar-tooltip'
 		};
 	},
 
@@ -55,8 +56,6 @@ var DownloadProgressBar = React.createClass({
 	},
 
 	updateShareChannelState: function (state) {
-		console.log('share state', state);
-
 		state.downloads = this.getRelevantDownloadsFromState(state);
 		state.averageDownloadProgress = this.getAverageDownloadProgress(state);
 
@@ -71,11 +70,10 @@ var DownloadProgressBar = React.createClass({
 
 	getTooltipContent: function () {
 		return (
-			<div className='download-progress-bar-tooltip'>
-				<ul>
-					{this.getDownloads()}
-				</ul>
-			</div>);
+			<ul>
+				{this.getDownloads()}
+			</ul>
+		);
 	},
 
 	getRelevantDownloadsFromState: function (state) {
@@ -104,6 +102,10 @@ var DownloadProgressBar = React.createClass({
 	getDownloads: function () {
 		var downloads = [];
 		
+		if (!this.state.downloads || this.state.downloads.length) {
+			return downloads;
+		}
+
 		for (var i = 0; i < this.state.downloads.length; i++) {
 			var data = this.state.downloads[i];
 
