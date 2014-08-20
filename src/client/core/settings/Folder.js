@@ -84,7 +84,7 @@ var Folder = React.createClass({
 		}
 
 		return (
-			<div className='folder'>
+			<div className='folder animated fadeIn'>
 				<h3>{this.props.name}</h3>
 				<Path path={this.props.path} />
 					

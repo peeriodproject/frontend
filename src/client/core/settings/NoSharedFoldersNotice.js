@@ -20,7 +20,7 @@ var NoSharedFoldersNotice = React.createClass({
 
 	render: function () {
 		return (
-			<div className='no-shared-folders-notice-wrapper'>
+			<div className='no-shared-folders-notice-wrapper animated fadeIn'>
 				<div className='no-shared-folders-notice'>
 					<div className='icon-wrapper'>
 						<SvgIcon icon={this.props.icon} />

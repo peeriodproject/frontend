@@ -10,8 +10,6 @@ var I18nMixin = require('../i18n/I18nMixin');
 
 var DropzoneBackroundRenderer = React.createClass({
 
-	_rendered: false,
-
 	mixins: [
 		I18nMixin
 	],
@@ -20,6 +18,7 @@ var DropzoneBackroundRenderer = React.createClass({
 		return {
 			title: '',
 			description: '',
+			image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cGF0aCBkPSJNMCA1NGMwIDEuNjU3IDEuMzQzIDMgMyAzaDU4YzEuNjU3IDAgMy0xLjM0MyAzLTN2LTMyaC02NHYzMnptNjEtNDFoLTM3LjAxOGwtNS45ODItNmgtMTVjLTEuNjU3IDAtMyAxLjM0My0zIDN2OWg2NHYtM2MwLTEuNjU3LTEuMzQzLTMtMy0zeiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyIvPjwvc3ZnPg==',
 			onRendered: function () {}
 		}
 	},
@@ -29,6 +28,10 @@ var DropzoneBackroundRenderer = React.createClass({
 			renderedBackground: '',
 			renderedButton: ''
 		};
+	},
+
+	componentWillMount: function () {
+		this._rendered = false;
 	},
 
 	componentDidMount: function () {
@@ -89,7 +92,7 @@ var DropzoneBackroundRenderer = React.createClass({
 		return (
 			<div className='dropzone-renderer-wrapper' style={{ display: (this._rendered ? 'none' : 'block') }}>
 				<div ref='dropzoneRenderer' className='dropzone-renderer'>
-					<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cGF0aCBkPSJNMCA1NGMwIDEuNjU3IDEuMzQzIDMgMyAzaDU4YzEuNjU3IDAgMy0xLjM0MyAzLTN2LTMyaC02NHYzMnptNjEtNDFoLTM3LjAxOGwtNS45ODItNmgtMTVjLTEuNjU3IDAtMyAxLjM0My0zIDN2OWg2NHYtM2MwLTEuNjU3LTEuMzQzLTMtMy0zeiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyIvPjwvc3ZnPg==" />
+					<img src={this.props.image} />
 					<h2>{this.props.title}</h2>
 					<p>{this.props.description}</p>
 				</div>
