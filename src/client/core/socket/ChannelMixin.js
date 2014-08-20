@@ -2,10 +2,6 @@
 
 var ChannelMixin = {
 
-	_channels: [],
-	_onChannelCallbacks: {},
-	_gotInitialChannelState: {},
-
 	_setupChannel: function (name) {
 		var self = this;
 		var channelName = this.getChannelName(name);
@@ -39,19 +35,6 @@ var ChannelMixin = {
 	},
 
 	getInitialState: function () {
-		var self = this;
-
-		if (!this.channelNames || !this.channelNames.length) {
-			if (console) {
-				console.error('no channel names specified!');
-			}
-			return;
-		}
-
-		for (var i = 0, l = this.channelNames.length; i < l; i++) {
-			this._setupChannel(this.channelNames[i]);
-		}
-
 		return this.initialChannelsState;
 	},
 
@@ -61,6 +44,21 @@ var ChannelMixin = {
 
 	gotStateClassName: function (channelName) {
 		return this._gotInitialChannelState[channelName] ? ' got-' + channelName + '-channel-state' : '';
+	},
+
+	gotStateClassNames: function () {
+		var classNames = '';
+		var channelNames = Object.keys(this._gotInitialChannelState);
+
+		if (!channelNames.length) {
+			return '';
+		}
+
+		for (var i = 0, l = channelNames.length; i < l; i++) {
+			classNames += this.gotStateClassName(channelNames[i]);
+		}
+
+		return classNames;
 	},
 
 	onChannelUpdate: function () {
@@ -80,6 +78,25 @@ var ChannelMixin = {
 		}
 		else {
 			this.updateChannelState.apply(this, args);
+		}
+	},
+
+	componentWillMount: function () {
+		var self = this;
+
+		this._channels = [];
+		this._onChannelCallbacks = {};
+		this._gotInitialChannelState = {};
+
+		if (!this.channelNames || !this.channelNames.length) {
+			if (console) {
+				console.error('no channel names specified!');
+			}
+			return;
+		}
+
+		for (var i = 0, l = this.channelNames.length; i < l; i++) {
+			this._setupChannel(this.channelNames[i]);
 		}
 	},
 
