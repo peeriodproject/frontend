@@ -24,7 +24,8 @@ var TooltipMixin = {
 
 	componentDidMount: function() {
 		var el = this._getTooltipOption('getTooltipElement');
-		
+		var extraClassName = this._getTooltipOption('getTooltipClassName');
+
 		if (!this.props.tooltipContent && !this.props.enableTooltip) {
 			return;
 		}
@@ -34,8 +35,19 @@ var TooltipMixin = {
 			position	: this._getTooltipOption('getTooltipPosition'),
 			content		: '',
 			openOn		: null,
-			thetherOption: {
-				moveElement: false
+			classes		:'tooltip-theme-arrows' + (extraClassName ? ' ' + extraClassName : extraClassName),
+			constrainToScrollParent: false,
+			constrainToWindow: true,
+			tetherOptions: {
+				/*optimizations: {
+					moveElement: false
+				}*/
+				 constraints: [{
+					to: 'window',
+					pin: true,
+					attachment: 'together'
+				}],
+				offset: '0 0'
 			}
 			/*classes		: 'my-tether-theme'*/
 		});
@@ -59,6 +71,10 @@ var TooltipMixin = {
 
 	_getTooltipPosition: function () {
 		return this.props.tooltipPosition ? this.props.tooltipPosition : 'top center';
+	},
+
+	_getTooltipClassName: function () {
+		return this.props.tooltipClassName ? this.props.tooltipClassName : '';
 	},
 
 	_getTooltipOpenClass: function () {
@@ -146,6 +162,10 @@ var TooltipMixin = {
 		if (this.props.onTooltipClose) {
 			this.props.onTooltipClose();
 		}
+	},
+
+	getTooltipDrop: function () {
+		return this._tooltip ? this._tooltip.drop.drop : null;
 	},
 
 	/**

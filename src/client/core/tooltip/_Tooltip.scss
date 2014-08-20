@@ -4,13 +4,12 @@
 
 $themePrefix: "tooltip";
 $themeName: "arrows";
-$arrowSize: 8px;
 $backgroundColor: $tooltip-background-color;
 $color: $tooltip-color;
 $useDropShadow: false;
 
 @include tether($themePrefix: $themePrefix);
-@include tether-theme-arrows($themePrefix: $themePrefix, $themeName: $themeName, $arrowSize: $arrowSize, $backgroundColor: $backgroundColor, $color: $color, $useDropShadow: $useDropShadow);
+@include tether-theme-arrows($themePrefix: $themePrefix, $themeName: $themeName, $arrowSize: $tooltip-arrow-size, $backgroundColor: $backgroundColor, $color: $color, $useDropShadow: $useDropShadow);
 
 // Just a few additions
 
