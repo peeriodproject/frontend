@@ -14,13 +14,9 @@ Tooltip.autoinit = false;
  */
 var TooltipMixin = {
 
-	/**
-	 * The internally used tooltip instance
-	 *
-	 * @member {Tooltip} core.tooltip.TooltipMixin~_tooltip
-	 */
-	_tooltip: null,
-	//_isOpen: false,
+	componentWillMount: function () {
+		this._tooltip = null;
+	},
 
 	componentDidMount: function() {
 		var el = this._getTooltipOption('getTooltipElement');
