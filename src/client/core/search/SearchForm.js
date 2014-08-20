@@ -200,6 +200,10 @@ var SearchForm = React.createClass({
 			this.navigate('/');
 		}
 
+		if (!this.state.inputValue) {
+			this.refs.searchField.getDOMNode().focus();
+		}
+
 		return false;
 	},
 
