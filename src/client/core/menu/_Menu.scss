@@ -6,13 +6,17 @@
 		cursor: pointer;
 
 		&:hover {
-			span.icon svg:not(.current) use {
+			span.icon:not(.icon-warning) svg:not(.current) use {
 				fill: $icons-fill-color;
 			}
 		}
 	}
 
 	span.icon {
+		&.icon-warning svg use {
+			fill: $red-color;
+		}
+		
 		svg {
 			&.current use {
 				//fill: lighten($menu-buttons-color, 30%);
