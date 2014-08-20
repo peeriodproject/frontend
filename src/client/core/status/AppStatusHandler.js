@@ -68,7 +68,7 @@ var AppStatusHandler = React.createClass({
 		var numOfHydraCircuitsLabel = 'appStatus_hydra_noHydraCircuits_title';
 		var placeholders;
 		var badgeClassName = '';
-		var desiredAmountOfCircuitsReached = this.state.protocolState.numOfHydraCircuits === this.state.protocolState.desiredAmountOfCircuits;
+		var desiredAmountOfCircuitsReached = this.state.protocolState.desiredAmountOfCircuits && this.state.protocolState.numOfHydraCircuits === this.state.protocolState.desiredAmountOfCircuits;
 		var reachedIcon = desiredAmountOfCircuitsReached ? 'tick' : 'close';
 		var reachedLabel = desiredAmountOfCircuitsReached ? 'valid' : 'invalid';
 		var hasHydrasIcon = this.state.protocolState.numOfHydraCircuits ? 'tick' : 'close';
