@@ -85,7 +85,7 @@ var SharedFoldersHandler = React.createClass({
 	},
 
 	showDownloads: function () {
-		alert('todo: open the download destination');
+		this.shareChannel.send('showDownloadDestination');
 	},
 
 	showDownload: function (id) {
