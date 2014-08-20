@@ -6,7 +6,7 @@
 	height: 100%;
 
 	margin: 0;
-	padding: 0 0 $footer-height 0;
+	padding: 0 0 ($footer-height / 2) 0;
 	
 	display: table;
 
@@ -44,6 +44,7 @@
 
 	a.btn {
 		border-color: $green-color;
+		display: inline-block;
 
 		@include hover-green-background;
 	}
