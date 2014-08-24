@@ -109,25 +109,6 @@ var SharedFoldersHandler = React.createClass({
 		this.openDropzoneWindow();
 	},
 
-	/*refreshFolder: function (path) {
-		// we're checking all folder paths at once.
-		this.folderChannel.send('syncFolders');
-	},
-
-	showFolder: function (path) {
-		this.folderChannel.send('showFolder', path);
-	},*/
-
-	/*onBackgroundColorChange: function (background, color, inverted, invertedBackgroundColor) {
-		// the background isn't added to the state as we're just piping it to the dropzone!
-		this.folderdropzoneChannel.send('background', {
-			background: background,
-			color: color,
-			inverted: inverted,
-			invertedBackgroundColor: invertedBackgroundColor
-		});
-	},*/
-
 	render: function() {
 		var downloadSectionButtons = [];
 		var downloads = [];
@@ -170,7 +151,7 @@ var SharedFoldersHandler = React.createClass({
 		}
 		else if (this.gotInitialState('share')) {
 			downloadListOrNotice = (
-				<p className='no-downloads notice'>{this.i18n('settings_share_downloads_noUploadsRunning_notice')}</p>
+				<p className='no-downloads notice'>{this.i18n('settings_share_downloads_noDownloadsRunning_notice')}</p>
 			);
 		}
 
