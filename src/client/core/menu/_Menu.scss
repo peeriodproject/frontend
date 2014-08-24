@@ -1,6 +1,10 @@
 .menu {
-	overflow: hidden;
 	$icons-fill-color: lighten($menu-buttons-color, 10%);
+	
+	// fixes chrome rendering issue
+	@include transform(translateZ(0));
+
+	overflow: hidden;
 
 	li {
 		cursor: pointer;
@@ -38,7 +42,7 @@
 	$content-width: 3.5;
 	$icon-dim: 70%;
 
-	@include transition(max-height 0.25s ease);
+	@include transition(max-height 5.25s ease);
 
 	position: fixed;
 	top: rhythm($search-form-padding * 2 + $search-form-height);
@@ -49,11 +53,7 @@
 
 	background: $menu-background-color;
 	color: $menu-color;
-
 	max-height: 0;
-
-	background: $menu-background-color;
-	color: $menu-color;
 
 	&.is-open {
 		max-height: rhythm(15);

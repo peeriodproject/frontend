@@ -6,6 +6,10 @@
 	background-color: transparent;
 	padding: 0;
 
+	&> * {
+		pointer-events: none;
+	}
+	
 	svg use {
 		@include transition(fill .25s ease);
 		fill: $icon-color;
