@@ -27,9 +27,9 @@ var DownloadProgressBarItem = React.createClass({
 				<progress value={this.getProgress() * 100} max='100'></progress>
 
 				<span className='size'>
-					{this.type.getSizeWithExtension(this.props.loaded)} of {this.type.getSizeWithExtension(this.props.size)}
+					{DownloadProgressBarItem.getSizeWithExtension(this.props.loaded)} of {DownloadProgressBarItem.getSizeWithExtension(this.props.size)}
 				</span>
-				<span className='speed'>{this.type.getSizeWithExtension(this.state.averageSpeed)}/s</span>
+				<span className='speed'>{DownloadProgressBarItem.getSizeWithExtension(this.state.averageSpeed)}/s</span>
 				<span className='time'>{this.getTimeLeft()}</span>
 			</div>
 		)

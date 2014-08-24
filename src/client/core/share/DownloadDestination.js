@@ -9,8 +9,6 @@ var I18nMixin = require('../i18n/I18nMixin');
 
 var DownloadDestination = React.createClass({
 
-	_errorTour: null,
-
 	mixins: [
 		I18nMixin
 	],

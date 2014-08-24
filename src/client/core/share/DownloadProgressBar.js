@@ -101,8 +101,8 @@ var DownloadProgressBar = React.createClass({
 
 	getDownloads: function () {
 		var downloads = [];
-		
-		if (!this.state.downloads || this.state.downloads.length) {
+
+		if (!this.state.downloads || !this.state.downloads.length) {
 			return downloads;
 		}
 

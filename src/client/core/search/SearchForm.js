@@ -234,7 +234,7 @@ var SearchForm = React.createClass({
 		var isEnabledClassName = !this.state.searchEnabled ? ' search-disabled' : '';
 
 		return (
-			<section className={'search-form-wrapper' + fullscreenClassName + isEnabledClassName + this.props.locationClassName}>
+			<section className={'search-form-wrapper' + fullscreenClassName + isEnabledClassName + this.props.locationClassName + this.gotStateClassNames()}>
 				<div className='logo-wrapper'>
 					<Link href='/search' className='logo' onClick={this.handleLogoClick}>
 						<img src='/assets/icons/icon128.png' />

@@ -49,7 +49,7 @@
 		}
 	}
 
-	&.search-disabled {
+	&.got-protocol-channel-state.search-disabled {
 		$background: mix(#fff, $background-color, 75%);
 
 		.search-form,

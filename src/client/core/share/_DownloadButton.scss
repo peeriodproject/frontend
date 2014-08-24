@@ -14,8 +14,11 @@
 		}
 	}
 
-	&.invalid .download-btn {
-		background-color: $red-color;
+	&.shepherd-enabled,
+	&.invalid { 
+		.download-btn {
+			background-color: $red-color;
+		}
 	}
 
 	&.neutral .download-btn {

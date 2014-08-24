@@ -15,6 +15,7 @@ $successBackgroundColor: $green-color;
 $errorColor: $dark-background-color;
 $successColor: #fff;
 $useDropShadow: false;
+$gutter-width: 2rem;
 
 $headerBackgroundColor: #eeeeee;
 
@@ -51,7 +52,7 @@ $headerBackgroundColor: #eeeeee;
 		@include padding-leader(0.5);
 		@include padding-trailer(0.25);
 
-		@include gutters(2rem inside);
+		@include gutters($gutter-width inside);
 		//background: $headerBackgroundColor;
 		//padding: 1em;
 		
@@ -68,6 +69,7 @@ $headerBackgroundColor: #eeeeee;
 	.#{$themePrefix}-content {
 		padding: 0;
 		max-width: 21em;
+		font-size: 1em;
 
 		header {
 			@extend %clearfix;
@@ -120,6 +122,7 @@ $headerBackgroundColor: #eeeeee;
 			}
 		}
 		footer {
+			@include gutters($gutter-width inside);
 			//padding: 0 1em 1em;
 			
 			.#{$themePrefix}-buttons {
@@ -129,15 +132,30 @@ $headerBackgroundColor: #eeeeee;
 				margin: 0;
 
 				li {
-					display: inline;
-					padding: 0;
+					@include padding-leader(0.5);
+					@include padding-trailer(0.5);
+
+					display: inline-block;
+					//padding: 0;
 					margin: 0;
 
 					.shepherd-button {
-						@include inline-block;
+						@include adjust-font-size-to($base-font-size);
+						@extend a.btn;
+						@include transition(color 0.15s ease, background-color 0.15s ease);
+
+						display: inline-block;
+						color: #fff;
+						border-color: mix(#fff, $red-color);
+						/*@include inline-block;
 						cursor: pointer;
-						margin: 0 0.5em 0 0;
-						text-decoration: none;
+						text-decoration: none;*/
+						//margin: 0 0.5em 0 0;
+						
+						&:hover,
+						&:focus {
+							background-color: mix(#fff, $red-color);
+						}
 					}
 
 					&:last-child .shepherd-button {

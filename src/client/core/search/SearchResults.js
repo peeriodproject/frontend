@@ -9,6 +9,7 @@ var events = require('../events/EventEmitterMixin');
 
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
+var DownloadDestinationDropzoneMixin = require('../share/DownloadDestinationDropzoneMixin');
 
 var FeatureManager = require('../element/FeatureManager');
 var Badge = require('../element/Badge');
@@ -23,6 +24,7 @@ var SearchResults = React.createClass({
 	mixins: [
 		ChannelMixin,
 		I18nMixin,
+		DownloadDestinationDropzoneMixin,
 		events.mixinFor('SearchResultsRefresh'),
 		events.mixinFor('SearchResultsNotificationsEnabled'),
 		events.mixinFor('SearchResultsNotificationsDisabled')
@@ -30,10 +32,9 @@ var SearchResults = React.createClass({
 
 	channelNames: [
 		'search',
-		'share'
+		'share',
+		'folderdropzone'
 	],
-
-	_overlayTimeout: null,
 
 	getDefaultProps: function () {
 		return {
@@ -48,13 +49,15 @@ var SearchResults = React.createClass({
 			results: null,
 			frozenResults: null,
 			downloads: {},
-			overlayTimedOut: false
+			destination: {},
+			overlayTimedOut: false,
+			resultErrors: {}
 		}
 	},
 
-	/*componentWillReceiveProps: function (nextProps) {
-		this.emitThr
-	},*/
+	componentWillMount: function () {
+		this._overlayTimeout = null;
+	},
 
 	componentWillUnmount: function () {
 		if (this._overlayTimeout) {
@@ -72,11 +75,42 @@ var SearchResults = React.createClass({
 		return this.state.downloads[downloadId] || {};
 	},
 
+	getResultError: function (resultId) {
+		return this.state.resultErrors[resultId] ? this.state.resultErrors[resultId] : null;
+	},
+
 	handleDownloadStart: function (resultId) {
 		console.log('Sending download down the wire');
-		this.shareChannel.send('addDownload', resultId, function (bar) {
-			console.log('foo', bar);
+		var _this = this;
+		this.shareChannel.send('addDownload', resultId, function (err) {
+			var resultErrors = _this.state.resultErrors;
+			if (err) {
+				resultErrors[resultId] = err;
+
+				_this.setState({
+					resultErrors: resultErrors
+				});
+			}
+			else if (resultErrors[resultId]) {
+				resultErrors[resultId] = null;
+				delete resultErrors[resultId];
+
+				_this.setState({
+					resultErrors: resultErrors
+				});
+			}
 		});
+	},
+
+	handleSetDownloadDestination: function (event) {
+		event.preventDefault();
+
+		this.openDropzoneWindow();
+	},
+
+	handleShowDownload: function (id) {
+		//alert('show download id: ' + id);
+		this.shareChannel.send('showDownload', id);
 	},
 
 	freezeResults: function (state, trimResults) {
@@ -231,8 +265,11 @@ var SearchResults = React.createClass({
 	},
 
 	updateShareChannelState: function (state) {
+		console.log(state);
+
 		this.setState({
-			downloads: state ? state.downloads : []
+			downloads: state ? state.downloads : [],
+			destination: state.destination
 		});
 	},
 
@@ -263,19 +300,23 @@ var SearchResults = React.createClass({
 
 				results[hit.response._id] = (
 					<SearchResult
+						ref={'searchResult-' + hit.response._id}
 						resultId={hit.response._id}
 						created={created}
 						size={size}
+						destination={this.state.destination}
 						download={this.getDownload(hit.response._id)}
 						onDownloadStart={this.handleDownloadStart}
-						onDownloadAbort={this.handleDownloadAbort}>
+						onDownloadAbort={this.handleDownloadAbort}
+						onSetDownloadDestination={this.handleSetDownloadDestination}
+						onShowDownload={this.handleShowDownload}>
 							<template fields={hit.fields} response={hit.response} />
 					</SearchResult>
 				)
 			}
 		}
 
-		// shw results
+		// sohw results
 		if (hasResults) {
 			resultList = (
 				<ul className='search-results-list'>
@@ -284,7 +325,7 @@ var SearchResults = React.createClass({
 			)
 		}
 		// no running query. show some tips and features
-		else if (!this.state.query) {
+		else if (!this.state.query && this.gotInitialState('search')) {
 			noSearchStartedNotice = (
 				<div className='search-results-not-started-notice'>
 					<FeatureManager getRandomFeature={true} />
@@ -313,6 +354,8 @@ var SearchResults = React.createClass({
 				{noSearchStartedNotice}
 				{noResultsFoundNotice}
 				{resultList}
+
+				{this.getDropzone()}
 			</div>
 		);
 	}

@@ -50,7 +50,7 @@ var Upload = React.createClass({
 			return (<span className='hidden'></span>);
 		}*/
 		return (
-			<div className={'upload'}>
+			<div className={'upload animated fadeIn'}>
 				<h3>{this.props.name}</h3>
 				<Path path={this.props.path} />
 

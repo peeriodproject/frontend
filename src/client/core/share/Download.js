@@ -118,7 +118,7 @@ var Download = React.createClass({
 	},
 
 	getStatusDescription: function () {
-		return this.i18n('download_status_' + this.type.transformStatus(this.props.status.toLowerCase()));
+		return this.i18n('download_status_' + Download.transformStatus(this.props.status.toLowerCase()));
 	},
 
 	cancelDownload: function () {
@@ -141,11 +141,11 @@ var Download = React.createClass({
 		var statusDescription;
 		var statusDescriptionTag;
 
-		var elementStatus = this.type.getElementStatus(this.props.status);
+		var elementStatus = Download.getElementStatus(this.props.status);
 
 		var progress = elementStatus === 'loading' ? <progress value={this.getProgress() * 100} max='100'></progress> : null;
 
-		var statusIcon = this.type.getStatusIcon(this.props.status);
+		var statusIcon = Download.getStatusIcon(this.props.status);
 		var badge;
 
 		if (this.props.status === 'COMPLETED') {
@@ -157,9 +157,9 @@ var Download = React.createClass({
 			statusDescriptionTag = (
 				<p className={'status-description ' + elementStatus}>
 					<span className='size'>
-						{this.type.getSizeWithExtension(this.props.loaded)} of {this.type.getSizeWithExtension(this.props.size)}
+						{Download.getSizeWithExtension(this.props.loaded)} of {Download.getSizeWithExtension(this.props.size)}
 					</span>
-					<span className='speed'>{this.type.getSizeWithExtension(this.state.averageSpeed)}/s</span>
+					<span className='speed'>{Download.getSizeWithExtension(this.state.averageSpeed)}/s</span>
 					<span className='time'>{this.getTimeLeft()}</span>
 				</p>
 			)
@@ -187,7 +187,7 @@ var Download = React.createClass({
 		}
 
 		return (
-			<div className={'download'}>
+			<div className={'download animated fadeIn'}>
 				<h3>{this.props.name}</h3>
 				{statusDescriptionTag}
 
