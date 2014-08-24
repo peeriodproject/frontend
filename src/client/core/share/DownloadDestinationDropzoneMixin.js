@@ -13,7 +13,7 @@ var DownloadDestinationDropzoneMixin = {
 			this._dropzoneButton = JSON.parse(window.localStorage.getItem('downloadDestinationDropzoneButton'));
 		}
 		catch (e) {
-			console.log(e);
+			console.error(e);
 
 			this._dropzoneBackground = null;
 			this._dropzoneButton = null;
@@ -35,14 +35,13 @@ var DownloadDestinationDropzoneMixin = {
 	dropzoneRendered: function (data) {
 		this._dropzoneBackground = data.background;
 		this._dropzoneButton = data.button;
-		console.log(this._dropzoneButton);
-
+		
 		try {
 			window.localStorage.setItem('downloadDestinationDropzoneBackground', this._dropzoneBackground);
 			window.localStorage.setItem('downloadDestinationDropzoneButton', JSON.stringify(this._dropzoneButton));
 		}
 		catch (e) {
-			console.log(e);
+			console.error(e);
 		}
 	},
 

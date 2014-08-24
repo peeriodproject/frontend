@@ -7,12 +7,34 @@ var React = require('react');
 
 var DownloadButtonErrorTourMixin = {
 
-	/*getDefaultProps: function () {
-		return {
-			error: '',
-			target: null
-		};
-	},*/
+	componentWillMount: function () {
+		this._currentErrorTour = '';
+		this._currentErrorTourCode = '';
+		this._currentErrorTourStarted = false;
+		this._showErrorTourImmediate = false;
+		this._currentErrorTourTimeout = null;
+	},
+
+	componentDidUpdate: function () {
+		console.log('did update');
+		if (this.props.error && this._showErrorTourImmediate) {
+			if (this.props.error !== this._currentErrorTourCode) {
+				if (this._currentErrorTour) {
+					this.cancelErrorTour();
+				}
+
+				this._currentErrorTourCode = this.props.error;
+				this.createErrorTour(this.props.error);
+			}
+		} else if (this._currentErrorTour) {
+			// error is gone ... showing success step
+			this.completeErrorTour();
+		}
+	},
+
+	componentWillUnmount: function () {
+		this.cancelErrorTour();
+	},
 
 	getTourForErrorStatus: function (errorStatus) {
 		var status = {
@@ -23,7 +45,7 @@ var DownloadButtonErrorTourMixin = {
 						title: this.i18n('downloadButtonErrorTour_invalidPath_title'),
 						text: this.i18n('downloadButtonErrorTour_invalidPath_content'),
 						buttons: [{
-							text: 'Cancel',
+							text: this.i18n('downloadButtonErrorTour_invalidPath_closeButton_label'),
 							action: this.cancelErrorTour
 						}, {
 							text: this.i18n('downloadButtonErrorTour_invalidPath_setDownloadDestinationButton_label'),
@@ -45,10 +67,10 @@ var DownloadButtonErrorTourMixin = {
 						title: this.i18n('downloadButtonErrorTour_fsError_showError_title'),
 						text: this.i18n('downloadButtonErrorTour_fsError_showError_content'),
 						buttons: [{
-								text: 'Close',
+								text: this.i18n('downloadButtonErrorTour_fsError_showError_closeButton_label'),
 								action: this.cancelErrorTour
 						}, {
-								text: 'Show File',
+								text: this.i18n('downloadButtonErrorTour_fsError_showError_showFileButton_label'),
 								action: this.handleShowDownload
 						}]
 					}
@@ -59,34 +81,6 @@ var DownloadButtonErrorTourMixin = {
 		errorStatus = errorStatus.toLowerCase();
 
 		return status[errorStatus] ? status[errorStatus] : null;
-	},
-
-	componentWillMount: function () {
-		this._currentErrorTour = '';
-		this._currentErrorTourCode = '';
-		this._currentErrorTourStarted = false;
-		this._showErrorTourImmediate = false;
-		this._currentErrorTourTimeout = null;
-	},
-
-	componentDidUpdate: function () {
-		if (this.props.error && this._showErrorTourImmediate) {
-			if (this.props.error !== this._currentErrorTourCode) {
-				if (this._currentErrorTour) {
-					this.cancelErrorTour();
-				}
-
-				this._currentErrorTourCode = this.props.error;
-				this.createErrorTour(this.props.error);
-			}
-		} else if (this._currentErrorTour) {
-			// error is gone ... showing success step
-			this.completeErrorTour();
-		}
-	},
-
-	componentWillUnmount: function () {
-		this.cancelErrorTour();
 	},
 
 	handleShowDownload: function () {
@@ -119,12 +113,15 @@ var DownloadButtonErrorTourMixin = {
 			this._currentErrorTour = null;
 			this._currentErrorTourCode = '';
 			this._currentErrorTourStarted = false;
+			this._showErrorTourImmediate = false;
 		}
 
 		if (this._currentErrorTourTimeout) {
 			clearTimeout(this._currentErrorTourTimeout);
 			this._currentErrorTourTimeout = null;
 		}
+
+		console.log('show immediate:', this._showErrorTourImmediate);
 	},
 
 	completeErrorTour: function () {
@@ -132,10 +129,8 @@ var DownloadButtonErrorTourMixin = {
 		var completeStep;
 
 		if (this._currentErrorTour) {
-			console.log('move to success step and delay closing');
 			completeStep = this._currentErrorTour.getById('success');
-			console.log(completeStep);
-
+			
 			if (completeStep) {
 				this._currentErrorTourTimeout = setTimeout(function () {
 					_this.cancelErrorTour();
@@ -171,7 +166,6 @@ var DownloadButtonErrorTourMixin = {
 		stepNames = Object.keys(tour.steps);
 
 		for (var i = 0, l = stepNames.length; i < l; i++) {
-			console.log('adding step', stepNames[i]);
 			step = $.extend({
 				attachTo: {
 					element: this.getDOMNode(),
