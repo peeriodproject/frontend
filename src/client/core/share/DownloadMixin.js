@@ -1,4 +1,5 @@
-var countdown = require('countdown');
+//var countdown = require('countdown');
+var moment = require('moment');
 
 var DownloadMixin = {
 
@@ -44,34 +45,36 @@ var DownloadMixin = {
 		};
 	},
 
-	componentDidMount: function () {
+	/*componentDidMount: function () {
 		this.calcTimeAndSpeed();
 
 		this._startUpdateTimeout();
-	},
+	},*/
+
 	// @see http://stackoverflow.com/a/7312237
 	componentWillReceiveProps: function (nextProps) {
 		this.calcTimeAndSpeed(nextProps);
 	},
 
-	componentWillUnmount: function () {
+	/*componentWillUnmount: function () {
 		if (this._updateTimeout) {
 			clearTimeout(this._updateTimeout);
 		}
-	},
+	},*/
 
-	_startUpdateTimeout: function () {
+	/*_startUpdateTimeout: function () {
 		var _this = this;
 
 		if (this._updateTimeout) {
 			clearTimeout(this._updateTimeout);
+			this._updateTimeout = null;
 		}
 
 		this._updateTimeout = setTimeout(function () {
 			_this.calcTimeAndSpeed();
 			_this._startUpdateTimeout();
 		}, 200);
-	},
+	},*/
 
 	/**
 	 * Returns the progress as a decimal value 0 <= i <= 1
@@ -107,9 +110,78 @@ var DownloadMixin = {
 		return SMOOTHING_FACTOR * lastSpeed + (1 - SMOOTHING_FACTOR) * this.state.averageSpeed;
 	},
 
+	convertTime: function () {
+		var timeLeftInSeconds = this.state.timeLeft;
+
+		if (!timeLeftInSeconds) {
+			return {};
+		}
+		
+		return {
+			years	: Math.round(moment.duration(timeLeftInSeconds, 'milliseconds').years()),
+			months	: Math.round(moment.duration(timeLeftInSeconds, 'milliseconds').months()),
+			days	: Math.round(moment.duration(timeLeftInSeconds, 'milliseconds').days()),
+			hours	: Math.round(moment.duration(timeLeftInSeconds, 'milliseconds').hours()),
+			minutes	: Math.round(moment.duration(timeLeftInSeconds, 'milliseconds').minutes()),
+			seconds	: Math.round(moment.duration(timeLeftInSeconds, 'milliseconds').seconds())
+		};
+	},
+
+	/**
+	 * Returns the human readable estimated download duration without seconds.
+	 * If the remaining duration is less than a minute it returns 'less than a minute' or 'a few seconds'
+	 */
+	humanize: function (time) {
+		var o = '';
+
+		var keys = Object.keys(time);
+		var remaining = this._getI18nString('downloadMixin_remaining', 'remaining');
+
+		if (!keys.length) {
+			return '';
+		}
+
+		for (var i = 0, l = keys.length; i < l; i++) {
+			var key = keys[i];
+
+			if (time[key] > 0) {
+				var i18nKey = this._isSingular(time[key]) ? this._getI18nString('downloadMixin_' + key + '_singular', key) : this._getI18nString('downloadMixin_' + key + '_plural', key);
+
+				if (o === '') {
+					o += this._getI18nString('downloadMixin_about', 'About') + ' ';
+					o += time[key] + ' ' + i18nKey + ' ';
+
+					if (key === 'minutes') {
+						return o + remaining;
+					}
+				}
+				else {
+					return o + this._getI18nString('downloadMixin_and', 'and') + ' ' + time[key] + ' ' + i18nKey + ' ' + remaining;
+				}
+			}
+		}
+
+		if (o > 30) {
+			return this._getI18nString('downloadMixin_lessThanAMinute', 'less than a minute') + ' ' + remaining;
+		}
+		else {
+			return this._getI18nString('downloadMixin_aFewSeconds', 'a few seconds') + ' ' + remaining;
+		}
+	},
+
+	_isSingular: function (value) {
+		return value <= 1 ? true : false;
+	},
+
+	_getI18nString: function (key, fallback) {
+		return this.i18n ? this.i18n(key) : fallback;
+	},
+
+	// @see https://stackoverflow.com/questions/14157341/how-can-i-humanize-this-complete-duration-in-moment-js-javascript
 	getTimeLeft: function () {
-		return countdown(new Date().getTime() + this.state.timeLeft).toString();
+		return this.humanize(this.convertTime());
 	}
+
 };
 
 module.exports = DownloadMixin;
