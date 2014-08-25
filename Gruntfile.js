@@ -121,7 +121,9 @@ module.exports = function (grunt) {
                         './bower_components/tether-tooltip/js/tooltip.js',
                         './bower_components/shepherd.js/js/shepherd.js',
                         './bower_components/headroom.js/dist/headroom.js',
-                        './bower_components/html2canvas/build/html2canvas.js'
+                        './bower_components/html2canvas/build/html2canvas.js',
+                        './bower_components/springy/springy.js',
+                        './src/client/lib/springyui.js'
                         //'./bower_components/select/js/select.js',
                         //'./bower_components/d3/d3.js'
                     ]
