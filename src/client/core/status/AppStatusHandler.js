@@ -141,13 +141,11 @@ var AppStatusHandler = React.createClass({
 	},
 
 	render: function () {
-		return (
-			<section className='app-status-handler'>
-				<header>
-					<h1>{this.i18n('appStatus_title')}</h1>
-				</header>
-
-				<div className='stats-wrapper'>
+		var stats = null;
+		
+		if (this.gotInitialState('protocol')) {
+			stats = (
+				<div className='stats-wrapper animated fadeIn'>
 					<div className='stats'>
 						<h2>{this.i18n('appStatus_topology_title')}</h2>
 
@@ -170,6 +168,16 @@ var AppStatusHandler = React.createClass({
 						{this.getProxyStats()}
 					</div>
 				</div>
+			)
+		}
+
+		return (
+			<section className='app-status-handler'>
+				<header>
+					<h1>{this.i18n('appStatus_title')}</h1>
+				</header>
+
+				{stats}
 			</section>
 		)
 	}
