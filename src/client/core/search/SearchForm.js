@@ -11,6 +11,7 @@ var NavigatableMixin = require('react-router-component').NavigatableMixin;
 var BackgroundPageMessageMixin = require('../socket/BackgroundPageMessageMixin');
 var ChannelMixin = require('../socket/ChannelMixin');
 var I18nMixin = require('../i18n/I18nMixin');
+var events = require('../events/EventEmitterMixin');
 
 var Badge = require('../element/Badge');
 var IconButton = require('../element/IconButton');
@@ -23,7 +24,8 @@ var SearchForm = React.createClass({
 		NavigatableMixin,
 		BackgroundPageMessageMixin,
 		ChannelMixin,
-		I18nMixin
+		I18nMixin,
+		events.mixinFor('menuClose'),
 	],
 
 	messages: [
@@ -142,6 +144,7 @@ var SearchForm = React.createClass({
 
 		this.searchChannel.send('addQuery', value);
 
+		this.emitMenuClose();
 		this.navigate('/search');
 	},
 

@@ -133,6 +133,8 @@ var SearchResults = React.createClass({
 		this.setState({
 			frozenResults: frozenResults
 		});
+
+		return frozenResults.total;
 	},
 
 	handleDownloadAbort: function (resultId) {
@@ -158,6 +160,7 @@ var SearchResults = React.createClass({
 
 	freezingPoint: function (nextState) {
 		var trimResults = this.state.frozenResults && this.state.frozenResults.total < this.props.resultsThresholdToFreeze ? true : false;
+		var frozenResults = -1;
 
 		console.log('below freezing. needs refresh', trimResults);
 		if (this.state.frozenResults) console.log(this.state.frozenResults.total);
@@ -165,10 +168,12 @@ var SearchResults = React.createClass({
 		if (!this.state.frozenResults || this.state.frozenResults.total < this.props.resultsThresholdToFreeze) {
 			console.log('___ FREEZE ___');
 			console.log(nextState);
-			this.freezeResults(nextState, trimResults);
+			frozenResults = this.freezeResults(nextState, trimResults);
 		}
 
 		this.hideOverlay(true);
+
+		return frozenResults;
 	},
 
 	onSearchResultsRefresh: function () {
@@ -188,6 +193,7 @@ var SearchResults = React.createClass({
 			nextState.frozenResults = null;
 		}
 
+		// handle overlay
 		if (this.state.overlayTimedOut && ((nextState.results && nextState.results.total) || nextState.status === 'COMPLETE')) {
 				this.hideOverlay();
 		}
@@ -197,61 +203,34 @@ var SearchResults = React.createClass({
 
 		// results amount is above freezing. -> updating results
 		if (nextState.results && nextState.results.total) {
-			console.log('has results', nextState.status);
-			//nextState.frozenResults = nextState.results;
-
+			
 			if (nextState.results.total < this.props.resultsThresholdToFreeze) {
-				console.log('above freezing, setting:', nextState.results.total);
 				this.freezeResults(nextState);
-				//nextState.frozenResults = nextState.results;
-				//this.emitSearchResultsRefresh();
-				/*if (nextState.results.total === this.props.resultsThresholdToFreeze) {
-					this.freezingPoint(nextState);
-					this.emitSearchResultsNotificationsEnabled();
-				}*/
 			}
 			else if (nextState.results.total >= this.props.resultsThresholdToFreeze && (this.state.overlayIsActive || nextState.status !== 'CREATED')) {
-				console.log('- - - - - - - - - - -');
-				this.freezingPoint(nextState);
-				this.emitSearchResultsNotificationsEnabled();
-				console.log('- - - - - - - - - - -');
-
-				/*if (!this.state.isFrozen) {
-					this.emitSearchResultsNotificationsEnabled();
-					this.setState({
-						isFrozen: true
-					});
-				}*/
-
+				var frozenResultsAmount = this.freezingPoint(nextState);
+				
+				this.emitSearchResultsNotificationsEnabled(frozenResultsAmount);
+				
 				if (!this.state.frozenResults) {
 					this.emitSearchResultsRefresh();
 				}
 			}
 		}
-		/*if (nextState.results && nextState.results.total < this.props.resultsThresholdToFreeze) {
-			console.log('above freezing');
-			nextState.frozenResults = nextState.results;
-		}
-		// hide the overlay and freeze the results.
-		else if (nextState.results && nextState.results.total >= this.props.resultsThresholdToFreeze && this.state.overlayIsActive) {
-			this.hideOverlay();
-		}*/
 		// activate overlay whenever a new query started
 		else if (nextState.query && this.state.query !== nextState.query && nextState.status !== 'COMPLETE') {
 			if (this._overlayTimeout) {
 				clearTimeout(this._overlayTimeout);
 			}
 
-			console.log('setting overlay timeout');
 			this._overlayTimeout = setTimeout(function () {
-				console.log('clearing overlay');
-				//_this.hideOverlay()
 				_this.setState({
 					overlayTimedOut: true
 				});
 
 				_this._overlayTimeout = null;
 			}, this.props.hideOverlayTimeoutDelay);
+
 			this.emitSearchResultsNotificationsDisabled();
 
 			nextState.overlayIsActive = true;
@@ -262,14 +241,9 @@ var SearchResults = React.createClass({
 		}
 
 		this.setState(nextState);
-
-		console.log('channel update!', this.state.results.total);
-		JSON.stringify(this.state.results.hits);
 	},
 
 	updateShareChannelState: function (state) {
-		console.log(state);
-
 		this.setState({
 			downloads: state ? state.downloads : [],
 			destination: state.destination
@@ -340,6 +314,7 @@ var SearchResults = React.createClass({
 				</div>
 			)
 		}*/
+
 		// completed without results. show a "nothing found" notice
 		else if (this.state.status === 'COMPLETE') {
 			noResultsFoundNotice = (
@@ -381,6 +356,7 @@ var SearchResults = React.createClass({
 						</div>
 					</div>
 				</div>
+				
 				{noSearchStartedNotice}
 				{noResultsFoundNotice}
 				{resultList}

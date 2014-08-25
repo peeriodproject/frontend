@@ -12,6 +12,8 @@
 		@include bleed-x(gutter(12 - ($search-results-squish * 2)));
 
 		background-color: $search-results-notification-background;
+		border-bottom-right-radius: $border-radius;
+		border-bottom-left-radius: $border-radius;
 		color: $menu-color;
 
 		.badge:not(.length-1) {
@@ -53,7 +55,7 @@
 
 		position: fixed;
 		//border: 10px solid red;
-		background-color: rgba($dark-color, 0.8);
+		background-color: rgba($dark-color, 0.9);
 		top: 0;
 		left: 0;
 

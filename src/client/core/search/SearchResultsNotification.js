@@ -41,39 +41,33 @@ var SearchResultsNotification = React.createClass({
 			totalResultsAmount: amount
 		});
 
-		if (!amount) {
+		if (!amount || amount < 0) {
 			this.setState({
 				isEnabled: false
 			});
 		}
 	},
 
-	onSearchResultsNotificationsEnabled: function () {
-		if (!this.state.isEnabled) {
-			this.setState({
-				isEnabled: true
-			});
-
-			this.resetAmount();
-
-			console.log('__ ENABLED & SYNCED __');
+	onSearchResultsNotificationsEnabled: function (frozenAmount) {
+		if (this.state.isEnabled) {
+			return;
 		}
-		else {
-			console.log('__ ALREADY ENABLED __');
-		}
+		
+		this.setState({
+			isEnabled: true
+		});
+
+		this.resetAmount(frozenAmount);
 	},
 
 	onSearchResultsNotificationsDisabled: function () {
 		this.setState({
 			isEnabled: false
 		});
-
-		console.log('__ DISABLED __');
 	},
 
 	onSearchResultsRefresh: function () {
 		this.resetAmount();
-		console.log('__ SYNCED __');
 	},
 
 	onRefreshButtonClick: function (e) {
@@ -83,9 +77,11 @@ var SearchResultsNotification = React.createClass({
 		this.resetAmount();
 	},
 
-	resetAmount: function () {
+	resetAmount: function (frozenAmount) {
+		var amount = frozenAmount || this.state.totalResultsAmount;
+
 		this.setState({
-			loadedResultsAmount: this.state.totalResultsAmount
+			loadedResultsAmount: amount
 		});
 	},
 
@@ -93,7 +89,6 @@ var SearchResultsNotification = React.createClass({
 		var pendingResultsAmount = this.state.totalResultsAmount - this.state.loadedResultsAmount;
 		var notification;
 
-		console.log('bade counter', pendingResultsAmount);
 		if (pendingResultsAmount > 0 && this.state.isEnabled) {
 			notification = (
 				<section className='search-results-notification animated flipInX'>
