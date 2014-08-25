@@ -9,9 +9,11 @@
 	padding-right: span(0.5 wide);
 
 	.menu-button {
+		@include translate(border-color 0.15s ease, background-color 0.15s ease);
+
 		height: rhythm($button-height, $icon-button-font-size);
 		width: rhythm($button-height, $icon-button-font-size);
-		border: 1px solid $input-border-color;
+		border: 1px solid rgba($dark-color, 0.2);
 
 		border-radius: $button-border-radius;
 
@@ -28,6 +30,7 @@
 
 		&.is-open {
 			background-color: $menu-background-color;
+			border-color: rgba(darken($dark-color, 10%), 0.6);
 
 			.icon svg use {
 				fill: $menu-heading-color;
