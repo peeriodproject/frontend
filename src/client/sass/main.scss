@@ -31,6 +31,7 @@
 @import "../core/element/Footer";
 @import "../core/element/IconButton";
 @import "../core/element/ListItem";
+@import "../core/element/NetworkLoader";
 @import "../core/element/Path";
 @import "../core/utils/DropzoneRenderer";
 
@@ -53,10 +54,6 @@ body {
 	font-family: "GandhiSans";
 	//font-weight: $font-weight-thin;
 	-webkit-font-smoothing: antialiased;
-
-	text-rendering: optimizeLegibility;
-	-webkit-font-feature-settings: "kern";
-	font-kerning: normal;
 
 	color: $main-color;
 
@@ -94,6 +91,20 @@ body {
 	//@include show-grid(overlay);
 
 	//transition: color $background-animation-duration linear, background-color $background-animation-duration linear !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.btn,
+.input,
+.badge {
+	text-rendering: optimizeLegibility;
+	-webkit-font-feature-settings: "kern";
+	font-kerning: normal;
 }
 
 strong {

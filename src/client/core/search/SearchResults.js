@@ -184,15 +184,16 @@ var SearchResults = React.createClass({
 			results: state.currentResults || {}
 		};
 
-		console.log(state);
-
 		if (!nextState.results || (nextState.query !== this.state.query && nextState.status === 'CREATED')) {
 			nextState.frozenResults = null;
 		}
 
 		if (this.state.overlayTimedOut && ((nextState.results && nextState.results.total) || nextState.status === 'COMPLETE')) {
 				this.hideOverlay();
-			}
+		}
+		else if (!nextState.query) {
+			this.hideOverlay(true);
+		}
 
 		// results amount is above freezing. -> updating results
 		if (nextState.results && nextState.results.total) {

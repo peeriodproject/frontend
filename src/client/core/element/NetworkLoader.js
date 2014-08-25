@@ -9,7 +9,7 @@ var NetworkLoader = React.createClass({
 
 	getDefaultProps: function () {
 		return {
-			maxNodes: 7,
+			maxNodes: 8,
 			width: 200,
 			height: 200
 		}
@@ -20,8 +20,8 @@ var NetworkLoader = React.createClass({
 
 		this._springy = $(this.refs.networkLoader.getDOMNode()).springy({
 			graph: this._graph,
-			stiffness: 200.0,
-			repulsion: 200.0,
+			stiffness: 300.0,
+			repulsion: 300.0,
 			damping: 0.5,
 			nodeRadius: 3,
 			canvasPadding: 25,
@@ -51,6 +51,7 @@ var NetworkLoader = React.createClass({
 		
 		if (edges.length) {
 			for (var i = 0; i < edges.length; i++) {
+				console.log('new edge from', node.id, 'to', edges[i].id);
 				this._graph.newEdge(node, edges[i], {
 					weight: 0.25
 				});
@@ -64,6 +65,7 @@ var NetworkLoader = React.createClass({
 		}
 
 		var edges = Math.min(this._graph.nodes.length, Math.ceil(Math.random() * 3));
+		
 		//+ Jonas Raoni Soares Silva
 		//@ http://jsfromhell.com/array/shuffle [v1.0]
 		var shuffle = function shuffle(o){ //v1.0
@@ -71,23 +73,48 @@ var NetworkLoader = React.createClass({
 			return o;
 		};
 
-		return (shuffle(this._graph.nodes.slice())).splice(edges);
+		return (shuffle(this._graph.nodes.slice())).splice(0, edges);
 	},
 
 	removeNode: function () {
 		console.log('remove node');
 		var node = this._graph.nodes.shift();
+		var connectedNodeIds = [];
+
 		this._graph.removeNode(node);
+		
+		// collect connected node ids
+		for (var i = 0, l = this._graph.edges.length; i < l; i++) {
+			var edge = this._graph.edges[i];
+			
+			if (connectedNodeIds.indexOf(edge.source.id) === -1) {
+				connectedNodeIds.push(edge.source.id);
+			}
+
+			if (connectedNodeIds.indexOf(edge.target.id) === -1) {
+				connectedNodeIds.push(edge.target.id);
+			}
+		}
+
+		for (var j = 0, m = this._graph.nodes.length; j < m; j++) {
+			var n = this._graph.nodes[j];
+
+			if (n && connectedNodeIds.indexOf(n.id) === -1) {
+				this._graph.removeNode(n);
+			}
+		}
+
+		//console.log(this._graph.edges);
+		//console.log(this._graph.nodes);
+
 	},
 
 	randomizeGraph: function () {
-		console.log(this._graph.nodes.length);
 		if (this._graph.nodes.length < this.props.maxNodes / 2) {
 			this.addNode();
 		} 
 		else {
 			var rand = Math.random();
-			console.log(rand);
 			if (this._graph.nodes.length < this.props.maxNodes && rand >= 0.5) {
 				this.addNode();
 			}
