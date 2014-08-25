@@ -94,13 +94,12 @@ var SearchResultsNotification = React.createClass({
 		var notification;
 
 		console.log('bade counter', pendingResultsAmount);
-
 		if (pendingResultsAmount > 0 && this.state.isEnabled) {
 			notification = (
 				<section className='search-results-notification animated flipInX'>
-					<p>Search Started: {(this.state.searchStarted ? 'true' : 'false')}</p>
-					
-					<Badge label={pendingResultsAmount} className={'length-' + pendingResultsAmount.toString().length} /> new Results found. <a href='#' onClick={this.onRefreshButtonClick}>Refresh »</a>
+					{this.i18n('SearchResultsNotification_newResultsFound_content', [
+						<Badge label={pendingResultsAmount} className={'status-valid length-' + pendingResultsAmount.toString().length} />
+					])} <a href='#' onClick={this.onRefreshButtonClick}>{this.i18n('SearchResultsNotification_newResultsFound_refreshButton_label')} »</a>
 				</section>
 			)
 		}
