@@ -19,6 +19,14 @@
 
 	&:hover {
 		opacity: 1;
+
+		a {
+			color: $dark-color;
+		}
+
+		.icon-heart svg use {
+			fill: $red-color !important;
+		}
 	}
 
 	a {
@@ -29,7 +37,7 @@
 		&:hover,
 		&:focus {
 			color: $dark-color;
-			text-decoration: none;
+			text-decoration: underline;
 		}
 	}
 
