@@ -53,7 +53,7 @@
 
 		position: fixed;
 		//border: 10px solid red;
-		background-color: rgba($red-color, 0.9);
+		background-color: rgba($dark-color, 0.8);
 		top: 0;
 		left: 0;
 
@@ -63,7 +63,7 @@
 		z-index: 45;
 
 		&.active {
-			@include visible-transition;
+			@include visible-transition(0.5s);
 		}
 
 		.notice-wrapper {
@@ -75,6 +75,21 @@
 			&> div {
 				display: table-cell;
 				vertical-align: middle;
+
+				.badge {
+					font-size: rhythm(2);
+				}
+
+				.content {
+					margin-left: $search-form-inner-padding;
+					color: $menu-color;
+					display: inline-block;
+					text-align: left;
+
+					h3 {
+						color: $menu-heading-color;
+					}
+				}
 			}
 		}
 	}

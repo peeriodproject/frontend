@@ -13,7 +13,9 @@ var DownloadDestinationDropzoneMixin = require('../share/DownloadDestinationDrop
 
 var FeatureManager = require('../element/FeatureManager');
 var Badge = require('../element/Badge');
+var SvgIcon = require('../element/SvgIcon');
 var SearchResult = require('./SearchResult');
+var NetworkLoader = require('../element/NetworkLoader');
 
 var resultTemplates = {
 	text: require('../resultTemplates/TextResult')
@@ -38,8 +40,8 @@ var SearchResults = React.createClass({
 
 	getDefaultProps: function () {
 		return {
-			hideOverlayTimeoutDelay: 10000,
-			resultsThresholdToFreeze: 3
+			hideOverlayTimeoutDelay: 15000,
+			resultsThresholdToFreeze: 7
 		}
 	},
 
@@ -276,14 +278,19 @@ var SearchResults = React.createClass({
 	render: function () {
 		var overlayIsActiveClassName = this.state.overlayIsActive ? ' active' : '';
 		var hasResults = false;
+		var hasResultsAmount = 0;
 		var results = {};
 		var resultList;
 		var noSearchStartedNotice;
 		var noResultsFoundNotice;
+		var overlayNoticeTitle;
+		var overlayNoticeContent;
+		var overlayLoader;
 
 		// build templates
 		if (this.state.frozenResults && this.state.frozenResults.total) {
 			hasResults = true;
+			hasResultsAmount = this.state.frozenResults.total;
 
 			for (var i = 0, l = this.state.frozenResults.hits.length; i < l; i++) {
 				var hit = this.state.frozenResults.hits[i];
@@ -316,7 +323,7 @@ var SearchResults = React.createClass({
 			}
 		}
 
-		// sohw results
+		// show results
 		if (hasResults) {
 			resultList = (
 				<ul className='search-results-list'>
@@ -325,13 +332,13 @@ var SearchResults = React.createClass({
 			)
 		}
 		// no running query. show some tips and features
-		else if (!this.state.query && this.gotInitialState('search')) {
+		/*else if (!(this.state.query || this.state.submitted) && this.gotInitialState('search')) {
 			noSearchStartedNotice = (
 				<div className='search-results-not-started-notice'>
 					<FeatureManager getRandomFeature={true} />
 				</div>
 			)
-		}
+		}*/
 		// completed without results. show a "nothing found" notice
 		else if (this.state.status === 'COMPLETE') {
 			noResultsFoundNotice = (
@@ -344,11 +351,33 @@ var SearchResults = React.createClass({
 			)
 		}
 
+		// overlay message
+		if (this.state.overlayIsActive) {
+			overlayNoticeTitle = hasResults ? this.i18n('searchResults_overlay_resultsFound_title') : this.i18n('searchResults_overlay_noResultsFound_title');
+			overlayNoticeContent = hasResults ? this.i18n('searchResults_overlay_resultsFound_content') : this.i18n('searchResults_overlay_noResultsFound_content');
+
+			if (hasResults) {
+				//overlayLoader = <SvgIcon icon='tick' />
+				overlayLoader = <Badge label={hasResultsAmount} className='status-valid' />
+			}
+			else {
+				overlayLoader = (
+					<NetworkLoader />
+				)
+			}
+		}
+
 		return (
-			<div className='search-results'>
+			<section className='search-results'>
 				<div className={'search-results-overlay' + overlayIsActiveClassName} onClick={this.hideOverlay}>
 					<div className='notice-wrapper'>
-						<div className='click-to-hide-notice'>Click to hide overlay</div>
+						<div className='click-to-hide-notice'>
+							{overlayLoader}
+							<div className='content'>
+								<h3>{overlayNoticeTitle}</h3>
+								<p>{overlayNoticeContent}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 				{noSearchStartedNotice}
@@ -356,7 +385,7 @@ var SearchResults = React.createClass({
 				{resultList}
 
 				{this.getDropzone()}
-			</div>
+			</section>
 		);
 	}
 });
