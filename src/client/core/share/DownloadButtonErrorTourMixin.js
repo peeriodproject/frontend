@@ -89,6 +89,8 @@ var DownloadButtonErrorTourMixin = {
 		} catch (e) {
 			console.log(e);
 		}
+		
+		this.completeErrorTour();
 	},
 
 	showDelayedErrorTour: function () {
