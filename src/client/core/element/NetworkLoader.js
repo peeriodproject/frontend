@@ -43,7 +43,6 @@ var NetworkLoader = React.createClass({
 	},
 
 	addNode: function () {
-		console.log('add Node');
 		var edges = this.getEdges();
 		var node = this._graph.newNode({
 			label: this._graph.nodes.length + ''
@@ -51,7 +50,6 @@ var NetworkLoader = React.createClass({
 		
 		if (edges.length) {
 			for (var i = 0; i < edges.length; i++) {
-				console.log('new edge from', node.id, 'to', edges[i].id);
 				this._graph.newEdge(node, edges[i], {
 					weight: 0.25
 				});
@@ -77,7 +75,6 @@ var NetworkLoader = React.createClass({
 	},
 
 	removeNode: function () {
-		console.log('remove node');
 		var node = this._graph.nodes.shift();
 		var connectedNodeIds = [];
 

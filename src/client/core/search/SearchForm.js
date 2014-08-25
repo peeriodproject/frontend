@@ -173,7 +173,6 @@ var SearchForm = React.createClass({
 	},
 
 	handleInputBlur: function (event) {
-		console.log('input blur', event.target);
 		event.target.blur();
 
 		if (!event.target.value) {
