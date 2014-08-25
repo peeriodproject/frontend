@@ -104,11 +104,21 @@
 	},
 	"appStatus_hydra_numOfHydraCircuits_plural_title": {
 		"message": "Maintaining currently $numOfCircuits$ circuits",
-		"description": "A message that indicates that the app is currently maintaining a multiple circuits.",
+		"description": "A message that indicates that the app is currently maintaining multiple circuits.",
 		"placeholders": {
 			"numOfCircuits": {
 				"content": "$1",
 				"example": "<strong>2</strong>"
+			}
+		}
+	},
+	"SearchResultsNotification_newResultsFound_content": {
+		"message": "$numOfNewResultsFound$ new results found.",
+		"description": "A message indicates that a specified amount of additional results matched the running query",
+		"placeholders": {
+			"numOfNewResultsFound": {
+				"content": "$1",
+				"example": "<strong>47</strong>"
 			}
 		}
 	}
