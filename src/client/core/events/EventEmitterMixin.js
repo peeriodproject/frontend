@@ -5,35 +5,34 @@ var globalEmitter = module.exports = new EventEmitter();
  * @see https://gist.github.com/brigand/10399638
  */
 module.exports.mixinFor = function (eventName, events) {
-    events = events || globalEmitter;
+	events = events || globalEmitter;
 
-    // "fooBar" => "FooBar"
-    var pascal = eventName[0].toUpperCase() 
-                      + eventName.slice(1);
+	// 'fooBar' => 'FooBar'
+	var pascal = eventName[0].toUpperCase() 
+					  + eventName.slice(1);
 
-    var noop = function(){};
+	var noop = function(){};
 
-    var mixin = {
-        componentWillMount: function(){
-            if (!this["on" + pascal]) {
-                return;
-            }
+	var mixin = {
+		componentWillMount: function(){
+			if (!this['on' + pascal]) {
+				return;
+			}
 
-            events.on(eventName, this["on" + pascal]);
+			events.on(eventName, this['on' + pascal]);
+		},
+		
+		componentWillUnmount: function(){
+			if (!this['on' + pascal]) {
+				return;
+			}
+			
+			events.removeListener(eventName, this['on' + pascal]);
+		}
+	};
 
-            console.log('bound to ' + "on" + pascal);
-        },
-        componentWillUnmount: function(){
-            if (!this["on" + pascal]) {
-                return;
-            }
-            
-            events.removeListener(eventName, this["on" + pascal]);
-        }
-    };
+	// add emit method
+	mixin['emit' + pascal] = events.emit.bind(events, eventName);
 
-    // add emit method
-    mixin["emit" + pascal] = events.emit.bind(events, eventName);
-
-    return mixin;
+	return mixin;
 };

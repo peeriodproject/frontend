@@ -26,10 +26,6 @@ var AppStatusHandler = React.createClass({
 		protocolState: {}
 	},
 
-	componentDidMount: function () {
-		console.log('mounted');
-	},
-
 	updateProtocolChannelState: function (state) {
 		this.setState({
 			protocolState: state
@@ -52,7 +48,7 @@ var AppStatusHandler = React.createClass({
 			var label = enabled ? 'valid' : 'invalid';
 
 			var li = (
-				<li className={'is-' + label}>
+				<li key={stats.length} className={'is-' + label}>
 					<SvgIcon icon={icon} /> {this.i18n('appStatus_topology_' + key + '_' + label + '_title')}
 				</li>
 			)
@@ -102,13 +98,13 @@ var AppStatusHandler = React.createClass({
 		//desiredAmountOfCircuitsReached
 
 		stats.push(
-			<li className={'is-' + hasHydraClassName + ' ' + badgeClassName}>
+			<li key={stats.length} className={'is-' + hasHydraClassName + ' ' + badgeClassName}>
 				<SvgIcon icon={hasHydrasIcon} /> {this.i18n(numOfHydraCircuitsLabel, placeholders)}
 			</li>
 		);
 
 		stats.push(
-			<li className={'is-' + reachedLabel}>
+			<li key={stats.length} className={'is-' + reachedLabel}>
 				<SvgIcon icon={reachedIcon} /> {this.i18n('appStatus_hydra_desiredAmountOfCircuitsReached_' + reachedLabel + '_title')}
 			</li>
 		)
@@ -120,9 +116,9 @@ var AppStatusHandler = React.createClass({
 		var needsProxy = this.state.protocolState.needsProxy;
 		var needsProxyLabel = needsProxy ? 'appStatus_proxy_needsProxyAndHasNumOfProxies_title' : 'appStatus_proxy_needsNoProxyAndIsProxyingFor_title';
 		var proxyCount = needsProxy ? this.state.protocolState.numOfProxies : this.state.protocolState.numOfProxyingFor;
-		proxyCount = proxyCount || 0;
-
 		var badgeClassName = '';
+		
+		proxyCount = proxyCount || 0;
 
 		if (needsProxy) {
 			badgeClassName = !proxyCount ? 'status-invalid' : 'status-valid';
