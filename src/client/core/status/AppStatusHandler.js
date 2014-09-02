@@ -36,9 +36,8 @@ var AppStatusHandler = React.createClass({
 		var stats = [];
 		var keys = [
 			'foundEntryNode',
-			'topologyJoinComplete',
 			'initialContactQueryComplete',
-			'joinNetwork'
+			'topologyJoinComplete'
 		];
 
 		for (var i = 0, l = keys.length; i < l; i++) {
