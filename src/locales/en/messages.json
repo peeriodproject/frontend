@@ -13,13 +13,64 @@
 		"message": "peeriod",
 		"description": "The lowercase keyword to enable the omnibox instant search."
 	},
+	"welcome_title": {
+		"message": "Welcome to Peeriod Alpha!",
+		"description": "The welcome title."
+	},
+	"welcome_description": {
+		"message": "Thank you for giving Peeriod a try. We do our best to provide an anonymous file sharing experience. Please keep in mind:
+		Peeriod is still an early experiment, and little dwarves with axes may jump in front of you. So take care and do not use in life-or-death situations.",
+		"description": "Welcome text."
+	},
+
+
 	"contextMenu_searchSelection_title": {
 		"message": "Search in Peeriod",
 		"description": ""
 	},
+
+	"menu_item_downloads_title": {
+		"message": "Downloads",
+		"description": "Title of the menu item leading to active uploads and downloads."
+	},
+	"menu_item_downloads_text": {
+		"message": "Get an Overview of Currently Running Up- & Downloads",
+		"description": "Description of the menu item leading to active uploads and downloads."
+	},
+	"menu_item_downloads_button_label": {
+		"message": "Go to Downloads",
+		"description": "Button label of the menu item leading to active uploads and downloads."
+	},
+
+	"menu_item_sharedFolder_title": {
+		"message": "My Shared Folders",
+		"description": "Title of the menu item leading to the shared folders."
+	},
+	"menu_item_sharedFolder_text": {
+		"message": "Manage the Files You Provide for Others on the Network",
+		"description": "Description of the menu item leading to the shared folders."
+	},
+	"menu_item_sharedFolder_button_label": {
+		"message": "Go to My Shared Folders",
+		"description": "Button label of the menu item leading to the shared folders."
+	},
+
+	"menu_item_appStatus_title": {
+		"message": "App Status",
+		"description": "Title of the menu item leading to the app status."
+	},
+	"menu_item_appStatus_text": {
+		"message": "See How Well You're Doing on the Network",
+		"description": "Description of the menu item leading to the app status."
+	},
+	"menu_item_appStatus_button_label": {
+		"message": "Go to App Status",
+		"description": "Button label of the menu item leading to the app status."
+	},
+
 	"settings_sharedFolders_title": {
-		"message": "Shared Folders",
-		"description": "The title of the 'Shared Folders' settings page"
+		"message": "My Shared Folders",
+		"description": "The title of the 'My Shared Folders' settings page"
 	},
 	"settings_sharedFolders_addFolderButton_label": {
 		"message": "Add Folder",
@@ -38,24 +89,53 @@
 		"description": "Try to find and add an invalid path to the shared folders"
 	},
 
+	"dropzone_selectSharedFolder_title": {
+		"message": "Share a Folder",
+		"description": "Popup title for selecting a shared folder via dragndrop."
+	},
+	"dropzone_selectSharedFolder_description": {
+		"message": "Drag a folder here to share its contents with others.",
+		"description": "Popup description for selecting a shared folder via dragndrop."
+	},
+	"dropzone_closeButton_title": {
+		"message": "Close Window",
+		"description": "Button title for closing 'Select Folder' popup."
+	},
+
 	"folder_removeButton_tooltipContent": {
 		"message": "Remove Folder",
 		"description": "The tooltip content of the 'remove folder' icon"
 	},
 
+	"folder_showButton_tooltipContent": {
+		"message": "Show Folder Contents",
+		"description": "The tooltip content of the 'show folder in explorer' icon"
+	},
+
 	"search_input_placeholder": {
-		"message": "Search FOOBAR...",
+		"message": "Search for Files",
 		"description": "The placeholder text of the main search field."
 	},
 
+	"searchForm_searchIsDisabled_title": {
+		"message": "You cannot search unanonymously. Please be patient.",
+		"description": "The placeholder text of the main search field when no anonymity can be guaranteed."
+	},
+
 	"page_connectionFailed_title": {
-		"message": "Connection Failed",
+		"message": "Aw, Snap!",
 		"description": "The title of the page that will show up whenever the fontend can not connect to the deamon"
 	},
 
 	"page_connectionFailed_text": {
-		"message": "Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.",
-		"description": "The text that will be shown below the `page_connectionFailed_title`"
+		"message": "Unfortunately your browser couldn't connect to Peeriod. You should start the main application. If it is already running, a restart may help, but feel free to $contactUs$ on any problems you encounter.",
+		"description": "The text that will be shown below the `page_connectionFailed_title`",
+		"placeholders": {
+			"contactUs": {
+				"content": "$1",
+				"example": "<a href='mailto:mail@mail.com'>contact us</a>"
+			}
+		}
 	},
 
 	"page_connectionFailed_retryButton_title": {
@@ -71,6 +151,24 @@
 	"settings_share_downloadDestinationButton_label": {
 		"message": "Set Download Destination",
 		"description": "The title of the downloads destination button"
+	},
+
+	"appStatus_title": {
+		"message": "App Status",
+		"description": "The title of the App Status section."
+	},
+
+	"appStatus_topology_title": {
+		"message": "Topology",
+		"description": "The headline for indicators of topology relevant status information."
+	},
+	"appStatus_topology_foundEntryNode_valid_title": {
+		"message": "Found an initial node for entering the network.",
+		"description": "The node found an initial entry node?"
+	},
+	"appStatus_topology_foundEntryNode": {
+		"message": "Found an initial node for entering the network.",
+		"description": "The node found an initial entry node?"
 	},
 	"appStatus_proxy_needsNoProxyAndIsProxyingFor_title": {
 		"message": "No Proxy needed. $proxingForCount$",
