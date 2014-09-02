@@ -29,6 +29,11 @@
 		"description": ""
 	},
 
+	"menu_closeButton_label": {
+		"message": "Close",
+		"description": "Label of button which closes the big main menu."
+	},
+
 	"menu_item_downloads_title": {
 		"message": "Downloads",
 		"description": "Title of the menu item leading to active uploads and downloads."
@@ -97,6 +102,14 @@
 		"message": "Drag a folder here to share its contents with others.",
 		"description": "Popup description for selecting a shared folder via dragndrop."
 	},
+	"dropzone_selectDownloadDestination_title": {
+		"message": "Choose Download Folder",
+		"description": "Popup title for selecting a download folder via dragndrop."
+	},
+	"dropzone_selectDownloadDestination_description": {
+		"message": "Drag a folder here to select it as download destination.",
+		"description": "Popup description for selecting a download folder via dragndrop."
+	},
 	"dropzone_closeButton_title": {
 		"message": "Close Window",
 		"description": "Button title for closing 'Select Folder' popup."
@@ -144,13 +157,45 @@
 	},
 
 	"settings_share_title": {
-		"message": "Sharing",
+		"message": "Downloads",
 		"description": "The title of the sharing page"
+	},
+	"settings_share_downloads_title": {
+		"message": "Current Downloads",
+		"description": "Title of the download section showing currently running downloads."
+	},
+	"settings_share_downloads_noDownloadsRunning_notice": {
+		"message": "No active downloads.",
+		"description": "Indicates within the download section that currently no downloads are running."
+	},
+	"settings_share_download_removeStoppedDownloadsButton_tooltipContent": {
+		"message": "Clear Inactive Entries",
+		"description": "The tooltip when hovering over the trash bin next to Current Downloads section. Removes aborted / completed download entries from list."
+	},
+	"settings_share_downloads_showDownloadsButton_tooltipContent": {
+		"message": "Reveal Download Folder",
+		"description": "The tooltip when hovering over the eye next to Current Downloads section. Reveals the download folder in file explorer on click."
+	},
+	"settings_share_uploads_title": {
+		"message": "Current Uploads",
+		"description": "Title of the download section showing currently running uploads."
+	},
+	"settings_share_uploads_noUploadsRunning_notice": {
+		"message": "No active uploads.",
+		"description": "Indicates within the upload section that currently no uploads are running."
+	},
+	"upload_cancelButton_tooltipContent": {
+		"message": "Abort Upload",
+		"description": "Tooltip label when hovering over the 'manual abort' functionality in the upload section."
 	},
 
 	"settings_share_downloadDestinationButton_label": {
 		"message": "Set Download Destination",
-		"description": "The title of the downloads destination button"
+		"description": "Label of button to set download destination."
+	},
+	"downloadDestination_button_label_updateFolder": {
+		"message": "Change Download Destination",
+		"description": "Label of button to change download destination."
 	},
 
 	"appStatus_title": {
@@ -183,18 +228,23 @@
 		"description": "DHT hasn't been completely joined."
 	},
 
+	"appStatus_proxy_title": {
+		"message": "Reachability",
+		"description": "The headline for indicators of proxy relevant status information."
+	},
+
 	"appStatus_proxy_needsNoProxyAndIsProxyingFor_title": {
-		"message": "No Proxy needed. $proxingForCount$",
-		"description": "A message that indicates that the app does not need a proxy and is eventually proxing for 'proxingForCount' other apps.",
+		"message": "No Proxy needed. Peeriod loves you. You are proxying for $proxyingForCount$ other nodes.",
+		"description": "A message that indicates that the app does not need a proxy and is potentially proxying for 'proxingForCount' other apps.",
 		"placeholders": {
-			"proxingForCount": {
+			"proxyingForCount": {
 				"content": "$1",
 				"example": "<strong>1</strong>"
 			}
 		}
 	},
 	"appStatus_proxy_needsProxyAndHasNumOfProxies_title": {
-		"message": "Proxy needed. $numOfProxys$",
+		"message": "Unreachable. Proxy needed. $numOfProxys$",
 		"description": "...",
 		"placeholders": {
 			"numOfProxys": {
@@ -202,6 +252,31 @@
 				"example": "<strong>1</strong>"
 			}
 		}
+	},
+
+	"openPortsHandler_noOpenPorts_notice": {
+		"message": "The vast Internet can't reach you on its own. This doesn't affect your privacy, but you rely on the help and bandwidth of others.
+		By opening a port in your router, you contribute to the whole network's anonymity. Peeriod will consume more of your bandwidth, but you actively make private file sharing possible – for everyone!",
+		"description": "Longer description of what it means to have an open port."
+	},
+
+	"openPortsHandler_noOpenPort_addPortButton_label": {
+		"message": "Add Open TCP Port",
+		"description": "Button label for adding an open port."
+	},
+
+	"openPortsHandler_hasOpenPort_addPortButton_label": {
+		"message": "Add Open TCP Port",
+		"description": "Button label for adding an open port."
+	},
+
+	"openPortsHandler_portsChangedNotice_title": {
+		"message": "Open Port Added",
+		"description": "Header of notification which appears when an open port has been added."
+	},
+	"openPortsHandler_portsChangedNotice_content": {
+		"message": "Marvelous! For the changes to take effect, please restart the Peeriod main application.",
+		"description": "Main message which appears when an open port has been added."
 	},
 
 	"appStatus_hydra_title": {
@@ -241,6 +316,79 @@
 		"description": "Indicator that desired number of circuits has not been reached yet."
 	},
 
+	"downloadDestination_warning_noDownloadDestination_title": {
+		"message": "Where to Save Files?",
+		"description": "Title of the notification box which is shown as long as no download destination has been set."
+	},
+	"downloadDestination_warning_noDownloadDestination_content": {
+		"message": "Please select a download location on your computer.",
+		"description": "Message of the notification box which is shown as long as no download destination has been set."
+	},
+	"downloadDestination_button_label_setFolder": {
+		"message": "Choose Download Folder.",
+		"description": "Label of the button which shows the dropzone for selecting download destination."
+	},
+	"download_status_completed": {
+		"message": "Successfully Downloaded",
+		"description": "Label of download status on Download page when successfully completed."
+	},
+	"download_status_manualAbort": {
+		"message": "Manually Aborted",
+		"description": "Label of download status on Download page when manually aborted."
+	},
+	"download_status_remoteAbort": {
+		"message": "Uploader Aborted Transfer",
+		"description": "Label of download status on Download page when remotely aborted."
+	},
+	"download_status_fsError": {
+		"message": "Cannot Write File",
+		"description": "Label of download status on Download page when the file system throws an error."
+	},
+	"download_showButton_tooltipContent": {
+		"message": "Reveal File",
+		"description": "Tooltip when hovering over the eye icon next to a complete download."
+	},
+	"download_removeButton_tooltipContent": {
+		"message": "Clear Entry",
+		"description": "Tooltip when hovering over the trash icon next to a complete download."
+	},
+	"download_cancelButton_tooltipContent": {
+		"message": "Abort Download",
+		"description": "Tooltip label when hovering over the 'manual abort' functionality in the download section."
+	},
+	"downloadMixin_aFewSeconds": {
+		"message": "only a few seconds",
+		"description": "ETR label when only a few seconds left."
+	},
+	"downloadMixin_remaining": {
+		"message": "remaining",
+		"description": "ETR label for 'remaining'."
+	},
+	"downloadMixin_about": {
+		"message": "about",
+		"description": "ETR label prepended to time."
+	},
+	"downloadMixin_hours_plural": {
+		"message": "hours",
+		"description": "ETR label for 'hours'."
+	},
+	"downloadMixin_hours_singular": {
+		"message": "hour",
+		"description": "ETR label for 'hour'."
+	},
+	"downloadMixin_and": {
+		"message": ",",
+		"description": "ETR label for 'and'."
+	},
+	"downloadMixin_minutes_plural": {
+		"message": "minutes",
+		"description": "ETR label for 'minutes'."
+	},
+	"downloadMixin_minutes_singular": {
+		"message": "minute",
+		"description": "ETR label for 'minute'."
+	},
+
 	"SearchResultsNotification_newResultsFound_content": {
 		"message": "$numOfNewResultsFound$ new results found.",
 		"description": "A message indicates that a specified amount of additional results matched the running query",
@@ -250,5 +398,38 @@
 				"example": "<strong>47</strong>"
 			}
 		}
+	},
+
+	"SearchResult_downloadButton_title": {
+		"message": "Download",
+		"description": "Label of button which starts downloading a query result."
+	},
+	"SearchResult_downloadButton_status_created_title": {
+		"message": "Initializing...",
+		"description": "Label of download button when kicking off the download"
+	},
+	"SearchResult_downloadButton_status_requestingFile_title": {
+		"message": "Reaching out for Node...",
+		"description": "Label of download button when requesting file from node"
+	},
+	"SearchResult_downloadButton_status_transferStarted_title": {
+		"message": "Downloading File...",
+		"description": "Label of download button when actually transferring the file blocks."
+	},
+	"SearchResult_downloadButton_status_completed_title": {
+		"message": "Successfully Downloaded",
+		"description": "Label of download button when the file has been completely downloaded."
+	},
+	"SearchResult_downloadButton_status_manualAbort_title": {
+		"message": "Aborted",
+		"description": "Label of download button when the file transfer was manually aborted."
+	},
+	"SearchResult_downloadButton_status_remoteAbort_title": {
+		"message": "Uploader Aborted Transfer",
+		"description": "Label of download button when the file transfer was remotely aborted."
+	},
+	"SearchResult_downloadButton_status_fsError_title": {
+		"message": "Cannot Write File",
+		"description": "Label of download button when the file transfer errored out due to a file system problem."
 	}
 }
