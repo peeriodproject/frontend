@@ -208,6 +208,10 @@
 		"message": "Anonymity",
 		"description": "Title of the AppStatus block regarding hydra circuits."
 	},
+	"appStatus_hydra_noHydraCircuits_title": {
+		"message": "No anonymizing circuits.",
+		"description": "Indicates that zero circuits are currently being maintained."
+	},
 	"appStatus_hydra_numOfHydraCircuits_singular_title": {
 		"message": "Currently maintaining $numOfCircuits$ anonymizing circuit.",
 		"description": "A message that indicates that the app is currently maintaining a single circuit.",
@@ -229,8 +233,12 @@
 		}
 	},
 	"appStatus_hydra_desiredAmountOfCircuitsReached_valid_title": {
-		"message": "Desired amount reached!",
+		"message": "Desired circuit amount reached!",
 		"description": "Indicator that desired number of circuits has been reached."
+	},
+	"appStatus_hydra_desiredAmountOfCircuitsReached_invalid_title": {
+		"message": "Desired circuit amount has not been reached yet!",
+		"description": "Indicator that desired number of circuits has not been reached yet."
 	},
 
 	"SearchResultsNotification_newResultsFound_content": {
