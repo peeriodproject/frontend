@@ -71,6 +71,7 @@ body {
 	@import "../core/settings/Folder";
 	@import "../core/settings/SharedFoldersHandler";
 	@import "../core/settings/NoSharedFoldersNotice";
+	@import "../core/settings/OpenPortsHandler";
 
 	@import "../core/share/Download";
 	@import "../core/share/DownloadButton";
