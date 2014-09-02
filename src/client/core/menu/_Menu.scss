@@ -52,11 +52,13 @@
 	z-index: 400;
 
 	background: $menu-background-color;
+	border-bottom: 1px solid transparent;
 	color: $menu-color;
 	max-height: 0;
 
 	&.is-open {
 		max-height: rhythm(15);
+		border-bottom-color: rgba($dark-background-color, 0.45);
 	}
 
 	&:not(.is-open) nav > ul {

@@ -59,6 +59,8 @@ $onePixel: (1 / strip-units($base-font-size)) * 1rem;
 }
 
 .download-progress-bar-tooltip {
+	border: 1px solid rgba($dark-background-color, 0.45);
+
 	&:not(.tooltip-element-attached-center) .tooltip-content {
 		&:before {
 			bottom: 100%;

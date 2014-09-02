@@ -5,13 +5,15 @@
 
 var React = require('react');
 
-var SvgIcon = require('../element/SvgIcon');
-
+var I18nMixin = require('../i18n/I18nMixin');
 var events = require('../events/EventEmitterMixin');
+
+var SvgIcon = require('../element/SvgIcon');
 
 var Menu = React.createClass({
 
 	mixins: [
+		I18nMixin,
 		events.mixinFor('menuClose'),
 		events.mixinFor('menuOpen')
 	],
@@ -53,7 +55,7 @@ var Menu = React.createClass({
 				</nav>
 				<div className='menu-buttons'>
 					<a href='#' ref='closeButton' onClick={this.handleCloseClick}>
-						<SvgIcon icon='close' /> Close
+						<SvgIcon icon='close' /> {this.i18n('menu_closeButton_label')}
 					</a>
 				</div>
 			</section>
