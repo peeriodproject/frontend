@@ -12,7 +12,9 @@ $themePrefix: "shepherd";
 $arrowSize: 8px;
 $errorBackgroundColor: $red-color;
 $successBackgroundColor: $green-color;
+$noticeBackgroundColor: $dark-color;
 $errorColor: $dark-background-color;
+$noticeColor: $dark-background-color;
 $successColor: #fff;
 $useDropShadow: false;
 $gutter-width: 2rem;
@@ -23,11 +25,13 @@ $headerBackgroundColor: #eeeeee;
 
 @include tether-theme-arrows($themePrefix: $themePrefix, $themeName: "error", $arrowSize: $arrowSize, $backgroundColor: $errorBackgroundColor, $color: $errorColor, $useDropShadow: $useDropShadow);
 @include tether-theme-arrows($themePrefix: $themePrefix, $themeName: "success", $arrowSize: $arrowSize, $backgroundColor: $successBackgroundColor, $color: $successColor, $useDropShadow: $useDropShadow);
+@include tether-theme-arrows($themePrefix: $themePrefix, $themeName: "notice", $arrowSize: $arrowSize, $backgroundColor: $noticeBackgroundColor, $color: $noticeColor, $useDropShadow: $useDropShadow);
 
 // Shepherd specific styles
 
 .#{$themePrefix}-element.#{$themePrefix}-theme-error,
-.#{$themePrefix}-element.#{$themePrefix}-theme-success {
+.#{$themePrefix}-element.#{$themePrefix}-theme-success,
+.#{$themePrefix}-element.#{$themePrefix}-theme-notice, {
 	@include transition(visibility 0s 0.15s, opacity 15s ease);
 
 	display: block;
@@ -42,11 +46,11 @@ $headerBackgroundColor: #eeeeee;
 	}
 	
 	// Make the arrow 5color the same as the header color when the arrow is on the top
-	&.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-center, &.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-right.#{$themePrefix}-target-attached-bottom, &.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-left.#{$themePrefix}-target-attached-bottom {
+	/*&.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-center, &.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-right.#{$themePrefix}-target-attached-bottom, &.#{$themePrefix}-element-attached-top.#{$themePrefix}-element-attached-left.#{$themePrefix}-target-attached-bottom {
 		&.#{$themePrefix}-has-title .#{$themePrefix}-content:before {
 			border-bottom-color: $headerBackgroundColor;
 		}
-	}
+	}*/
 
 	&.#{$themePrefix}-has-title .#{$themePrefix}-content header {
 		@include padding-leader(0.5);
