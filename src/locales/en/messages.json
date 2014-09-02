@@ -164,12 +164,25 @@
 	},
 	"appStatus_topology_foundEntryNode_valid_title": {
 		"message": "Found an initial node for entering the network.",
-		"description": "The node found an initial entry node?"
+		"description": "The node found an initial entry node"
 	},
-	"appStatus_topology_foundEntryNode": {
-		"message": "Found an initial node for entering the network.",
-		"description": "The node found an initial entry node?"
+	"appStatus_topology_initialContactQueryComplete_valid_title": {
+		"message": "Discovered other active nodes.",
+		"description": "The node has successfuly queried its own id"
 	},
+	"appStatus_topology_initialContactQueryComplete_invalid_title": {
+		"message": "No other nodes found yet.",
+		"description": "The node hasn't yet successfully queried for its own id"
+	},
+	"appStatus_topology_topologyJoinComplete_valid_title": {
+		"message": "Successfully joined the network.",
+		"description": "The node successfully joined the DHT."
+	},
+	"appStatus_topology_topologyJoinComplete_invalid_title": {
+		"message": "Network join not complete.",
+		"description": "DHT hasn't been completely joined."
+	},
+
 	"appStatus_proxy_needsNoProxyAndIsProxyingFor_title": {
 		"message": "No Proxy needed. $proxingForCount$",
 		"description": "A message that indicates that the app does not need a proxy and is eventually proxing for 'proxingForCount' other apps.",
@@ -190,8 +203,13 @@
 			}
 		}
 	},
+
+	"appStatus_hydra_title": {
+		"message": "Anonymity",
+		"description": "Title of the AppStatus block regarding hydra circuits."
+	},
 	"appStatus_hydra_numOfHydraCircuits_singular_title": {
-		"message": "Maintaining currently $numOfCircuits$ circuit",
+		"message": "Currently maintaining $numOfCircuits$ anonymizing circuit.",
 		"description": "A message that indicates that the app is currently maintaining a single circuit.",
 		"placeholders": {
 			"numOfCircuits": {
@@ -201,7 +219,7 @@
 		}
 	},
 	"appStatus_hydra_numOfHydraCircuits_plural_title": {
-		"message": "Maintaining currently $numOfCircuits$ circuits",
+		"message": "Currently maintaining $numOfCircuits$ anonymizing circuits.",
 		"description": "A message that indicates that the app is currently maintaining multiple circuits.",
 		"placeholders": {
 			"numOfCircuits": {
@@ -210,6 +228,11 @@
 			}
 		}
 	},
+	"appStatus_hydra_desiredAmountOfCircuitsReached_valid_title": {
+		"message": "Desired amount reached!",
+		"description": "Indicator that desired number of circuits has been reached."
+	},
+
 	"SearchResultsNotification_newResultsFound_content": {
 		"message": "$numOfNewResultsFound$ new results found.",
 		"description": "A message indicates that a specified amount of additional results matched the running query",
