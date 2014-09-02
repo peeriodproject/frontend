@@ -77,7 +77,12 @@ var ChannelMixin = {
 			this[channelUpdateName].apply(this, args);
 		}
 		else {
-			this.updateChannelState.apply(this, args);
+			if (this.updateChannelState) {
+				this.updateChannelState.apply(this, args);
+			}
+			else {
+				console.warn('no channel update method for ' + channelUpdateName + ' implemented');
+			}
 		}
 	},
 
