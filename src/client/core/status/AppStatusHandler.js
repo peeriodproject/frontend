@@ -11,6 +11,8 @@ var ChannelMixin = require('../socket/ChannelMixin');
 var Badge = require('../element/Badge');
 var SvgIcon = require('../element/SvgIcon');
 
+var OpenPortsHandler = require('../settings/OpenPortsHandler');
+
 var AppStatusHandler = React.createClass({
 
 	mixins: [
@@ -161,6 +163,8 @@ var AppStatusHandler = React.createClass({
 						<h2>{this.i18n('appStatus_proxy_title')}</h2>
 
 						{this.getProxyStats()}
+
+						<OpenPortsHandler />
 					</div>
 				</div>
 			)

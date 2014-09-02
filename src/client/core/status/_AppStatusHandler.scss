@@ -35,7 +35,7 @@
 					@include margin-leader(1);
 				}
 
-				li {
+				&> ul > li {
 					@include padding-leader(0.25);
 					@include padding-trailer(0.25);
 
@@ -63,21 +63,34 @@
 							fill: $red-color;
 						}
 					}
-				}
-				
-				.icon {
-					position: absolute;
-					top: rhythm(0.25);
-					left: 0;
-					//z-index: 710;
 
-					width: 1.5rem;
-					height: 1.5rem;
-					float: left;
-
-					svg {
+					.icon {
 						position: absolute;
+						top: rhythm(0.25);
+						left: 0;
+						//z-index: 710;
+
+						width: 1.5rem;
+						height: 1.5rem;
+						float: left;
+
+						svg {
+							position: absolute;
+						}
 					}
+				}
+			}
+
+			.open-ports-handler {
+				@include margin-leader(1);
+				@include leading-border(1px, 1);
+
+				border-color: $input-border-color;
+				border-style: dashed;
+
+				.ports-changed-notice {
+					@include bleed-x(gutter(4));
+					//@include gutters(4 inside);
 				}
 			}
 		}
