@@ -15,6 +15,7 @@ var events = require('../events/EventEmitterMixin');
 
 var Badge = require('../element/Badge');
 var IconButton = require('../element/IconButton');
+var Logo = require('../element/Logo');
 
 var SearchForm = React.createClass({
 
@@ -234,12 +235,13 @@ var SearchForm = React.createClass({
 		var searchIcon = this.getSearchIcon();
 		var loadingClassName = searchIcon === 'loading' ? ' loading' : '';
 		var isEnabledClassName = !this.state.searchEnabled ? ' search-disabled' : '';
+		var logoWidth = this.refs.searchForm ? this.refs.searchForm.getDOMNode().offsetHeight : -1;
 
 		return (
 			<section className={'search-form-wrapper' + fullscreenClassName + isEnabledClassName + this.props.locationClassName + this.gotStateClassNames()}>
 				<div className='logo-wrapper'>
 					<Link href='/search' className='logo' onClick={this.handleLogoClick}>
-						<img src='/assets/icons/icon128.png' />
+						<Logo width={logoWidth} shadow={true} />
 					</Link>
 				</div>
 
