@@ -9,10 +9,14 @@
 	@include nested(12 - ($squish * 2)) {
 		header {
 			@include span(full);
-			@include padding-leader(3);
-			@include margin-trailer(2);
+			@include padding-leader(4);
+			@include margin-trailer(0.5);
 
 			@extend %clearfix;
+
+			font-weight: bold;
+			font-style: italic;
+			color: $dark-color;
 		}
 
 		p {
