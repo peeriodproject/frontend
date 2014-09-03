@@ -1,3 +1,14 @@
+.tooltip-element.tooltip-theme-arrows.no-open-ports-notice-tooltip {
+	.tooltip-content {
+		@include rhythm-padding(0.5, 0.5);
+
+		max-width: 25em;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		border-radius: $border-radius;
+	}
+}
+
 // todo add delay to close-icon animation
 .open-ports-handler {
 	$close-icon-duration: 0.15s;
@@ -7,6 +18,8 @@
 	@extend %clearfix;
 
 	&.has-open-ports {
+		@include margin-leader(1);
+
 		a.add-port-button {
 			@include icon-button();
 			@include rhythm-padding(0.25);
@@ -54,6 +67,22 @@
 		border-radius: $border-radius;
 		color: #fff;
 		font-style: $notice-font-style;
+	}
+
+	.no-open-ports-notice-button-wrapper {
+		@include margin-trailer(1);
+		
+		.tooltip-target {
+			@include transition(color 0.15s ease);
+
+			color: $dark-color;
+			display: inline-block;
+			cursor: pointer;
+
+			&:hover {
+				color: darken($dark-color, 15%);
+			}
+		}
 	}
 
 	ul.open-ports-list {
@@ -108,6 +137,7 @@
 				height: 100%;
 				background-color: mix($red-color, $open-ports-background-color);
 				padding: 0 0.25rem;
+				outline: none;
 
 				&:hover,
 				&:focus {

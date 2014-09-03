@@ -7,6 +7,7 @@ var React = require('react');
 
 var I18nMixin = require('../i18n/I18nMixin');
 var ChannelMixin = require('../socket/ChannelMixin');
+var TooltipMixin = require('../tooltip/TooltipMixin');
 
 var OpenPort = require('./OpenPort');
 var SvgIcon = require('../element/SvgIcon');
@@ -15,7 +16,8 @@ var OpenPortsHandler = React.createClass({
 
 	mixins: [
 		I18nMixin,
-		ChannelMixin
+		ChannelMixin,
+		TooltipMixin
 	],
 
 	channelNames: [
@@ -25,6 +27,15 @@ var OpenPortsHandler = React.createClass({
 	initialChannelsState: {
 		ports: [],
 		portsChanged: false
+	},
+
+	getDefaultProps: function () {
+		return {
+			enableTooltip: true,
+			tooltipPosition: 'left middle',
+			tooltipClassName: 'no-open-ports-notice-tooltip',
+			tooltipOffset: '0 10px'
+		};
 	},
 
 	updateOpenportsChannelState: function (state) {
@@ -57,6 +68,14 @@ var OpenPortsHandler = React.createClass({
 		)
 	},
 
+	getNoOpenPortsNoticeButton: function () {
+		return (
+			<p className='no-open-ports-notice-button-wrapper'>
+				<span ref='noOpenPortsNoticeButton'>{this.i18n('OpenPortsHandler_noOpenPortsNoticeButton_label')} »</span>
+			</p>
+		)
+	},
+
 	getPortChangedNotice: function () {
 		return (
 			<div className='ports-changed-notice'>
@@ -66,6 +85,14 @@ var OpenPortsHandler = React.createClass({
 		)
 	},
 
+	getTooltipElement: function () {
+		return this.refs.noOpenPortsNoticeButton.getDOMNode();
+	},
+
+	getTooltipContent: function () {
+		return this.getNoOpenPortsNotice();
+	},
+
 	hasOpenPorts: function () {
 		return this.state.ports && this.state.ports.length ? true : false;
 	},
@@ -73,7 +100,7 @@ var OpenPortsHandler = React.createClass({
 	handleAddPortButtonClick: function (event) {
 		event.preventDefault();
 
-		var port = prompt('add port');
+		var port = prompt(this.i18n('openPortsHandler_enterOpenPort_label'));
 
 		if (port) {
 			this.openportsChannel.send('addPort', port);
@@ -87,8 +114,8 @@ var OpenPortsHandler = React.createClass({
 	render: function () {
 		var hasOpenPorts = this.hasOpenPorts();
 		var hasOpenPortsClassName = hasOpenPorts ? ' has-open-ports' : '';
-		var portListOrNotice = hasOpenPorts ? this.getOpenPortsList() : this.getNoOpenPortsNotice();
-		var portsChangedNotice = this.state.portsChanged ? this.getPortChangedNotice() : null;
+		var portListOrNotice = hasOpenPorts ? this.getOpenPortsList() : this.getNoOpenPortsNoticeButton();
+		var portsChangedNotice = this.state.portsChanged ? (this.getPortChangedNotice()) : null;
 		var addPortButtonLabel = hasOpenPorts ? 'openPortsHandler_hasOpenPort_addPortButton_label' : 'openPortsHandler_noOpenPort_addPortButton_label';
 
 		return (

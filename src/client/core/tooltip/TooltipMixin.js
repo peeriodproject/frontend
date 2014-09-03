@@ -43,16 +43,18 @@ var TooltipMixin = {
 					pin: true,
 					attachment: 'together'
 				}],
-				offset: '0 0'
+				offset: this._getTooltipOption('getTooltipOffset')
 			}
 			/*classes		: 'my-tether-theme'*/
 		});
 
 		if (!this.props.tooltipOpenOn || this.props.tooltipOpenOn === 'hover') {
+			console.log('tooltip hover');
 			el.addEventListener('mouseenter', this.openTooltip, false);
 			el.addEventListener('mouseleave', this.closeTooltip, false);
 		}
 		else if (this.props.tooltipOpenOn === 'click') {
+			console.log('tooltip click');
 			el.addEventListener('click', this.toggleTooltip, false);
 		}
 	},
@@ -75,6 +77,10 @@ var TooltipMixin = {
 
 	_getTooltipOpenClass: function () {
 		return this.props.tooltipOpenClass ? this.props.tooltipOpenClass : '';
+	},
+
+	_getTooltipOffset: function () {
+		return this.props.tooltipOffset ? this.props.tooltipOffset : '0 0';
 	},
 
 	_getTooltipElement: function () {

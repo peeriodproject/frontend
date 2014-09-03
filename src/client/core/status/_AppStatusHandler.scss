@@ -83,11 +83,14 @@
 			}
 
 			.open-ports-handler {
-				@include margin-leader(1);
-				@include leading-border(1px, 1);
+				.no-open-ports-notice-button-wrapper {
+					@include trailing-border(1px, 1);
 
-				border-color: $input-border-color;
-				border-style: dashed;
+					border-color: $input-border-color;
+					border-style: dashed;
+				}
+
+				//@include margin-leader(1);
 
 				.ports-changed-notice {
 					@include bleed-x(gutter(4));
