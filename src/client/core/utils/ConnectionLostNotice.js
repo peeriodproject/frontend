@@ -119,7 +119,7 @@ var ConnectionLostNotice = React.createClass({
 			return null;
 		}
 
-		var noticeContent = this.statel.reloadInSeconds ? this.i18n('connectionLost_reloading_content', [this.state.reloadInSeconds]) : this.i18n('connectionLost_notice_content')
+		var noticeContent = this.state.reloadInSeconds ? this.i18n('connectionLost_reloading_content', [this.state.reloadInSeconds]) : this.i18n('connectionLost_notice_content')
 
 		return (
 			<div className='connection-lost-notice-wrapper animated fadeIn'>

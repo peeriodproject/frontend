@@ -22,7 +22,7 @@
 		.connection-lost-notice-inner {
 			display: inline-block;
 		}
-		
+
 		.icon-wrapper {
 			width: $icon-width;
 			height: $icon-width;
@@ -60,6 +60,8 @@
 	#wrapper,
 	.page-footer,
 	.shepherd-step {
+		// todo vendor prefixes
 		-webkit-filter: blur(6px);
+		-webkit-transition: -webkit-filter 500s linear;
 	}
 }
