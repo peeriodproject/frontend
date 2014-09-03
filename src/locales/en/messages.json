@@ -298,7 +298,7 @@
 	},
 
 	"openPortsHandler_noOpenPorts_notice": {
-		"message": "The vast Internet can’t reach you on its own. This doesn’t affect your privacy, but you rely on the help and bandwidth of others.
+		"message": "The vast Internet can’t reach you on its own. This doesn’t affect your privacy, but you rely on the help and extra bandwidth of others.
 		By opening a port in your router, you contribute to the whole network’s anonymity. Peeriod will consume more of your bandwidth, but you actively make private file sharing possible – for everyone!",
 		"description": "Longer description of what it means to have an open port."
 	},
@@ -306,6 +306,10 @@
 	"openPortsHandler_noOpenPort_addPortButton_label": {
 		"message": "Add Open TCP Port",
 		"description": "Button label for adding an open port."
+	},
+	"openPortsHandler_noOpenPortsNoticeButton_label": {
+		"message": "Is that a problem?",
+		"description": "Label of link which shows the explanation of the importance of open ports on hovering over."
 	},
 
 	"openPortsHandler_hasOpenPort_addPortButton_label": {
@@ -320,6 +324,10 @@
 	"openPortsHandler_portsChangedNotice_content": {
 		"message": "For the changes to take effect, please restart the Peeriod main application.",
 		"description": "Main message which appears when an open port has been added."
+	},
+	"openPortsHandler_enterOpenPort_label": {
+		"message": "Enter the open port which the app can listen to.",
+		"description": "Explanation in input alert window when entering open port."
 	},
 
 	"appStatus_hydra_title": {
