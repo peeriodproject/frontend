@@ -271,11 +271,11 @@
 	},
 
 	"openPortsHandler_portsChangedNotice_title": {
-		"message": "Open Port Added",
+		"message": "Open Ports Modified",
 		"description": "Header of notification which appears when an open port has been added."
 	},
 	"openPortsHandler_portsChangedNotice_content": {
-		"message": "Marvelous! For the changes to take effect, please restart the Peeriod main application.",
+		"message": "For the changes to take effect, please restart the Peeriod main application.",
 		"description": "Main message which appears when an open port has been added."
 	},
 
@@ -388,7 +388,46 @@
 		"message": "minute",
 		"description": "ETR label for 'minute'."
 	},
-
+	"downloadButtonErrorTour_fsError_showError_title": {
+		"message": "Oops!",
+		"description": "Title when the file about to download already exists."
+	},
+	"downloadButtonErrorTour_fsError_showError_content": {
+		"message": "The file you're about to download already exists. Peeriod won't ever override your files.",
+		"description": "Message when the file about to download already exists."
+	},
+	"downloadButtonErrorTour_fsError_showError_closeButton_label": {
+		"message": "Nevermind",
+		"description": "Button to close the dialog when the file about to download already exists."
+	},
+	"downloadButtonErrorTour_fsError_showError_showFileButton_label": {
+		"message": "Show Existing File",
+		"description": "Button to show the old file when the file about to download already exists."
+	},
+	"downloadButtonErrorTour_invalidPath_title": {
+		"message": "Oops!",
+		"description": "Title when trying to download a file and no destination is specified."
+	},
+	"downloadButtonErrorTour_invalidPath_content": {
+		"message": "You haven't specified a download destination yet.",
+		"description": "Message when trying to download a file and no destination is specified."
+	},
+	"downloadButtonErrorTour_invalidPath_closeButton_label": {
+		"message": "I Don't Care",
+		"description": "Button to close the dialog when trying to download a file and no destination is specified."
+	},
+	"downloadButtonErrorTour_invalidPath_setDownloadDestinationButton_label": {
+		"message": "Choose Download Folder",
+		"description": "Button to choose download folder when trying to download a file and no destination is specified."
+	},
+	"downloadButtonErrorTour_invalidPath_success_title": {
+		"message": "Marvelous!",
+		"description": "Title of error tour when a download destination has been specified."
+	},
+	"downloadButtonErrorTour_invalidPath_success_content": {
+		"message": "Download destination has successfully been set.",
+		"description": "Message of error tour when a download destination has been specified."
+	},
 	"SearchResultsNotification_newResultsFound_content": {
 		"message": "$numOfNewResultsFound$ new results found.",
 		"description": "A message indicates that a specified amount of additional results matched the running query",
