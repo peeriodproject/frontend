@@ -430,13 +430,17 @@
 	},
 	"SearchResultsNotification_newResultsFound_content": {
 		"message": "$numOfNewResultsFound$ new results found.",
-		"description": "A message indicates that a specified amount of additional results matched the running query",
+		"description": "A message which indicates that a specified amount of additional results matched the running query",
 		"placeholders": {
 			"numOfNewResultsFound": {
 				"content": "$1",
 				"example": "<strong>47</strong>"
 			}
 		}
+	},
+	"SearchResultsNotification_newResultsFound_refreshButton_label": {
+		"message": "Rank and show them?",
+		"description": "Link label which leads to ranking and showing new results."
 	},
 
 	"SearchResult_downloadButton_title": {
@@ -470,5 +474,31 @@
 	"SearchResult_downloadButton_status_fsError_title": {
 		"message": "Cannot Write File",
 		"description": "Label of download button when the file transfer errored out due to a file system problem."
+	},
+
+	"searchResults_overlay_noResultsFound_title": {
+		"message": "No results found so far…",
+		"description": "Head title of overlay when searching but no result has been found so far."
+	},
+	"searchResults_overlay_noResultsFound_content": {
+		"message": "…but we're still searching. Patience is a virtue.",
+		"description": "Subtitle of overlay when searching but no result has been found so far."
+	},
+	"searchResults_overlay_resultsFound_title": {
+		"message": "results found so far…",
+		"description": "Head title of overlay when searching and results have already been found."
+	},
+	"searchResults_overlay_resultsFound_content": {
+		"message": "…and we're still searching. Click anywhere to show what has been found so far.",
+		"description": "Subtitle of overlay when searching and results have already been found."
+	},
+	"searchResults_nothingFound_title": {
+		"message": "No results found",
+		"description": "Title of notification when a search is complete but no results were found."
+	},
+	"searchResults_nothingFound_content": {
+		"message": "We're sorry, but noone online seems to have what you're looking for. Peeriod currently uses flooding-based search, 
+		which means your query may not have reached everyone. Trying again (now or at a later time) may help.",
+		"description": "Subtitle of notification when a search is complete but no results were found."
 	}
 }
