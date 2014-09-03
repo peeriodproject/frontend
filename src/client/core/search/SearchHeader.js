@@ -68,9 +68,7 @@ var SearchHeader = React.createClass({
 				<div className='animation-helper'></div>
 				<div className='search-form-height–indicator' ref='searchFormHeightIndicator'></div>
 				
-				<SearchForm isFullscreen={this.state.isFullscreen} locationClassName={this.state.locationClassName}>
-					<p>Mollis Ultricies Inceptos Vestibulum <a href='http://joernroeder.de'>Nullam</a></p>
-				</SearchForm>
+				<SearchForm isFullscreen={this.state.isFullscreen} locationClassName={this.state.locationClassName} />
 
 				<DownloadProgressBar />
 				<Menu locationClassName={this.state.locationClassName}>
