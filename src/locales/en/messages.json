@@ -22,6 +22,14 @@
 		Peeriod is still an early experiment, and little dwarves with axes may jump in front of you. So take care and do not use in life-or-death situations.",
 		"description": "Welcome text."
 	},
+	"connectionLost_notice_title": {
+		"message": "Connection lost",
+		"description": "Head of label when connection to main app is no longer established."
+	},
+	"connectionLost_notice_content": {
+		"message": "Is the main application still running?",
+		"description": "Content of label when connection to main app is no longer established."
+	},
 
 
 	"contextMenu_searchSelection_title": {
