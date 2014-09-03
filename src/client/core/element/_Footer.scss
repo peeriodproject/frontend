@@ -12,22 +12,47 @@
 	border-color: $input-border-color;
 	text-align: center;
 	
-	@include icon-button($menu-buttons-color, $menu-buttons-color-hover);
-
+	@include icon-button(#fff, #fff);
 	color: $color;
-	opacity: 0.5;
+	//opacity: 0.5;
+
+	&> section {
+		$squish: 1;
+		$nested: 12 - ($squish * 2);
+
+		@include squish($squish);
+		@extend %clearfix;
+
+		@include nested($nested) {
+			&> div  {
+				@include gallery(4 of 12);
+
+				text-align: center;
+
+				&:first-child {
+					text-align: left;
+				}
+
+				&:last-child {
+					text-align: right;
+				}
+			}
+		}
+	}
 
 	&:hover {
-		opacity: 1;
+		color: $color;
+	}
+		/*opacity: 1;
 
 		a {
 			color: $dark-color;
 		}
 
-		.icon-heart svg use {
-			fill: $red-color !important;
+		.icon-logo svg use {
+			fill: #fff !important;
 		}
-	}
+	}*/
 
 	a {
 		@include transition(color 0.15s ease);
@@ -45,15 +70,11 @@
 		color: mix($color, $dark-background-color, 65%);
 	}
 
-	.icon-heart {
-		svg {
-			width: 1rem;
-			height: 1rem;
-			top: -0.05rem;
+	.icon-logo {
+		font-size: 200%;
 
-			use {
-				fill: mix($red-color, $dark-background-color, 30%) !important;
-			}
+		svg {
+			top: -0.25rem;
 		}
 	}
 }
