@@ -46,7 +46,8 @@ var DownloadButtonErrorTourMixin = {
 						text: this.i18n('downloadButtonErrorTour_invalidPath_content'),
 						buttons: [{
 							text: this.i18n('downloadButtonErrorTour_invalidPath_closeButton_label'),
-							action: this.cancelErrorTour
+							action: this.cancelErrorTour,
+							classes: 'secondary'
 						}, {
 							text: this.i18n('downloadButtonErrorTour_invalidPath_setDownloadDestinationButton_label'),
 							action: this.props.onSetDownloadDestination
@@ -68,7 +69,8 @@ var DownloadButtonErrorTourMixin = {
 						text: this.i18n('downloadButtonErrorTour_fsError_showError_content'),
 						buttons: [{
 								text: this.i18n('downloadButtonErrorTour_fsError_showError_closeButton_label'),
-								action: this.cancelErrorTour
+								action: this.cancelErrorTour,
+								classes: 'secondary'
 						}, {
 								text: this.i18n('downloadButtonErrorTour_fsError_showError_showFileButton_label'),
 								action: this.handleShowDownload
@@ -170,7 +172,7 @@ var DownloadButtonErrorTourMixin = {
 		for (var i = 0, l = stepNames.length; i < l; i++) {
 			step = $.extend({
 				attachTo: {
-					element: this.getDOMNode(),
+					element: this.refs.downloadButton.getDOMNode(),
 					on: 'left'
 				},
 				tetherOptions: {

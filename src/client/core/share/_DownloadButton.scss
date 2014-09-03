@@ -38,6 +38,8 @@
 		border: none;
 		outline: none;
 
+		position: relative;
+
 		&[disabled="true"] .icon {
 			&.icon-loading use {
 				@include animation(spin 2s linear infinite);
@@ -56,10 +58,13 @@
 		@include transition(bottom 0.15s ease);
 
 		position: absolute;
-		bottom: -$height;
+		//bottom: -$height;
+		bottom: 0;
+		left: 0;
 		height: $height;
 		background-color: $green-color;
-		width: 50%;
+		width: 0;
+		margin: 0;
 	}
 
 
