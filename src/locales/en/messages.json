@@ -30,7 +30,17 @@
 		"message": "Is the main application still running?",
 		"description": "Content of label when connection to main app is no longer established."
 	},
-
+	"connectionLost_reloading_content": {
+		"message": "Main application found. Reloading in $reloadSec$ seconds.",
+		"description": "Content of label when connection to main app is no longer established.",
+		"placeholders": {
+			"reloadSec": {
+				"content": "$1",
+				"example": "<strong>5</strong>"
+			}
+		}
+	},
+	
 
 	"contextMenu_searchSelection_title": {
 		"message": "Search in Peeriod",
@@ -81,6 +91,16 @@
 		"description": "Button label of the menu item leading to the app status."
 	},
 
+	"settings_sharedFolders_noSharedFoldersNotice_title": {
+		"message": "No Shared Folders",
+		"description": "Title of notification when no shared folders have been set yet."
+	},
+	"settings_sharedFolders_noSharedFoldersNotice_description": {
+		"message": "Sharing is caring. With Peeriod you can share files without disclosing your identity. Uploading is just as anonymous as downloading. Simply pick as many folders as you like.
+		Each file in a shared folder will be made available to everyone.
+		Please keep in mind: although Peeriod does its best to protect your identity as provider, personal information in a file's content is not protected.",
+		"description": "Detailed description of notification when no shared folders have been set yet."
+	},
 	"settings_sharedFolders_title": {
 		"message": "My Shared Folders",
 		"description": "The title of the 'My Shared Folders' settings page"
@@ -204,6 +224,14 @@
 	"downloadDestination_button_label_updateFolder": {
 		"message": "Change Download Destination",
 		"description": "Label of button to change download destination."
+	},
+	"downloadDestination_solved_noDownloadDestination_title": {
+		"message": "Marvelous!",
+		"description": "Title of notification when a download destination has been specified."
+	},
+	"downloadDestination_solved_noDownloadDestination_content": {
+		"message": "Download destination has successfully been set.",
+		"description": "Message of notification when a download destination has been specified."
 	},
 
 	"appStatus_title": {
@@ -333,7 +361,7 @@
 		"description": "Message of the notification box which is shown as long as no download destination has been set."
 	},
 	"downloadDestination_button_label_setFolder": {
-		"message": "Choose Download Folder.",
+		"message": "Choose Download Folder",
 		"description": "Label of the button which shows the dropzone for selecting download destination."
 	},
 	"download_status_completed": {
