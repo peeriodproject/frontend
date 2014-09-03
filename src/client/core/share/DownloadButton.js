@@ -72,6 +72,8 @@ var DownloadButton = React.createClass({
 		var loaded = this.props.download.loaded / this.props.download.size * 100;
 		var target = null;
 		
+		loaded = isNaN(loaded) ? 0 : loaded;
+		
 		try {
 			target = this.getDOMNode()
 		} catch (e) {
@@ -81,8 +83,8 @@ var DownloadButton = React.createClass({
 			<div className={'download-btn-wrapper ' + elementStatus + this.props.className}>
 				<button className='download-btn' ref='downloadButton' onClick={this.onClick} disabled={disabled}>
 					<SvgIcon icon={this.getDownloadIcon()} /> {this.getStatusTitle()}
+					<div className='progress-bar' style={{ width: loaded + '%' }}></div>
 				</button>
-				<div className='progress-bar' style={{ width: loaded + '%' }}></div>
 			</div>
 		)
 	}
