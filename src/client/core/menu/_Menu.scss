@@ -58,7 +58,7 @@
 
 	&.is-open {
 		max-height: rhythm(15);
-		border-bottom-color: rgba($dark-background-color, 0.45);
+		//border-bottom-color: rgba($dark-background-color, 0.45);
 	}
 
 	&:not(.is-open) nav > ul {

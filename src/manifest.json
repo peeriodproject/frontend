@@ -4,9 +4,10 @@
 	"description"     : "Peeriod Frontend",
 	"version"         : "0.0.1",
 	"icons"           : {
-		"16" : "assets/icons/icon16.png",
-		"48" : "assets/icons/icon48.png",
-		"128": "assets/icons/icon128.png"
+		"16" : "assets/icons/icon-16.png",
+		"48" : "assets/icons/icon-shadow-48.png",
+		"128": "assets/icons/icon-shadow-128.png",
+		"256": "assets/icons/icon-shadow-256.png"
 	},
 	"omnibox"         : {
 		"keyword": "__MSG_omniboxKeyword__"

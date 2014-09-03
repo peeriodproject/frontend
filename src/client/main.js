@@ -11,6 +11,8 @@ var ConnectionLostNotice = require('./core/utils/ConnectionLostNotice');
 var Router = require('./core/router/Router')(require('./config/routes'));
 var Footer = require('./core/element/Footer');
 
+var I18nMixin = require('./core/i18n/I18nMixin');
+
 var DialogHandler = require('./core/dialog/DialogHandler')({
 	'addFolderDialog': require('./core/dialog/AddFolderDialog')
 });
@@ -72,11 +74,16 @@ window.App = {
 		}
 	},
 
+	setTitle: function () {
+		document.title = I18nMixin.i18n('appName');
+	},
+
 	start: function () {
 		if (this._running || !this._windowLoaded || !this._connected) {
 			return;
 		}
 
+		this.setTitle();
 		this.checkFirstRun();
 
 		//React.renderComponent(DialogHandler(), document.getElementById('dialogHandler'));

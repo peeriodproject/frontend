@@ -27,7 +27,7 @@
 				@include gallery(($nested / 3));
 				@include gutters(4 inside);
 				
-				overflow: hidden;
+				//overflow: hidden;
 
 				&> ul,
 				&> p,
@@ -50,7 +50,8 @@
 					}
 
 					position: relative;
-					padding-left: 2.5rem;
+					padding-left: 2rem;
+					margin-left: -2rem;
 
 					&.is-valid {
 						.icon svg use {
