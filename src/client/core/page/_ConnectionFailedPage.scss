@@ -74,6 +74,14 @@
 
 	p {
 		@include animation-delay($delay * 0);
+
+		a {
+			color: $dark-color;
+
+			&:hover {
+				color: darken($dark-color, 15%);
+			}
+		}
 	}
 
 	.app-icon {

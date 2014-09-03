@@ -60,7 +60,8 @@
 	#wrapper,
 	.page-footer,
 	.shepherd-step,
-	.search-header {
+	.search-header,
+	.app-status-handler {
 		// todo vendor prefixes
 		-webkit-filter: blur(6px);
 		-webkit-transition: -webkit-filter 500s linear;

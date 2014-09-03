@@ -37,7 +37,7 @@
 }
 
 .menu:not(.route-index) {
-	$squish: 1;
+	$squish: 0.5;
 	$item-width: 4;
 	$content-width: 3.5;
 	$icon-dim: 70%;
@@ -52,7 +52,7 @@
 	z-index: 400;
 
 	background: $menu-background-color;
-	border-bottom: 1px solid transparent;
+	//border-bottom: 1px solid transparent;
 	color: $menu-color;
 	max-height: 0;
 

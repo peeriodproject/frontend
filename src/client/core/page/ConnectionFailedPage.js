@@ -9,6 +9,7 @@ var I18nMixin = require('../i18n/I18nMixin');
 
 var Logo = require('../element/Logo');
 var SvgIcon = require('../element/SvgIcon');
+var ExternalUrl = require('../utils/ExternalUrl');
 
 var ConnectionFailedPage = React.createClass({
 
@@ -85,7 +86,7 @@ var ConnectionFailedPage = React.createClass({
 							<header>
 								<h1>{ this.i18n('page_connectionFailed_title') }</h1>
 							</header>
-							<p>{ this.i18n('page_connectionFailed_text') }</p>
+							<p>{ this.i18n('page_connectionFailed_text', [<ExternalUrl name='contactUs' />]) }</p>
 
 							<a href='#' className='btn' onClick={this.onReconnectClick}>
 								{this.i18n('page_connectionFailed_retryButton_title')}
