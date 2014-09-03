@@ -40,7 +40,14 @@
 			}
 		}
 	},
-	
+	"externalUrl_contactUs_label": {
+		"message": "contact us",
+		"description": "Label of link leading to 'contact us' page on the website."
+	},
+	"externalUrl_home_label": {
+		"message": "Peeriod Project",
+		"description": "Label of link leading to website."
+	},
 
 	"contextMenu_searchSelection_title": {
 		"message": "Search in Peeriod",
