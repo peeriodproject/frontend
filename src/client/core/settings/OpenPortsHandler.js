@@ -12,12 +12,13 @@ var TooltipMixin = require('../tooltip/TooltipMixin');
 var OpenPort = require('./OpenPort');
 var SvgIcon = require('../element/SvgIcon');
 
+var NoOpenPortsNoticeButton = require('./NoOpenPortsNoticeButton');
+
 var OpenPortsHandler = React.createClass({
 
 	mixins: [
 		I18nMixin,
-		ChannelMixin,
-		TooltipMixin
+		ChannelMixin
 	],
 
 	channelNames: [
@@ -27,15 +28,6 @@ var OpenPortsHandler = React.createClass({
 	initialChannelsState: {
 		ports: [],
 		portsChanged: false
-	},
-
-	getDefaultProps: function () {
-		return {
-			enableTooltip: true,
-			tooltipPosition: 'left middle',
-			tooltipClassName: 'no-open-ports-notice-tooltip',
-			tooltipOffset: '0 10px'
-		};
 	},
 
 	updateOpenportsChannelState: function (state) {
@@ -62,18 +54,8 @@ var OpenPortsHandler = React.createClass({
 		)
 	},
 
-	getNoOpenPortsNotice: function () {
-		return (
-			<p className='no-open-ports-notice'>{this.i18n('openPortsHandler_noOpenPorts_notice')}</p>
-		)
-	},
-
 	getNoOpenPortsNoticeButton: function () {
-		return (
-			<p className='no-open-ports-notice-button-wrapper'>
-				<span ref='noOpenPortsNoticeButton'>{this.i18n('OpenPortsHandler_noOpenPortsNoticeButton_label')} »</span>
-			</p>
-		)
+		return <NoOpenPortsNoticeButton />;
 	},
 
 	getPortChangedNotice: function () {
@@ -83,14 +65,6 @@ var OpenPortsHandler = React.createClass({
 				<p>{this.i18n('openPortsHandler_portsChangedNotice_content')}</p>
 			</div>
 		)
-	},
-
-	getTooltipElement: function () {
-		return this.refs.noOpenPortsNoticeButton.getDOMNode();
-	},
-
-	getTooltipContent: function () {
-		return this.getNoOpenPortsNotice();
 	},
 
 	hasOpenPorts: function () {
