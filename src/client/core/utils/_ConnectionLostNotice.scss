@@ -59,7 +59,8 @@
 .connection-lost {
 	#wrapper,
 	.page-footer,
-	.shepherd-step {
+	.shepherd-step,
+	.search-header {
 		// todo vendor prefixes
 		-webkit-filter: blur(6px);
 		-webkit-transition: -webkit-filter 500s linear;

@@ -26,7 +26,7 @@ var ConnectionLostNotice = React.createClass({
 	getInitialState: function () {
 		return {
 			reconnecting: false,
-			reloadInSeconds: 0
+			reloadInSeconds: -1
 		};
 	},
 
@@ -100,6 +100,8 @@ var ConnectionLostNotice = React.createClass({
 			var now = Date.now();
 			var remaining = _this.state.reloadTimestamp - now;
 
+			this._reloadTimeout = null;
+
 			if (remaining <= 0) {
 				window.location.reload();
 				return;
@@ -119,7 +121,7 @@ var ConnectionLostNotice = React.createClass({
 			return null;
 		}
 
-		var noticeContent = this.state.reloadInSeconds ? this.i18n('connectionLost_reloading_content', [this.state.reloadInSeconds]) : this.i18n('connectionLost_notice_content')
+		var noticeContent = this.state.reloadInSeconds > -1 ? this.i18n('connectionLost_reloading_content', [this.state.reloadInSeconds]) : this.i18n('connectionLost_notice_content')
 
 		return (
 			<div className='connection-lost-notice-wrapper animated fadeIn'>
