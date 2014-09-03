@@ -30,7 +30,17 @@
 		"message": "Is the main application still running?",
 		"description": "Content of label when connection to main app is no longer established."
 	},
-
+	"connectionLost_reloading_content": {
+		"message": "Main application found. Reloading in $reloadSec$ seconds.",
+		"description": "Content of label when connection to main app is no longer established.",
+		"placeholders": {
+			"reloadSec": {
+				"content": "$1",
+				"example": "<strong>5</strong>"
+			}
+		}
+	},
+	
 
 	"contextMenu_searchSelection_title": {
 		"message": "Search in Peeriod",
@@ -73,7 +83,7 @@
 		"description": "Title of the menu item leading to the app status."
 	},
 	"menu_item_appStatus_text": {
-		"message": "See How Well You're Doing on the Network",
+		"message": "See How Well You’re Doing on the Network",
 		"description": "Description of the menu item leading to the app status."
 	},
 	"menu_item_appStatus_button_label": {
@@ -81,6 +91,16 @@
 		"description": "Button label of the menu item leading to the app status."
 	},
 
+	"settings_sharedFolders_noSharedFoldersNotice_title": {
+		"message": "No Shared Folders",
+		"description": "Title of notification when no shared folders have been set yet."
+	},
+	"settings_sharedFolders_noSharedFoldersNotice_description": {
+		"message": "Sharing is caring. With Peeriod you can share files without disclosing your identity. Uploading is just as anonymous as downloading. Simply pick as many folders as you like.
+		Each file in a shared folder will be made available to everyone.
+		Please keep in mind: although Peeriod does its best to protect your identity as provider, personal information in a file’s content is not protected.",
+		"description": "Detailed description of notification when no shared folders have been set yet."
+	},
 	"settings_sharedFolders_title": {
 		"message": "My Shared Folders",
 		"description": "The title of the 'My Shared Folders' settings page"
@@ -149,7 +169,7 @@
 	},
 
 	"page_connectionFailed_text": {
-		"message": "Unfortunately your browser couldn't connect to Peeriod. You should start the main application. If it is already running, a restart may help, but feel free to $contactUs$ on any problems you encounter.",
+		"message": "Unfortunately your browser couldn’t connect to Peeriod. You should start the main application. If it is already running, a restart may help, but feel free to $contactUs$ on any problems you encounter.",
 		"description": "The text that will be shown below the `page_connectionFailed_title`",
 		"placeholders": {
 			"contactUs": {
@@ -204,6 +224,14 @@
 	"downloadDestination_button_label_updateFolder": {
 		"message": "Change Download Destination",
 		"description": "Label of button to change download destination."
+	},
+	"downloadDestination_solved_noDownloadDestination_title": {
+		"message": "Marvelous!",
+		"description": "Title of notification when a download destination has been specified."
+	},
+	"downloadDestination_solved_noDownloadDestination_content": {
+		"message": "Download destination has successfully been set.",
+		"description": "Message of notification when a download destination has been specified."
 	},
 
 	"appStatus_title": {
@@ -263,8 +291,8 @@
 	},
 
 	"openPortsHandler_noOpenPorts_notice": {
-		"message": "The vast Internet can't reach you on its own. This doesn't affect your privacy, but you rely on the help and bandwidth of others.
-		By opening a port in your router, you contribute to the whole network's anonymity. Peeriod will consume more of your bandwidth, but you actively make private file sharing possible – for everyone!",
+		"message": "The vast Internet can’t reach you on its own. This doesn’t affect your privacy, but you rely on the help and bandwidth of others.
+		By opening a port in your router, you contribute to the whole network’s anonymity. Peeriod will consume more of your bandwidth, but you actively make private file sharing possible – for everyone!",
 		"description": "Longer description of what it means to have an open port."
 	},
 
@@ -333,7 +361,7 @@
 		"description": "Message of the notification box which is shown as long as no download destination has been set."
 	},
 	"downloadDestination_button_label_setFolder": {
-		"message": "Choose Download Folder.",
+		"message": "Choose Download Folder",
 		"description": "Label of the button which shows the dropzone for selecting download destination."
 	},
 	"download_status_completed": {
@@ -401,7 +429,7 @@
 		"description": "Title when the file about to download already exists."
 	},
 	"downloadButtonErrorTour_fsError_showError_content": {
-		"message": "The file you're about to download already exists. Peeriod won't ever override your files.",
+		"message": "The file you’re about to download already exists. Peeriod won’t ever override your files.",
 		"description": "Message when the file about to download already exists."
 	},
 	"downloadButtonErrorTour_fsError_showError_closeButton_label": {
@@ -417,11 +445,11 @@
 		"description": "Title when trying to download a file and no destination is specified."
 	},
 	"downloadButtonErrorTour_invalidPath_content": {
-		"message": "You haven't specified a download destination yet.",
+		"message": "You haven’t specified a download destination yet.",
 		"description": "Message when trying to download a file and no destination is specified."
 	},
 	"downloadButtonErrorTour_invalidPath_closeButton_label": {
-		"message": "I Don't Care",
+		"message": "I Don’t Care",
 		"description": "Button to close the dialog when trying to download a file and no destination is specified."
 	},
 	"downloadButtonErrorTour_invalidPath_setDownloadDestinationButton_label": {
@@ -489,7 +517,7 @@
 		"description": "Head title of overlay when searching but no result has been found so far."
 	},
 	"searchResults_overlay_noResultsFound_content": {
-		"message": "…but we're still searching. Patience is a virtue.",
+		"message": "…but we’re still searching. Patience is a virtue.",
 		"description": "Subtitle of overlay when searching but no result has been found so far."
 	},
 	"searchResults_overlay_resultsFound_title": {
@@ -497,7 +525,7 @@
 		"description": "Head title of overlay when searching and results have already been found."
 	},
 	"searchResults_overlay_resultsFound_content": {
-		"message": "…and we're still searching. Click anywhere to show what has been found so far.",
+		"message": "…and we’re still searching. Click anywhere to show what has been found so far.",
 		"description": "Subtitle of overlay when searching and results have already been found."
 	},
 	"searchResults_nothingFound_title": {
@@ -505,7 +533,7 @@
 		"description": "Title of notification when a search is complete but no results were found."
 	},
 	"searchResults_nothingFound_content": {
-		"message": "We're sorry, but noone online seems to have what you're looking for. Peeriod currently uses flooding-based search, 
+		"message": "We’re sorry, but noone online seems to have what you’re looking for. Peeriod currently uses flooding-based search, 
 		which means your query may not have reached everyone. Trying again (now or at a later time) may help.",
 		"description": "Subtitle of notification when a search is complete but no results were found."
 	}
