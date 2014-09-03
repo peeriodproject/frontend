@@ -7,6 +7,7 @@ var React = require('react');
 
 var I18nMixin = require('../i18n/I18nMixin');
 
+var Logo = require('../element/Logo');
 var SvgIcon = require('../element/SvgIcon');
 
 var ConnectionFailedPage = React.createClass({
@@ -80,7 +81,7 @@ var ConnectionFailedPage = React.createClass({
 				<section className='page connection-failed'>
 					<div className='wrapper'>
 						<article>
-							<img className='app-icon' src='/assets/icons/icon128.png' alt={this.i18n('appName') + ' – ' + this.i18n('appTagline')} />
+							<Logo className='app-icon' width={128} shadow={true} />
 							<header>
 								<h1>{ this.i18n('page_connectionFailed_title') }</h1>
 							</header>

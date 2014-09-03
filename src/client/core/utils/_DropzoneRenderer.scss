@@ -1,4 +1,5 @@
 $maxWidth: 400px;
+$dropzoneWidth: 450px;
 
 .dropzone-renderer-wrapper {
 	@extend %clearfix;
@@ -9,10 +10,13 @@ $maxWidth: 400px;
 }
 
 .dropzone-renderer {
-	max-width: $maxWidth;
+	width: $dropzoneWidth;
 	text-align: center;
+	background-color: $dark-color;
 
 	h2 {
+		@include padding-leader(0.5);
+
 		color: $menu-heading-color;
 	}
 

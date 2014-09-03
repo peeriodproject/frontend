@@ -3,4 +3,4 @@ $font-path: "../fonts";
 @include font-face(GandhiSans, "#{$font-path}/GandhiSans-Regular");
 @include font-face(GandhiSans, "#{$font-path}/GandhiSans-Italic", normal, italic);
 @include font-face(GandhiSans, "#{$font-path}/GandhiSans-Bold", bold);
-@include font-face(GandhiSans, "#{$font-path}/GandhiSans-BoldItalic ", bold, italic);
+@include font-face(GandhiSans, "#{$font-path}/GandhiSans-BoldItalic", bold, italic);

@@ -64,7 +64,12 @@
 	}
 
 	header  {
+		@include padding-trailer(0.5);
 		@include animation-delay($delay * 1);
+
+		font-weight: bold;
+		font-style: italic;
+		color: $dark-color;
 	}
 
 	p {
