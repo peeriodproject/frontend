@@ -19,6 +19,10 @@
 		display: table-cell;
 		vertical-align: middle;
 		
+		.connection-lost-notice-inner {
+			display: inline-block;
+		}
+		
 		.icon-wrapper {
 			width: $icon-width;
 			height: $icon-width;

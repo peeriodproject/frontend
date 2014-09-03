@@ -58,12 +58,9 @@ var ConnectionLostNotice = React.createClass({
 		});
 
 		socket.on('open', function () {
-			/*if (_this.state.reconnecting) {
+			if (_this.state.reconnecting) {
 				_this.startReloadTimeout();
-			}*/
-			_this.setState({
-				reconnecting: false
-			});
+			}
 		});
 	},
 
@@ -71,12 +68,12 @@ var ConnectionLostNotice = React.createClass({
 		this.updateElementClassName(document.getElementsByTagName('body')[0]);
 	},
 
-	/*componentWillUnmount: function () {
+	componentWillUnmount: function () {
 		if (this._reloadTimeout) {
 			clearTimeout(this._reloadTimeout);
 			this._reloadTimeout = null;
 		}
-	},*/
+	},
 
 	updateElementClassName: function (el) {
 		var classNameIndex = el.className.indexOf(' ' + this.props.connectionLostClassName);
@@ -89,7 +86,7 @@ var ConnectionLostNotice = React.createClass({
 		}
 	},
 
-	/*startReloadTimeout: function () {
+	startReloadTimeout: function () {
 		var _this = this;
 
 		if (!this.state.reloadTimestamp) {
@@ -101,7 +98,7 @@ var ConnectionLostNotice = React.createClass({
 
 		this._reloadTimeout = setTimeout(function () {
 			var now = Date.now();
-			var remaining = now - _this.state.reloadTimestamp;
+			var remaining = _this.state.reloadTimestamp - now;
 
 			if (remaining <= 0) {
 				window.location.reload();
@@ -115,23 +112,26 @@ var ConnectionLostNotice = React.createClass({
 			_this.startReloadTimeout();
 			
 		}, this.props.reloadDelayUpdateInterval);
-	},*/
+	},
 
 	render: function () {
 		if (!this.state.reconnecting) {
 			return null;
 		}
 
+		var noticeContent = this.statel.reloadInSeconds ? this.i18n('connectionLost_reloading_content', [this.state.reloadInSeconds]) : this.i18n('connectionLost_notice_content')
+
 		return (
 			<div className='connection-lost-notice-wrapper animated fadeIn'>
 				<div className='connection-lost-notice'>
-					<div className='icon-wrapper'>
-						<SvgIcon icon='logo' />
-					</div>
-					<div className='content'>
-						<h2>{this.i18n('connectionLost_notice_title')}</h2>
-						<p>{this.i18n('connectionLost_notice_content')}</p>
-						{/*this.state.reloadInSeconds*/}
+					<div className='connection-lost-notice-inner'>
+						<div className='icon-wrapper'>
+							<SvgIcon icon='logo' />
+						</div>
+						<div className='content'>
+							<h2>{this.i18n('connectionLost_notice_title')}</h2>
+							<p>{noticeContent}</p>
+						</div>
 					</div>
 				</div>
 			</div>
