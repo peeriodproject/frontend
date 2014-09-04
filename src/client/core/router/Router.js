@@ -22,14 +22,6 @@ var WelcomeHandler = require('../welcome/WelcomeHandler');
 var Router = function (routes) {
 	return React.createClass({
 
-		onBeforeNavigation: function () {
-			console.log(arguments);
-		},
-
-		onNavigation: function () {
-			console.log(arguments);
-		},
-
 		render: function() {
 			var locations = [];
 
@@ -46,9 +38,6 @@ var Router = function (routes) {
 					{locations}
 				</Locations>
 			)
-
-			//console.log(locationRouter.getRouterState());
-			console.log(locationRouter);
 
 			return (
 				<main className='main has-search-header'>
