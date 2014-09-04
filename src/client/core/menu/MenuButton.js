@@ -38,8 +38,6 @@ var MenuButton = React.createClass({
 		event.preventDefault();
 		event.currentTarget.blur();
 
-		console.log('blured');
-
 		var isOpen = this.state.menuIsOpen;
 		var eventName = isOpen ? 'Close' : 'Open';
 

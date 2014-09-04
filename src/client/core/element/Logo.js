@@ -61,7 +61,9 @@ var Logo = React.createClass({
 			}
 		}
 
-		return size ? baseName + '-' + size : baseName;
+		var name = size ? baseName + '-' + size : baseName;
+
+		return name;
 	},
 
 	render: function () {

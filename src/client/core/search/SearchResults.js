@@ -82,8 +82,8 @@ var SearchResults = React.createClass({
 	},
 
 	handleDownloadStart: function (resultId) {
-		console.log('Sending download down the wire');
 		var _this = this;
+
 		this.shareChannel.send('addDownload', resultId, function (err) {
 			var resultErrors = _this.state.resultErrors;
 			if (err) {
@@ -111,7 +111,6 @@ var SearchResults = React.createClass({
 	},
 
 	handleShowDownload: function (id) {
-		//alert('show download id: ' + id);
 		this.shareChannel.send('showDownload', id);
 	},
 
@@ -142,7 +141,7 @@ var SearchResults = React.createClass({
 	},
 
 	hideOverlay: function (ignoreResults) {
-		console.log('_ hiding overlay _');
+		//console.log('_ hiding overlay _');
 		if (this._overlayTimeout) {
 			clearTimeout(this._overlayTimeout);
 			this._overlayTimeout = null;
@@ -162,12 +161,12 @@ var SearchResults = React.createClass({
 		var trimResults = this.state.frozenResults && this.state.frozenResults.total < this.props.resultsThresholdToFreeze ? true : false;
 		var frozenResults = -1;
 
-		console.log('below freezing. needs refresh', trimResults);
+		//console.log('below freezing. needs refresh', trimResults);
 		if (this.state.frozenResults) console.log(this.state.frozenResults.total);
 
 		if (!this.state.frozenResults || this.state.frozenResults.total < this.props.resultsThresholdToFreeze) {
-			console.log('___ FREEZE ___');
-			console.log(nextState);
+			//console.log('___ FREEZE ___');
+			//console.log(nextState);
 			frozenResults = this.freezeResults(nextState, trimResults);
 		}
 
@@ -276,7 +275,7 @@ var SearchResults = React.createClass({
 				var template = resultTemplates[this.getHitTemplate(hit)];
 				
 				if (!template) {
-					console.warn('No template found. Falling back to text!');
+					//console.warn('No template found. Falling back to text!');
 					template = resultTemplates['text'];
 				}
 

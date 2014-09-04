@@ -38,7 +38,7 @@ var I18nMixin = {
 
 		if (!value) {
 			if (sentWarningFor.indexOf(key) === -1) {
-				console.warn('i18n: No value found for key: "' + key  + '"');
+				//console.warn('i18n: No value found for key: "' + key  + '"');
 				sentWarningFor.push(key);
 			}
 			

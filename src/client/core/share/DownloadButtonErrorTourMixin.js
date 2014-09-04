@@ -16,7 +16,6 @@ var DownloadButtonErrorTourMixin = {
 	},
 
 	componentDidUpdate: function () {
-		console.log('did update');
 		if (this.props.error && this._showErrorTourImmediate) {
 			if (this.props.error !== this._currentErrorTourCode) {
 				if (this._currentErrorTour) {
@@ -89,7 +88,7 @@ var DownloadButtonErrorTourMixin = {
 		try {
 			this.props.onShowDownload(this.props.download.id);
 		} catch (e) {
-			console.log(e);
+			console.error(e);
 		}
 		
 		this.completeErrorTour();
@@ -124,8 +123,6 @@ var DownloadButtonErrorTourMixin = {
 			clearTimeout(this._currentErrorTourTimeout);
 			this._currentErrorTourTimeout = null;
 		}
-
-		console.log('show immediate:', this._showErrorTourImmediate);
 	},
 
 	completeErrorTour: function () {

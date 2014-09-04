@@ -61,11 +61,6 @@ var SharedFoldersHandler = React.createClass({
 		this.setState(state);
 	},
 
-	updateChannelState: function (channel, state) {
-		console.warn('got event from unhandled channel:', channel);
-		console.warn(state);		
-	},
-
 	showDownloads: function () {
 		this.shareChannel.send('showDownloadDestination');
 	},

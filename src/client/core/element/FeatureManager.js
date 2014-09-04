@@ -27,10 +27,6 @@ var FeatureManager = React.createClass({
 	},
 
 	render: function () {
-		console.log(this);
-		console.log(this.getFeatureList);
-		console.log(FeatureManager.getFeatureList);
-
 		var features = FeatureManager.getFeatureList();
 		var featureNames;
 		var feature;

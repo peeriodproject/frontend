@@ -1,7 +1,6 @@
 var BackgroundPageMessageMixin = {
 
 	_setupMessages: function () {
-		console.log(this.messages);
 
 		if (!this.messages || !this.messages.length) {
 			return;
@@ -22,7 +21,6 @@ var BackgroundPageMessageMixin = {
 		}
 
 		type = type.charAt(0).toUpperCase() + type.slice(1);
-		console.log(type);
 
 		if (this['on' + type + 'Message']) {
 			delete message.type;

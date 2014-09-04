@@ -23,8 +23,6 @@ var ExternalUrl = React.createClass({
 			}
 		},
 		contactUs: function (inline) {
-			console.log('contact us inline', inline);
-			
 			return {
 				href: 'https://peeriodproject.org/contact',
 				label: I18nMixin.i18n('externalUrl_contactUs_label' + ExternalUrl._getInlineAppendix(inline))
@@ -43,8 +41,6 @@ var ExternalUrl = React.createClass({
 	},
 
 	getDataByName: function () {
-		console.log(ExternalUrl[this.props.name]);
-
 		return ExternalUrl[this.props.name] ? ExternalUrl[this.props.name](this.props.inline) : {};
 	},
 

@@ -49,8 +49,8 @@ var ConnectionLostNotice = React.createClass({
 				reconnecting: true
 			});
 
-			console.log('Reconnecting in %d ms', opts.timeout);
-			console.log('This is attempt %d out of %d', opts.attempt, opts.retries);
+			//console.log('Reconnecting in %d ms', opts.timeout);
+			//console.log('This is attempt %d out of %d', opts.attempt, opts.retries);
 
 			if (opts.attempt === opts.retries) {
 				window.location.reload();

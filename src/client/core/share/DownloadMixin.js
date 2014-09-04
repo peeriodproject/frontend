@@ -133,9 +133,6 @@ var DownloadMixin = {
 	 */
 	humanize: function (time) {
 		var o = '';
-
-		console.log(JSON.stringify(time));
-
 		var keys = Object.keys(time);
 		var key = '';
 		var remaining = this._getI18nString('downloadMixin_remaining', 'remaining');
@@ -193,7 +190,6 @@ var DownloadMixin = {
 	// @see https://stackoverflow.com/questions/14157341/how-can-i-humanize-this-complete-duration-in-moment-js-javascript
 	getTimeLeft: function () {
 		var timeLeft = this.humanize(this.convertTime());
-		console.log(timeLeft);
 
 		return timeLeft;
 	}

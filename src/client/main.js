@@ -37,14 +37,6 @@ window.App = {
 
 			socket.on('end', function () {
 				App.connectionFailed();
-				//console.log('Connection closed');
-			});
-
-			socket.on('open', function () {
-				if (_this._connected) {
-					//window.location.reload();
-					console.log('reconnected after we lost the connection. reloading window...');
-				}
 			});
 
 			window.socket = socket;

@@ -31,7 +31,7 @@ var Dropzone = React.createClass({
 			})
 			.on('drop', function (evt) {
   				evt.preventDefault();
-  				console.log(evt.originalEvent.dataTransfer);
+  				//console.log(evt.originalEvent.dataTransfer);
   				//debugger;
 
   				var files = evt.originalEvent.dataTransfer.items;

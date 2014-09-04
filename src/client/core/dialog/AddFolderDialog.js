@@ -26,7 +26,7 @@ var AddFolderDialog = React.createClass({
 			if (item && item.isDirectory) {
 
 				chrome.fileSystem.getDisplayPath(item, function(path) {
-    				console.log(path);
+    				//console.log(path);
   				});
 
 				this.emitFolderAdded(item.fullPath);
@@ -41,7 +41,7 @@ var AddFolderDialog = React.createClass({
 	},
 
 	render: function () {
-		console.log(this.props);
+		//console.log(this.props);
 
 		return (
 			<section className='add-folder-dialog'>
