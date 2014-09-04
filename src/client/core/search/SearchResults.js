@@ -334,7 +334,11 @@ var SearchResults = React.createClass({
 
 			if (hasResults) {
 				//overlayLoader = <SvgIcon icon='tick' />
-				overlayLoader = <Badge label={hasResultsAmount} className='status-valid' />
+				overlayLoader = (
+					<div className='badge-wrapper'>
+						<Badge label={hasResultsAmount} className='status-valid' />
+					</div>
+				)
 			}
 			else {
 				overlayLoader = (

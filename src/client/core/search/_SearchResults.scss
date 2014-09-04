@@ -38,15 +38,6 @@
 		@include hidden-transition;
 	}
 }
-
-.network-loader-wrapper {
-	&> div {
-		width: 500px;
-		height: 500px;
-		border: 1px solid;
-	}
-}
-
 .search-results {
 	position: relative;
 
@@ -78,15 +69,28 @@
 				display: table-cell;
 				vertical-align: middle;
 
+				.badge-wrapper {
+					display: inline-block;
+					width: 200px;
+					text-align: right;
+					vertical-align: text-bottom;
+				}
+
+				.badge-wrapper,
+				.network-loader-wrapper {
+					margin-left: -100px;
+				}
+
 				.badge {
 					font-size: rhythm(2);
 				}
 
 				.content {
-					margin-left: $search-form-inner-padding;
+					padding-left: $search-form-inner-padding;
 					color: $menu-color;
 					display: inline-block;
 					text-align: left;
+					width: span(5);
 
 					h3 {
 						color: $menu-heading-color;
