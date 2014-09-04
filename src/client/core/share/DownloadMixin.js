@@ -134,7 +134,10 @@ var DownloadMixin = {
 	humanize: function (time) {
 		var o = '';
 
+		console.log(JSON.stringify(time));
+
 		var keys = Object.keys(time);
+		var key = '';
 		var remaining = this._getI18nString('downloadMixin_remaining', 'remaining');
 
 		if (!keys.length) {
@@ -142,9 +145,9 @@ var DownloadMixin = {
 		}
 
 		for (var i = 0, l = keys.length; i < l; i++) {
-			var key = keys[i];
+			key = keys[i];
 
-			if (time[key] > 0) {
+			if (time[key] && time[key] > 0) {
 				var i18nKey = this._isSingular(time[key]) ? this._getI18nString('downloadMixin_' + key + '_singular', key) : this._getI18nString('downloadMixin_' + key + '_plural', key);
 
 				if (o === '') {
@@ -161,12 +164,22 @@ var DownloadMixin = {
 			}
 		}
 
-		if (o > 30) {
-			return this._getI18nString('downloadMixin_lessThanAMinute', 'less than a minute') + ' ' + remaining;
+		// extra humanzier for less than a minute
+		if (key === 'seconds') {
+			if (!isNaN(time[key])) {
+				if (time[key] > 30) {
+					return this._getI18nString('downloadMixin_lessThanAMinute', 'less than a minute') + ' ' + remaining;
+				}
+				else {
+					return this._getI18nString('downloadMixin_aFewSeconds', 'a few seconds') + ' ' + remaining;
+				}
+			}
+			else {
+				return this._getI18nString('downloadMixin_calculatingDuration', '');
+			}
 		}
-		else {
-			return this._getI18nString('downloadMixin_aFewSeconds', 'a few seconds') + ' ' + remaining;
-		}
+
+		return '';
 	},
 
 	_isSingular: function (value) {
@@ -179,7 +192,10 @@ var DownloadMixin = {
 
 	// @see https://stackoverflow.com/questions/14157341/how-can-i-humanize-this-complete-duration-in-moment-js-javascript
 	getTimeLeft: function () {
-		return this.humanize(this.convertTime());
+		var timeLeft = this.humanize(this.convertTime());
+		console.log(timeLeft);
+
+		return timeLeft;
 	}
 
 };
