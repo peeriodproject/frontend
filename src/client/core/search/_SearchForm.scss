@@ -203,9 +203,18 @@
 
 					color: $dark-color;
 					opacity: 1;
+					margin: 2px 0 -2px; // quick vertical alignment fix
+
+					text-rendering: optimizeLegibility;
+					-webkit-font-feature-settings: "kern";
+					font-kerning: normal;
 
 					@include placeholder {
 						color: $search-form-placeholder-color;
+
+						text-rendering: optimizeLegibility;
+						-webkit-font-feature-settings: "kern";
+						font-kerning: normal;
 					}
 
 				}
