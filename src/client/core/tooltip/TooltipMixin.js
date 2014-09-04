@@ -49,12 +49,10 @@ var TooltipMixin = {
 		});
 
 		if (!this.props.tooltipOpenOn || this.props.tooltipOpenOn === 'hover') {
-			console.log('tooltip hover');
 			el.addEventListener('mouseenter', this.openTooltip, false);
 			el.addEventListener('mouseleave', this.closeTooltip, false);
 		}
 		else if (this.props.tooltipOpenOn === 'click') {
-			console.log('tooltip click');
 			el.addEventListener('click', this.toggleTooltip, false);
 		}
 	},
