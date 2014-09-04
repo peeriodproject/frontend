@@ -16,7 +16,7 @@
 
 		&> article {
 			@extend %clearfix;
-			@include padding-trailer(6); // moved to "optical" center
+			@include padding-trailer(1.5);
 			@include animation(slideDown 0.75s ease forwards);
 
 			width: span(5);
