@@ -383,6 +383,14 @@
 		"message": "Choose Download Folder",
 		"description": "Label of the button which shows the dropzone for selecting download destination."
 	},
+	"download_status_created": {
+		"message": "Initializing…",
+		"description": "Label of download status on Download page when download is being prepared."
+	},
+	"download_status_requestingFile": {
+		"message": "Reaching out for Node…",
+		"description": "Label of download status on Download page when file is being requested from provider."
+	},
 	"download_status_completed": {
 		"message": "Successfully Downloaded",
 		"description": "Label of download status on Download page when successfully completed."
@@ -411,6 +419,10 @@
 		"message": "Abort Download",
 		"description": "Tooltip label when hovering over the 'manual abort' functionality in the download section."
 	},
+	"downloadMixin_lessThanAMinute": {
+		"message": "less than a minute",
+		"description": "ETR label when less than a minute left."
+	},
 	"downloadMixin_aFewSeconds": {
 		"message": "only a few seconds",
 		"description": "ETR label when only a few seconds left."
@@ -422,6 +434,10 @@
 	"downloadMixin_about": {
 		"message": "about",
 		"description": "ETR label prepended to time."
+	},
+	"downloadMixin_calculatingDuration": {
+		"message": "downloading…",
+		"description": "ETR label when duration is being calculated."
 	},
 	"downloadMixin_hours_plural": {
 		"message": "hours",
@@ -503,15 +519,15 @@
 		"description": "Label of button which starts downloading a query result."
 	},
 	"SearchResult_downloadButton_status_created_title": {
-		"message": "Initializing...",
+		"message": "Initializing…",
 		"description": "Label of download button when kicking off the download"
 	},
 	"SearchResult_downloadButton_status_requestingFile_title": {
-		"message": "Reaching out for Node...",
+		"message": "Reaching out for Node…",
 		"description": "Label of download button when requesting file from node"
 	},
 	"SearchResult_downloadButton_status_transferStarted_title": {
-		"message": "Downloading File...",
+		"message": "Downloading File…",
 		"description": "Label of download button when actually transferring the file blocks."
 	},
 	"SearchResult_downloadButton_status_completed_title": {
