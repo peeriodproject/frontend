@@ -41,8 +41,12 @@
 		}
 	},
 	"externalUrl_contactUs_label": {
-		"message": "contact us",
+		"message": "Contact",
 		"description": "Label of link leading to 'contact us' page on the website."
+	},
+	"externalUrl_contactUs_label_inline": {
+		"message": "contact us",
+		"description": "Label of link leading to 'contact us' page on the website. Used for links within text blocks."
 	},
 	"externalUrl_home_label": {
 		"message": "Peeriod Project",

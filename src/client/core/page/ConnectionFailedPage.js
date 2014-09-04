@@ -86,7 +86,7 @@ var ConnectionFailedPage = React.createClass({
 							<header>
 								<h1>{ this.i18n('page_connectionFailed_title') }</h1>
 							</header>
-							<p>{ this.i18n('page_connectionFailed_text', [<ExternalUrl name='contactUs' />]) }</p>
+							<p>{ this.i18n('page_connectionFailed_text', [<ExternalUrl name='contactUs' inline={true} />]) }</p>
 
 							<a href='#' className='btn' onClick={this.onReconnectClick}>
 								{this.i18n('page_connectionFailed_retryButton_title')}

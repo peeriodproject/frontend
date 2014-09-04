@@ -16,28 +16,36 @@ var ExternalUrl = React.createClass({
 	],
 
 	statics: {
-		home: function () {
+		home: function (inline) {
 			return {
 				href: 'https://peeriodproject.org',
-				label: I18nMixin.i18n('externalUrl_home_label')
+				label: I18nMixin.i18n('externalUrl_home_label' + ExternalUrl._getInlineAppendix(inline))
 			}
 		},
-		contactUs: function () {
+		contactUs: function (inline) {
+			console.log('contact us inline', inline);
+			
 			return {
 				href: 'https://peeriodproject.org/contact',
-				label: I18nMixin.i18n('externalUrl_contactUs_label')
+				label: I18nMixin.i18n('externalUrl_contactUs_label' + ExternalUrl._getInlineAppendix(inline))
 			}
+		},
+
+		_getInlineAppendix: function (inline) {
+			return inline ? '_inline' : '';
 		}
 	},
 
 	getDefaultProps: function () {
-		return {};
+		return {
+			inline: false
+		};
 	},
 
 	getDataByName: function () {
 		console.log(ExternalUrl[this.props.name]);
 
-		return ExternalUrl[this.props.name] ? ExternalUrl[this.props.name]() : {};
+		return ExternalUrl[this.props.name] ? ExternalUrl[this.props.name](this.props.inline) : {};
 	},
 
 	render: function () {
