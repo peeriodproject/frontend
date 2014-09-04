@@ -61,7 +61,8 @@
 	.page-footer,
 	.shepherd-step,
 	.search-header,
-	.app-status-handler {
+	.app-status-handler,
+	.share-handler {
 		// todo vendor prefixes
 		-webkit-filter: blur(6px);
 		-webkit-transition: -webkit-filter 500s linear;
