@@ -17,6 +17,8 @@
 
 	@extend %clearfix;
 
+	position: relative;
+
 	&.has-open-ports {
 		@include margin-leader(1);
 
@@ -45,6 +47,7 @@
 			
 			background-color: $button-background-color;
 			border-color: $button-border-color;
+			outline: none;
 
 			&:hover,
 			&:focus {
@@ -77,7 +80,7 @@
 
 			color: $dark-color;
 			display: inline-block;
-			cursor: pointer;
+			cursor: help;
 
 			&:hover {
 				color: darken($dark-color, 15%);
@@ -86,12 +89,13 @@
 	}
 
 	ul.open-ports-list {
-		@include margin-trailer(1);
+		//@include margin-trailer(0.5);
 
-		float: left;
+		//float: left;
 
 		li {
 			@include rhythm-padding(0.25);
+			@include margin-trailer(0.5);
 
 			position: relative;
 			background-color: $open-ports-background-color;
@@ -158,4 +162,74 @@
 			}
 		}
 	}
+
+	&.has-open-ports .add-port-form-wrapper {
+		@include margin-leader(0.5);
+
+		.add-port-form {
+			@include arrow-lazy($direction: bottom, $size: 10px, $color: $input-border-color, $center: 50%, $margin: 0, $pseudo: before);
+			@include arrow-lazy($direction: bottom, $size: 9px, $color: #fff, $center: 50%, $margin: 0, $pseudo: after);
+		}
+	}
+
+	&:not(.has-open-ports) {
+		.add-port-form-wrapper {
+			position: absolute;
+
+			.add-port-form {
+				padding-right: 3.25rem;
+			}
+		}
+
+		.add-port-button.active {
+			position: absolute;
+			z-index: 1;
+			right: 0;
+
+			.label {
+				display: none;
+			}
+		}
+	}
+
+	.add-port-form-wrapper {
+		display: none;
+		
+		&.active {
+			display: block;
+		}
+
+		position: relative;
+		width: 100%;
+		float: left;
+		margin: 0;
+	}
+
+	.add-port-form {
+		@include gutters($search-form-inner-padding inside);
+		@include margin-trailer(1);
+		@include padding-leader(0.5);
+		@include padding-trailer(0.5);
+		@include rhythm-borders(1px, 0.5);
+		
+		background-color: #fff;
+		border-color: $input-border-color;
+		border-radius: $border-radius;
+
+		label {
+			display: block;
+		}
+
+		input[type=number]::-webkit-inner-spin-button, 
+		input[type=number]::-webkit-outer-spin-button { 
+			-webkit-appearance: none;
+  			margin: 0;
+		}
+
+		input[type=number] {
+			width: 100%;
+			border: none;
+		}
+	}
+
 }

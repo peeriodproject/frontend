@@ -36,6 +36,19 @@ var OpenPortsHandler = React.createClass({
 		};
 	},
 
+	componentDidUpdate: function () {
+		var node;
+
+		if (this.state.showAddPortForm && !this.getPortInputValue()) {
+			node = this.getPortInputNode();
+
+			if (node) {
+				node.focus();
+			}
+
+		}
+	},
+
 	updateOpenportsChannelState: function (state) {
 		this.replaceState(state);
 	},
@@ -73,6 +86,16 @@ var OpenPortsHandler = React.createClass({
 		)
 	},
 
+	getPortInputValue: function () {
+		var node = this.getPortInputNode();
+
+		return node ? node.value : null;
+	},
+
+	getPortInputNode: function () {
+		return this.refs.portInput.getDOMNode();
+	},
+
 	hasOpenPorts: function () {
 		return this.state.ports && this.state.ports.length ? true : false;
 	},
@@ -84,6 +107,7 @@ var OpenPortsHandler = React.createClass({
 
 	handleAddPortButtonClick: function (event) {
 		event.preventDefault();
+		event.target.blur();
 
 		if (!this.state.showAddPortForm) {
 			this.setState({
@@ -104,12 +128,26 @@ var OpenPortsHandler = React.createClass({
 		this.openportsChannel.send('removePort', port);
 	},
 
+	handlePortInputBlur: function () {
+		if (!this.getPortInputValue()) {
+			this.setState({
+				showAddPortForm: false
+			});
+		}
+	},
+
 	checkAndSubmitPort: function () {
-		var port = this.refs.portInput.getDOMNode().value;
+		var port = this.getPortInputValue();
+		var node;
 
 		if (port) {
 			this.openportsChannel.send('addPort', port);
-			
+			node = this.getPortInputNode();
+
+			if (node) {
+				node.value = '';
+			}
+
 			this.setState({
 				showAddPortForm: false
 			});
@@ -133,14 +171,20 @@ var OpenPortsHandler = React.createClass({
 
 				{portListOrNotice}
 
-				<form className={'add-port-form' + showFormClassName} onSubmit={this.handleFormSubmit}>
-					<label>{this.i18n('openPortsHandler_enterOpenPort_label')}</label>
-					<input type='number' ref='portInput' className='add-port-input' />
-				</form>
-
-				<a href='#' ref='addPortButton' className='add-port-button' onClick={this.handleAddPortButtonClick}>
-					<SvgIcon icon='plus' /> {this.i18n(addPortButtonLabel)}
+				<a href='#' ref='addPortButton' className={'add-port-button' + showFormClassName} onClick={this.handleAddPortButtonClick}>
+					<SvgIcon icon='plus' /> <span className='label'>{this.i18n(addPortButtonLabel)}</span>
 				</a>
+
+				<section className={'add-port-form-wrapper' + showFormClassName}>
+					<form className={'add-port-form' + showFormClassName} onSubmit={this.handleFormSubmit}>
+						<input 
+							type='number'
+							ref='portInput'
+							className='add-port-input'
+							onBlur={this.handlePortInputBlur}
+							placeholder={this.i18n('openPortsHandler_addPortInput_placeholder')} />
+					</form>
+				</section>
 			</section>
 		)
 	}
