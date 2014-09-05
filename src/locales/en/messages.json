@@ -90,7 +90,7 @@
 	},
 
 	"menu_item_appStatus_title": {
-		"message": "App Status",
+		"message": "Application Status",
 		"description": "Title of the menu item leading to the app status."
 	},
 	"menu_item_appStatus_text": {
@@ -98,7 +98,7 @@
 		"description": "Description of the menu item leading to the app status."
 	},
 	"menu_item_appStatus_button_label": {
-		"message": "Go to App Status",
+		"message": "Go to Application Status",
 		"description": "Button label of the menu item leading to the app status."
 	},
 
@@ -246,7 +246,7 @@
 	},
 
 	"appStatus_title": {
-		"message": "App Status",
+		"message": "Application Status",
 		"description": "The title of the App Status section."
 	},
 
@@ -332,6 +332,10 @@
 	"openPortsHandler_enterOpenPort_label": {
 		"message": "Enter the open port which the app can listen to.",
 		"description": "Explanation in input alert window when entering open port."
+	},
+	"openPortsHandler_addPortInput_placeholder": {
+		"message": "Enter number of open TCP port",
+		"description": "Placeholder text in input field when entering first open port"
 	},
 
 	"appStatus_hydra_title": {
