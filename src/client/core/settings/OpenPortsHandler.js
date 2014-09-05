@@ -129,7 +129,7 @@ var OpenPortsHandler = React.createClass({
 	},
 
 	handlePortInputBlur: function () {
-		if (!this.getPortInputValue()) {
+		if (this.state.showAddPortForm && !this.getPortInputValue()) {
 			this.setState({
 				showAddPortForm: false
 			});
