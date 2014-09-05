@@ -11,6 +11,7 @@
 
 		.progress-bar {
 			bottom: 0;
+			display: block;
 		}
 	}
 
@@ -58,8 +59,7 @@
 		@include transition(bottom 0.15s ease);
 
 		position: absolute;
-		//bottom: -$height;
-		bottom: 0;
+		bottom: -$height;
 		left: 0;
 		height: $height;
 		background-color: $green-color;
