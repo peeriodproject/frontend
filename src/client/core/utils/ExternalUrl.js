@@ -18,13 +18,13 @@ var ExternalUrl = React.createClass({
 	statics: {
 		home: function (inline) {
 			return {
-				href: 'https://peeriodproject.org',
+				href: 'https://peeriodproject.github.io',
 				label: I18nMixin.i18n('externalUrl_home_label' + ExternalUrl._getInlineAppendix(inline))
 			}
 		},
 		contactUs: function (inline) {
 			return {
-				href: 'https://peeriodproject.org/contact',
+				href: 'https://peeriodproject.github.io/contact',
 				label: I18nMixin.i18n('externalUrl_contactUs_label' + ExternalUrl._getInlineAppendix(inline))
 			}
 		},
