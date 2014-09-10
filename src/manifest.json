@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name"            : "__MSG_appName__ – __MSG_appTagline__",
 	"description"     : "Peeriod Frontend",
-	"version"         : "0.0.1",
+	"version"         : "0.1.0",
 	"icons"           : {
 		"16" : "assets/icons/icon-16.png",
 		"48" : "assets/icons/icon-shadow-48.png",
