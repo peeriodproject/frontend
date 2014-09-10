@@ -26,15 +26,18 @@ var OpenPortsHandler = React.createClass({
 	],
 
 	initialChannelsState: {
-		ports: [],
-		portsChanged: false
+		openPorts: {
+			ports: [],
+			portsChanged: false
+		},
+		showAddPortForm: false
 	},
 
-	getInitialState: function () {
+	/*getInitialState: function () {
 		return {
-			showAddPortForm: false
+			
 		};
-	},
+	},*/
 
 	componentDidUpdate: function () {
 		var node;
@@ -50,19 +53,21 @@ var OpenPortsHandler = React.createClass({
 	},
 
 	updateOpenportsChannelState: function (state) {
-		this.replaceState(state);
+		this.setState({
+			openPorts: state
+		});
 	},
 
 	getOpenPortsList: function () {
 		var openPorts = [];
 
-		if (!this.state.ports || !this.state.ports.length) {
+		if (!this.state.openPorts.ports || !this.state.openPorts.ports.length) {
 			return null;
 		}
 
-		for (var i = 0, l = this.state.ports.length; i < l; i++) {
+		for (var i = 0, l = this.state.openPorts.ports.length; i < l; i++) {
 			openPorts.push(
-				<OpenPort key={'port-' + this.state.ports[i]} port={this.state.ports[i]} onClick={this.handleRemovePortClick} />
+				<OpenPort key={'port-' + this.state.openPorts.ports[i]} port={this.state.openPorts.ports[i]} onClick={this.handleRemovePortClick} />
 			);
 		}
 
@@ -97,7 +102,7 @@ var OpenPortsHandler = React.createClass({
 	},
 
 	hasOpenPorts: function () {
-		return this.state.ports && this.state.ports.length ? true : false;
+		return this.state.openPorts.ports && this.state.openPorts.ports.length ? true : false;
 	},
 
 	handleFormSubmit: function (event) {
@@ -148,9 +153,11 @@ var OpenPortsHandler = React.createClass({
 				node.value = '';
 			}
 
-			this.setState({
-				showAddPortForm: false
-			});
+			if (this.state.showAddPortForm) {
+				this.setState({
+					showAddPortForm: false
+				});
+			}
 		}
 
 		return false;
@@ -160,7 +167,7 @@ var OpenPortsHandler = React.createClass({
 		var hasOpenPorts = this.hasOpenPorts();
 		var hasOpenPortsClassName = hasOpenPorts ? ' has-open-ports' : '';
 		var portListOrNotice = hasOpenPorts ? this.getOpenPortsList() : this.getNoOpenPortsNoticeButton();
-		var portsChangedNotice = this.state.portsChanged ? (this.getPortChangedNotice()) : null;
+		var portsChangedNotice = this.state.openPorts.portsChanged ? (this.getPortChangedNotice()) : null;
 		var addPortButtonLabel = hasOpenPorts ? 'openPortsHandler_hasOpenPort_addPortButton_label' : 'openPortsHandler_noOpenPort_addPortButton_label';
 
 		var showFormClassName = this.state.showAddPortForm ? ' active' : '';

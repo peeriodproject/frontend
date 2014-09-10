@@ -29,7 +29,7 @@ var AppStatusHandler = React.createClass({
 	},
 
 	updateProtocolChannelState: function (state) {
-		this.setState({
+		this.replaceState({
 			protocolState: state
 		});
 	},
