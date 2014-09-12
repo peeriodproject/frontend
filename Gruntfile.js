@@ -86,6 +86,11 @@ module.exports = function (grunt) {
                         return content.replace('{{ svgIcons }}', fs.readFileSync('./src/icons/svg_output/icons.svg', 'utf8'));
                     }
                 }
+            },
+            ping: {
+                nonull: true,
+                src : ['src/ping.txt'],
+                dest: 'build/ping.txt'
             }
             /*,
             background: {
