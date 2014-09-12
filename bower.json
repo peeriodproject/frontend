@@ -1,10 +1,16 @@
 {
-  "name": "git_frontend",
-  "version": "0.0.0",
+  "name": "peeriod-frontend",
+  "version": "0.1.1",
   "homepage": "https://github.com/joernroeder/abschluss_frontend",
-  "authors": [
-    "Jonathan Pirnay <mail@johnnycrab.com>",
-    "Jörn Röder <kontakt@joernroeder.de>"
+  "author": [
+    {
+      "name": "Jonathan Pirnay",
+      "email": "mail@johnnycrab.com"
+    },
+    {
+      "name": "Jörn Röder",
+      "email": "me@joernroeder.de"
+    }
   ],
   "license": "MIT",
   "private": true,

@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name"            : "__MSG_appName__ – __MSG_appTagline__",
 	"description"     : "Peeriod Frontend",
-	"version"         : "0.1.0",
+	"version"         : "0.1.1",
 	"icons"           : {
 		"16" : "assets/icons/icon-16.png",
 		"48" : "assets/icons/icon-shadow-48.png",
@@ -30,6 +30,10 @@
 
 	"permissions": [
 		"contextMenus"
+	],
+
+	"web_accessible_resources": [
+		"ping.txt"
 	],
 
 	"content_security_policy": "script-src 'self' http://localhost:7474 http://localhost:3000 http://localhost:3001; object-src 'self'"

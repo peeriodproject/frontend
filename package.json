@@ -1,4 +1,16 @@
 {
+  name: "peeriod-frontend",
+  version: "0.1.1",
+  "author": [
+    {
+      "name": "Jonathan Pirnay",
+      "email": "mail@johnnycrab.com"
+    },
+    {
+      "name": "Jörn Röder",
+      "email": "me@joernroeder.de"
+    }
+  ],
   "dependencies": {
     "envify": "^1.2.1"
   },
