@@ -4,15 +4,13 @@
 'use strict';
 
 var React = require('react');
-var Router = require('react-router-component');
 
 var I18nMixin = require('../i18n/I18nMixin');
 
 var ExternalUrl = React.createClass({
 
 	mixins: [
-		I18nMixin,
-		Router.NavigatableMixin
+		I18nMixin
 	],
 
 	statics: {
@@ -48,7 +46,7 @@ var ExternalUrl = React.createClass({
 		var data = this.getDataByName();
 
 		return this.transferPropsTo(
-			<Router.Link href={data.href} target='_blank'>{data.label}</Router.Link>
+			<a href={data.href} target='_blank'>{data.label}</a>
 		);
 	}
 
